@@ -6,12 +6,20 @@ const httpService = {
     return await axiosInstance.get<T>(url, config);
   },
 
-  post: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-    return await axiosInstance.post<T>(url, data, config);
+  post: async <TResponse, TRequest = unknown>(
+    url: string,
+    data?: TRequest,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<TResponse>> => {
+    return await axiosInstance.post<TResponse>(url, data, config);
   },
 
-  put: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-    return await axiosInstance.put<T>(url, data, config);
+  put: async <TResponse, TRequest = unknown>(
+    url: string,
+    data?: TRequest,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<TResponse>> => {
+    return await axiosInstance.put<TResponse>(url, data, config);
   },
 
   delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
