@@ -1,8 +1,29 @@
 // src/theme.ts
 import { createTheme } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    appBarColour: Palette['primary'];
+  }
+  interface PaletteOptions {
+    appBarColour?: PaletteOptions['primary'];
+  }
+}
+
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'comfortaa',
+      'montserrat'
+    ].join(',')
+  },
   palette: {
+    appBarColour: {
+      main: '#2196f3',
+      light: '#fff',
+      dark: '#03a9f4',
+      contrastText: '#242105',
+    },
     background:{
         default: '#bce0ed'
     },
@@ -12,7 +33,22 @@ const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
+   
   },
+  // components: {
+  //   MuiAppBar: {
+  //     styleOverrides: {
+  //       root: {
+  //         color: 'primary',
+  //         '& .MuiBox-root':{
+  //           'a':{
+  //             color:'red'
+  //           }
+  //         },
+  //       }
+  //     }
+  //   }
+  // }
 });
 
 export default theme;

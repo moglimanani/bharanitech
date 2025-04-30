@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -13,28 +13,60 @@ import {
   Box,
   useTheme,
   useMediaQuery,
+  styled,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { usePostsContext } from '../../contexts/postContext';
+import { Link, NavLink, useMatch, useParams } from 'react-router';
 
 const menuItems = [
-  'Home',
-  'About Us',
-  'Resources',
-  'Jobs',
-  'Trainings',
-  'Login',
-  'Contact Us',
-  'Testimonials',
+  { path: '/', name: 'Home' },
+  { path: '/aboutus', name: 'About Us' },
+  { path: '/resources', name: 'Resources' },
+  { path: '/jobs', name: 'Jobs' },
+  { path: '/trainings', name: 'Trainings' },
+  { path: '/login', name: 'Login' },
+  { path: '/contact', name: 'Contact Us' },
+  { path: '/testimonial', name: 'Testimonials' }
 ];
 
 const MenuBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { posts } = usePostsContext()
+  const params = useParams()
+  const match = useMatch('/')
+  console.log('params', params, match);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const ActiveLink = styled(NavLink)(({ theme }) => ({
+    textDecoration: 'none',
+    color: theme.palette.appBarColour.light,
+    '&.active': {
+      color: theme.palette.appBarColour.dark
+    }
+  }))
+
+  const LogoStyled = styled('img')(({ theme }) => ({
+    width: '50px',
+    height: '50px'
+  }))
+  const BrandNameStyled = styled(Typography)(({ theme }) => ({
+    fontSize: '1.5em',
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '15px'
+  }))
+  const AppBarStyled = styled(Box)(({ theme }) => ({
+    backgroundColor: theme.palette.appBarColour.main
+  }))
+
+
+
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -42,10 +74,12 @@ const MenuBar: React.FC = () => {
         Mogli Developers
       </Typography>
       <List>
-        {menuItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        {menuItems.map((item, id) => (
+          <ListItem key={`menuItem-${id}`} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+              <Link to={item.path}>
+                <ListItemText primary={item.name} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -55,7 +89,7 @@ const MenuBar: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static" color="primary">
+      <AppBarStyled position="static">
         <Toolbar>
           {isMobile && (
             <IconButton
@@ -67,20 +101,26 @@ const MenuBar: React.FC = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" sx={{ flexGrow: 1 }} align='left'>
-            Barani Tech
+          <Typography variant="h6" sx={{ flexGrow: 1 }} align='left' display='flex'>
+            <LogoStyled src='/logo.jpeg' alt='Barani Tech logo' loading='lazy' />
+            <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
+              Barani Tech
+            </BrandNameStyled>
           </Typography>
           {!isMobile && (
             <Box sx={{ display: 'flex', gap: 2 }}>
-              {menuItems.map((item) => (
-                <Button key={item} color="inherit">
-                  {item}
-                </Button>
+              {menuItems.map((item, id) => (
+                <ActiveLink key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""
+                } to={item.path}>
+                  {item.name}
+                </ActiveLink>
+
               ))}
             </Box>
           )}
         </Toolbar>
-      </AppBar>
+      </AppBarStyled>
 
       <Drawer
         anchor="left"
@@ -94,4 +134,4 @@ const MenuBar: React.FC = () => {
   );
 };
 
-export default MenuBar;
+export default memo(MenuBar);
