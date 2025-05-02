@@ -87,6 +87,6 @@ export const MenusBoxStyled = styled(Box)(({ theme }) => ({
 export const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     [theme.breakpoints.up('sm')]: {
         paddingTop: '40px',
-        paddingBottom: '40px',
+        paddingBottom: '20px',
     }
 }))
