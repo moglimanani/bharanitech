@@ -18,16 +18,17 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePostsContext } from '../../contexts/postContext';
 import { Link, NavLink, useMatch, useParams } from 'react-router';
-
+import LabelImportantIcon from '@mui/icons-material/LabelImportant';
+import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled} from './styles'
 const menuItems = [
   { path: '/', name: 'Home' },
   { path: '/aboutus', name: 'About Us' },
   { path: '/resources', name: 'Resources' },
   { path: '/jobs', name: 'Jobs' },
   { path: '/trainings', name: 'Trainings' },
-  { path: '/login', name: 'Login' },
+  // { path: '/login', name: 'Login' },
   { path: '/contact', name: 'Contact Us' },
-  { path: '/testimonial', name: 'Testimonials' }
+  // { path: '/testimonial', name: 'Testimonials' }
 ];
 
 const MenuBar: React.FC = () => {
@@ -43,72 +44,48 @@ const MenuBar: React.FC = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const ActiveLink = styled(NavLink)(({ theme }) => ({
-    textDecoration: 'none',
-    color: theme.palette.appBarColour.light,
-    '&.active': {
-      color: theme.palette.appBarColour.dark
-    }
-  }))
-
-  const LogoStyled = styled('img')(({ theme }) => ({
-    width: '50px',
-    height: '50px'
-  }))
-  const BrandNameStyled = styled(Typography)(({ theme }) => ({
-    fontSize: '1.5em',
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: '15px'
-  }))
-  const AppBarStyled = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.appBarColour.main
-  }))
-
-
 
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Mogli Developers
+        
       </Typography>
-      <List>
+      <MobileMenuListStyled>
         {menuItems.map((item, id) => (
           <ListItem key={`menuItem-${id}`} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <Link to={item.path}>
-                <ListItemText primary={item.name} />
+                <LabelImportantIcon /> <ListItemText primary={item.name} />
               </Link>
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MobileMenuListStyled>
     </Box>
   );
 
   return (
     <>
       <AppBarStyled position="static">
-        <Toolbar>
+        <ToolbarStyled>
           {isMobile && (
-            <IconButton
-              color="inherit"
+            <IconButtonStyled
               edge="start"
               onClick={handleDrawerToggle}
               sx={{ mr: 2 }}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButtonStyled>
           )}
-          <Typography variant="h6" sx={{ flexGrow: 1 }} align='left' display='flex'>
+          <Typography variant="h6" sx={{ flexGrow: 1 }} align='left' display='flex' justifyContent='center' alignItems='center'>
             <LogoStyled src='/logo.jpeg' alt='Barani Tech logo' loading='lazy' />
             <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
               Barani Tech
             </BrandNameStyled>
           </Typography>
           {!isMobile && (
-            <Box sx={{ display: 'flex', gap: 2 }}>
+            <MenusBoxStyled>
               {menuItems.map((item, id) => (
                 <ActiveLink key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
@@ -117,9 +94,9 @@ const MenuBar: React.FC = () => {
                 </ActiveLink>
 
               ))}
-            </Box>
+            </MenusBoxStyled>
           )}
-        </Toolbar>
+        </ToolbarStyled>
       </AppBarStyled>
 
       <Drawer

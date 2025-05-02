@@ -13,19 +13,18 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   typography: {
     fontFamily: [
-      'comfortaa',
-      'montserrat'
+      'comfortaa'
     ].join(',')
   },
   palette: {
     appBarColour: {
-      main: '#2196f3',
+      main: '#127B93',
       light: '#fff',
       dark: '#03a9f4',
       contrastText: '#242105',
     },
     background:{
-        default: '#bce0ed'
+        default: '#e6eef0'
     },
     primary: {
       main: '#6a1b9a', // Purple theme
