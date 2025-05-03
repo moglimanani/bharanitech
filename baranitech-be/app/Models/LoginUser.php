@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Login extends Model
+class LoginUser extends Model
 {
-    protected $table = 'logins';
+    use HasFactory;
+    protected $table = 'login_users';
 
     protected $fillable = ['username', 'email', 'phone', 'password'];
 

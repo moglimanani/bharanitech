@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\LoginResource;
-use App\Models\Login;
+use App\Models\LoginUser;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class LoginUserController extends Controller
 {
     public function index(){
-        $loginUsers = Login::get();
+        $loginUsers = LoginUser::get();
         if($loginUsers->count() > 0){
             return LoginResource::collection($loginUsers);
         } else {
@@ -24,8 +24,8 @@ class LoginController extends Controller
     public function store(Request $request){
         try{
         $validator = Validator::make($request->all(),[
-            'username'=>'required|string|max:30|min:4|unique:logins',
-            'email'=>'required|min:8|unique:logins',
+            'username'=>'required|string|max:30|min:4|unique:login_users',
+            'email'=>'required|min:8|unique:login_users',
             'phone'=>'required|integer',
             'password'=> 'required|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/'
         ]);
@@ -40,7 +40,7 @@ class LoginController extends Controller
         //     'password'=> 'required'
         // ])
 
-        $data = Login::create([
+        $data = LoginUser::create([
             'username'=>$request->username,
             'email'=>$request->email,
             'phone'=>$request->phone,
@@ -59,7 +59,7 @@ class LoginController extends Controller
 
     public function show($id){
         try{
-            $login = Login::find($id);
+            $login = LoginUser::find($id);
             if(!$login){
                 return response()->json([
                     'status' => true,
@@ -82,7 +82,7 @@ class LoginController extends Controller
                 'email'=>'required|min:8|unique:logins',
                 'password'=> 'required|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/'
             ]);
-            $user = Login::where('email', $request->email)->first();
+            $user = LoginUser::where('email', $request->email)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'status' => false,
