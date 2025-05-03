@@ -2,24 +2,24 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\LoginUserController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
-Route::get('/login', [LoginController::class, 'index']); // GET /login
+Route::get('/login', [LoginUserController::class, 'index']); // GET /login
 
 // create post
-Route::post('/login', [LoginController::class, 'store']); // POST /login
+Route::post('/login', [LoginUserController::class, 'store']); // POST /login
 
 // get by id
-Route::get('/login/{id}', [LoginController::class, 'show']); // GET /login/{id}
+Route::get('/login/{id}', [LoginUserController::class, 'show']); // GET /login/{id}
 
-Route::post('/login/checklogin', [LoginController::class, 'checkLogin']); // GET /login/{id}
+Route::post('/login/checklogin', [LoginUserController::class, 'checkLogin']); // GET /login/{id}
 // update by id
-Route::put('/login/{id}', [LoginController::class, 'update']); // PUT /login/{id}
+Route::put('/login/{id}', [LoginUserController::class, 'update']); // PUT /login/{id}
 
 // delete by id
-Route::delete('/login/{id}', [LoginController::class, 'destroy']); // DELETE /login/{id}
+Route::delete('/login/{id}', [LoginUserController::class, 'destroy']); // DELETE /login/{id}
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
