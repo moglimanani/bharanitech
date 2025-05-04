@@ -44,7 +44,9 @@ export default function HomePage() {
                 
               <ListStyled sx={{ listStyleType: 'number' }}>
                 <ListItemTextStyled sx={{ display: 'list-item' }}>
+                  <Typography>
                   Comprehensive Courses
+                  </Typography>
                   <ListStyled sx={{ listStyleType: 'disc' }}>
                     <ListItemTextStyled sx={{ display: 'list-item' }}>
                       Introduction to Power Systems – Overall protection philosophy

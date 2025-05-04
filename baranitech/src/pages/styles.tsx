@@ -13,7 +13,9 @@ export const PageWrapperStyled = styled(Box)(({theme})=>({
 }))
 
 export const ListItemTextStyled = styled(ListItemText)(({theme})=>({
-  textAlign: 'left'
+  textAlign: 'left',
+  paddingRight: '2em',
+  paddingBottom: '1em'
 }))
 
 export const ListStyled = styled(List)(({theme})=>({
