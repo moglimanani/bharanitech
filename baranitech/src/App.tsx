@@ -6,7 +6,6 @@ import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
 import { PostsProvider } from './contexts/postContext'
 import FlashOffer from './components/FlashOffer'
-import AccordionComponent from './components/AccordianComponent'
 import { Outlet } from 'react-router';
 
 
