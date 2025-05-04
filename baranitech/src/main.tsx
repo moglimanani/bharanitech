@@ -8,7 +8,6 @@ import AboutUsPage from './pages/AboutUsPage';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
 import TestimonialPage from './pages/TestimonialPage';
-import TrainingsPage from './pages/TrainingsPage';
 // @ts-ignore
 import "@fontsource/comfortaa";
 // @ts-ignore
@@ -21,6 +20,8 @@ import YoutubeListPage from './pages/YoutubeListPage.tsx'
 import YoutubeUrlAddPage from './pages/YoutubeAddPage.tsx'
 import JobAddPage from './pages/JobAddPage.tsx'
 import ResourceAddPage from './pages/ResourceAddPage.tsx'
+import TrainingsListPage from './pages/TrainingsListPage.tsx'
+import TrainingAddPage from './pages/TrainingAddPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -40,10 +41,11 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/youtube/add" element={<YoutubeUrlAddPage />} />
           <Route path="/jobs" element={<JobsListPage />} />
           <Route path="/jobs/add" element={<JobAddPage />} />
+          <Route path="training/add" element={<TrainingAddPage />} />
           <Route path="trainings" >
-            <Route index element={<TrainingsPage />} />
-            <Route path=":tid" element={<TrainingsPage />} />
-            <Route path="edit/:tid" element={<TrainingsPage />} />
+            <Route index element={<TrainingsListPage />} />
+            <Route path=":tid" element={<TrainingsListPage />} />
+            <Route path="edit/:tid" element={<TrainingsListPage />} />
           </Route>
         </Route>
 
