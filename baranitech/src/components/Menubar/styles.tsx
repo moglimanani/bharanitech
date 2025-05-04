@@ -18,8 +18,8 @@ export const ActiveLink = styled(NavLink)(({ theme }) => ({
 }))
 
 export const LogoStyled = styled('img')(({ theme }) => ({
-    width: '50px',
-    height: '50px'
+    width: 'auto',
+    height: 'auto'
 }))
 
 export const BrandNameStyled = styled(Typography)(({ theme }) => ({
