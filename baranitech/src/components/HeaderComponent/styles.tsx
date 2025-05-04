@@ -2,7 +2,7 @@
 import {  styled, AppBar, Typography, Toolbar } from "@mui/material";
 
 export const AppBarStyled = styled(AppBar)(({theme})=>({
-    backgroundColor: '#127B93',
+    backgroundColor: 'transparent',
     textAlign: 'left',
     boxShadow: 'none',
     marginTop: '16px',
