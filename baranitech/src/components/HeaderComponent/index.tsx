@@ -1,8 +1,5 @@
 import React from "react";
-// import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { AppBarStyled } from "./styles";
+import { AppBarStyled, ToolbarStyled, TypographyStyled } from "./styles";
 
 interface HeaderProps {
   title: string;
@@ -11,11 +8,11 @@ interface HeaderProps {
 const HeaderComponent: React.FC<HeaderProps> = ({ title }) => {
   return (
     <AppBarStyled position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      <ToolbarStyled>
+        <TypographyStyled>
           {title}
-        </Typography>
-      </Toolbar>
+        </TypographyStyled>
+      </ToolbarStyled>
     </AppBarStyled>
   );
 };
