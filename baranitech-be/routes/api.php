@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginUserController;
+use App\Http\Controllers\API\YouTubeController;
+use App\Http\Controllers\Api\TrainingController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -24,3 +26,28 @@ Route::delete('/login/{id}', [LoginUserController::class, 'destroy']); // DELETE
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+
+// Route::apiResource('youtube', YouTubeController::class);
+
+// GET /api/youtube - List all YouTube URLs
+Route::get('youtube', [YouTubeController::class, 'index']);
+
+// POST /api/youtube - Store a new YouTube URL
+Route::post('youtube', [YouTubeController::class, 'store']);
+
+// GET /api/youtube/{id} - Show a specific YouTube URL
+Route::get('youtube/{id}', [YouTubeController::class, 'show']);
+
+// PUT or PATCH /api/youtube/{id} - Update a YouTube URL
+Route::put('youtube/{id}', [YouTubeController::class, 'update']);
+Route::patch('youtube/{id}', [YouTubeController::class, 'update']);
+
+// DELETE /api/youtube/{id} - Delete a YouTube URL
+Route::delete('youtube/{id}', [YouTubeController::class, 'destroy']);
+
+Route::get('trainings', [TrainingController::class, 'index']);
+Route::post('trainings', [TrainingController::class, 'store']);
+Route::get('trainings/{id}', [TrainingController::class, 'show']);
+Route::put('trainings/{id}', [TrainingController::class, 'update']);
+Route::patch('trainings/{id}', [TrainingController::class, 'update']);
+Route::delete('trainings/{id}', [TrainingController::class, 'destroy']);
