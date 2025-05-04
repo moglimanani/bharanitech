@@ -67,7 +67,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Collapse
+  Collapse,
+  styled
 } from '@mui/material';
 import {
   ExpandLess,
@@ -78,64 +79,80 @@ import {
   ColorLens,
   Language
 } from '@mui/icons-material';
+import { AccordianWrapper, ListItemButtonStyled } from './styles';
 
 const AccordionComponent: React.FC = () => {
   const [openSettings, setOpenSettings] = useState(true);
   const [openPreferences, setOpenPreferences] = useState(false);
 
-  return (
-    <Box sx={{ width: 250, bgcolor: '#f4f4f4', p: 1 }}>
-      <List component="nav">
-        {/* Settings */}
-        <ListItemButton onClick={() => setOpenSettings(!openSettings)}>
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-          {openSettings ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
 
-        {/* Settings -> Submenu */}
-        <Collapse in={openSettings} timeout="auto" unmountOnExit>
+  return (
+    <AccordianWrapper>
+      <List component="nav">
+        <ListItemButtonStyled>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="About Us" />
+        </ListItemButtonStyled>
+        <ListItemButtonStyled>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="Resources" />
+        </ListItemButtonStyled>
+        {/* <ListItemButton>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="Trainings" />
+        </ListItemButton> */}
+         <Collapse in={openSettings} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
+
             {/* Preferences (Expandable) */}
-            <ListItemButton sx={{ pl: 4 }} onClick={() => setOpenPreferences(!openPreferences)}>
+            <ListItemButtonStyled onClick={() => setOpenPreferences(!openPreferences)}>
               <ListItemIcon>
                 <Build />
               </ListItemIcon>
-              <ListItemText primary="Preferences" />
+              <ListItemText primary="Trainings" />
               {openPreferences ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
+            </ListItemButtonStyled>
 
             {/* Preferences -> Submenu */}
             <Collapse in={openPreferences} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 6 }}>
+                <ListItemButtonStyled sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <ColorLens />
                   </ListItemIcon>
-                  <ListItemText primary="Theme" />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 6 }}>
+                  <ListItemText primary="Training 1" />
+                </ListItemButtonStyled>
+                <ListItemButtonStyled sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <Language />
                   </ListItemIcon>
-                  <ListItemText primary="Language" />
-                </ListItemButton>
+                  <ListItemText primary="Training 2" />
+                </ListItemButtonStyled>
               </List>
             </Collapse>
-
-            {/* About App */}
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <Info />
-              </ListItemIcon>
-              <ListItemText primary="About App" />
-            </ListItemButton>
           </List>
         </Collapse>
+        <ListItemButtonStyled>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="Jobs" />
+        </ListItemButtonStyled>
+        <ListItemButtonStyled>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="Gallery" />
+        </ListItemButtonStyled>
+       
       </List>
-    </Box>
+    </AccordianWrapper>
   );
 };
 

@@ -29,13 +29,13 @@ function App() {
 
         <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
           <Grid container>
-            <Grid size={{ xs: 12, md: 2 }}>
+            {/* <Grid size={{ xs: 12, md: 2 }}>
               <AccordionComponent />
-            </Grid>
-            <Grid size={{ xs: 12, md: 8 }}>
+            </Grid> */}
+            <Grid size={{ xs: 12}}>
               <Outlet />
             </Grid>
-            <Grid size={{ xs: 12, md: 2 }}></Grid>
+            {/* <Grid size={{ xs: 12, md: 2 }}></Grid> */}
           </Grid>
 
         </ContainerStyled>

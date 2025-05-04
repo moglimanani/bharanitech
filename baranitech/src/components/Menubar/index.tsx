@@ -78,11 +78,11 @@ const MenuBar: React.FC = () => {
               <MenuIcon />
             </IconButtonStyled>
           )}
-          <Typography variant="h6" sx={{ flexGrow: 1 }} align='left' display='flex' justifyContent='center' alignItems='center'>
-            <LogoStyled src='/logo.jpeg' alt='Barani Tech logo' loading='lazy' />
-            <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
+          <Typography variant="h6" sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
+            <LogoStyled src='/logo.png' alt='Barani Tech logo' loading='lazy' />
+            {/* <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
               Barani Tech
-            </BrandNameStyled>
+            </BrandNameStyled> */}
           </Typography>
           {!isMobile && (
             <MenusBoxStyled>
