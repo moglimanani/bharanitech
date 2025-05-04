@@ -7,8 +7,6 @@ import HomePage from './pages/HomePage';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
-import JobsPage from './pages/JobsPage';
-import ResourcesPage from './pages/ResourcesPage';
 import TestimonialPage from './pages/TestimonialPage';
 import TrainingsPage from './pages/TrainingsPage';
 // @ts-ignore
@@ -17,6 +15,12 @@ import "@fontsource/comfortaa";
 import "@fontsource-variable/montserrat";
 import LoginPage from './pages/LoginPage/LoginPage.tsx'
 import RegisterPage from './pages/LoginPage/RegisterPage'
+import JobsListPage from './pages/JobsListPage.tsx'
+import ResourcesListPage from './pages/ResourcesListPage.tsx'
+import YoutubeListPage from './pages/YoutubeListPage.tsx'
+import YoutubeUrlAddPage from './pages/YoutubeAddPage.tsx'
+import JobAddPage from './pages/JobAddPage.tsx'
+import ResourceAddPage from './pages/ResourceAddPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -29,9 +33,13 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/jobs" element={<JobsPage />} />
-          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/resources" element={<ResourcesListPage />} />
+          <Route path="/resource/add" element={<ResourceAddPage />} />
           <Route path="/testimonial" element={<TestimonialPage />} />
+          <Route path="/youtube" element={<YoutubeListPage />} />
+          <Route path="/youtube/add" element={<YoutubeUrlAddPage />} />
+          <Route path="/jobs" element={<JobsListPage />} />
+          <Route path="/jobs/add" element={<JobAddPage />} />
           <Route path="trainings" >
             <Route index element={<TrainingsPage />} />
             <Route path=":tid" element={<TrainingsPage />} />
