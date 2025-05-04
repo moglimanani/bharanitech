@@ -62,28 +62,24 @@
 // export default AccordionComponent;
 import React, { useState } from 'react';
 import {
-  Box,
   List,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Collapse,
-  styled
 } from '@mui/material';
 import {
   ExpandLess,
   ExpandMore,
-  Settings,
-  Build,
   Info,
-  ColorLens,
-  Language
+  SchoolOutlined,
+  Image
 } from '@mui/icons-material';
 import { AccordianWrapper, ListItemButtonStyled } from './styles';
+import { Briefcase, NotebookText } from 'lucide-react';
 
 const AccordionComponent: React.FC = () => {
-  const [openSettings, setOpenSettings] = useState(true);
-  const [openPreferences, setOpenPreferences] = useState(false);
+  const [openTrainings, setOpenTrainings] = useState(false);
+  const [openJobs, setOpenJobs] = useState(false);
 
 
   return (
@@ -97,40 +93,30 @@ const AccordionComponent: React.FC = () => {
         </ListItemButtonStyled>
         <ListItemButtonStyled>
           <ListItemIcon>
-            <Info />
+            <NotebookText />
           </ListItemIcon>
           <ListItemText primary="Resources" />
         </ListItemButtonStyled>
-        {/* <ListItemButton>
+        <ListItemButtonStyled onClick={() => setOpenTrainings(!openTrainings)}>
           <ListItemIcon>
-            <Info />
+            <SchoolOutlined />
           </ListItemIcon>
           <ListItemText primary="Trainings" />
-        </ListItemButton> */}
-         <Collapse in={openSettings} timeout="auto" unmountOnExit>
+          {openTrainings ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButtonStyled>
+        <Collapse in={openTrainings} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-
-            {/* Preferences (Expandable) */}
-            <ListItemButtonStyled onClick={() => setOpenPreferences(!openPreferences)}>
-              <ListItemIcon>
-                <Build />
-              </ListItemIcon>
-              <ListItemText primary="Trainings" />
-              {openPreferences ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButtonStyled>
-
-            {/* Preferences -> Submenu */}
-            <Collapse in={openPreferences} timeout="auto" unmountOnExit>
+            <Collapse in={openTrainings} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButtonStyled sx={{ pl: 6 }}>
                   <ListItemIcon>
-                    <ColorLens />
+                    <SchoolOutlined />
                   </ListItemIcon>
                   <ListItemText primary="Training 1" />
                 </ListItemButtonStyled>
                 <ListItemButtonStyled sx={{ pl: 6 }}>
                   <ListItemIcon>
-                    <Language />
+                    <SchoolOutlined />
                   </ListItemIcon>
                   <ListItemText primary="Training 2" />
                 </ListItemButtonStyled>
@@ -138,19 +124,36 @@ const AccordionComponent: React.FC = () => {
             </Collapse>
           </List>
         </Collapse>
-        <ListItemButtonStyled>
+        <ListItemButtonStyled onClick={() => setOpenJobs(!openJobs)}>
           <ListItemIcon>
-            <Info />
+            <Briefcase />
           </ListItemIcon>
           <ListItemText primary="Jobs" />
+          {openJobs ? <ExpandLess /> : <ExpandMore />}
         </ListItemButtonStyled>
+        <Collapse in={openJobs} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButtonStyled sx={{ pl: 6 }}>
+              <ListItemIcon>
+                <Briefcase />
+              </ListItemIcon>
+              <ListItemText primary="Job 1" />
+            </ListItemButtonStyled>
+            <ListItemButtonStyled sx={{ pl: 6 }}>
+              <ListItemIcon>
+                <Briefcase />
+              </ListItemIcon>
+              <ListItemText primary="Job 2" />
+            </ListItemButtonStyled>
+          </List>
+        </Collapse>
         <ListItemButtonStyled>
           <ListItemIcon>
-            <Info />
+            <Image />
           </ListItemIcon>
           <ListItemText primary="Gallery" />
         </ListItemButtonStyled>
-       
+
       </List>
     </AccordianWrapper>
   );
