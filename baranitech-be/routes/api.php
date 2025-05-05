@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginUserController;
 use App\Http\Controllers\Api\YoutubeUrlController;
 use App\Http\Controllers\Api\TrainingController;
+use App\Http\Controllers\Api\JobCategoryController;
+use App\Http\Controllers\Api\JobController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -51,3 +53,11 @@ Route::get('trainings/{id}', [TrainingController::class, 'show']);
 Route::put('trainings/{id}', [TrainingController::class, 'update']);
 Route::patch('trainings/{id}', [TrainingController::class, 'update']);
 Route::delete('trainings/{id}', [TrainingController::class, 'destroy']);
+
+Route::get('/job-categories', [JobCategoryController::class, 'index']);
+Route::get('/job-categories/{id}', [JobCategoryController::class, 'show']);
+Route::get('/jobs', [JobController::class, 'index']);
+Route::post('/jobs', [JobController::class, 'store']);
+Route::get('/jobs/{id}', [JobController::class, 'show']);
+Route::put('/jobs/{id}', [JobController::class, 'update']);
+Route::delete('/jobs/{id}', [JobController::class, 'destroy']);
