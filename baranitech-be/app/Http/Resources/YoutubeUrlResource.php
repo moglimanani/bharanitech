@@ -1,25 +1,20 @@
 <?php
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\YoutubeCategoryResource;
 
 class YoutubeUrlResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
+            'type' => new YoutubeCategoryResource($this->whenLoaded('category')),
             'title' => $this->title,
             'url' => $this->url,
-            'video_id' => $this->video_id,
             'description' => $this->description,
-            'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }

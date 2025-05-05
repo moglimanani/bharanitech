@@ -4,30 +4,27 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\YoutubeUrl;
+use App\Models\YoutubeCategory;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\YoutubeUrlResource;
 
-class YouTubeController extends Controller
+class YoutubeUrlController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $fetchYoutubeUrls = YoutubeUrl::get();
+        $fetchYoutubeUrls = YoutubeUrl::with('category')->get();
         if ($fetchYoutubeUrls->count() > 0) {
-            return YoutubeUrlResource::collection($fetchYoutubeUrls);
+            // return YoutubeUrlResource::collection($fetchYoutubeUrls);
+            return response()->json([
+                'success' => true,
+                'data' => $fetchYoutubeUrls,
+            ]);
         } else {
             return response()->json(['data' => [], 'message' => 'No records available'], 200);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -37,8 +34,9 @@ class YouTubeController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'url' => 'required|url|unique:youtube_urls',
-                'title' => 'nullable|string|max:255',
+                'type' => 'required|exists:youtube_categorys,id',
+                'title' => 'required|string|max:255',
+                'url' => 'required|url|unique:youtube_urls,url',
                 'description' => 'nullable|string',
             ]);
 
@@ -46,17 +44,21 @@ class YouTubeController extends Controller
                 return response()->json(['error' => $validator->messages(), 'status' => false, 'message' => 'All fields are mandatory'], 422);
             }
 
-
-            $videoId = $this->extractYoutubeId($request->url);
+            if ($request->filled('type')) {
+                $validCategory = YoutubeCategory::find($request->type);
+                if (!$validCategory) {
+                    return response()->json(['success' => false, 'message' => 'Invalid category type'], 422);
+                }
+            }
 
             $video = YoutubeUrl::create([
                 'title' => $request->title,
                 'url' => $request->url,
-                'video_id' => $videoId,
                 'description' => $request->description,
+                'type' => $request->type,
             ]);
+            $video->load('category'); 
 
-            // return response()->json($video, 201);
             return response()->json(['data' => new YoutubeUrlResource($video), 'message' => 'Record added successfully'], 200);
         } catch (Exception $e) {
             return response()->json(
@@ -75,21 +77,14 @@ class YouTubeController extends Controller
      */
     public function show(string $id)
     {
-        $video = YoutubeUrl::find($id);
+        // $video = YoutubeUrl::find($id);
+        $video = YoutubeUrl::with('category')->find($id);
 
         if (!$video) {
-            return response()->json(['success'=> false, 'data' => [], 'message' => 'No data found'], 200);
+            return response()->json(['success' => false, 'data' => [], 'message' => 'No data found'], 200);
         }
-        return response()->json(['success'=> true,'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
+        return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
         // return response()->json($video);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -98,29 +93,55 @@ class YouTubeController extends Controller
     public function update(Request $request, string $id)
     {
         try {
+            // \Log::info("Incoming update request for ID: $id");
             $video = YoutubeUrl::find($id);
-
+            // \Log::info('Found: ' . ($video ? 'yes' : 'no') . !$video);
+            // dd(__CLASS__);
+            // dd($video);
             if (!$video) {
-                return response()->json(['success'=> false,'message' => 'Not found'], 200);
+                return response()->json(['success' => false, 'message' => 'Not found'], 200);
             }
-
-            $request->validate([
-                'url' => 'required|url',
+            //
+            $validator = Validator::make($request->all(), [
+                'type' => 'nullable|exists:youtube_categorys,id',
                 'title' => 'nullable|string|max:255',
+                'url' => 'nullable|url|unique:youtube_urls,url,' . $video->id,
                 'description' => 'nullable|string',
             ]);
 
-            $videoId = $this->extractYoutubeId($request->url);
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->messages(), 'status' => false, 'message' => 'All fields are mandatory'], 422);
+            }
+            //
+
+            if ($request->filled('type')) {
+                $validCategory = YoutubeCategory::find($request->type);
+                if (!$validCategory) {
+                    return response()->json(['success' => false, 'message' => 'Invalid category type'], 422);
+                }
+            }
+
+           
+
+            // $videoId = $this->extractYoutubeId($request->url);
+
+            
 
             $video->update([
-                'title' => $request->title,
-                'url' => $request->url,
-                'video_id' => $videoId,
-                'description' => $request->description,
+                // 'title' => $request->title,
+                // 'url' => $request->url,
+                // 'video_id' => $videoId,
+                // 'description' => $request->description,
+                // 'type'=>$request->type
+                'title' => $request->input('title', $video->title),
+                'url' => $request->input('url', $video->url),
+                // 'video_id' => $videoId ?? $video->video_id, // Only update if URL is provided
+                'description' => $request->input('description', $video->description),
+                'type' => $request->input('type', $video->type), // Default to current value if not provided
             ]);
+            // $video->load('category'); 
 
-            return response()->json(['success'=> true,'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
-
+            return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
         } catch (Exception $e) {
             return response()->json(
                 [
