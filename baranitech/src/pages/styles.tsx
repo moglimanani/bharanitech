@@ -1,10 +1,9 @@
 import { Box, Grid, List, ListItemText, styled, Typography } from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({theme})=>({
-  padding: "10px 10px",
+  padding: "10px 10px 10px 0px",
   textAlign: 'left',
   alignItems: 'flex-start',
-  fontSize: '.88em',
   color: theme.palette.common.white,
   //background: 'yellow'
 }))
@@ -16,7 +15,7 @@ export const PageWrapperStyled = styled(Box)(({theme})=>({
 export const ListItemTextStyled = styled(ListItemText)(({theme})=>({
   textAlign: 'left',
   paddingRight: '2em',
-  paddingBottom: '1em',
+  paddingBottom: '5px',
   //  background: 'yellow '
  //fontStyle: "italic",
  }))
@@ -24,13 +23,14 @@ export const ListItemTextStyled = styled(ListItemText)(({theme})=>({
  export const HeadingStyled = styled(Typography)(({theme})=>({
   color: '#127B93',
   background: '#c4f4ff',
-  borderRadius: '20px',
+  // borderRadius: '20px',
   paddingBlock: '15px',
   paddingLeft: '30px',
   maxWidth: '320px',
   textAlign: 'left',
   fontWeight: 'bold',
-  listStyle: 'none'
+  listStyle: 'none',
+  borderRadius: '8px 50px 50px 8px'
  }))
 
 

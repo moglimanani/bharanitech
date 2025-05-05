@@ -3,6 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { FlashOfferProps } from '../../types/flash';
 import styles from './flashNews.module.scss'
+import { Button } from '@mui/material';
 
 const FlashOffer: React.FC<FlashOfferProps> = ({
   message,
@@ -57,12 +58,13 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
             <Sparkles className={styles.sparkels} />
             
             {/* Button inside the zoom effect */}
-            <motion.button
+            <Button variant='outlined'> {buttonlabel}</Button>
+            {/* <motion.button
               onClick={onClick}
               className={styles.button}
             >
              {buttonlabel}
-            </motion.button>
+            </motion.button> */}
           </motion.div>
         </div>
       </div>
