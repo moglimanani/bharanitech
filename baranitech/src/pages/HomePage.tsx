@@ -15,8 +15,9 @@ import {
   ListItemTextStyled,
   ListStyled,
   PageWrapperStyled,
-  ThreeColumnStyled,
+  TwoColumnStyled,
 } from "./styles";
+import ThreeColumnPage from "../components/ThreeColumnPage/ThreeColumnPage";
 
 export default function HomePage() {
   return (
@@ -24,7 +25,7 @@ export default function HomePage() {
       <Grid size={12}>
         <CarouselComponent />
       </Grid>
-      <ThreeColumnStyled size={12}>
+      <TwoColumnStyled size={12}>
         <Grid container>
           <Grid size={{ xs: 12, md: 2 }}>
             <AccordionComponent />
@@ -168,7 +169,10 @@ export default function HomePage() {
           </Grid>
           {/* <Grid size={{ xs: 12, md: 4 }}></Grid> */}
         </Grid>
-      </ThreeColumnStyled>
+      </TwoColumnStyled>
+      <Grid size={12}>
+       <ThreeColumnPage />
+      </Grid>
     </Grid>
   );
 }
