@@ -5,7 +5,6 @@ export const AppBarStyled = styled(AppBar)(({theme})=>({
     backgroundColor: 'transparent',
     textAlign: 'left',
     boxShadow: 'none',
-    marginTop: '16px',
      '& > [class*="para"]': {
         textAlign: "left",
      }

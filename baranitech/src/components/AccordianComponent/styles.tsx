@@ -3,7 +3,6 @@ import { Box, ListItemButton, styled } from "@mui/material";
 export const AccordianWrapper = styled(Box)(({ theme }) => ({
     backgroundColor: 'transparent',
     padding: '0px',
-    marginLeft: '16px'
     // ' .MuiListItemButton-root': {
     //     backgroundColor: 'red',
     //     display: 'flex',
