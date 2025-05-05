@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title')->nullable(); // Optional title
             $table->text('url')->unique(); // YouTube video URL
             $table->string('video_id')->nullable(); // Optional: Extracted YouTube video ID
-            $table->tinyInteger('type')->default(0)->comment('0 = Protection relay testing, 1 = Equipment testing');
             $table->text('description')->nullable();
             $table->timestamps();
         });

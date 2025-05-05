@@ -7,7 +7,7 @@ use App\Models\YoutubeUrl;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\YoutubeUrlResource;
 
-class YoutubeUrlController extends Controller
+class YouTubeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,12 +40,12 @@ class YoutubeUrlController extends Controller
                 'url' => 'required|url|unique:youtube_urls',
                 'title' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
-                'type' => 'required|in:0,1', // Enum validation
             ]);
 
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->messages(), 'status' => false, 'message' => 'All fields are mandatory'], 422);
             }
+
 
             $videoId = $this->extractYoutubeId($request->url);
 
@@ -54,7 +54,6 @@ class YoutubeUrlController extends Controller
                 'url' => $request->url,
                 'video_id' => $videoId,
                 'description' => $request->description,
-                'type' => $request->type,
             ]);
 
             // return response()->json($video, 201);
@@ -79,9 +78,9 @@ class YoutubeUrlController extends Controller
         $video = YoutubeUrl::find($id);
 
         if (!$video) {
-            return response()->json(['success' => false, 'data' => [], 'message' => 'No data found'], 200);
+            return response()->json(['success'=> false, 'data' => [], 'message' => 'No data found'], 200);
         }
-        return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
+        return response()->json(['success'=> true,'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
         // return response()->json($video);
     }
 
@@ -99,38 +98,29 @@ class YoutubeUrlController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            \Log::info("Incoming update request for ID: $id");
             $video = YoutubeUrl::find($id);
-            \Log::info('Found: ' . ($video ? 'yes' : 'no') . !$video);
-            // dd(__CLASS__);
-            // dd($video);
+
             if (!$video) {
-                return response()->json(['success' => false, 'message' => 'Not found'], 200);
+                return response()->json(['success'=> false,'message' => 'Not found'], 200);
             }
 
             $request->validate([
-                'url' => 'nullable|url',
+                'url' => 'required|url',
                 'title' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
-                'type' => 'nullable|in:0,1',
             ]);
 
-            // $videoId = $this->extractYoutubeId($request->url);
+            $videoId = $this->extractYoutubeId($request->url);
 
             $video->update([
-                // 'title' => $request->title,
-                // 'url' => $request->url,
-                // 'video_id' => $videoId,
-                // 'description' => $request->description,
-                // 'type'=>$request->type
-                'title' => $request->input('title', $video->title),
-                'url' => $request->input('url', $video->url),
-                // 'video_id' => $videoId ?? $video->video_id, // Only update if URL is provided
-                'description' => $request->input('description', $video->description),
-                'type' => $request->input('type', $video->type), // Default to current value if not provided
+                'title' => $request->title,
+                'url' => $request->url,
+                'video_id' => $videoId,
+                'description' => $request->description,
             ]);
 
-            return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
+            return response()->json(['success'=> true,'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
+
         } catch (Exception $e) {
             return response()->json(
                 [

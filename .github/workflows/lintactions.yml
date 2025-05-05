@@ -1,37 +1,18 @@
-name: Run Super Linter
+name: Suber-Linter
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 
 jobs:
-  super-linter:
+  super-lint:
+    name: lint code base
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0' # Adjust according to your PHP version requirement
-
-      - name: Install Composer dependencies
-        run: |
-          # Navigate to the baranitech-be directory
-          cd baranitech-be
-          
-          # Install Composer
-          curl -sS https://getcomposer.org/installer | php
-          
-          # Run composer install in the correct directory
-          php composer.phar install --no-interaction --prefer-dist
-
       - name: Run Super Linter
-        uses: github/super-linter@v4
-        env:
-          RUN_LOCAL: false
+        uses: github/super-linter@v4.10.1
+    env:
+        DEFAULT_BRANCH: master
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
