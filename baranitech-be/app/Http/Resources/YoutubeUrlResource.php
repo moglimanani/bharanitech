@@ -20,6 +20,8 @@ class YoutubeUrlResource extends JsonResource
             'description' => $this->description,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
+            'type' => $this->type,
+            'type_label' => $this->type_label, // Optional for readable label
         ];
     }
 }
