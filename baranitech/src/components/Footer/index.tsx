@@ -15,8 +15,10 @@ const Footer: React.FC = () => {
         py: 2,
         px: 2,
         mt: 'auto',
-        backgroundColor: theme.palette.grey[900],
-        color: theme.palette.common.white,
+       // backgroundColor: theme.palette.grey[900],
+       background: '#c4f4ff',
+       color: '#4d4d4d',
+        //color: theme.palette.common.white,
         textAlign: 'center',
       }}
     >
