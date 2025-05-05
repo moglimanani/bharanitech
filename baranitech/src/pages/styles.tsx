@@ -40,6 +40,6 @@ export const ListStyled = styled(List)(({theme})=>({
   color: theme.palette.common.white
 }))
 
-export const ThreeColumnStyled = styled(Grid)(({theme})=>({
+export const TwoColumnStyled = styled(Grid)(({theme})=>({
   padding: "30px 30px 0px",
 }))
