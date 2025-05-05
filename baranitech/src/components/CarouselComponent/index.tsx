@@ -1,22 +1,25 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { CarouselButtonStyled, CarouselImageStyled, CarouselPtagStyled, CarouselStyled } from "./styles";
 
 const CarouselComponent = () => {
   return (
-    <Carousel autoPlay infiniteLoop showThumbs={false}>
+    <CarouselStyled autoPlay infiniteLoop showThumbs={false}>
       <div>
-        <img src="/carousel/image1.jpeg" />
-        <p className="legend">Legend 1</p>
+        <CarouselImageStyled src="/carousel/image1.jpeg" />
+        <CarouselPtagStyled className="legend">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</CarouselPtagStyled>
+        <CarouselButtonStyled>Read More</CarouselButtonStyled>
       </div>
       <div>
-        <img src="/carousel/image1.jpeg" />
-        <p className="legend">Legend 2</p>
+      <CarouselImageStyled src="/carousel/image1.jpeg" />
+        <CarouselPtagStyled className="legend">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</CarouselPtagStyled>
+        <CarouselButtonStyled>Read More</CarouselButtonStyled>
       </div>
       <div>
-        <img src="/carousel/image1.jpeg" />
-        <p className="legend">Legend 3</p>
+      <CarouselImageStyled src="/carousel/image1.jpeg" />
+        <CarouselPtagStyled className="legend">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</CarouselPtagStyled>
+        <CarouselButtonStyled>Read More</CarouselButtonStyled>
       </div>
-    </Carousel>
+    </CarouselStyled>
   );
 }
 
