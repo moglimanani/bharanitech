@@ -25,7 +25,7 @@ export const CarouselPtagStyled = styled('p')(({theme})=>({
   background: '#ffffff !important',
   padding: '20px !important',
   bottom: '0 !important',
-  width: '30% important',
+  width: '30% !important',
   top: '10px ',
   color: '#127B93 !important',
   fontSize: '1.2em !important',
