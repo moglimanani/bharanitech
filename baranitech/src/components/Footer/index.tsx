@@ -20,10 +20,13 @@ const Footer: React.FC = () => {
        color: '#4d4d4d',
         //color: theme.palette.common.white,
         textAlign: 'center',
+        'a': {
+          color: '#127B93',
+        }
       }}
     >
       <Typography variant="body2">
-        © {new Date().getFullYear()} Developed by <strong>Mogli Developer</strong>
+        © {new Date().getFullYear()} Developed by <strong><a href='mailto:moglimani@gmail.com'>Mogli Developer</a></strong>
       </Typography>
     </Box>
   );
