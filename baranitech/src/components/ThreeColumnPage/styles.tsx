@@ -22,7 +22,7 @@ export const TitleDivStyled = styled('div')(({theme})=>({
     textAlign: 'left',
     padding: '10px 20px',
     color: '#ffffff',
-    display: 'flex'
+    display: 'flex',
 }))
 
 export const ImageDivStyled = styled('div')(({theme})=>({
@@ -32,6 +32,10 @@ export const ImageDivStyled = styled('div')(({theme})=>({
     '& > img': {
         width: '100%',
     }
+}))
+export const ButtonWrapperStyled = styled('div')(({theme})=>({
+   display: 'flex',
+   justifyContent: 'flex-end'
 }))
 
 export const ParaOneStyled = styled('p')(({theme})=>({
