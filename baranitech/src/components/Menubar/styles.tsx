@@ -63,7 +63,7 @@ export const MenusBoxStyled = styled(Box)(({ theme }) => ({
     borderRadius: '8px',
     gap: '8px',
     fontFamily: 'Quintessential',
-    fontSize: '1.5em',
+    fontSize: '0.88em',
     fontWeight: 'bold',
     'a': {
         color: theme.palette.appBarColour.main,

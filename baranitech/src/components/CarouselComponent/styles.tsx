@@ -31,7 +31,8 @@ export const CarouselPtagStyled = styled('p')(({theme})=>({
   fontSize: '1.2em !important',
   textAlign: 'left',
   marginLeft: '0 !important',
-  left: '0 !important'
+  left: '0 !important',
+  opacity: '100 !important',
 }))
 
 export const CarouselButtonStyled = styled('button')(({theme})=>({
