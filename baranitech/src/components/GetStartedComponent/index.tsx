@@ -1,5 +1,6 @@
 import React from "react";
 import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, WrapperDivStyled } from "./styles";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const GetStartedToday: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const GetStartedToday: React.FC = () => {
             Furthermore, our courses are available internationally and are UK
             accredited.
           </p>
-          <button>Enroll</button>
+          <button>Enroll <KeyboardArrowRightIcon /></button>
         </DivWrapperStyled>
         <div>
           <img src="/radio.png" alt="tower" loading="lazy" />

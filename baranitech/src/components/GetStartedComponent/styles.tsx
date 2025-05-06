@@ -26,9 +26,11 @@ export const DivWrapperStyled = styled('div')(({theme})=>({
     padding: '10px 40px',
     background: '#fff',
     border: 'none',
-    fontSize: '.88em',
+    fontSize: '1em',
     borderRadius: '20px',
     display: 'flex',
+    fontWeight: 'bold',
+    lineHeight: '26px',
   }
 
 }))
