@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextField,
   Button,
@@ -9,6 +9,9 @@ import {
 } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { styled } from '@mui/material/styles';
+import { validateEmail, validateName, validatePassword, validatePhone } from '../../helper';
+import axiosInstance from '../../api/axiosInstance';
+import { useNavigate } from 'react-router';
 
 interface RegisterForm {
   username: string;
@@ -17,6 +20,15 @@ interface RegisterForm {
   confirmPassword: string;
   phone: string;
 }
+interface FormErrors {
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  phone?: string;
+}
+
+
 
 // Styled with MUI’s styled API
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -46,13 +58,52 @@ const RegisterPage: React.FC = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
-
+  const [formValid, setFormValid] = useState(false)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate()
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const errors: FormErrors = { ...formErrors };
+
+    if (name === 'username') {
+      errors.username = validateName(value)
+    }
+    if (name === 'email') {
+      errors.email = validateEmail(value)
+    }
+    if (name === 'phone') {
+      errors.phone = validatePhone(value)
+    }
+    if (name === 'password') {
+      errors.password = validatePassword(value)
+    }
+    if (name === 'confirmPassword') {
+      errors.confirmPassword = validatePassword(value)
+      if (errors.confirmPassword.length !== 0 && form.confirmPassword !== form.password) {
+        errors.confirmPassword = 'Password and confirm password does not match.'
+      }
+    }
+
+    setFormErrors(errors);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const email = validateEmail(form.email);
+    const name = validateName(form.username);
+    const phone = validatePhone(form.phone);
+    const password = validatePassword(form.password);
+    const confirmPassword = validatePassword(form.confirmPassword);
+
+    const test = email.length === 0 && name.length === 0 && phone.length === 0 && password.length === 0 && confirmPassword.length === 0 && confirmPassword === password;
+
+    setFormValid(test)
+  }, [form])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
@@ -70,15 +121,73 @@ const RegisterPage: React.FC = () => {
       setSubmitting(false);
       return;
     }
+    try {
+      const res = await axiosInstance.post('login', {
+        username, email, password, phone
+      });
 
-    // Simulated API call
-    console.log('Registering user:', form);
-    alert('Registration successful!');
+      if (res.data.status) {
+        setOpenSnackbar(true)
+        setForm({
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          phone: '',
+        })
+
+      }
+
+    } catch (err: any) {
+      if (err?.response?.data?.error) {
+
+        setError(Object.values(err?.response?.data?.error ?? {}).join(' '));
+      } else {
+        setError('Invalid credentials');
+      }
+      setSubmitting(false);
+    }
+
     setSubmitting(false);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const errors: FormErrors = { ...formErrors };
+
+    if (name === 'username') {
+      errors.username = validateName(value)
+    }
+    if (name === 'email') {
+      errors.email = validateEmail(value)
+    }
+    if (name === 'phone') {
+      errors.phone = validatePhone(value)
+    }
+    if (name === 'password') {
+      errors.password = validatePassword(value)
+    }
+    if (name === 'confirmPassword') {
+      errors.confirmPassword = validatePassword(value)
+      if (errors.confirmPassword.length !== 0 && form.confirmPassword !== form.password) {
+        errors.confirmPassword = 'Password and confirm password does not match.'
+      }
+    }
+
+    setFormErrors(errors);
+  };
+
+  const handleToLogin = () => {
+    navigate('/ea532f28cda5ac4d4b037af546c61233/login'); // or any other route
   };
 
   return (
     <StyledContainer maxWidth="sm">
+      {openSnackbar && (
+        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+          Registration successful!
+        </Alert>
+      )}
       <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
         <PersonAddIcon />
       </Avatar>
@@ -96,61 +205,80 @@ const RegisterPage: React.FC = () => {
       <StyledForm onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          required
-          label="Username"
+          label="Username *"
           name="username"
           value={form.username}
           onChange={handleChange}
           margin="normal"
+          onBlur={handleBlur}
+          error={Boolean(formErrors.username)}
+          helperText={formErrors.username}
         />
         <TextField
           fullWidth
-          required
-          label="Email"
+          label="Email *"
           name="email"
           type="email"
           value={form.email}
           onChange={handleChange}
           margin="normal"
+          onBlur={handleBlur}
+          error={Boolean(formErrors.email)}
+          helperText={formErrors.email}
         />
         <TextField
           fullWidth
-          required
-          label="Phone"
+          label="Phone *"
           name="phone"
           type="tel"
           value={form.phone}
           onChange={handleChange}
           margin="normal"
+          onBlur={handleBlur}
+          error={Boolean(formErrors.phone)}
+          helperText={formErrors.phone}
         />
         <TextField
           fullWidth
-          required
-          label="Password"
+          label="Password *"
           name="password"
           type="password"
           value={form.password}
           onChange={handleChange}
           margin="normal"
+          onBlur={handleBlur}
+          error={Boolean(formErrors.password)}
+          helperText={formErrors.password}
         />
         <TextField
           fullWidth
-          required
-          label="Confirm Password"
+          label="Confirm Password *"
           name="confirmPassword"
           type="password"
           value={form.confirmPassword}
           onChange={handleChange}
           margin="normal"
+          onBlur={handleBlur}
+          error={Boolean(formErrors.confirmPassword)}
+          helperText={formErrors.confirmPassword}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           sx={{ mt: 3 }}
-          disabled={submitting}
+          disabled={submitting || !formValid}
         >
           {submitting ? 'Registering...' : 'Register'}
+        </Button>
+        <Button
+          type="button"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3 }}
+          onClick={handleToLogin}
+        >
+         Back to Login
         </Button>
       </StyledForm>
     </StyledContainer>

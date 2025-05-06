@@ -10,8 +10,9 @@ const httpService = {
     url: string,
     data?: TRequest,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<TResponse>> => {
-    return await axiosInstance.post<TResponse>(url, data, config);
+  ): Promise<TResponse> => {
+    const response = await axiosInstance.post<TResponse>(url, data, config);
+    return response.data
   },
 
   put: async <TResponse, TRequest = unknown>(
