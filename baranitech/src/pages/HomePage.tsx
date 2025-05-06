@@ -19,6 +19,7 @@ import {
 } from "./styles";
 import ThreeColumnPage from "../components/ThreeColumnPage/ThreeColumnPage";
 import ThreeColumnWhitePage from "../components/ThreeColumnWhitePage/ThreeColumnWhitePage";
+import GetStartedToday from "../components/GetStartedComponent";
 
 export default function HomePage() {
   return (
@@ -176,6 +177,9 @@ export default function HomePage() {
       </Grid>
       <Grid size={12}>
         <ThreeColumnWhitePage />
+      </Grid>
+      <Grid size={12}>
+        <GetStartedToday />
       </Grid>
     </Grid>
   );
