@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\TrainingCategoryController;
 use App\Http\Controllers\Api\RegisterTrainingController;
+use App\Http\Controllers\Api\GalleryController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -72,7 +73,6 @@ Route::get('/trainings/{id}', [TrainingController::class, 'show']);
 Route::put('/trainings/{id}', [TrainingController::class, 'update']);
 Route::delete('/trainings/{id}', [TrainingController::class, 'destroy']);
 
-
 // Store a new registration
 Route::post('register-training', [RegisterTrainingController::class, 'store']);
 
@@ -87,3 +87,9 @@ Route::put('register-training/{id}', [RegisterTrainingController::class, 'update
 
 // Delete a specific registration by ID
 Route::delete('register-training/{id}', [RegisterTrainingController::class, 'destroy']);
+
+Route::post('/gallery', [GalleryController::class, 'store']); // Create gallery
+Route::get('/gallery', [GalleryController::class, 'index']); // Get all galleries
+Route::get('/gallery/{id}', [GalleryController::class, 'show']); // Get single gallery by ID
+Route::put('/gallery/{id}', [GalleryController::class, 'update']); // Update gallery by ID
+Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);
