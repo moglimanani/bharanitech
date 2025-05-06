@@ -20,8 +20,7 @@ import { Link, NavLink, useMatch, useParams } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled} from './styles'
 const menuItems = [
-  { path: '/', name: 'Home' },
-  { path: '/aboutus', name: 'About Us' },
+  { path: import.meta.env.VITE_ROUTE_ADMIN_URL, name: 'Home' },
   { path: '/resources', name: 'Resources' },
   { path: '/jobs', name: 'Jobs' },
   { path: '/trainings', name: 'Trainings' },
