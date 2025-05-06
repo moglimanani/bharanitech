@@ -1,3 +1,4 @@
+
 import { Grid, styled } from "@mui/material";
 
 
@@ -24,6 +25,9 @@ export const TitleDivStyled = styled('div')(({theme})=>({
     padding: '10px 20px',
     color: '#ffffff',
     display: 'flex',
+    'svg': {
+        marginRight: '10px'
+    }
 }))
 
 export const ImageDivStyled = styled('div')(({theme})=>({
