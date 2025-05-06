@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\JobCategoryController;
 use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\TrainingCategoryController;
+use App\Http\Controllers\Api\RegisterTrainingController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -25,12 +26,6 @@ Route::put('/login/{id}', [LoginUserController::class, 'update']); // PUT /login
 
 // delete by id
 Route::delete('/login/{id}', [LoginUserController::class, 'destroy']); // DELETE /login/{id}
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
-
-// Route::apiResource('youtube', YoutubeUrlController::class);
 
 // GET /api/youtube - List all YouTube URLs
 Route::get('youtube', [YoutubeUrlController::class, 'index']);
@@ -76,3 +71,19 @@ Route::post('/trainings', [TrainingController::class, 'store']);
 Route::get('/trainings/{id}', [TrainingController::class, 'show']);
 Route::put('/trainings/{id}', [TrainingController::class, 'update']);
 Route::delete('/trainings/{id}', [TrainingController::class, 'destroy']);
+
+
+// Store a new registration
+Route::post('register-training', [RegisterTrainingController::class, 'store']);
+
+// List all registrations
+Route::get('register-training', [RegisterTrainingController::class, 'index']);
+
+// Show a specific registration by ID
+Route::get('register-training/{id}', [RegisterTrainingController::class, 'show']);
+
+// Update a specific registration by ID
+Route::put('register-training/{id}', [RegisterTrainingController::class, 'update']);
+
+// Delete a specific registration by ID
+Route::delete('register-training/{id}', [RegisterTrainingController::class, 'destroy']);
