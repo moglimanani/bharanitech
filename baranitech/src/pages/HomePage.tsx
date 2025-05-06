@@ -18,6 +18,7 @@ import {
   TwoColumnStyled,
 } from "./styles";
 import ThreeColumnPage from "../components/ThreeColumnPage/ThreeColumnPage";
+import ThreeColumnWhitePage from "../components/ThreeColumnWhitePage/ThreeColumnWhitePage";
 
 export default function HomePage() {
   return (
@@ -172,6 +173,9 @@ export default function HomePage() {
       </TwoColumnStyled>
       <Grid size={12}>
        <ThreeColumnPage />
+      </Grid>
+      <Grid size={12}>
+        <ThreeColumnWhitePage />
       </Grid>
     </Grid>
   );
