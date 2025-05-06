@@ -5,10 +5,10 @@ export const useRequireUserSession = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem('baranitech-user');
+    const storedUser = sessionStorage.getItem(import.meta.env.VITE_APP_USER_SESSION_NAME);
 
     if (!storedUser) {
-      navigate('/ea532f28cda5ac4d4b037af546c61233/login');
+      navigate(import.meta.env.VITE_ROUTE_LOGIN_URL);
     }
   }, [navigate]);
 };

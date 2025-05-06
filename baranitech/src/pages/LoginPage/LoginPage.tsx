@@ -121,13 +121,13 @@ const EditLoginPage: React.FC = () => {
       setFormErrors({});
       if (res.status) {
         const data = res.data
-        sessionStorage.setItem('baranitech-user', JSON.stringify({
+        sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify({
           email: data.email,
           phone: data.phone,
           username: data.username,
           id: data.id
         }));
-        navigate('/ea532f28cda5ac4d4b037af546c61233/admin')
+        navigate(import.meta.env.VITE_ROUTE_ADMIN_URL)
       }
     } catch (err) {
       setFormErrors({ general: 'Login failed. Please check your credentials.' });
@@ -191,7 +191,7 @@ const EditLoginPage: React.FC = () => {
       <Box mt={2}>
         <Typography variant="body2">
           Don't have an account?{' '}
-          <Link to="/ea532f28cda5ac4d4b037af546c61233/register" style={{ color: '#1976d2' }}>
+          <Link to={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} style={{ color: '#1976d2' }}>
             Register
           </Link>
         </Typography>

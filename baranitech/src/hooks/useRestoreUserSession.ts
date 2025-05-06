@@ -15,11 +15,12 @@ export const UseRestoreUserSession = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const stored = sessionStorage.getItem('baranitech-user');
+        const stored = sessionStorage.getItem(import.meta.env.VITE_APP_USER_SESSION_NAME);
         if (stored && !user) {
             const parsedUser: StoredUser = JSON.parse(stored);
+            
             login(parsedUser);
-            navigate('/ea532f28cda5ac4d4b037af546c61233/admin');
+            navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
         }
     }, [login, user, navigate])
 

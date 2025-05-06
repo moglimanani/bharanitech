@@ -22,34 +22,43 @@ import JobAddPage from './pages/JobAddPage.tsx'
 import ResourceAddPage from './pages/ResourceAddPage.tsx'
 import TrainingsListPage from './pages/TrainingsListPage.tsx'
 import TrainingAddPage from './pages/TrainingAddPage.tsx'
+import { ThemeProvider } from '@emotion/react'
+import theme from './theme.ts'
+import { CssBaseline } from '@mui/material'
+import { UserProvider } from './contexts/userContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<App />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/aboutus" element={<AboutUsPage />} />
-          <Route path="/ea532f28cda5ac4d4b037af546c61233/login" element={<LoginPage />} />
-          <Route path="/ea532f28cda5ac4d4b037af546c61233/register" element={<RegisterPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/ea532f28cda5ac4d4b037af546c61233/admin" element={<AdminPage />} />
-          <Route path="/resources" element={<ResourcesListPage />} />
-          <Route path="/resource/add" element={<ResourceAddPage />} />
-          <Route path="/testimonial" element={<TestimonialPage />} />
-          <Route path="/youtube" element={<YoutubeListPage />} />
-          <Route path="/youtube/add" element={<YoutubeUrlAddPage />} />
-          <Route path="/jobs" element={<JobsListPage />} />
-          <Route path="/jobs/add" element={<JobAddPage />} />
-          <Route path="training/add" element={<TrainingAddPage />} />
-          <Route path="trainings" >
-            <Route index element={<TrainingsListPage />} />
-            <Route path=":tid" element={<TrainingsListPage />} />
-            <Route path="edit/:tid" element={<TrainingsListPage />} />
-          </Route>
-        </Route>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <UserProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<App />}>
+              <Route path={import.meta.env.VITE_ROUTE_HOME_URL} element={<HomePage />} />
+              <Route path={import.meta.env.VITE_ROUTE_ABOUTUS_URL} element={<AboutUsPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_LOGIN_URL} element={<LoginPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} element={<RegisterPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_CONTACT_URL} element={<ContactPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_ADMIN_URL} element={<AdminPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL} element={<ResourcesListPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_ADD_URL} element={<ResourceAddPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_TESTIMONIAL_URL} element={<TestimonialPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_URL} element={<YoutubeListPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_ADD_URL} element={<YoutubeUrlAddPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_JOBS_URL} element={<JobsListPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_JOBS_ADD_URL} element={<JobAddPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ADD_URL} element={<TrainingAddPage />} />
+              <Route path={import.meta.env.VITE_ROUTE_TRAININGS_URL} >
+                <Route index element={<TrainingsListPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsListPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_EDIT_URL} element={<TrainingsListPage />} />
+              </Route>
+            </Route>
 
-      </Routes>
-    </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

@@ -1,13 +1,13 @@
 import './styles/App.scss'
 import { Container, CssBaseline, Paper, styled, ThemeProvider, useMediaQuery, useTheme } from '@mui/material'
 import { Grid } from '@mui/material';
-import theme from './theme'
 import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
-import { PostsProvider } from './contexts/postContext'
 import FlashOffer from './components/FlashOffer'
 import { Outlet } from 'react-router';
-import { UserProvider } from './contexts/userContext';
+import { useUser } from './contexts/userContext';
+import { useEffect } from 'react';
+import AdminMenubar from './components/Menubar/adminMenubar';
 
 
 
@@ -16,36 +16,35 @@ function App() {
     padding: '0px',
     width: '100%'
   }))
+  const { user } = useUser()
+  useEffect(()=>{
+
+    console.log('user', user);
+  },[user])
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <UserProvider>
-        <PostsProvider>
+    <>
+      {user?.email ? <AdminMenubar /> : <MenuBar /> }
+      <FlashOffer
+        onClick={() => { }}
+        message="Book your spot now before registration closes. Don’t miss out!"
+        buttonlabel="Register" />
 
-          <MenuBar />
-          <FlashOffer
-            onClick={() => { }}
-            message="Book your spot now before registration closes. Don’t miss out!"
-            buttonlabel="Register" />
-
-          <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
-            <Grid container>
-              {/* <Grid size={{ xs: 12, md: 2 }}>
+      <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
+        <Grid container>
+          {/* <Grid size={{ xs: 12, md: 2 }}>
               <AccordionComponent />
             </Grid> */}
-              <Grid size={{ xs: 12 }}>
-                <Outlet />
-              </Grid>
-              {/* <Grid size={{ xs: 12, md: 2 }}></Grid> */}
-            </Grid>
+          <Grid size={{ xs: 12 }}>
+            <Outlet />
+          </Grid>
+          {/* <Grid size={{ xs: 12, md: 2 }}></Grid> */}
+        </Grid>
 
-          </ContainerStyled>
+      </ContainerStyled>
 
-          <Footer />
-
-        </PostsProvider>
-      </UserProvider>
-    </ThemeProvider>
+      <Footer />
+    </>
   )
 }
 

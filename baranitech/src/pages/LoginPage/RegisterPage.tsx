@@ -178,7 +178,7 @@ const RegisterPage: React.FC = () => {
   };
 
   const handleToLogin = () => {
-    navigate('/ea532f28cda5ac4d4b037af546c61233/login'); // or any other route
+    navigate(import.meta.env.VITE_ROUTE_LOGIN_URL); // or any other route
   };
 
   return (
