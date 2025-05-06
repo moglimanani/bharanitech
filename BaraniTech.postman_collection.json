@@ -1001,6 +1001,43 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Gallery",
+			"item": [
+				{
+					"name": "http://localhost:8000/api/gallery",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Nature Gallery\",\n    \"description\": \"A collection of beautiful nature photos\",\n    \"photos\": [\n        \"/Users/manimaranuthirapathy/Downloads/1.jpeg\",\n        \"/Users/manimaranuthirapathy/Downloads/2.jpeg\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/gallery",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
