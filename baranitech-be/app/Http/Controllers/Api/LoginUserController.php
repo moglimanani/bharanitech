@@ -43,7 +43,7 @@ class LoginUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return response()->json(['data' => new LoginResource($data), 'message' => 'User added successfully'], 200);
+            return response()->json([ 'status' => true, 'data' => new LoginResource($data), 'message' => 'User added successfully'], 200);
         } catch (Exception $e) {
             return response()->json(
                 [

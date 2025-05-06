@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import { PostsProvider } from './contexts/postContext'
 import FlashOffer from './components/FlashOffer'
 import { Outlet } from 'react-router';
+import { UserProvider } from './contexts/userContext';
 
 
 
@@ -18,30 +19,32 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <PostsProvider>
+      <UserProvider>
+        <PostsProvider>
 
-        <MenuBar />
-        <FlashOffer
-          onClick={() => { }}
-          message="Book your spot now before registration closes. Don’t miss out!"
-          buttonlabel="Register" />
+          <MenuBar />
+          <FlashOffer
+            onClick={() => { }}
+            message="Book your spot now before registration closes. Don’t miss out!"
+            buttonlabel="Register" />
 
-        <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
-          <Grid container>
-            {/* <Grid size={{ xs: 12, md: 2 }}>
+          <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
+            <Grid container>
+              {/* <Grid size={{ xs: 12, md: 2 }}>
               <AccordionComponent />
             </Grid> */}
-            <Grid size={{ xs: 12}}>
-              <Outlet />
+              <Grid size={{ xs: 12 }}>
+                <Outlet />
+              </Grid>
+              {/* <Grid size={{ xs: 12, md: 2 }}></Grid> */}
             </Grid>
-            {/* <Grid size={{ xs: 12, md: 2 }}></Grid> */}
-          </Grid>
 
-        </ContainerStyled>
+          </ContainerStyled>
 
-        <Footer />
+          <Footer />
 
-      </PostsProvider>
+        </PostsProvider>
+      </UserProvider>
     </ThemeProvider>
   )
 }

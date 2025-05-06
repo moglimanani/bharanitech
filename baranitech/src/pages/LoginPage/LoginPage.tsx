@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Container,
   Typography,
@@ -11,10 +11,30 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { styled } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router';
+import { validateEmail, validatePassword } from '../../helper';
+import { useUser } from '../../contexts/userContext';
+import httpService from '../../api/httpService';
+import { UseRestoreUserSession } from '../../hooks/useRestoreUserSession';
 
 interface EditLoginPage {
   email: string;
   password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+  general?: string;
+}
+
+interface LoginResponse {
+  status: boolean;
+  data: {
+    id: number;
+    username: string;
+    email: string;
+    phone: string;
+  };
 }
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -36,33 +56,81 @@ const StyledForm = styled('form')(({ theme }) => ({
 
 const EditLoginPage: React.FC = () => {
   const [form, setForm] = useState<EditLoginPage>({ email: '', password: '' });
-  const [error, setError] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  UseRestoreUserSession()
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const errors: FormErrors = { ...formErrors };
+    if (name === 'email') {
+      errors.email = validateEmail(value)
+    }
+    if (name === 'password') {
+      errors.password = validatePassword(value)
+    }
+    setFormErrors(errors); 
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const errors: FormErrors = { ...formErrors };
+
+    if (name === 'email') {
+      errors.email = validateEmail(value)
+    }
+
+    // Validate password on blur
+    if (name === 'password') {
+      errors.password = validatePassword(value);
+    }
+
+    setFormErrors(errors);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setError(null);
+    setFormErrors({});
 
     const { email, password } = form;
+    const errors: FormErrors = {};
 
-    if (!email || !password) {
-      setError('Both email and password are required.');
+    if (validateEmail(email)) {
+      errors.email = validateEmail(email);
+    }
+    if (validatePassword(password)) {
+      errors.password = validatePassword(password)
+    }
+
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       setSubmitting(false);
       return;
     }
 
-    // Simulated login
-    if (email === 'admin@example.com' && password === 'password') {
-      alert('Login successful');
-      navigate('/dashboard'); // redirect after login
-    } else {
-      setError('Invalid credentials');
+    try {
+      const res = await httpService.post<LoginResponse>('login/checklogin', {
+        email,
+        password,
+      });
+      setFormErrors({});
+      if (res.status) {
+        const data = res.data
+        sessionStorage.setItem('baranitech-user', JSON.stringify({
+          email: data.email,
+          phone: data.phone,
+          username: data.username,
+          id: data.id
+        }));
+        navigate('/ea532f28cda5ac4d4b037af546c61233/admin')
+      }
+    } catch (err) {
+      setFormErrors({ general: 'Login failed. Please check your credentials.' });
     }
 
     setSubmitting(false);
@@ -78,39 +146,43 @@ const EditLoginPage: React.FC = () => {
         Sign In
       </Typography>
 
-      {error && (
+      {formErrors.general && (
         <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
-          {error}
+          {formErrors.general}
         </Alert>
       )}
 
       <StyledForm onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          required
-          label="Email"
+          label="Email *"
           name="email"
-          type="email"
+          type="text"
           value={form.email}
           onChange={handleChange}
+          onBlur={handleBlur}
           margin="normal"
+          error={Boolean(formErrors.email)}
+          helperText={formErrors.email}
         />
         <TextField
           fullWidth
-          required
-          label="Password"
+          label="Password *"
           name="password"
           type="password"
+          onBlur={handleBlur}
           value={form.password}
           onChange={handleChange}
           margin="normal"
+          error={Boolean(formErrors.password)}
+          helperText={formErrors.password}
         />
         <Button
           fullWidth
           type="submit"
           variant="contained"
           sx={{ mt: 3 }}
-          disabled={submitting}
+          disabled={submitting || validateEmail(form.email).length !== 0 || validatePassword(form.password).length !== 0}
         >
           {submitting ? 'Signing in...' : 'Sign In'}
         </Button>
@@ -119,7 +191,7 @@ const EditLoginPage: React.FC = () => {
       <Box mt={2}>
         <Typography variant="body2">
           Don't have an account?{' '}
-          <Link to="/register" style={{ color: '#1976d2' }}>
+          <Link to="/ea532f28cda5ac4d4b037af546c61233/register" style={{ color: '#1976d2' }}>
             Register
           </Link>
         </Typography>

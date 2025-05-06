@@ -30,10 +30,10 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<App />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/ea532f28cda5ac4d4b037af546c61233/login" element={<LoginPage />} />
+          <Route path="/ea532f28cda5ac4d4b037af546c61233/register" element={<RegisterPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/ea532f28cda5ac4d4b037af546c61233/admin" element={<AdminPage />} />
           <Route path="/resources" element={<ResourcesListPage />} />
           <Route path="/resource/add" element={<ResourceAddPage />} />
           <Route path="/testimonial" element={<TestimonialPage />} />
