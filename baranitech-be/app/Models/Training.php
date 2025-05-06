@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Training extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'title',
-        'description',
-        'trainer_name',
-        'duration_minutes',
-        'date',
+        'title', 'description', 'type', 'classification',
+        'startdate', 'enddate', 'location', 'total_hours',
+        'city', 'state', 'country', 'table_of_contents', 'total_price'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(TrainingCategory::class, 'type');
+    }
 }

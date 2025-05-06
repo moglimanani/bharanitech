@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginUserController;
 use App\Http\Controllers\Api\YoutubeUrlController;
-use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\JobCategoryController;
 use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\TrainingController;
+use App\Http\Controllers\Api\TrainingCategoryController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -61,3 +62,17 @@ Route::post('/jobs', [JobController::class, 'store']);
 Route::get('/jobs/{id}', [JobController::class, 'show']);
 Route::put('/jobs/{id}', [JobController::class, 'update']);
 Route::delete('/jobs/{id}', [JobController::class, 'destroy']);
+
+// Training Category Routes
+Route::get('/training-categories', [TrainingCategoryController::class, 'index']);
+Route::post('/training-categories', [TrainingCategoryController::class, 'store']);
+Route::get('/training-categories/{id}', [TrainingCategoryController::class, 'show']);
+Route::put('/training-categories/{id}', [TrainingCategoryController::class, 'update']);
+Route::delete('/training-categories/{id}', [TrainingCategoryController::class, 'destroy']);
+
+// Training Routes
+Route::get('/trainings', [TrainingController::class, 'index']);
+Route::post('/trainings', [TrainingController::class, 'store']);
+Route::get('/trainings/{id}', [TrainingController::class, 'show']);
+Route::put('/trainings/{id}', [TrainingController::class, 'update']);
+Route::delete('/trainings/{id}', [TrainingController::class, 'destroy']);

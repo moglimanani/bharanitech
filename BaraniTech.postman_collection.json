@@ -385,7 +385,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"First course\" \n}",
+							"raw": "{\n    \"type\": 3,\n\t\t\"title\": \"first training\",\n\t\t\"classification\": 0,\n\t\t\"startdate\": \"2025-05-06T03:31:00.000000Z\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -449,7 +449,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/trainings/1",
+							"raw": "http://localhost:8000/api/trainings/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -458,7 +458,7 @@
 							"path": [
 								"api",
 								"trainings",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -660,17 +660,34 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Training category",
+			"item": [
 				{
-					"name": "get jobs by id",
+					"name": "fetch trainings category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/jobs/2",
+							"raw": "http://localhost:8000/api/training-categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -678,8 +695,141 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"jobs",
-								"2"
+								"training-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch trainings category by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/training-categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"training-categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete training category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/training-categories/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"training-categories",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update training category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Module - Basic\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/training-categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"training-categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add training category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": 43534\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/training-categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"training-categories"
 							]
 						}
 					},

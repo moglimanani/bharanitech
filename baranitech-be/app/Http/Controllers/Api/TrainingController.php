@@ -1,70 +1,107 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Training;
-use App\Http\Resources\TrainingResource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class TrainingController extends Controller
 {
     public function index()
     {
-        $trainings = Training::latest()->get();
+        $trainings = Training::with('category')->get();
 
         return response()->json([
-            'status' => true,
-            'data' => TrainingResource::collection($trainings),
-            'message' => 'Trainings retrieved successfully'
+            'status' => 'success',
+            'data' => $trainings,
         ]);
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255|unique:trainings',
-            'description' => 'nullable|string',
-            'trainer_name' => 'nullable|string|max:255',
-            'duration_minutes' => 'nullable|integer|min:1',
-            'date' => 'nullable|date',
-        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'type' => 'required|exists:training_categories,id',
+                'classification' => 'required|in:0,1',
+                'startdate' => 'required|date',
+                'enddate' => 'date|after_or_equal:startdate',
+                'location' => 'nullable|string',
+                'total_hours' => 'nullable|numeric',
+                'city' => 'nullable|string',
+                'state' => 'nullable|string',
+                'country' => 'nullable|string',
+                'table_of_contents' => 'nullable|string',
+                'total_price' => 'nullable|numeric',
+            ]);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        'status' => false,
+                        'message' => 'Validation failed.',
+                        'errors' => $validator->errors(),
+                    ],
+                    422,
+                );
+            }
+
+            $validated = $validator->validated();
+
+            // Use Carbon to format the dates
+            $validated['startdate'] = Carbon::parse($validated['startdate'])->format('Y-m-d H:i:s');
+            if (isset($validated['enddate'])) {
+                $validated['enddate'] = Carbon::parse($validated['enddate'])->format('Y-m-d H:i:s');
+            }
+
+            // $training = Training::create($validator)->load('category');
+            $training = Training::create($validated)->load('category');
+
             return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
+                'status' => 'success',
+                'data' => $training,
+                'message' => 'Training created successfully.',
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Job not found.',
+                ],
+                404,
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'An unexpected error occurred.',
+                    'error' => $e->getMessage(),
+                ],
+                500,
+            );
         }
-
-        $training = Training::create($validator->validated());
-
-        return response()->json([
-            'status' => true,
-            'data' => new TrainingResource($training),
-            'message' => 'Training created successfully'
-        ], 201);
     }
 
     public function show($id)
     {
-        $training = Training::find($id);
+        $training = Training::with('category')->find($id);
 
         if (!$training) {
-            return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Training not found'
-            ], 200);
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Training not found.',
+                ],
+                404,
+            );
         }
 
         return response()->json([
-            'status' => true,
-            'data' => new TrainingResource($training),
-            'message' => 'Training retrieved successfully'
+            'status' => 'success',
+            'data' => $training,
         ]);
     }
 
@@ -73,36 +110,37 @@ class TrainingController extends Controller
         $training = Training::find($id);
 
         if (!$training) {
-            return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Training not found'
-            ], 404);
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Training not found.',
+                ],
+                404,
+            );
         }
 
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
+        $validated = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'trainer_name' => 'nullable|string|max:255',
-            'duration_minutes' => 'nullable|integer|min:1',
-            'date' => 'nullable|date',
+            'type' => 'sometimes|required|exists:training_categories,id',
+            'classification' => 'sometimes|required|in:0,1',
+            'startdate' => 'sometimes|required|date',
+            'enddate' => 'sometimes|required|date|after_or_equal:startdate',
+            'location' => 'nullable|string',
+            'total_hours' => 'nullable|numeric',
+            'city' => 'nullable|string',
+            'state' => 'nullable|string',
+            'country' => 'nullable|string',
+            'table_of_contents' => 'nullable|string',
+            'total_price' => 'nullable|numeric',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $training->update($validator->validated());
+        $training->update($validated);
 
         return response()->json([
-            'status' => true,
-            'data' => new TrainingResource($training),
-            'message' => 'Training updated successfully'
+            'status' => 'success',
+            'data' => $training->load('category'),
+            'message' => 'Training updated successfully.',
         ]);
     }
 
@@ -111,19 +149,20 @@ class TrainingController extends Controller
         $training = Training::find($id);
 
         if (!$training) {
-            return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Training not found'
-            ], 404);
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Training not found.',
+                ],
+                404,
+            );
         }
 
         $training->delete();
 
         return response()->json([
-            'status' => true,
-            'data' => null,
-            'message' => 'Training deleted successfully'
+            'status' => 'success',
+            'message' => 'Training deleted successfully.',
         ]);
     }
 }
