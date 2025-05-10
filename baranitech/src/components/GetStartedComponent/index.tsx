@@ -1,5 +1,5 @@
 import React from "react";
-import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, WrapperDivStyled } from "./styles";
+import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, ImageWrapperStyled, WrapperDivStyled } from "./styles";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const GetStartedToday: React.FC = () => {
@@ -14,9 +14,9 @@ const GetStartedToday: React.FC = () => {
           </p>
           <button>Enroll <KeyboardArrowRightIcon /></button>
         </DivWrapperStyled>
-        <div>
+        <ImageWrapperStyled>
           <img src="/radio.png" alt="tower" loading="lazy" />
-        </div>
+        </ImageWrapperStyled>
       </BoxWrapperStyled>
       <DivWrapperBoxStyled>
           <h2>Why study with us?</h2>
@@ -40,7 +40,7 @@ const GetStartedToday: React.FC = () => {
           </DivWrapperInnerStyled>
            <DivWrapperInnerStyled>
            <div>
-            <div><img src="/mail.png" alt="" loading="lazy" /></div>
+            <div className="image"><img src="/mail.png" alt="" loading="lazy" /></div>
               <WrapperDivStyled>
                 <div>100% Online</div>
                 <p>Study from Home Anywhere in the World</p>

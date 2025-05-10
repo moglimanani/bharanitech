@@ -14,6 +14,9 @@ export const ThreeColumnStyled = styled(Grid)(({theme})=>({
     padding: '0px',
     margin: '10px 0 30px',
     flexDirection: 'column',
+    [theme.breakpoints.down('sm')]: {
+       // background: 'Yellow',
+    }
 }))
 
 

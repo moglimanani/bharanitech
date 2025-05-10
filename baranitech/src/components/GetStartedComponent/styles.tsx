@@ -63,16 +63,34 @@ export const DivWrapperInnerStyled = styled('div')(({theme})=>({
   display: 'flex',
   justifyContent: 'space-between',
   textAlign: 'left',
+  [theme.breakpoints.down('sm')]: {
+    // background: 'yellow',
+   flexDirection: 'column',
+   padding: '0',
+ },
   '& > div': {
     display: 'flex',
     textAlign: 'left',
     margin: '0',
-    width: '500px',    
+    width: '500px',  
+   
+    [theme.breakpoints.down('sm')]: {
+      // background: 'yellow',
+     // flexDirection: 'column',
+    
+   }
   },
 }))
 
 export const WrapperDivStyled = styled('div')(({theme})=>({
   margin: '20px 0 0 20px',
+  
+  [theme.breakpoints.down('sm')]: {
+    // background: 'yellow',
+   // flexDirection: 'column',
+   margin: '10px 0 0 10px',
+   maxWidth: '230px',
+ },
   '& > div': {
     color: '#127B93',
     fontSize: '.88em',
@@ -83,4 +101,13 @@ export const WrapperDivStyled = styled('div')(({theme})=>({
     fontSize: '.88em'
   },
 
+}))
+
+export const ImageWrapperStyled = styled('div')(({theme})=>({
+  [theme.breakpoints.down('sm')]: {
+    'img': {
+      maxWidth: '120px',
+    }
+  
+ },
 }))
