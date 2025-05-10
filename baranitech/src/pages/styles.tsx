@@ -10,6 +10,10 @@ export const BodyPara1Styled = styled(Typography)(({theme})=>({
 
 export const PageWrapperStyled = styled(Box)(({theme})=>({
   padding: '0px 16px 16px 20px',
+  [theme.breakpoints.down('sm')]: {
+    padding: '0',
+    margin: ' 20px 0',
+ }
 }))
 
 export const ListItemTextStyled = styled(ListItemText)(({theme})=>({
@@ -42,4 +46,7 @@ export const ListStyled = styled(List)(({theme})=>({
 
 export const TwoColumnStyled = styled(Grid)(({theme})=>({
   padding: "30px 30px 0px",
+  [theme.breakpoints.down('sm')]: {
+    padding: '20px',
+ }
 }))
