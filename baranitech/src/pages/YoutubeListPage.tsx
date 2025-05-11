@@ -10,7 +10,6 @@ import {
   Alert,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
 
 interface YoutubeVideo {
   id: number;
@@ -20,7 +19,7 @@ interface YoutubeVideo {
   url: string;
 }
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -60,19 +59,9 @@ const mockData: YoutubeVideo[] = [
 const YoutubeListPage: React.FC = () => {
   const [videos, setVideos] = useState<YoutubeVideo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
 
   useEffect(() => {
-    // axios
-    //   .get<YoutubeVideo[]>('/api/youtube') // adjust to your actual endpoint
-    //   .then((res) => {
-    //     setVideos(res.data.data || res.data); // supports API resource structure
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setError('Failed to load YouTube videos');
-    //     setLoading(false);
-    //   });
     setTimeout(() => {
         setVideos(mockData);
         setLoading(false);

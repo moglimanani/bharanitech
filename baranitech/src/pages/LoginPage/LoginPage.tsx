@@ -1,30 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import {
   Container,
   Typography,
   TextField,
   Button,
   Avatar,
-  Alert,
   Box,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { styled } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router';
-import { validateEmail, validatePassword } from '../../helper';
-import { useUser } from '../../contexts/userContext';
 import httpService from '../../api/httpService';
 import { UseRestoreUserSession } from '../../hooks/useRestoreUserSession';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { LoginFormSchema } from '../../validationSchema/schema';
+import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
+import { useErrorAlert } from '../../contexts/ErrorAlertContext';
 
-interface EditLoginPage {
+interface LoginPageType {
   email: string;
   password: string;
-}
-
-interface FormErrors {
-  email?: string;
-  password?: string;
-  general?: string;
 }
 
 interface LoginResponse {
@@ -55,86 +51,54 @@ const StyledForm = styled('form')(({ theme }) => ({
 }));
 
 const EditLoginPage: React.FC = () => {
-  const [form, setForm] = useState<EditLoginPage>({ email: '', password: '' });
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   UseRestoreUserSession()
+  const {showError} = useErrorAlert()
+  useAxiosErrorHandler(showError)
 
+  const { control, formState: { errors, isValid, isSubmitting }, handleSubmit, reset } = useForm<LoginPageType>({
+    resolver: yupResolver(LoginFormSchema),
+    mode: 'onBlur'
+  })
+  // try {
+  //   const res = await httpService.post<LoginResponse>('login/checklogin', {
+  //     email,
+  //     password,
+  //   });
+  //   setFormErrors({});
+  //   if (res.status) {
+  //     const data = res.data
+  //     sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify({
+  //       email: data.email,
+  //       phone: data.phone,
+  //       username: data.username,
+  //       id: data.id
+  //     }));
+  //     navigate(import.meta.env.VITE_ROUTE_ADMIN_URL)
+  //   }
+  //    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // } catch (err) {
+  //   setFormErrors({ general: 'Login failed. Please check your credentials.' });
+  // }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    const { name, value } = e.target;
-    const errors: FormErrors = { ...formErrors };
-    if (name === 'email') {
-      errors.email = validateEmail(value)
-    }
-    if (name === 'password') {
-      errors.password = validatePassword(value)
-    }
-    setFormErrors(errors); 
-  };
+  // setSubmitting(false);
+  // };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const errors: FormErrors = { ...formErrors };
-
-    if (name === 'email') {
-      errors.email = validateEmail(value)
-    }
-
-    // Validate password on blur
-    if (name === 'password') {
-      errors.password = validatePassword(value);
-    }
-
-    setFormErrors(errors);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setFormErrors({});
-
-    const { email, password } = form;
-    const errors: FormErrors = {};
-
-    if (validateEmail(email)) {
-      errors.email = validateEmail(email);
-    }
-    if (validatePassword(password)) {
-      errors.password = validatePassword(password)
-    }
-
-
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      setSubmitting(false);
-      return;
-    }
-
+  const onSubmit = async (data: LoginPageType) => {
     try {
-      const res = await httpService.post<LoginResponse>('login/checklogin', {
-        email,
-        password,
-      });
-      setFormErrors({});
+      const res = await httpService.post<LoginResponse>('login/checklogin', data);
+  
       if (res.status) {
-        const data = res.data
-        sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify({
-          email: data.email,
-          phone: data.phone,
-          username: data.username,
-          id: data.id
-        }));
-        navigate(import.meta.env.VITE_ROUTE_ADMIN_URL)
+        const user = res.data;
+        sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify(user));
+        navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
+      } else {
+        // optional: show a toast or alert here
       }
     } catch (err) {
-      setFormErrors({ general: 'Login failed. Please check your credentials.' });
-    }
-
-    setSubmitting(false);
-  };
+      // optional: show error alert
+      console.error(err);
+    }  }
 
   return (
     <StyledContainer maxWidth="xs">
@@ -146,47 +110,52 @@ const EditLoginPage: React.FC = () => {
         Sign In
       </Typography>
 
-      {formErrors.general && (
-        <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
-          {formErrors.general}
-        </Alert>
-      )}
-
-      <StyledForm onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Email *"
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <Controller
           name="email"
-          type="text"
-          value={form.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          margin="normal"
-          error={Boolean(formErrors.email)}
-          helperText={formErrors.email}
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Email *"
+              type="email"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.email)}
+              helperText={errors.email?.message}
+            />
+          )}
         />
-        <TextField
-          fullWidth
-          label="Password *"
+
+        <Controller
           name="password"
-          type="password"
-          onBlur={handleBlur}
-          value={form.password}
-          onChange={handleChange}
-          margin="normal"
-          error={Boolean(formErrors.password)}
-          helperText={formErrors.password}
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Password *"
+              type="password"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.password)}
+              helperText={errors.password?.message}
+            />
+          )}
         />
+
         <Button
           fullWidth
           type="submit"
           variant="contained"
           sx={{ mt: 3 }}
-          disabled={submitting || validateEmail(form.email).length !== 0 || validatePassword(form.password).length !== 0}
+          disabled={!isValid}
         >
-          {submitting ? 'Signing in...' : 'Sign In'}
+          {isSubmitting ? 'Signing in...' : 'Sign In'}
         </Button>
       </StyledForm>
+
 
       <Box mt={2}>
         <Typography variant="body2">

@@ -5,7 +5,6 @@ import {
   Typography,
   Grid,
   Container,
-  Box,
   Divider,
 } from '@mui/material';
 
