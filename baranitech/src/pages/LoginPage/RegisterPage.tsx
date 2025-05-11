@@ -9,23 +9,30 @@ import {
 } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { styled } from '@mui/material/styles';
-import { validateEmail, validateName, validatePassword, validatePhone } from '../../helper';
-import axiosInstance from '../../api/axiosInstance';
 import { useNavigate } from 'react-router';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { RegisterUserSchema } from '../../validationSchema/schema';
+import httpService from '../../api/httpService';
+import { useErrorAlert } from '../../contexts/ErrorAlertContext';
+import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 
-interface RegisterForm {
+interface RegisterFormType {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
   phone: string;
 }
-interface FormErrors {
-  username?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-  phone?: string;
+interface RegisterFormResponse {
+  status: boolean;
+  data: {
+    id: number;
+    username: string;
+    email: string;
+    phone: string;
+  };
+  message: string;
 }
 
 
@@ -49,133 +56,38 @@ const StyledForm = styled('form')(({ theme }) => ({
 }));
 
 const RegisterPage: React.FC = () => {
-  const [form, setForm] = useState<RegisterForm>({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-  });
-
-  const [error, setError] = useState<string | null>(null);
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [submitting, setSubmitting] = useState(false);
-  const [formValid, setFormValid] = useState(false)
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate()
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    const { name, value } = e.target;
-    const errors: FormErrors = { ...formErrors };
+  const { showError } = useErrorAlert()
+  useAxiosErrorHandler(showError)
+  const {
+    control,
+    formState: { errors, isValid, isSubmitting },
+    handleSubmit,
+    reset
+  } = useForm<RegisterFormType>({
+    resolver: yupResolver(RegisterUserSchema),
+    mode: 'onBlur'
+  })
 
-    if (name === 'username') {
-      errors.username = validateName(value)
-    }
-    if (name === 'email') {
-      errors.email = validateEmail(value)
-    }
-    if (name === 'phone') {
-      errors.phone = validatePhone(value)
-    }
-    if (name === 'password') {
-      errors.password = validatePassword(value)
-    }
-    if (name === 'confirmPassword') {
-      errors.confirmPassword = validatePassword(value)
-      if (errors.confirmPassword.length !== 0 && form.confirmPassword !== form.password) {
-        errors.confirmPassword = 'Password and confirm password does not match.'
-      }
-    }
-
-    setFormErrors(errors);
-  };
-
-  useEffect(() => {
-    const email = validateEmail(form.email);
-    const name = validateName(form.username);
-    const phone = validatePhone(form.phone);
-    const password = validatePassword(form.password);
-    const confirmPassword = validatePassword(form.confirmPassword);
-
-    const test = email.length === 0 && name.length === 0 && phone.length === 0 && password.length === 0 && confirmPassword.length === 0 && confirmPassword === password;
-
-    setFormValid(test)
-  }, [form])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(null);
-
-    const { username, email, password, confirmPassword, phone } = form;
-
-    if (!username || !email || !password || !confirmPassword || !phone) {
-      setError('All fields are required.');
-      setSubmitting(false);
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      setSubmitting(false);
-      return;
-    }
+  const onSubmit = async (data: RegisterFormType) => {
     try {
-      const res = await axiosInstance.post('login', {
-        username, email, password, phone
-      });
-
-      if (res.data.status) {
+      const res = await httpService.post<RegisterFormResponse>('login', data);
+      console.log(res);
+      // @ts-ignore
+      if (res.status) {
         setOpenSnackbar(true)
-        setForm({
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          phone: '',
-        })
-
-      }
-
-    } catch (err: any) {
-      if (err?.response?.data?.error) {
-
-        setError(Object.values(err?.response?.data?.error ?? {}).join(' '));
+        reset()
+        // sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify(user));
+        // navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
       } else {
-        setError('Invalid credentials');
+        // optional: show a toast or alert here
       }
-      setSubmitting(false);
+    } catch (err) {
+      // optional: show error alert
+      console.error(err);
     }
-
-    setSubmitting(false);
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const errors: FormErrors = { ...formErrors };
-
-    if (name === 'username') {
-      errors.username = validateName(value)
-    }
-    if (name === 'email') {
-      errors.email = validateEmail(value)
-    }
-    if (name === 'phone') {
-      errors.phone = validatePhone(value)
-    }
-    if (name === 'password') {
-      errors.password = validatePassword(value)
-    }
-    if (name === 'confirmPassword') {
-      errors.confirmPassword = validatePassword(value)
-      if (errors.confirmPassword.length !== 0 && form.confirmPassword !== form.password) {
-        errors.confirmPassword = 'Password and confirm password does not match.'
-      }
-    }
-
-    setFormErrors(errors);
-  };
+  }
 
   const handleToLogin = () => {
     navigate(import.meta.env.VITE_ROUTE_LOGIN_URL); // or any other route
@@ -196,80 +108,92 @@ const RegisterPage: React.FC = () => {
         Register
       </Typography>
 
-      {error && (
-        <Alert severity="error" sx={{ mt: 2, width: '100%' }}>
-          {error}
-        </Alert>
-      )}
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name='username'
+          control={control}
+          defaultValue=''
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Username *"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.username)}
+              helperText={errors.username?.message}
+            />
+          )}
+        />
 
-      <StyledForm onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Username *"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-          margin="normal"
-          onBlur={handleBlur}
-          error={Boolean(formErrors.username)}
-          helperText={formErrors.username}
+        <Controller
+          name='email'
+          control={control}
+          defaultValue=''
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Email *"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.email)}
+              helperText={errors.email?.message}
+            />
+          )}
         />
-        <TextField
-          fullWidth
-          label="Email *"
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-          margin="normal"
-          onBlur={handleBlur}
-          error={Boolean(formErrors.email)}
-          helperText={formErrors.email}
+        <Controller
+          name='phone'
+          control={control}
+          defaultValue=''
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Phone Number *"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.phone)}
+              helperText={errors.phone?.message}
+            />
+          )}
         />
-        <TextField
-          fullWidth
-          label="Phone *"
-          name="phone"
-          type="tel"
-          value={form.phone}
-          onChange={handleChange}
-          margin="normal"
-          onBlur={handleBlur}
-          error={Boolean(formErrors.phone)}
-          helperText={formErrors.phone}
+        <Controller
+          name='password'
+          control={control}
+          defaultValue=''
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Password *"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.password)}
+              helperText={errors.password?.message}
+            />
+          )}
         />
-        <TextField
-          fullWidth
-          label="Password *"
-          name="password"
-          type="password"
-          value={form.password}
-          onChange={handleChange}
-          margin="normal"
-          onBlur={handleBlur}
-          error={Boolean(formErrors.password)}
-          helperText={formErrors.password}
+        <Controller
+          name='confirmPassword'
+          control={control}
+          defaultValue=''
+          render={({ field }) => (
+            <TextField
+              fullWidth
+              label="Confirm Password *"
+              margin="normal"
+              {...field}
+              error={Boolean(errors.confirmPassword)}
+              helperText={errors.confirmPassword?.message}
+            />
+          )}
         />
-        <TextField
-          fullWidth
-          label="Confirm Password *"
-          name="confirmPassword"
-          type="password"
-          value={form.confirmPassword}
-          onChange={handleChange}
-          margin="normal"
-          onBlur={handleBlur}
-          error={Boolean(formErrors.confirmPassword)}
-          helperText={formErrors.confirmPassword}
-        />
+
         <Button
           type="submit"
           fullWidth
           variant="contained"
           sx={{ mt: 3 }}
-          disabled={submitting || !formValid}
+          disabled={!isValid}
         >
-          {submitting ? 'Registering...' : 'Register'}
+          {isSubmitting ? 'Registering...' : 'Register'}
         </Button>
         <Button
           type="button"
@@ -278,7 +202,7 @@ const RegisterPage: React.FC = () => {
           sx={{ mt: 3 }}
           onClick={handleToLogin}
         >
-         Back to Login
+          Back to Login
         </Button>
       </StyledForm>
     </StyledContainer>

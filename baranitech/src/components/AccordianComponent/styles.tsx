@@ -1,32 +1,11 @@
 import { Box, ListItemButton, styled } from "@mui/material";
 
-export const AccordianWrapper = styled(Box)(({ theme }) => ({
+export const AccordianWrapper = styled(Box)(() => ({
     backgroundColor: 'transparent',
-    padding: '0px',
-    // ' .MuiListItemButton-root': {
-    //     backgroundColor: 'red',
-    //     display: 'flex',
-    //     alignItems: 'flex-start'
-    // },
-    // 'nav': {
-    //     '& > .MuiListItemButton-root': {
-    //         backgroundColor: 'green'
-    //     },
-    //     '& > .MuiCollapse-vertical': {
-    //         '&  .MuiList-root': {
-    //             backgroundColor: 'yellow',
-    //             ' & > .MuiListItemButton-root': {
-    //                 backgroundColor: 'blue',
-    //                 display: 'flex',
-    //                 alignItems: 'flex-start'
-    //             },
-    //         },
-
-    //     }
-    // }
+    padding: '0px'
 }))
 
-export const ListItemButtonStyled = styled(ListItemButton)(({theme})=>({
+export const ListItemButtonStyled = styled(ListItemButton)(()=>({
     backgroundColor: '#C4F4FF',
     marginBottom: '2px',
     borderRadius: '20px',

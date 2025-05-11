@@ -32,7 +32,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const ResourcesListPage: React.FC = () => {
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
 
   // Simulating data fetching with mock array
   useEffect(() => {

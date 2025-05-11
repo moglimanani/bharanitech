@@ -30,6 +30,16 @@ export const validateName = (name: string) => {
     return '';
 };
 
+export const validateTitle = (prop: {name: string, value: string, minLength:number, maxLength: number}) => {
+    if (!prop.value.trim()) {
+        return `${prop.name} is required.`;
+    }
+    if (prop.value.length < prop.minLength || prop.value.length < prop.maxLength) {
+      return `${prop.name} must be at least 3 characters.`;
+    }
+    return '';
+};
+
 export const validatePhone = (phone: string): string => {
     if (!phone.trim()) {
       return 'Phone number is required.';

@@ -26,38 +26,48 @@ import { ThemeProvider } from '@emotion/react'
 import theme from './theme.ts'
 import { CssBaseline } from '@mui/material'
 import { UserProvider } from './contexts/userContext.tsx'
+import GalleryAdminComponent from './components/GalleryAdminComponent/index.tsx'
+import { ErrorAlertProvider } from './contexts/ErrorAlertContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <UserProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<App />}>
-              <Route path={import.meta.env.VITE_ROUTE_HOME_URL} element={<HomePage />} />
-              <Route path={import.meta.env.VITE_ROUTE_ABOUTUS_URL} element={<AboutUsPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_LOGIN_URL} element={<LoginPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} element={<RegisterPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_CONTACT_URL} element={<ContactPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_ADMIN_URL} element={<AdminPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL} element={<ResourcesListPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_ADD_URL} element={<ResourceAddPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_TESTIMONIAL_URL} element={<TestimonialPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_URL} element={<YoutubeListPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_ADD_URL} element={<YoutubeUrlAddPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_JOBS_URL} element={<JobsListPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_JOBS_ADD_URL} element={<JobAddPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ADD_URL} element={<TrainingAddPage />} />
-              <Route path={import.meta.env.VITE_ROUTE_TRAININGS_URL} >
-                <Route index element={<TrainingsListPage />} />
-                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsListPage />} />
-                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_EDIT_URL} element={<TrainingsListPage />} />
+        <ErrorAlertProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<App />}>
+                <Route path={import.meta.env.VITE_ROUTE_HOME_URL} element={<HomePage />} />
+                <Route path={import.meta.env.VITE_ROUTE_ABOUTUS_URL} element={<AboutUsPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_LOGIN_URL} element={<LoginPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} element={<RegisterPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_CONTACT_URL} element={<ContactPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_ADMIN_URL} element={<AdminPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL} element={<ResourcesListPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_RESOURCES_ADD_URL} element={<ResourceAddPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_TESTIMONIAL_URL} element={<TestimonialPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_URL} element={<YoutubeListPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_ADD_URL} element={<YoutubeUrlAddPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_JOBS_URL} element={<JobsListPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_JOBS_ADD_URL} element={<JobAddPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ADD_URL} element={<TrainingAddPage />} />
+                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_URL} >
+                  <Route index element={<TrainingsListPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsListPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_TRAININGS_EDIT_URL} element={<TrainingsListPage />} />
+                </Route>
+                <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL} >
+                  <Route index element={<TrainingsListPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ID_URL} element={<TrainingsListPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL} element={<GalleryAdminComponent />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ADD_URL} element={<GalleryAdminComponent />} />
+                </Route>
               </Route>
-            </Route>
 
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </ErrorAlertProvider>
       </UserProvider>
     </ThemeProvider>
   </StrictMode>,

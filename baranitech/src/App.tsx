@@ -1,5 +1,5 @@
 import './styles/App.scss'
-import { Container, CssBaseline, Paper, styled, ThemeProvider, useMediaQuery, useTheme } from '@mui/material'
+import { styled } from '@mui/material'
 import { Grid } from '@mui/material';
 import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
@@ -9,10 +9,8 @@ import { useUser } from './contexts/userContext';
 import { useEffect } from 'react';
 import AdminMenubar from './components/Menubar/adminMenubar';
 
-
-
 function App() {
-  const ContainerStyled = styled(Grid)(({ theme }) => ({
+  const ContainerStyled = styled(Grid)(() => ({
     padding: '0px',
     width: '100%'
   }))
