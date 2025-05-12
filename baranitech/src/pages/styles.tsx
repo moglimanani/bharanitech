@@ -7,7 +7,7 @@ export const BodyPara1Styled = styled(Typography)(({theme})=>({
   color: theme.palette.common.white
 }))
 
-export const PageWrapperStyled = styled(Box)(()=>({
+export const PageWrapperStyled = styled(Box)(({theme})=>({
   padding: '0px 16px 16px 20px',
   [theme.breakpoints.down('sm')]: {
     padding: '0',
@@ -43,7 +43,7 @@ export const ListStyled = styled(List)(({theme})=>({
   color: theme.palette.common.white
 }))
 
-export const TwoColumnStyled = styled(Grid)(()=>({
+export const TwoColumnStyled = styled(Grid)(({theme})=>({
   padding: "30px 30px 0px",
   [theme.breakpoints.down('sm')]: {
     padding: '20px',
