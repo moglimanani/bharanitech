@@ -14,40 +14,48 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminGalleryAddSchema } from '../../validationSchema/schema';
 import { StyledContainer, StyledForm } from './styles';
+import httpService from '../../api/httpService';
+import { InferType } from 'yup';
 
 interface PhotoPreview {
-  file: File;
+  file?: File;
   url: string;
 }
 
 interface FormData {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  photos: { file?: File; url: string }[];
+}
+// type FormData = InferType<typeof AdminGalleryAddSchema>;
+
+interface GalleryResponse {
+  status: boolean;
+  data: any;
 }
 
-
-
-const GalleryForm: React.FC = () => {
+const GalleryAdminAddForm: React.FC = () => {
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({
     resolver: yupResolver(AdminGalleryAddSchema),
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
 
   const [photos, setPhotos] = useState<PhotoPreview[]>([]);
   const [photoError, setPhotoError] = useState<string | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const uploadedPhotos = Array.from(files).map(file => ({
-        file,
+      const uploadedPhotos = Array.from(files).map((file) => ({
+        file: file ?? '',
         url: URL.createObjectURL(file),
       }));
-      setPhotos(prev => [...prev, ...uploadedPhotos]);
+      setPhotos((prev) => [...prev, ...uploadedPhotos]);
 
       // Clear error if valid files uploaded
       if (uploadedPhotos.length > 0) {
@@ -56,21 +64,51 @@ const GalleryForm: React.FC = () => {
     }
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     if (photos.length === 0) {
       setPhotoError('At least one photo is required.');
       return;
     }
 
-    // Proceed with submission
-    console.log({ ...data, photos });
+    const formData = new FormData();
+    formData.append('title', data.title ?? '');
+    formData.append('description', data.description ?? '');
+
+    // Append each photo file
+    photos.forEach((photo) => {
+      if (photo.file instanceof File) {
+        formData.append('photos[]', photo.file); // Adjust if your backend expects photos[]
+      }
+    });
+
+    try {
+      const res = await httpService.post<GalleryResponse>('/gallery', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (res.status) {
+        console.log(res);
+        setOpenSnackbar(true);
+      } else {
+        // optional: show a toast or alert here
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <StyledContainer maxWidth="xs">
       <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
+        {openSnackbar && (
+          <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+            Registration successful!
+          </Alert>
+        )}
         <Typography variant="h5" gutterBottom>
-          Create Gallery
+          Add Gallery
         </Typography>
 
         <Controller
@@ -131,7 +169,7 @@ const GalleryForm: React.FC = () => {
 
         <Grid container spacing={2} sx={{ mt: 2 }}>
           {photos.map((photo, index) => (
-            <Grid size={{xs: 4}} key={index}>
+            <Grid size={{xs:4}} key={index}>
               <Card>
                 <CardMedia
                   component="img"
@@ -141,7 +179,7 @@ const GalleryForm: React.FC = () => {
                 />
                 <CardContent>
                   <Typography variant="body2" noWrap>
-                    {photo.file.name}
+                    {photo.file?.name}
                   </Typography>
                 </CardContent>
               </Card>
@@ -163,4 +201,4 @@ const GalleryForm: React.FC = () => {
   );
 };
 
-export default GalleryForm;
+export default GalleryAdminAddForm;
