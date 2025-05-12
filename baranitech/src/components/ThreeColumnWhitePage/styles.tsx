@@ -1,4 +1,4 @@
-import {  Box, Grid, styled } from "@mui/material";
+import {  Box, Grid, styled, } from "@mui/material";
 
 export const BoxWhiteStyled = styled(Box)(({theme})=>({
   background: '#fff',
