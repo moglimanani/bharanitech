@@ -26,8 +26,11 @@ import { ThemeProvider } from '@emotion/react'
 import theme from './theme.ts'
 import { CssBaseline } from '@mui/material'
 import { UserProvider } from './contexts/userContext.tsx'
-import GalleryAdminComponent from './components/GalleryAdminComponent/index.tsx'
 import { ErrorAlertProvider } from './contexts/ErrorAlertContext.tsx'
+import GalleryAdminPage from './pages/GalleryAdminPage.tsx'
+import GalleryEditAdminPage from './pages/GalleryEditAdminPage.tsx'
+import GalleryAddAdminPage from './pages/GalleryAddAdminPage.tsx'
+import GalleryList from './components/GalleryList/index.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -57,11 +60,11 @@ createRoot(document.getElementById('root')!).render(
                   <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsListPage />} />
                   <Route path={import.meta.env.VITE_ROUTE_TRAININGS_EDIT_URL} element={<TrainingsListPage />} />
                 </Route>
-                <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL} >
-                  <Route index element={<TrainingsListPage />} />
-                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ID_URL} element={<TrainingsListPage />} />
-                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL} element={<GalleryAdminComponent />} />
-                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ADD_URL} element={<GalleryAdminComponent />} />
+                <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL} element={<GalleryAdminPage />}>
+                  <Route index element={<GalleryList />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ID_URL} element={<GalleryAdminPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL} element={<GalleryAdminPage />} />
+                  <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ADD_URL} element={<GalleryAddAdminPage />} />
                 </Route>
               </Route>
 

@@ -1,8 +1,30 @@
 import * as yup from 'yup';
 
 export const AdminGalleryAddSchema = yup.object().shape({
-    title: yup.string().required('Title is required').min(3, 'At least 3 characters'),
-    description: yup.string().required('Description is required').min(10, 'At least 10 characters'),
+    title: yup.string()
+        .transform(value => (value === '' ? undefined : value))
+        .nullable()
+        .min(3, 'At least 3 characters'),
+
+    description: yup.string()
+        .transform(value => (value === '' ? undefined : value))
+        .nullable()
+        .min(10, 'At least 10 characters'),
+
+    photos: yup.array()
+        .of(
+            yup.object({
+                file: yup
+                    .mixed<File>()
+                    .optional()
+                    .test('is-file', 'Photo must be a valid file', (value) => {
+                        return !value || value instanceof File;
+                    }),
+                url: yup.string().required('URL is required'),
+            })
+        )
+        .min(1, 'At least one photo is required')
+        .required()
 });
 
 export const LoginFormSchema = yup.object().shape({

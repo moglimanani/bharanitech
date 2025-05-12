@@ -20,7 +20,9 @@ export const UseRestoreUserSession = () => {
             const parsedUser: StoredUser = JSON.parse(stored);
             
             login(parsedUser);
-            navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
+
+            // navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
+            navigate(location.pathname + location.search, { replace: true });
         }
     }, [login, user, navigate])
 
