@@ -1,4 +1,4 @@
-import { AboutUsParaStyled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
+import { AboutUsDivStyled, AboutUsParaStyled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
 
 export default function AboutUsPage() {
   return (
@@ -12,6 +12,9 @@ export default function AboutUsPage() {
       <AboutUsParaStyled>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
       </AboutUsParaStyled>
+      <AboutUsDivStyled>
+       Lorem Ipsum is simply dummy
+      </AboutUsDivStyled>
       <AboutUsParaStyled>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
       </AboutUsParaStyled>

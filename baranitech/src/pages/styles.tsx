@@ -53,9 +53,9 @@ export const TwoColumnStyled = styled(Grid)(({theme})=>({
 // AboutUs
 
 export const AboutUsStyled = styled('div')(({theme})=>({
-  margin: '30px',
-  padding: "0px 20px 0px",
-  background: '#ffffff',
+  margin: '20px 30px',
+  // padding: "0px 20px 0px",
+  //background: '#ffffff',
   borderRadius: '20px',
   textAlign: 'left',
   [theme.breakpoints.down('sm')]: {
@@ -66,7 +66,7 @@ export const AboutUsStyled = styled('div')(({theme})=>({
 export const AboutUsTitleStyled = styled('h2')(({theme})=>({
  // background: 'yellow',
   padding: '20px 0px 0px',
-  color: '#127B93',
+  color: '#ffffff',
   fontWeight: 'bold',
   fontSize: '1.3em',
   [theme.breakpoints.down('sm')]: {
@@ -78,7 +78,22 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   // background: 'yellow',
    margin: '0',
    padding: '0 0 20px',
-   color: '#4d4d4d',
+   color: '#ffffff',
+   fontSize: '0.88em',
+   [theme.breakpoints.down('sm')]: {
+     padding: '20px',
+  }
+ }))
+
+ export const AboutUsDivStyled = styled('div')(({theme})=>({
+  // background: 'yellow',
+   margin: '10px 0 20px',
+   maxWidth: '300px',
+   padding: '15px 20px',
+   color: '#127B93',
+   background: '#c4f4ff',
+   fontWeight: 'bold',
+   borderRadius: '8px 50px 50px 8px',
    fontSize: '0.88em',
    [theme.breakpoints.down('sm')]: {
      padding: '20px',
