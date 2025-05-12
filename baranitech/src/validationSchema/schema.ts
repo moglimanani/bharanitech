@@ -1,21 +1,26 @@
 import * as yup from 'yup';
 
-export const AdminGalleryAddSchema = yup.object().shape({
-    title: yup.string()
-        .transform(value => (value === '' ? undefined : value))
+export const AdminGalleryAddSchema = yup.object({
+    title: yup
+        .string()
+        .required("Title is required")
         .nullable()
+        .transform(value => (value === '' ? null : value))
+        .notRequired()
         .min(3, 'At least 3 characters'),
 
     description: yup.string()
-        .transform(value => (value === '' ? undefined : value))
+        .required("Title is required")
         .nullable()
+        .transform(value => (value === '' ? null : value))
+        .notRequired()
         .min(10, 'At least 10 characters'),
 
     photos: yup.array()
         .of(
             yup.object({
                 file: yup
-                    .mixed<File>()
+                    .mixed()
                     .optional()
                     .test('is-file', 'Photo must be a valid file', (value) => {
                         return !value || value instanceof File;
@@ -24,8 +29,8 @@ export const AdminGalleryAddSchema = yup.object().shape({
             })
         )
         .min(1, 'At least one photo is required')
-        .required()
-});
+        .required('At least one photo is required')
+})
 
 export const LoginFormSchema = yup.object().shape({
     email: yup

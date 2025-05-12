@@ -22,12 +22,8 @@ interface PhotoPreview {
   url: string;
 }
 
-interface FormData {
-  title?: string;
-  description?: string;
-  photos: { file?: File; url: string }[];
-}
-// type FormData = InferType<typeof AdminGalleryAddSchema>;
+
+type FormData = InferType<typeof AdminGalleryAddSchema>;
 
 interface GalleryResponse {
   status: boolean;
@@ -38,11 +34,15 @@ const GalleryAdminAddForm: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState,
+    setValue,
+    trigger
   } = useForm<FormData>({
     resolver: yupResolver(AdminGalleryAddSchema),
     mode: 'onBlur',
   });
+  const { errors, isValid } = formState
+ console.log(formState);
 
   const [photos, setPhotos] = useState<PhotoPreview[]>([]);
   const [photoError, setPhotoError] = useState<string | null>(null);
@@ -52,17 +52,20 @@ const GalleryAdminAddForm: React.FC = () => {
     const files = event.target.files;
     if (files) {
       const uploadedPhotos = Array.from(files).map((file) => ({
-        file: file ?? '',
+        file,
         url: URL.createObjectURL(file),
       }));
-      setPhotos((prev) => [...prev, ...uploadedPhotos]);
-
+      const updatedPhotos = [...photos, ...uploadedPhotos]
+      setPhotos(updatedPhotos);
+      setValue('photos', updatedPhotos, { shouldValidate: true });
+      trigger('photos');
       // Clear error if valid files uploaded
       if (uploadedPhotos.length > 0) {
         setPhotoError(null);
       }
     }
   };
+console.log(photos);
 
   const onSubmit = async (data: FormData) => {
     if (photos.length === 0) {
@@ -114,7 +117,6 @@ const GalleryAdminAddForm: React.FC = () => {
         <Controller
           name="title"
           control={control}
-          defaultValue=""
           render={({ field }) => (
             <TextField
               {...field}
@@ -130,7 +132,6 @@ const GalleryAdminAddForm: React.FC = () => {
         <Controller
           name="description"
           control={control}
-          defaultValue=""
           render={({ field }) => (
             <TextField
               {...field}
