@@ -56,33 +56,10 @@ const EditLoginPage: React.FC = () => {
   const {showError} = useErrorAlert()
   useAxiosErrorHandler(showError)
 
-  const { control, formState: { errors, isValid, isSubmitting }, handleSubmit, reset } = useForm<LoginPageType>({
+  const { control, formState: { errors, isValid, isSubmitting }, handleSubmit } = useForm<LoginPageType>({
     resolver: yupResolver(LoginFormSchema),
     mode: 'onBlur'
   })
-  // try {
-  //   const res = await httpService.post<LoginResponse>('login/checklogin', {
-  //     email,
-  //     password,
-  //   });
-  //   setFormErrors({});
-  //   if (res.status) {
-  //     const data = res.data
-  //     sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify({
-  //       email: data.email,
-  //       phone: data.phone,
-  //       username: data.username,
-  //       id: data.id
-  //     }));
-  //     navigate(import.meta.env.VITE_ROUTE_ADMIN_URL)
-  //   }
-  //    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // } catch (err) {
-  //   setFormErrors({ general: 'Login failed. Please check your credentials.' });
-  // }
-
-  // setSubmitting(false);
-  // };
 
   const onSubmit = async (data: LoginPageType) => {
     try {

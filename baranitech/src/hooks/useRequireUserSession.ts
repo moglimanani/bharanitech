@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const useRequireUserSession = () => {
+export const UseRequireUserSession = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
