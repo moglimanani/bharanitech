@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   Container,
   Typography,
   TextField,
-  Button,
-  Avatar,
   Box,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { styled } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router';
-import httpService from '../../api/httpService';
-import { UseRestoreUserSession } from '../../hooks/useRestoreUserSession';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginFormSchema } from '../../validationSchema/schema';
-import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
-import { useErrorAlert } from '../../contexts/ErrorAlertContext';
+  Grid,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { styled } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router";
+import httpService from "../../api/httpService";
+import { UseRestoreUserSession } from "../../hooks/useRestoreUserSession";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginFormSchema } from "../../validationSchema/schema";
+import { useAxiosErrorHandler } from "../../hooks/useAxiosErrorHandler";
+import { useErrorAlert } from "../../contexts/ErrorAlertContext";
+import { LoginWrapperButtonStyled, LoginWrapperIconStyled, LoginWrapperImageStyled, LoginWrapperStyled } from "./styles";
 
 interface LoginPageType {
   email: string;
@@ -36,27 +36,28 @@ interface LoginResponse {
 const StyledContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(10),
   padding: theme.spacing(4),
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  border: `1px solid ${theme.palette.grey[300]}`,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   borderRadius: theme.spacing(1),
-  boxShadow: theme.shadows[3],
-  backgroundColor: theme.palette.background.paper,
 }));
 
-const StyledForm = styled('form')(({ theme }) => ({
-  width: '100%',
+const StyledForm = styled("form")(({ theme }) => ({
+  width: "100%",
   marginTop: theme.spacing(2),
 }));
 
 const EditLoginPage: React.FC = () => {
   const navigate = useNavigate();
-  UseRestoreUserSession()
-  const {showError} = useErrorAlert()
-  useAxiosErrorHandler(showError)
+  UseRestoreUserSession();
+  const { showError } = useErrorAlert();
+  useAxiosErrorHandler(showError);
 
-  const { control, formState: { errors, isValid, isSubmitting }, handleSubmit } = useForm<LoginPageType>({
+  const {
+    control,
+    formState: { errors, isValid, isSubmitting },
+    handleSubmit,
+  } = useForm<LoginPageType>({
     resolver: yupResolver(LoginFormSchema),
     mode: 'onChange',
     reValidateMode: 'onBlur'
@@ -64,11 +65,17 @@ const EditLoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginPageType) => {
     try {
-      const res = await httpService.post<LoginResponse>('login/checklogin', data);
-  
+      const res = await httpService.post<LoginResponse>(
+        "login/checklogin",
+        data
+      );
+
       if (res.status) {
         const user = res.data;
-        sessionStorage.setItem(import.meta.env.VITE_APP_USER_SESSION_NAME, JSON.stringify(user));
+        sessionStorage.setItem(
+          import.meta.env.VITE_APP_USER_SESSION_NAME,
+          JSON.stringify(user)
+        );
         navigate(import.meta.env.VITE_ROUTE_ADMIN_URL);
       } else {
         // optional: show a toast or alert here
@@ -76,74 +83,85 @@ const EditLoginPage: React.FC = () => {
     } catch (err) {
       // optional: show error alert
       console.error(err);
-    }  }
+    }
+  };
 
   return (
-    <StyledContainer maxWidth="xs">
-      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-        <LockOutlinedIcon />
-      </Avatar>
 
-      <Typography component="h1" variant="h5">
-        Sign In
-      </Typography>
+    <LoginWrapperStyled container>
+      <Grid size={{ xs: 12, md: 5 }}>
+        <StyledContainer>
+          <LoginWrapperIconStyled sx={{ m: 1, bgcolor: "primary.main" }}>
+            <LockOutlinedIcon />
+          </LoginWrapperIconStyled>
 
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Email *"
-              type="email"
-              margin="normal"
-              {...field}
-              error={Boolean(errors.email)}
-              helperText={errors.email?.message}
+          <Typography component="h1" variant="h5">
+            Sign In
+          </Typography>
+
+          <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Email *"
+                  type="email"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.email)}
+                  helperText={errors.email?.message}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Password *"
-              type="password"
-              margin="normal"
-              {...field}
-              error={Boolean(errors.password)}
-              helperText={errors.password?.message}
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Password *"
+                  type="password"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.password)}
+                  helperText={errors.password?.message}
+                />
+              )}
             />
-          )}
-        />
 
-        <Button
-          fullWidth
-          type="submit"
-          variant="contained"
-          sx={{ mt: 3 }}
-          disabled={!isValid}
-        >
-          {isSubmitting ? 'Signing in...' : 'Sign In'}
-        </Button>
-      </StyledForm>
+            <LoginWrapperButtonStyled
+              fullWidth
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3 }}
+              disabled={!isValid}
+            >
+              {isSubmitting ? "Signing in..." : "Sign In"}
+            </LoginWrapperButtonStyled>
+          </StyledForm>
 
-
-      <Box mt={2}>
-        <Typography variant="body2">
-          Don't have an account?{' '}
-          <Link to={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} style={{ color: '#1976d2' }}>
-            Register
-          </Link>
-        </Typography>
-      </Box>
-    </StyledContainer>
+          <Box mt={2}>
+            <Typography variant="body2">
+              Don't have an account?{" "}
+              <Link
+                to={import.meta.env.VITE_ROUTE_REGISTER_USER_URL}
+                style={{ color: "#127B93" }}
+              >
+                Register
+              </Link>
+            </Typography>
+          </Box>
+        </StyledContainer>
+      </Grid>
+      <LoginWrapperImageStyled size={{ xs: 12, md: 5 }}>
+        <img src="/login.png" alt="login" loading="lazy" />
+      </LoginWrapperImageStyled>
+    </LoginWrapperStyled>
   );
 };
 

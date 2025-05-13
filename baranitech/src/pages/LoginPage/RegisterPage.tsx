@@ -6,6 +6,7 @@ import {
   Typography,
   Avatar,
   Alert,
+  Grid 
 } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { styled } from '@mui/material/styles';
@@ -16,6 +17,7 @@ import { RegisterUserSchema } from '../../validationSchema/schema';
 import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/ErrorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
+import { LoginWrapperButtonStyled, LoginWrapperIconStyled, LoginWrapperImageStyled, LoginWrapperStyled } from './styles';
 
 interface RegisterFormType {
   username: string;
@@ -44,10 +46,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  border: `1px solid ${theme.palette.grey[300]}`,
+ // border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.spacing(1),
-  boxShadow: theme.shadows[3],
-  backgroundColor: theme.palette.background.paper,
+ // boxShadow: theme.shadows[3],
+ // backgroundColor: theme.palette.background.paper,
 }));
 
 const StyledForm = styled('form')(({ theme }) => ({
@@ -102,15 +104,17 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <StyledContainer maxWidth="sm">
+    <LoginWrapperStyled container>
+      <Grid size={{ xs: 12, md: 5 }}>
+      <StyledContainer maxWidth="sm">
       {openSnackbar && (
         <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
           Registration successful!
         </Alert>
       )}
-      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+      <LoginWrapperIconStyled sx={{ m: 1, bgcolor: 'primary.main' }}>
         <PersonAddIcon />
-      </Avatar>
+      </LoginWrapperIconStyled>
 
       <Typography component="h1" variant="h5">
         Register
@@ -196,7 +200,7 @@ const RegisterPage: React.FC = () => {
           )}
         />
 
-        <Button
+        <LoginWrapperButtonStyled
           type="submit"
           fullWidth
           variant="contained"
@@ -204,8 +208,8 @@ const RegisterPage: React.FC = () => {
           disabled={!isValid}
         >
           {isSubmitting ? 'Registering...' : 'Register'}
-        </Button>
-        <Button
+        </LoginWrapperButtonStyled>
+        <LoginWrapperButtonStyled
           type="button"
           fullWidth
           variant="contained"
@@ -213,9 +217,15 @@ const RegisterPage: React.FC = () => {
           onClick={handleToLogin}
         >
           Back to Login
-        </Button>
+        </LoginWrapperButtonStyled>
       </StyledForm>
     </StyledContainer>
+      </Grid>
+      <LoginWrapperImageStyled size={{ xs: 12, md: 5 }}>
+         <img src="/login.png" alt="login" loading="lazy" />
+      </LoginWrapperImageStyled>
+    </LoginWrapperStyled>
+   
   );
 };
 
