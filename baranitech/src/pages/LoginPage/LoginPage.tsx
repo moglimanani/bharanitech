@@ -58,7 +58,8 @@ const EditLoginPage: React.FC = () => {
 
   const { control, formState: { errors, isValid, isSubmitting }, handleSubmit } = useForm<LoginPageType>({
     resolver: yupResolver(LoginFormSchema),
-    mode: 'onBlur'
+    mode: 'onChange',
+    reValidateMode: 'onBlur'
   })
 
   const onSubmit = async (data: LoginPageType) => {

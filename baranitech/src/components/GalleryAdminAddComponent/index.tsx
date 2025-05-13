@@ -8,7 +8,9 @@ import {
   CardMedia,
   CardContent,
   Alert,
+  IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -36,13 +38,19 @@ const GalleryAdminAddForm: React.FC = () => {
     handleSubmit,
     formState,
     setValue,
-    trigger
+    trigger,
+    reset
   } = useForm<FormData>({
     resolver: yupResolver(AdminGalleryAddSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onBlur',
+    defaultValues: {
+      title: '',
+      description: '',
+      photos: []
+    }
   });
   const { errors, isValid } = formState
- console.log(formState);
 
   const [photos, setPhotos] = useState<PhotoPreview[]>([]);
   const [photoError, setPhotoError] = useState<string | null>(null);
@@ -65,7 +73,13 @@ const GalleryAdminAddForm: React.FC = () => {
       }
     }
   };
-console.log(photos);
+
+  const handleRemovePhoto = (indexToRemove: number) => {
+    const updatedPhotos = photos.filter((_, index) => index !== indexToRemove);
+    setPhotos(updatedPhotos);
+    setValue('photos', updatedPhotos, { shouldValidate: true });
+    trigger('photos');
+  };
 
   const onSubmit = async (data: FormData) => {
     if (photos.length === 0) {
@@ -92,8 +106,11 @@ console.log(photos);
       });
 
       if (res.status) {
-        console.log(res);
         setOpenSnackbar(true);
+        reset()
+        setPhotos([]);
+        setValue('photos', [], { shouldValidate: true });
+        trigger('photos');
       } else {
         // optional: show a toast or alert here
       }
@@ -107,7 +124,7 @@ console.log(photos);
       <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
         {openSnackbar && (
           <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-            Registration successful!
+            Gallery added successfully!
           </Alert>
         )}
         <Typography variant="h5" gutterBottom>
@@ -170,14 +187,26 @@ console.log(photos);
 
         <Grid container spacing={2} sx={{ mt: 2 }}>
           {photos.map((photo, index) => (
-            <Grid size={{xs:4}} key={index}>
-              <Card>
+            <Grid size={{ xs: 4 }} key={index}>
+              <Card sx={{ position: 'relative' }}>
                 <CardMedia
                   component="img"
                   height="120"
                   image={photo.url}
                   alt={`Photo ${index + 1}`}
                 />
+                <IconButton
+                  size="small"
+                  sx={{
+                    position: 'absolute',
+                    top: 4,
+                    right: 4,
+                    backgroundColor: 'rgba(255,255,255,0.7)',
+                  }}
+                  onClick={() => handleRemovePhoto(index)}
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
                 <CardContent>
                   <Typography variant="body2" noWrap>
                     {photo.file?.name}

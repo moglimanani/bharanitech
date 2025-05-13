@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {
   Grid,
   Card,
@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
+import httpService from '../../api/httpService';
 
 export interface GalleryItem {
   id: number;
@@ -13,27 +14,60 @@ export interface GalleryItem {
   imageUrl: string;
 }
 
-interface GalleryListProps {
-  items: GalleryItem[];
+interface PhotosType {
+  id: string,
+  title: string,
+  description: string,
+  photos: string[]
 }
 
-const mockItems: GalleryItem[] = Array.from({ length: 20 }, (_, index) => ({
-  id: index + 1,
-  title: `Gallery Item ${index + 1}`,
-  imageUrl: `https://source.unsplash.com/random/400x300?sig=${index + 1}`,
-}));
+interface GalleryResponse {
+  status: boolean;
+  data: PhotosType[];
+}
+
+// const mockItems: GalleryItem[] = Array.from({ length: 20 }, (_, index) => ({
+//   id: index + 1,
+//   title: `Gallery Item ${index + 1}`,
+//   imageUrl: `https://source.unsplash.com/random/400x300?sig=${index + 1}`,
+// }));
 
 
 const GalleryList: React.FC = () => {
+  const [gallery, setGallery] = useState<PhotosType[]>([])
+  const fetchGallery = async () => {
+    try {
+      const res = await httpService.get<GalleryResponse>('/gallery');
+      
+      if (res.status) {
+        const {data} = res
+        const photosArr = data && data.map(item => ({id: item.id, title: item?.title ?? '', description: item?.description ?? '', photos: JSON.parse(JSON.stringify(item?.photos))}))
+        setGallery([...photosArr])
+      } else {
+        // optional: show a toast or alert here
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchGallery()
+
+    return () => {
+      fetchGallery()
+    }
+  }, [])
+  
   return (
     <Grid container spacing={3}>
-      {mockItems.map((item) => (
-        <Grid size={{xs:12, sm:6, md:4, lg:3}} key={item.id}>
+      {gallery.map((item) => (
+        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
           <Card>
             <CardMedia
               component="img"
               height="200"
-              image={item.imageUrl}
+              image={`http://localhost:8000/storage/${item.photos[0]}`}
               alt={item.title}
             />
             <CardContent>
@@ -48,4 +82,4 @@ const GalleryList: React.FC = () => {
   );
 };
 
-export default GalleryList;
+export default memo(GalleryList);

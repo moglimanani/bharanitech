@@ -10,22 +10,62 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
+    public function index()
+    {
+        try {
+            // Retrieve all galleries with their related photos
+            $galleries = Gallery::all();
+
+            // Check if galleries are found
+            if ($galleries->isEmpty()) {
+                return response()->json(
+                    [
+                        'status' => true,
+                        'message' => 'No galleries found.',
+                        'data' => []
+                    ],
+                    200,
+                );
+            }
+
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Galleries retrieved successfully.',
+                    'data' => $galleries,
+                ],
+                200,
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Error fetching galleries.',
+                    'error' => $e->getMessage(),
+                ],
+                500,
+            );
+        }
+    }
     // Store a new gallery
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'photos' => 'required|array',
             'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image files
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation failed.',
-                'errors' => $validator->errors(),
-            ], 422);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Validation failed.',
+                    'errors' => $validator->errors(),
+                ],
+                422,
+            );
         }
 
         // Handle file uploads
@@ -55,10 +95,13 @@ class GalleryController extends Controller
         $gallery = Gallery::find($id);
 
         if (!$gallery) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Gallery not found.',
-            ], 404);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Gallery not found.',
+                ],
+                404,
+            );
         }
 
         $validator = Validator::make($request->all(), [
@@ -69,11 +112,14 @@ class GalleryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation failed.',
-                'errors' => $validator->errors(),
-            ], 422);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Validation failed.',
+                    'errors' => $validator->errors(),
+                ],
+                422,
+            );
         }
 
         // Handle file uploads (if any)

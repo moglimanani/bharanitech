@@ -67,7 +67,15 @@ const RegisterPage: React.FC = () => {
     reset
   } = useForm<RegisterFormType>({
     resolver: yupResolver(RegisterUserSchema),
-    mode: 'onBlur'
+    mode: 'onChange',
+    reValidateMode: 'onBlur',
+    defaultValues: {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    phone: '',
+  }
   })
 
   const onSubmit = async (data: RegisterFormType) => {
@@ -164,6 +172,7 @@ const RegisterPage: React.FC = () => {
               fullWidth
               label="Password *"
               margin="normal"
+              type="password"
               {...field}
               error={Boolean(errors.password)}
               helperText={errors.password?.message}
@@ -179,6 +188,7 @@ const RegisterPage: React.FC = () => {
               fullWidth
               label="Confirm Password *"
               margin="normal"
+              type="password"
               {...field}
               error={Boolean(errors.confirmPassword)}
               helperText={errors.confirmPassword?.message}
