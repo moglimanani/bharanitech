@@ -2,8 +2,9 @@ import axiosInstance from './axiosInstance';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const httpService = {
-  get: async <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-    return await axiosInstance.get<T>(url, config);
+  get: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
+    const response =  await axiosInstance.get<T>(url, config);
+    return response.data;
   },
 
   post: async <TResponse, TRequest = unknown>(

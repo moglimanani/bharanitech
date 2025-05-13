@@ -3,8 +3,6 @@ import {
   Container,
   Typography,
   TextField,
-  Button,
-  Avatar,
   Box,
   Grid,
 } from "@mui/material";
@@ -41,10 +39,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  //border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.spacing(1),
-  //boxShadow: theme.shadows[3],
-  // backgroundColor: theme.palette.background.paper,
 }));
 
 const StyledForm = styled("form")(({ theme }) => ({
@@ -64,8 +59,9 @@ const EditLoginPage: React.FC = () => {
     handleSubmit,
   } = useForm<LoginPageType>({
     resolver: yupResolver(LoginFormSchema),
-    mode: "onBlur",
-  });
+    mode: 'onChange',
+    reValidateMode: 'onBlur'
+  })
 
   const onSubmit = async (data: LoginPageType) => {
     try {
@@ -91,7 +87,7 @@ const EditLoginPage: React.FC = () => {
   };
 
   return (
-    
+
     <LoginWrapperStyled container>
       <Grid size={{ xs: 12, md: 5 }}>
         <StyledContainer>
