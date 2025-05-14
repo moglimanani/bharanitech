@@ -11,6 +11,8 @@ import {
   Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
+import { Margin } from '@mui/icons-material';
 
 // Resource interface
 interface Resource {
@@ -25,8 +27,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  boxShadow: theme.shadows[3],
-  borderRadius: theme.shape.borderRadius,
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px',
 }));
 
 const ResourcesListPage: React.FC = () => {
@@ -91,28 +93,28 @@ const ResourcesListPage: React.FC = () => {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom>
+      <LearningResourcesStyled variant="h4" gutterBottom>
         Learning Resources
-      </Typography>
-      <Grid container spacing={3}>
+      </LearningResourcesStyled>
+      <Grid container spacing={3} style={{marginBottom: '30px'}}>
         {resources.map((resource) => (
           <Grid size={{xs:12, sm:6, md:4}} key={resource.id}>
             <StyledCard>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <TitleStyled variant="h6" gutterBottom>
                   {resource.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                </TitleStyled>
+                <ParaStyled variant="body2" color="text.secondary">
                   {resource.description}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                </ParaStyled>
+                <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   Type: {resource.type}
-                </Typography>
+                </ParaStyled>
               </CardContent>
               <Box sx={{ padding: 2 }}>
-                <Button fullWidth variant="contained" color="primary" href={resource.link} target="_blank">
+                <LearnButtonStyled fullWidth variant="contained" color="primary" href={resource.link} target="_blank">
                   Access Resource
-                </Button>
+                </LearnButtonStyled>
               </Box>
             </StyledCard>
           </Grid>

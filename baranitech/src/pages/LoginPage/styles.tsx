@@ -1,5 +1,5 @@
 
-import {  Grid, styled, Avatar, Button} from "@mui/material";
+import {  Grid, styled, Avatar, Button, } from "@mui/material";
 
 export const LoginWrapperStyled = styled(Grid)(({theme})=>({
    margin: '30px',
@@ -45,5 +45,8 @@ export const LoginWrapperButtonStyled = styled(Button)(({theme})=>({
   borderRadius: '20px'
 
 }))
+
+
+
 
  
