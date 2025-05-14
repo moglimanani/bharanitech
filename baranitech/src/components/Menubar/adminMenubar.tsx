@@ -23,7 +23,7 @@ import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, T
 const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_URL, name: 'Home' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL, name: 'Gallery' },
-  { path: '/resources', name: 'Resources' },
+  { path: import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL, name: 'Resources' },
   { path: '/jobs', name: 'Jobs' },
   { path: '/trainings', name: 'Trainings' },
   // { path: '/login', name: 'Login' },

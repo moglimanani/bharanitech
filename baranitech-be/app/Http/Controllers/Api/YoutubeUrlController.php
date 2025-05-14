@@ -19,11 +19,11 @@ class YoutubeUrlController extends Controller
         if ($fetchYoutubeUrls->count() > 0) {
             // return YoutubeUrlResource::collection($fetchYoutubeUrls);
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'data' => $fetchYoutubeUrls,
             ]);
         } else {
-            return response()->json(['data' => [], 'message' => 'No records available'], 200);
+            return response()->json(['status' => true,'data' => [], 'message' => 'No records available'], 200);
         }
     }
 
@@ -59,7 +59,7 @@ class YoutubeUrlController extends Controller
             ]);
             $video->load('category'); 
 
-            return response()->json(['data' => new YoutubeUrlResource($video), 'message' => 'Record added successfully'], 200);
+            return response()->json(['status' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record added successfully'], 200);
         } catch (Exception $e) {
             return response()->json(
                 [
