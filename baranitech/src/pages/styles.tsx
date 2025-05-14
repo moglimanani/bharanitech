@@ -1,4 +1,4 @@
-import { Box, Grid, List, ListItemText, styled, Typography } from "@mui/material";
+import { Box, Grid, List, ListItemText, styled, Typography, Button } from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({theme})=>({
   padding: "10px 10px 10px 0px",
@@ -99,3 +99,42 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
      padding: '20px',
   }
  }))
+ 
+ // Learning Resources
+
+
+
+ export const LearningResourcesStyled = styled( Typography)(({theme})=>({
+  textAlign: 'left',
+  fontSize: '2rem',
+  paddingBottom: '15px',
+  color: '#ffffff',    
+ }))
+
+ export const TitleStyled = styled( Typography)(({theme})=>({
+  textAlign: 'left',
+  fontSize: '1.2rem',
+  paddingTop: '10px',
+  color: '#127B93',
+    
+ }))
+
+ export const ParaStyled = styled( Typography)(({theme})=>({
+  textAlign: 'left',
+  fontSize: '.88rem',
+  paddingTop: '5px',
+  color: '#484848',
+    
+ }))
+
+
+ export const LearnButtonStyled = styled(Button)(({theme})=>({
+  fontSize: '.88rem',
+  color: '#ffffff',
+  background: '#127B93',
+  borderRadius: '20px',
+  margin: '10px 0 20px',
+  padding: '10px 20px',  
+    
+ }))
+ 
