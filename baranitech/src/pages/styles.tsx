@@ -1,4 +1,4 @@
-import { Box, Grid, List, ListItemText, styled, Typography, Button } from "@mui/material";
+import { Box, Grid, List, Card, ListItemText, styled, Typography, Button } from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({theme})=>({
   padding: "10px 10px 10px 0px",
@@ -100,20 +100,20 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   }
  }))
  
+
+
  // Learning Resources
-
-
 
  export const LearningResourcesStyled = styled( Typography)(({theme})=>({
   textAlign: 'left',
-  fontSize: '2rem',
+  fontSize: '1.3em',
   paddingBottom: '15px',
   color: '#ffffff',    
  }))
 
  export const TitleStyled = styled( Typography)(({theme})=>({
   textAlign: 'left',
-  fontSize: '1.2rem',
+  fontSize: '1em',
   paddingTop: '10px',
   color: '#127B93',
     
@@ -137,4 +137,13 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   padding: '10px 20px',  
     
  }))
+
+ 
+ export const StyledWrapperDivCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px',
+}));
  

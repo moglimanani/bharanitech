@@ -7,6 +7,7 @@ import {
   Container,
   Divider,
 } from '@mui/material';
+import { LearningResourcesStyled, ParaStyled, StyledWrapperDivCard, TitleStyled } from './styles';
 
 // Define a type for training items
 interface Training {
@@ -48,34 +49,34 @@ const trainings: Training[] = [
 
 const TrainingsListPage: React.FC = () => {
   return (
-    <Container maxWidth="md" sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom>
+    <Container  sx={{ mt: 5 }}>
+      <LearningResourcesStyled variant="h4" gutterBottom>
         Upcoming Trainings
-      </Typography>
+      </LearningResourcesStyled>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{marginBottom: '30px'}}>
         {trainings.map((training) => (
           <Grid size={{xs:12, sm:6, md:4}} key={training.id}>
-            <Card variant="outlined">
+            <StyledWrapperDivCard>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <TitleStyled variant="h6" gutterBottom>
                   {training.title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
+                </TitleStyled>
+                <ParaStyled variant="body2" color="textSecondary" gutterBottom>
                   {training.description}
-                </Typography>
+                </ParaStyled>
                 <Divider sx={{ my: 1 }} />
-                <Typography variant="body2">
+                <ParaStyled variant="body2">
                   <strong>Trainer:</strong> {training.trainer_name}
-                </Typography>
-                <Typography variant="body2">
+                </ParaStyled>
+                <ParaStyled variant="body2">
                   <strong>Duration:</strong> {training.duration_minutes} mins
-                </Typography>
-                <Typography variant="body2">
+                </ParaStyled>
+                <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.date}
-                </Typography>
+                </ParaStyled>
               </CardContent>
-            </Card>
+            </StyledWrapperDivCard>
           </Grid>
         ))}
       </Grid>
