@@ -46,6 +46,18 @@ export const LoginFormSchema = yup.object().shape({
         .matches(/\d/, 'Password must include at least one number')
         .matches(/[@$!%*?&#^()_\-+=]/, 'Password must include at least one special character')
 })
+// Regex to match YouTube URLs
+const youtubeUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+export const AdminResourceAddSchema = yup.object().shape({
+    // category: yup.string().required('Category is required'),
+    classification:  yup.string().required('Classification is required'),
+    ctype:  yup.string().required('Type is required'),
+    title: yup.string().required('Title is required'),
+    url: yup.string()
+        .required('YouTube URL is required')
+        .matches(youtubeUrlRegex, 'Enter a valid YouTube URL'),
+    description: yup.string().required('Description is required'),
+})
 
 export const RegisterUserSchema = yup.object().shape({
     email: yup

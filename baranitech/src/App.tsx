@@ -6,8 +6,8 @@ import Footer from './components/Footer'
 import FlashOffer from './components/FlashOffer'
 import { Outlet } from 'react-router';
 import { useUser } from './contexts/userContext';
-import { useEffect } from 'react';
 import AdminMenubar from './components/Menubar/adminMenubar';
+import { useYouTubeCategories } from './contexts/youtubeCategoryContext';
 
 function App() {
   const ContainerStyled = styled(Grid)(() => ({
@@ -15,11 +15,12 @@ function App() {
     width: '100%'
   }))
   const { user } = useUser()
-  useEffect(() => {
-
-    console.log('user', user);
-  }, [user])
-
+  const {categories, loading, error} = useYouTubeCategories()
+  
+  
+  if (loading) return <div>Loading categories...</div>;
+  if (error) return <div>{error}</div>;
+  
   return (
     <>
       {user?.email ? <AdminMenubar /> : <MenuBar />}

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginUserController;
 use App\Http\Controllers\Api\YoutubeUrlController;
+use App\Http\Controllers\Api\YouTubeCategoryController;
 use App\Http\Controllers\Api\JobCategoryController;
 use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\TrainingController;
@@ -43,6 +44,8 @@ Route::patch('youtube/{id}', [YoutubeUrlController::class, 'update']);
 
 // DELETE /api/youtube/{id} - Delete a YouTube URL
 Route::delete('youtube/{id}', [YoutubeUrlController::class, 'destroy']);
+
+Route::get('youtube-categories', [YouTubeCategoryController::class, 'index']);
 
 Route::get('trainings', [TrainingController::class, 'index']);
 Route::post('trainings', [TrainingController::class, 'store']);
