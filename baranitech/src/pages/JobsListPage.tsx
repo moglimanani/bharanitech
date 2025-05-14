@@ -11,6 +11,7 @@ import {
   Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
 
 // Job interface
 interface Job {
@@ -25,8 +26,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  boxShadow: theme.shadows[3],
-  borderRadius: theme.shape.borderRadius,
+  //boxShadow: theme.shadows[3],
+  //borderRadius: theme.shape.borderRadius,
+  borderRadius: '20px',
 }));
 
 const JobsListPage: React.FC = () => {
@@ -91,31 +93,31 @@ const JobsListPage: React.FC = () => {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom>
-        Job Openings
-      </Typography>
+      <LearningResourcesStyled variant="h4" gutterBottom>
+        Job Openings 
+      </LearningResourcesStyled>
       <Grid container spacing={3}>
         {jobs.map((job) => (
-          <Grid size={{xs:12, sm:6, md:4}} key={job.id}>
+          <Grid size={{xs:12, sm:6, md:4}} key={job.id} style={{marginBottom: '30px'}}>
             <StyledCard>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <TitleStyled variant="h6" gutterBottom>
                   {job.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                </TitleStyled>
+                <ParaStyled variant="body2" color="text.secondary">
                   <strong>{job.company}</strong>
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                </ParaStyled>
+                <ParaStyled variant="body2" color="text.secondary">
                   {job.location}
-                </Typography>
-                <Typography variant="body2" sx={{ mt: 2 }} color="text.secondary">
+                </ParaStyled>
+                <ParaStyled variant="body2" sx={{ mt: 2 }} color="text.secondary">
                   {job.description}
-                </Typography>
+                </ParaStyled>
               </CardContent>
               <Box sx={{ padding: 2 }}>
-                <Button fullWidth variant="contained" color="primary">
+                <LearnButtonStyled fullWidth variant="contained" color="primary">
                   Apply Now
-                </Button>
+                </LearnButtonStyled>
               </Box>
             </StyledCard>
           </Grid>
