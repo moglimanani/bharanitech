@@ -15,7 +15,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterUserSchema } from '../../validationSchema/schema';
 import httpService from '../../api/httpService';
-import { useErrorAlert } from '../../contexts/ErrorAlertContext';
+import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { LoginWrapperButtonStyled, LoginWrapperIconStyled, LoginWrapperImageStyled, LoginWrapperStyled } from './styles';
 

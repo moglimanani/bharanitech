@@ -22,7 +22,7 @@ class GalleryController extends Controller
                     [
                         'status' => true,
                         'message' => 'No galleries found.',
-                        'data' => []
+                        'data' => [],
                     ],
                     200,
                 );
@@ -147,6 +147,37 @@ class GalleryController extends Controller
             'status' => 'success',
             'data' => $gallery,
             'message' => 'Gallery updated successfully.',
+        ]);
+    }
+
+    // Delete a gallery by ID
+    public function destroy($id)
+    {
+        $gallery = Gallery::find($id);
+
+        if (!$gallery) {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Gallery not found.',
+                ],
+                200,
+            );
+        }
+
+        // Delete associated photo files from storage
+        foreach ($gallery->photos as $photo) {
+            if (Storage::disk('public')->exists($photo)) {
+                Storage::disk('public')->delete($photo);
+            }
+        }
+
+        // Delete the gallery record
+        $gallery->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Gallery deleted successfully.',
         ]);
     }
 }

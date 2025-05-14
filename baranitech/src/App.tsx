@@ -15,18 +15,21 @@ function App() {
     width: '100%'
   }))
   const { user } = useUser()
-  useEffect(()=>{
+  useEffect(() => {
 
     console.log('user', user);
-  },[user])
+  }, [user])
 
   return (
     <>
-      {user?.email ? <AdminMenubar /> : <MenuBar /> }
-      <FlashOffer
-        onClick={() => { }}
-        message="Book your spot now before registration closes. Don’t miss out!"
-        buttonlabel="Register" />
+      {user?.email ? <AdminMenubar /> : <MenuBar />}
+      {!(user?.email) && (
+        <FlashOffer
+          onClick={() => { }}
+          message="Book your spot now before registration closes. Don’t miss out!"
+          buttonlabel="Register" />
+      )}
+
 
       <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
         <Grid container>
