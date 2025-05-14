@@ -15,8 +15,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFormSchema } from "../../validationSchema/schema";
 import { useAxiosErrorHandler } from "../../hooks/useAxiosErrorHandler";
-import { useErrorAlert } from "../../contexts/ErrorAlertContext";
 import { LoginWrapperButtonStyled, LoginWrapperIconStyled, LoginWrapperImageStyled, LoginWrapperStyled } from "./styles";
+import { useErrorAlert } from "../../contexts/errorAlertContext";
 
 interface LoginPageType {
   email: string;
