@@ -14,6 +14,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from '@mui/material';
+import { BoxContactStyled, GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
 
 interface ContactForm {
   name: string;
@@ -80,81 +81,92 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 5 }}>
-      <Typography variant="h4" gutterBottom>
+    
+    <Container sx={{ mt: 5 }}>
+      <LearningResourcesStyled variant="h4" gutterBottom>
         Contact Us
-      </Typography>
+      </LearningResourcesStyled>
 
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">Your message has been sent successfully!</Alert>}
+      <GridContactStyled>
+          <Grid size={6} className={'fullwidth'}>
+            <BoxContactStyled
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+              }}
+            >
+              <TextField
+                label="Your Name"
+                variant="outlined"
+                fullWidth
+                name="name"
+                value={contactForm.name}
+                onChange={handleInputChange}
+                required
+              />
+              <TextField
+                label="Your Email"
+                variant="outlined"
+                fullWidth
+                name="email"
+                type="email"
+                value={contactForm.email}
+                onChange={handleInputChange}
+                required
+              />
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-        }}
-      >
-        <TextField
-          label="Your Name"
-          variant="outlined"
-          fullWidth
-          name="name"
-          value={contactForm.name}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Your Email"
-          variant="outlined"
-          fullWidth
-          name="email"
-          type="email"
-          value={contactForm.email}
-          onChange={handleInputChange}
-          required
-        />
+              {/* Subject Selector */}
+              <FormControl fullWidth>
+                <InputLabel>Subject</InputLabel>
+                <Select
+                  name="subject"
+                  value={contactForm.subject}
+                  onChange={handleSelectChange}
+                  label="Subject"
+                >
+                  <MenuItem value="general-inquiry">General Inquiry</MenuItem>
+                  <MenuItem value="feedback">Feedback</MenuItem>
+                  <MenuItem value="support">Support</MenuItem>
+                  <MenuItem value="other">Other</MenuItem>
+                </Select>
+              </FormControl>
 
-        {/* Subject Selector */}
-        <FormControl fullWidth>
-          <InputLabel>Subject</InputLabel>
-          <Select
-            name="subject"
-            value={contactForm.subject}
-            onChange={handleSelectChange}
-            label="Subject"
-          >
-            <MenuItem value="general-inquiry">General Inquiry</MenuItem>
-            <MenuItem value="feedback">Feedback</MenuItem>
-            <MenuItem value="support">Support</MenuItem>
-            <MenuItem value="other">Other</MenuItem>
-          </Select>
-        </FormControl>
+              <TextField
+                label="Your Message"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                name="message"
+                value={contactForm.message}
+                onChange={handleInputChange}
+                required
+              />
 
-        <TextField
-          label="Your Message"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={4}
-          name="message"
-          value={contactForm.message}
-          onChange={handleInputChange}
-          required
-        />
+              <LearnButtonStyled
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                disabled={loading}
+              >
+                {loading ? 'Sending...' : 'Send Message'}
+              </LearnButtonStyled>
+            </BoxContactStyled>
+          </Grid>
+          <Grid size={6} className={'hidden'}>
+              <img src="/login.png" alt="login" loading="lazy" />
+          </Grid>
+      </GridContactStyled>
+     
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          disabled={loading}
-        >
-          {loading ? 'Sending...' : 'Send Message'}
-        </Button>
-      </Box>
+
+      
     </Container>
   );
 };

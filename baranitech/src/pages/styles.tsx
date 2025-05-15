@@ -1,4 +1,4 @@
-import { Box, Grid, List, Card, ListItemText, styled, Typography, Button } from "@mui/material";
+import { Box, Grid, List, Card, ListItemText, styled, Typography, Button , Stack} from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({theme})=>({
   padding: "10px 10px 10px 0px",
@@ -59,7 +59,7 @@ export const AboutUsStyled = styled('div')(({theme})=>({
   borderRadius: '20px',
   textAlign: 'left',
   [theme.breakpoints.down('sm')]: {
-    padding: '20px',
+    padding: '0px',
  }
 }))
 
@@ -70,7 +70,7 @@ export const AboutUsTitleStyled = styled('h2')(({theme})=>({
   fontWeight: 'bold',
   fontSize: '1.3em',
   [theme.breakpoints.down('sm')]: {
-    padding: '20px',
+    padding: '0px',
  }
 }))
 
@@ -81,9 +81,48 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
    color: '#ffffff',
    fontSize: '0.88em',
    [theme.breakpoints.down('sm')]: {
-     padding: '20px',
+     padding: '20px 0',
   }
  }))
+
+ export const AboutUsDivWrapperStyled = styled('div')(({theme})=>({
+  // background: 'yellow',
+   margin: '0',
+   padding: '0 20px 20px 0',
+   display: 'flex',
+   color: '#ffffff',
+   fontSize: '0.88em',
+   '& > div > img': {
+    width: '100%',
+    borderRadius: '20px',
+   },
+   [theme.breakpoints.down('sm')]: {
+     padding: '0px',
+     flexDirection: 'column',
+     width: '100%',
+     '& > div > img': {
+      marginTop: '20px',
+      width: '100%',
+     }
+  }
+ }))
+
+
+ export const AboutUsPara1Styled = styled('p')(({theme})=>({
+  // background: 'yellow',
+  maxWidth: '80%',
+   margin: '0',
+   padding: '0 0 20px',
+   color: '#ffffff',
+   fontSize: '0.88em',
+   [theme.breakpoints.down('sm')]: {
+     padding: '0px',
+     maxWidth: '100%',
+  }
+ }))
+
+
+ 
 
  export const AboutUsDivStyled = styled('div')(({theme})=>({
   // background: 'yellow',
@@ -116,6 +155,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   fontSize: '1em',
   paddingTop: '10px',
   color: '#127B93',
+  position: 'relative',
     
  }))
 
@@ -146,4 +186,45 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   // boxShadow: theme.shadows[3],
   borderRadius: '20px',
 }));
+
+export const StackStyled = styled(Stack)(({ theme }) => ({
+  position: 'absolute',
+  top: '3px',
+  right: '0px',
+}));
  
+//contact page
+
+export const BoxContactStyled = styled(Box)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  marginBottom: '30px',
+  flexDirection: 'column',
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px',
+  background: '#ffffff'
+}));
+
+export const GridContactStyled = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px',
+  background: '#ffffff',
+  padding: '30px',
+  '& > .hidden': {
+    [theme.breakpoints.down('sm')]: {
+      margin: '0',
+      padding: '0',
+      display: 'none',
+   }
+  },
+  [theme.breakpoints.down('sm')]: {
+    '& > .fullwidth': {
+       width: "100%"
+    }
+  },
+  '& > .hidden > img': {
+    width: '100%'
+  }
+}));

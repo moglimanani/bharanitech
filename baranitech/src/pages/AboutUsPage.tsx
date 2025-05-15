@@ -1,4 +1,4 @@
-import { AboutUsDivStyled, AboutUsParaStyled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
+import { AboutUsDivStyled, AboutUsDivWrapperStyled, AboutUsPara1Styled, AboutUsParaStyled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
 
 export default function AboutUsPage() {
   return (
@@ -6,9 +6,17 @@ export default function AboutUsPage() {
       <AboutUsTitleStyled>
          AboutUsPage
       </AboutUsTitleStyled>
-      <AboutUsParaStyled>
+      <AboutUsDivWrapperStyled>
+      <AboutUsPara1Styled>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </AboutUsParaStyled>
+
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+      </AboutUsPara1Styled>
+      <div> 
+          <img src="/login.png" alt="login" loading="lazy" />
+        </div>
+      </AboutUsDivWrapperStyled>
+      
       <AboutUsParaStyled>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
       </AboutUsParaStyled>
