@@ -212,6 +212,7 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
   borderRadius: '20px',
   background: '#ffffff',
   padding: '30px',
+  marginBottom: '30px',
   '& > .hidden': {
     [theme.breakpoints.down('sm')]: {
       margin: '0',
