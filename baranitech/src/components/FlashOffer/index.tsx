@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import { FlashOfferProps } from '../../types/flash';
-import styles from './flashNews.module.scss'
-import { Button } from '@mui/material';
 
 const FlashOffer: React.FC<FlashOfferProps> = ({
   message,
@@ -11,65 +8,71 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
   buttonlabel
 }) => {
   const controls = useAnimation();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);  // Track zoom scale
-  const [isHovered, setIsHovered] = useState(false);
+   // Start the animation loop
+   useEffect(() => {
+    controls.start({
+      x: "-100%",
+      transition: {
+        repeat: Infinity,
+        ease: "linear",
+        duration: 10,
+      },
+    });
+  }, [controls]);
 
-  useEffect(() => {
-    if (!isHovered) {
-      // Zoom effect when not hovered
-      controls.start({
-        scale: [1, 1.2, 1],
-        transition: {
-          repeat: Infinity,
-          repeatType: 'reverse',
-          duration: 4,
-          ease: 'easeInOut',
-        },
-      });
-    }
-  }, [controls, isHovered]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    controls.stop(); // Stop zoom when hovered
+  const handlePause = () => {
+    controls.stop();
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
+  const handleResume = () => {
+    controls.start({
+      x: "-100%",
+      transition: {
+        repeat: Infinity,
+        ease: "linear",
+        duration: 10,
+      },
+    });
   };
 
   return (
-    <div className={styles.flashContainer}>
-      <div
-        ref={containerRef}
-        className={styles.flashInnerContainer}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {/* Zoomable area */}
-        <div className={styles.scrollArea}>
-          <motion.div
-            className="text"
-            animate={controls}
-          >
-            <Sparkles className={styles.sparkels} />
-            <span>{message}</span>
-            <Sparkles className={styles.sparkels} />
-            
-            {/* Button inside the zoom effect */}
-            <Button variant='outlined'> {buttonlabel}</Button>
-            {/* <motion.button
-              onClick={onClick}
-              className={styles.button}
-            >
-             {buttonlabel}
-            </motion.button> */}
-          </motion.div>
-        </div>
-      </div>
-    </div>
-  );
+    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#f0f0f0", padding: "20px 0" }}>
+    <motion.div
+      animate={controls}
+      initial={{ x: "0%" }}
+        style={{
+          display: "inline-block",
+          whiteSpace: "nowrap",
+          paddingLeft: "100%",
+        }}
+     
+    >
+      <span style={{ fontSize: "24px", fontWeight: "bold" }}>
+        {message}
+      </span>
+    </motion.div>
+
+    <button
+      onMouseEnter={() =>  handlePause()}
+      onMouseLeave={() => handleResume()}
+      style={{
+        position: "absolute",
+        right: 20,
+        top: "50%",
+        transform: "translateY(-50%)",
+        padding: "10px 20px",
+        cursor: "pointer",
+        background: "#333",
+        color: "#fff",
+        border: "none",
+        borderRadius: "4px"
+      }}
+      onClick={onClick}
+    >
+      {buttonlabel}
+    </button>
+  </div>
+  )
 };
 
 export default FlashOffer;

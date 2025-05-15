@@ -1,5 +1,15 @@
 import * as yup from 'yup';
 
+export const ContactUsFormSchema = yup.object({
+    username: yup.string().required("User name is required").min(3, 'At least 3 characters'),
+    email: yup
+    .string()
+    .required('Email address is required.')
+    .email('Invalid Email address.'),
+    subject: yup.string().required('Title is required').min(10, 'At least 10 characters'),
+    message: yup.string().required('Description is required').min(10, 'At least 10 characters'),
+})
+
 export const AdminGalleryAddSchema = yup.object({
     title: yup
         .string()
