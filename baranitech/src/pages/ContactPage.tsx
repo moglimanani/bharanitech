@@ -21,14 +21,23 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ContactUsFormSchema } from '../validationSchema/schema';
 import { InferType } from 'yup';
-import { Form } from 'react-router';
+import httpService from '../api/httpService';
 
-interface ContactForm {
-  name: string;
-  email: string;
-  subject: string;
+interface ContactFormDataType {
+  username: string,
+  email: string,
+  subject: string,
+  message: string,
+  occupation: string,
+  dob: string,
+  phone: string
+}
+interface ApiResponse {
+  status: boolean;
+  data: ContactFormDataType[];
   message: string;
 }
+
 export const StyledContainer = styled(Container, {
   shouldForwardProp: (prop) => !['variant', 'sx'].includes(prop as string)
 })<ContainerProps>(({ theme }) => ({
@@ -50,24 +59,45 @@ export const StyledForm = styled('form')(({ theme }) => ({
 type FormData = InferType<typeof ContactUsFormSchema>;
 
 const ContactPage: React.FC = () => {
-
+  const [success, setSuccess] = useState(false)
   const { control, handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState,
     setValue,
     trigger,
     reset } = useForm<FormData>({
       resolver: yupResolver(ContactUsFormSchema),
       mode: 'all',
+      reValidateMode: 'onChange',
       defaultValues: {
         username: '',
         email: '',
         subject: '',
         message: '',
+        occupation: '',
+        dob: '',
+        phone: ''
       }
     })
+  const { errors, isSubmitting, isValid } = formState
+
+  const submitContactForm = async (data: ContactFormDataType) => {
+    try {
+      const response = await httpService.post<ApiResponse>(`${import.meta.env.VITE_API_BASE_URL}contact`, data);
+
+      if (response.status) {
+        alert('Message sent successfully!');
+        reset()
+        setSuccess(true)
+        // Optionally reset the form here
+      }
+    } catch (error: any) {
+      console.error('Error submitting contact form:', error);
+      alert('Something went wrong. Please try again.');
+    }
+  };
 
   const onSubmit = async (data: FormData) => {
-    console.log('data', data);
+    submitContactForm(data)
 
   };
 
@@ -76,12 +106,10 @@ const ContactPage: React.FC = () => {
 
     <Container sx={{ mt: 5 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <Typography variant="h5" gutterBottom>
-          Contact Us
-        </Typography> */}
         <LearningResourcesStyled variant="h4" gutterBottom>
           Contact Us
         </LearningResourcesStyled>
+        {success && <Alert severity="success">Your message has been sent successfully!</Alert>}
         <GridContactStyled>
           <Grid size={6} className={'fullwidth'}>
             <Controller
@@ -110,6 +138,55 @@ const ContactPage: React.FC = () => {
                   margin="normal"
                   error={!!errors.email}
                   helperText={errors.email?.message}
+                />
+              )}
+            />
+            <Controller
+              name='phone'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Phone Number *"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.phone)}
+                  helperText={errors.phone?.message}
+                />
+              )}
+            />
+            <Controller
+              name="occupation"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Occupation"
+                  fullWidth
+                  margin="normal"
+                  error={!!errors.occupation}
+                  helperText={errors.occupation?.message}
+                />
+              )}
+            />
+            <Controller
+              name="dob"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type='date'
+                  label="Date of Birth"
+                  InputLabelProps={{ shrink: true }}
+                  fullWidth
+                  margin="normal"
+                  error={!!errors.dob}
+                  helperText={errors.dob?.message}
+                  onBlur={() => {
+                    field.onBlur(); // still call field's onBlur
+                    trigger('dob'); // manually trigger validation
+                  }}
                 />
               )}
             />
@@ -153,104 +230,15 @@ const ContactPage: React.FC = () => {
             >
               Send Message
             </LearnButtonStyled>
-          {/* </BoxContactStyled> */}
-        </Grid>
-        <Grid size={6} className={'hidden'}>
-          <img src="/login.png" alt="login" loading="lazy" />
-        </Grid>
-      </GridContactStyled>
-    </form>
-    </Container >
-
+            {/* </BoxContactStyled> */}
+          </Grid>
+          <Grid size={6} className={'hidden'}>
+            <img src="/login.png" alt="login" loading="lazy" />
+          </Grid>
+        </GridContactStyled>
+      </form>
+    </Container>
   )
-
-  //     <Container sx={{ mt: 5 }}>
-  //       <LearningResourcesStyled variant="h4" gutterBottom>
-  //         Contact Us
-  //       </LearningResourcesStyled>
-
-  //       {/* {error && <Alert severity="error">{error}</Alert>}
-  //       {success && <Alert severity="success">Your message has been sent successfully!</Alert>} */}
-  //       <GridContactStyled>
-  //         <Grid size={6} className={'fullwidth'}>
-  //           <BoxContactStyled
-  //             component="form"
-  //             onSubmit={handleSubmit}
-  //             sx={{
-  //               display: 'flex',
-  //               flexDirection: 'column',
-  //               gap: 2,
-  //             }}
-  //           >
-  //             <TextField
-  //               label="Your Name"
-  //               variant="outlined"
-  //               fullWidth
-  //               name="username"
-  //               value={contactForm.name}
-  //               onChange={handleInputChange}
-  //               required
-  //             />
-  //             <TextField
-  //               label="Your Email"
-  //               variant="outlined"
-  //               fullWidth
-  //               name="email"
-  //               type="email"
-  //               value={contactForm.email}
-  //               onChange={handleInputChange}
-  //               required
-  //             />
-
-  //             {/* Subject Selector */}
-  //             <FormControl fullWidth>
-  //               <InputLabel>Subject</InputLabel>
-  //               <Select
-  //                 name="subject"
-  //                 value={contactForm.subject}
-  //                 onChange={handleSelectChange}
-  //                 label="Subject"
-  //               >
-  //                 <MenuItem value="general-inquiry">General Inquiry</MenuItem>
-  //                 <MenuItem value="feedback">Feedback</MenuItem>
-  //                 <MenuItem value="support">Support</MenuItem>
-  //                 <MenuItem value="other">Other</MenuItem>
-  //               </Select>
-  //             </FormControl>
-
-  //             <TextField
-  //               label="Your Message"
-  //               variant="outlined"
-  //               fullWidth
-  //               multiline
-  //               rows={4}
-  //               name="message"
-  //               value={contactForm.message}
-  //               onChange={handleInputChange}
-  //               required
-  //             />
-
-  //             <LearnButtonStyled
-  //               type="submit"
-  //               variant="contained"
-  //               color="primary"
-  //               fullWidth
-  //               disabled={loading}
-  //             >
-  //               {loading ? 'Sending...' : 'Send Message'}
-  //             </LearnButtonStyled>
-  //           </BoxContactStyled>
-  //         </Grid>
-  //         <Grid size={6} className={'hidden'}>
-  //           <img src="/login.png" alt="login" loading="lazy" />
-  //         </Grid>
-  //       </GridContactStyled>
-
-
-
-
-  //     </Container>
-  // );
 };
 
 export default ContactPage;

@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\TrainingCategoryController;
 use App\Http\Controllers\Api\RegisterTrainingController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\ContactController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -96,3 +97,6 @@ Route::get('/gallery', [GalleryController::class, 'index']); // Get all gallerie
 Route::get('/gallery/{id}', [GalleryController::class, 'show']); // Get single gallery by ID
 Route::put('/gallery/{id}', [GalleryController::class, 'update']); // Update gallery by ID
 Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);
+
+Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/contact', [ContactController::class, 'index']);

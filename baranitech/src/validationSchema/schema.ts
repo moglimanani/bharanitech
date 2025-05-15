@@ -1,13 +1,35 @@
 import * as yup from 'yup';
 
+const today = new Date();
+const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 export const ContactUsFormSchema = yup.object({
     username: yup.string().required("User name is required").min(3, 'At least 3 characters'),
     email: yup
-    .string()
-    .required('Email address is required.')
-    .email('Invalid Email address.'),
+        .string()
+        .required('Email address is required.')
+        .email('Invalid Email address.'),
     subject: yup.string().required('Title is required').min(10, 'At least 10 characters'),
     message: yup.string().required('Description is required').min(10, 'At least 10 characters'),
+    phone: yup
+        .string()
+        .required('Phone number is required.')
+        .matches(
+            /^(\+?\d{1,4}?[-.\s]?)?(\(?\d{3}\)?|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}$/,
+            'Invalid phone number'
+        ),
+    occupation: yup.string().required('Occupation is required.'),
+    dob: yup.string()
+    .required('Date of birth is required')
+    // .transform((value) => (value === '' ? null : value))
+    .test('valid-date', 'Invalid date', (value) => {
+        const date = new Date(value!);
+        return !isNaN(date.getTime());
+      })
+      .test('min-age', 'You must be at least 18 years old', (value) => {
+        if (!value) return false;
+        const date = new Date(value);
+        return date <= eighteenYearsAgo;
+      })
 })
 
 export const AdminGalleryAddSchema = yup.object({
@@ -60,8 +82,8 @@ export const LoginFormSchema = yup.object().shape({
 const youtubeUrlRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
 export const AdminResourceAddSchema = yup.object().shape({
     // category: yup.string().required('Category is required'),
-    classification:  yup.string().required('Classification is required'),
-    ctype:  yup.string().required('Type is required'),
+    classification: yup.string().required('Classification is required'),
+    ctype: yup.string().required('Type is required'),
     title: yup.string().required('Title is required'),
     url: yup.string()
         .required('YouTube URL is required')
