@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
 import FlashOffer from './components/FlashOffer'
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import { useUser } from './contexts/userContext';
 import AdminMenubar from './components/Menubar/adminMenubar';
 import { useYouTubeCategories } from './contexts/youtubeCategoryContext';
@@ -16,15 +16,17 @@ function App() {
   }))
   const { user } = useUser()
   const {categories, loading, error} = useYouTubeCategories()
-  
+  const location = useLocation()
   
   if (loading) return <div>Loading categories...</div>;
   if (error) return <div>{error}</div>;
+
+  const ifItsLoginOrRegisterPage = (location.pathname === import.meta.env.VITE_ROUTE_LOGIN_URL) || (location.pathname === import.meta.env.VITE_ROUTE_REGISTER_USER_URL)
   
   return (
     <>
-      {user?.email ? <AdminMenubar /> : <MenuBar />}
-      {!(user?.email) && (
+      {!ifItsLoginOrRegisterPage && (user?.email ? <AdminMenubar /> : <MenuBar />)}
+      {!ifItsLoginOrRegisterPage && !(user?.email) && (
         <FlashOffer
           onClick={() => { }}
           message="Book your spot now before registration closes. Don’t miss out!"
