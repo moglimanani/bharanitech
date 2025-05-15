@@ -41,7 +41,7 @@ interface RegisterFormResponse {
 
 // Styled with MUI’s styled API
 const StyledContainer = styled(Container)(({ theme }) => ({
-  marginTop: theme.spacing(10),
+  marginTop: theme.spacing(1),
   padding: theme.spacing(4),
   display: 'flex',
   flexDirection: 'column',

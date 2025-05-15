@@ -6,8 +6,10 @@ import {
   Grid,
   Container,
   Divider,
+  Stack,
+  Chip,
 } from '@mui/material';
-import { LearningResourcesStyled, ParaStyled, StyledWrapperDivCard, TitleStyled } from './styles';
+import { LearningResourcesStyled, ParaStyled, StackStyled, StyledWrapperDivCard, StyledWrapperStack, TitleStyled } from './styles';
 
 // Define a type for training items
 interface Training {
@@ -61,6 +63,13 @@ const TrainingsListPage: React.FC = () => {
               <CardContent>
                 <TitleStyled variant="h6" gutterBottom>
                   {training.title}
+                  <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
+                    <Stack direction="row" spacing={1}>
+                     
+                      <Chip label="success" color="success" />
+                    </Stack>
+                   
+                  </StackStyled>
                 </TitleStyled>
                 <ParaStyled variant="body2" color="textSecondary" gutterBottom>
                   {training.description}
