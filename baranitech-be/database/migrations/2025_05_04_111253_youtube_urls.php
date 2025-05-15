@@ -10,7 +10,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('type')->constrained('youtube_categorys')->onDelete('cascade');
             $table->string('title');
-            $table->text('url')->unique();
+            $table->string('url', 2048)->unique();
             $table->text('description')->nullable();
             $table->timestamps();
         });
