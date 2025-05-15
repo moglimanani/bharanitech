@@ -34,6 +34,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    const storedUser = sessionStorage.getItem(import.meta.env.VITE_APP_USER_SESSION_NAME);
+
+    if (storedUser) {
+      sessionStorage.removeItem(import.meta.env.VITE_APP_USER_SESSION_NAME);
+    }
   };
 
   return (

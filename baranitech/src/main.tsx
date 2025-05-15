@@ -76,6 +76,12 @@ createRoot(document.getElementById('root')!).render(
                       <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL} element={<ResourceAdminListComponent />} />
                       <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_ADD_URL} element={<ResourceAdminAddComponent />} />
                     </Route>
+                    <Route path={import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL} element={<ResourceAdminPage />}>
+                      <Route index element={<ResourceAdminListComponent />} />
+                      <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_ID_URL} element={<ResourceAdminListComponent />} />
+                      <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL} element={<ResourceAdminListComponent />} />
+                      <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_ADD_URL} element={<ResourceAdminAddComponent />} />
+                    </Route>
                   </Route>
 
                 </Routes>
