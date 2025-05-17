@@ -17,7 +17,7 @@ function Vacancies() {
               <Item>
                 <Grid container>
                   <Grid size={10}>
-                    <JobsStyled align='left' variant="h6">Site Engineers  </JobsStyled>
+                    <JobsStyled align='left'>Site Engineers  </JobsStyled>
                   </Grid>
                   <Grid size={2}>
                     <BadgeStyled badgeContent={14} color="primary">
@@ -31,7 +31,7 @@ function Vacancies() {
               <Item>
                 <Grid container>
                   <Grid size={10}>
-                    <JobsStyled align='left' variant="h6">Technicians </JobsStyled>
+                    <JobsStyled align='left'>Technicians </JobsStyled>
                   </Grid>
                   <Grid size={2}>
                     <BadgeStyled badgeContent={24} color="primary">
@@ -45,7 +45,7 @@ function Vacancies() {
               <Item>
                 <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
                   <Grid size={10}>
-                    <JobsStyled align='left' variant="h6">QA  </JobsStyled>
+                    <JobsStyled align='left' >QA  </JobsStyled>
                   </Grid>
                   <Grid size={2}>
                     <BadgeStyled badgeContent={34} color="primary">

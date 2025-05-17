@@ -1,4 +1,5 @@
 import { Badge, Paper, styled, Typography } from "@mui/material";
+import { color } from "framer-motion";
 
 export const VacanciesStyled = styled(Typography)(({ theme }) => ({
     justifyContent: 'flex-start',
@@ -12,10 +13,16 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
   }));
 
   export const BadgeStyled = styled(Badge)(({theme}) => ({
+    'svg + span':{
+        color: theme.palette.common.black,
+        backgroundColor: theme.palette.flashPrimaryBGColor.main,
+    },
     svg: {
-        color: theme.palette.orange.main
-    }
+        color:  theme.palette.buttonPrimaryBGColor.main
+    },
+    
   }));
+
 
   export const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.common.white,
@@ -41,6 +48,6 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
   }));
 
   export const JobsStyled = styled(Typography)(({theme})=>({
-    fontFamily: 'Poetsen One',
+    // fontFamily: 'Poetsen One',
     color: theme.palette.common.black
   }))
