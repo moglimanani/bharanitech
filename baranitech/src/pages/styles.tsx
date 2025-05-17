@@ -229,3 +229,40 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
     width: '100%'
   }
 }));
+
+
+export const AdminStyled = styled('div')(({ theme }) => ({
+  
+  display: 'flex',
+  padding: '20px',
+  margin: '0px 30px 30px 0px' ,
+  flexDirection: 'column',
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px',
+  background: '#ffffff',
+  '& > div': {
+    color: '#127B93',
+    fontSize: '1.3em',
+    paddingBottom: '15px',
+  },
+  '& > button': {
+    background: '#127B93',
+    border: 0,
+    color: '#ffffff',
+    padding: '10px 20px',
+    borderRadius: '20px',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '240px',
+      margin: '0 auto',
+    },
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '240px',
+      margin: '0 auto',
+    }
+  },
+  [theme.breakpoints.down('sm')]: {
+    margin: '0px auto 30px',
+  }
+  
+}));
+
