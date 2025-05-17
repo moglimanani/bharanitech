@@ -10,7 +10,7 @@ export const CarouselStyled = styled(Carousel)(({theme})=>({
   borderRadius: '20px',
   padding: '20px',
   display: 'flex',
-  marginTop: '30px',
+  marginTop: '10px',
   justifyContent: 'space-around',
  
 }))

@@ -18,7 +18,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, NavLink, useMatch, useParams } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled} from './styles'
+import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ListItemTextStyled} from './styles'
 const menuItems = [
   { path: '/', name: 'Home' },
   { path: '/aboutus', name: 'About Us' },
@@ -54,7 +54,7 @@ const MenuBar: React.FC = () => {
           <ListItem key={`menuItem-${id}`} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <Link to={item.path}>
-                <LabelImportantIcon /> <ListItemText primary={item.name} />
+                <LabelImportantIcon /> <ListItemTextStyled primary={item.name} />
               </Link>
             </ListItemButton>
           </ListItem>

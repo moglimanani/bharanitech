@@ -110,7 +110,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
 
  export const AboutUsPara1Styled = styled('p')(({theme})=>({
   // background: 'yellow',
-  maxWidth: '80%',
+  maxWidth: '60%',
    margin: '0',
    padding: '0 0 20px',
    color: '#ffffff',

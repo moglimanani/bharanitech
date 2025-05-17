@@ -4,9 +4,15 @@ import { createTheme } from '@mui/material/styles';
 declare module '@mui/material/styles' {
   interface Palette {
     appBarColour: Palette['primary'];
+    orange: Palette['primary'];
+    buttonPrimaryBGColor: Palette['primary'];
+    flashPrimaryBGColor: Palette['primary'];
   }
   interface PaletteOptions {
     appBarColour?: PaletteOptions['primary'];
+    orange?: PaletteOptions['primary'];
+    buttonPrimaryBGColor?: PaletteOptions['primary'];
+    flashPrimaryBGColor?: PaletteOptions['primary'];
   }
 }
 
@@ -32,6 +38,12 @@ const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
+    buttonPrimaryBGColor: {
+      main: '#117b93'
+    },
+    flashPrimaryBGColor: {
+      main: '#c4f4ff'
+    }
    
   },
   // components: {

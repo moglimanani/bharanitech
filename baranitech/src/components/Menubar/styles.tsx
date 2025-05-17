@@ -5,6 +5,7 @@ import {
     styled,
     IconButton,
     List,
+    ListItemText
 } from '@mui/material';
 
 import { NavLink } from 'react-router';
@@ -12,9 +13,13 @@ import { NavLink } from 'react-router';
 export const ActiveLink = styled(NavLink)(({ theme }) => ({
     textDecoration: 'none',
     color: theme.palette.appBarColour.light,
+     letterSpacing: '1px',
     '&.active': {
         color: theme.palette.appBarColour.dark
     }
+}))
+export const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
+    letterSpacing: '1px'
 }))
 
 export const LogoStyled = styled('img')(({ theme }) => ({

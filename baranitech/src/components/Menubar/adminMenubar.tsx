@@ -36,7 +36,7 @@ const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Jobs' },
   { path: '/trainings', name: 'Trainings' },
   // { path: '/login', name: 'Login' },
-  { path: '/contact', name: 'Contact Us' },
+  { path: '/candidates', name: 'Candidates' },
   // { path: '/testimonial', name: 'Testimonials' }
 ];
 
