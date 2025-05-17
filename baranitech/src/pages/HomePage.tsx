@@ -1,13 +1,7 @@
 import {
-  Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  Typography,
+  Grid
 } from "@mui/material";
 import CarouselComponent from "../components/CarouselComponent";
-import AccordionComponent from "../components/AccordianComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import {
   BodyPara1Styled,
@@ -17,9 +11,6 @@ import {
   PageWrapperStyled,
   TwoColumnStyled,
 } from "./styles";
-import ThreeColumnPage from "../components/ThreeColumnPage/ThreeColumnPage";
-import ThreeColumnWhitePage from "../components/ThreeColumnWhitePage/ThreeColumnWhitePage";
-import GetStartedToday from "../components/GetStartedComponent";
 
 export default function HomePage() {
   return (
@@ -29,9 +20,6 @@ export default function HomePage() {
       </Grid>
       <TwoColumnStyled size={12}>
         <Grid container>
-          <Grid size={{ xs: 12, md: 2 }}>
-            <AccordionComponent />
-          </Grid>
           <Grid size={{ xs: 12, md: 10 }}>
             <PageWrapperStyled>
               <HeaderComponent title="Welcome to Barani Tech– Powering Your Future in Electrical Equipment & Protection Training" />
@@ -162,25 +150,10 @@ export default function HomePage() {
                   </ListStyled>
                 </ListItemTextStyled>
               </ListStyled>
-              {/* <HeaderComponent title="| About Us" />
-              <BodyPara1Styled variant="h6" >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </BodyPara1Styled> */}
             </PageWrapperStyled>
           </Grid>
-          {/* <Grid size={{ xs: 12, md: 4 }}></Grid> */}
         </Grid>
       </TwoColumnStyled>
-      <Grid size={12}>
-       <ThreeColumnPage />
-      </Grid>
-      <Grid size={12}>
-        <ThreeColumnWhitePage />
-      </Grid>
-      <Grid size={12}>
-        <GetStartedToday />
-      </Grid>
     </Grid>
   );
 }

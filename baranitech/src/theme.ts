@@ -4,9 +4,11 @@ import { createTheme } from '@mui/material/styles';
 declare module '@mui/material/styles' {
   interface Palette {
     appBarColour: Palette['primary'];
+    orange: Palette['primary'];
   }
   interface PaletteOptions {
     appBarColour?: PaletteOptions['primary'];
+    orange?: PaletteOptions['primary'];
   }
 }
 
@@ -32,6 +34,9 @@ const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
+    orange: {
+      main: '#ff3d00'
+    }
    
   },
   // components: {

@@ -36,7 +36,7 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
   };
 
   return (
-    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#c4f4ff", padding: "10px 0", color: "#484848" }}>
+    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#c4f4ff", padding: "10px 0", marginBottom: "20px", color: "#484848" }}>
     <motion.div
       animate={controls}
       initial={{ x: "0%" }}

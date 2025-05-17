@@ -72,7 +72,7 @@ const ResourcesListPage: React.FC = () => {
     setTimeout(() => {
       setResources(mockResources); // simulate a delay for fetching
       setLoading(false);
-    }, 1500);
+    }, 100);
   }, []);
 
   if (loading) {
