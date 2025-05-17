@@ -9,7 +9,7 @@ export default function GalleryEditAdminPage() {
 
   return (
     <div style={{ padding: '2rem' }}>
-Edit page
+      Edit page
     </div>
   )
 }

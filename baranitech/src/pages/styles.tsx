@@ -266,3 +266,33 @@ export const AdminStyled = styled('div')(({ theme }) => ({
   
 }));
 
+
+export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
+  height: '100%',
+  display: 'flex', 
+  marginBottom: '30px',
+  flexDirection: 'column',
+  // boxShadow: theme.shadows[3],
+  borderRadius: '20px !important',
+  background: '#ffffff',
+  '& > nav': {
+    marginTop: '30px',
+    color: '#127B93',
+    fontWeight: 'bold',
+    'a': {
+      color: '#127B93', 
+      padding: '15px' ,
+      borderRadius: '20px',    
+    },
+    'a:hover': {
+      color: '#ffffff',
+      background: '#127B93',
+      
+    }
+  },
+ 
+}));
+
+
+
+

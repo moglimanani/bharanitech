@@ -15,7 +15,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminGalleryAddSchema } from '../../validationSchema/schema';
-import { StyledContainer, StyledForm } from './styles';
+import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGalleryStyled, TitleStyled } from './styles';
 import httpService from '../../api/httpService';
 import { InferType } from 'yup';
 
@@ -127,9 +127,9 @@ const GalleryAdminAddForm: React.FC = () => {
             Gallery added successfully!
           </Alert>
         )}
-        <Typography variant="h5" gutterBottom>
+        <TitleGalleryStyled variant="h5" gutterBottom>
           Add Gallery
-        </Typography>
+        </TitleGalleryStyled>
 
         <Controller
           name="title"
@@ -163,7 +163,7 @@ const GalleryAdminAddForm: React.FC = () => {
           )}
         />
 
-        <Button
+        <ButtonPhotoStyled
           variant="contained"
           component="label"
           startIcon={<PhotoCamera />}
@@ -177,7 +177,7 @@ const GalleryAdminAddForm: React.FC = () => {
             hidden
             onChange={handlePhotoUpload}
           />
-        </Button>
+        </ButtonPhotoStyled>
 
         {photoError && (
           <Alert severity="error" sx={{ mt: 2 }}>
@@ -217,7 +217,7 @@ const GalleryAdminAddForm: React.FC = () => {
           ))}
         </Grid>
 
-        <Button
+        <ButtonStyled
           type="submit"
           variant="contained"
           color="primary"
@@ -225,7 +225,7 @@ const GalleryAdminAddForm: React.FC = () => {
           disabled={!isValid}
         >
           Submit
-        </Button>
+        </ButtonStyled>
       </StyledForm>
     </StyledContainer>
   );
