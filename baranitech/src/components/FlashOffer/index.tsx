@@ -36,7 +36,7 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
   };
 
   return (
-    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#f0f0f0", padding: "20px 0" }}>
+    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#c4f4ff", padding: "10px 0", color: "#484848" }}>
     <motion.div
       animate={controls}
       initial={{ x: "0%" }}
@@ -47,7 +47,7 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
         }}
      
     >
-      <span style={{ fontSize: "24px", fontWeight: "bold" }}>
+      <span style={{ fontSize: "20px", fontWeight: "bold" }}>
         {message}
       </span>
     </motion.div>
@@ -62,10 +62,10 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
         transform: "translateY(-50%)",
         padding: "10px 20px",
         cursor: "pointer",
-        background: "#333",
+        background: "#127B93",
         color: "#fff",
         border: "none",
-        borderRadius: "4px"
+        borderRadius: "20px"
       }}
       onClick={onClick}
     >
