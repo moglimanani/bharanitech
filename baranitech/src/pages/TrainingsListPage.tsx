@@ -51,7 +51,7 @@ const trainings: Training[] = [
 
 const TrainingsListPage: React.FC = () => {
   return (
-    <Container  sx={{ mt: 5 }}>
+    <Container  sx={{ mt: 1 }}>
       <LearningResourcesStyled variant="h4" gutterBottom>
         Upcoming Trainings
       </LearningResourcesStyled>

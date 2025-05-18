@@ -53,7 +53,7 @@ export const TwoColumnStyled = styled(Grid)(({theme})=>({
 // AboutUs
 
 export const AboutUsStyled = styled('div')(({theme})=>({
-  margin: '20px 30px',
+  margin: '0px 30px 20px',
   // padding: "0px 20px 0px",
   //background: '#ffffff',
   borderRadius: '20px',
@@ -65,7 +65,7 @@ export const AboutUsStyled = styled('div')(({theme})=>({
 
 export const AboutUsTitleStyled = styled('h2')(({theme})=>({
  // background: 'yellow',
-  padding: '20px 0px 0px',
+  padding: '0px 0px 0px',
   color: '#ffffff',
   fontWeight: 'bold',
   fontSize: '1.3em',

@@ -104,7 +104,7 @@ const ContactPage: React.FC = () => {
 
   return (
 
-    <Container sx={{ mt: 5 }}>
+    <Container sx={{ mt: 1 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <LearningResourcesStyled variant="h4" gutterBottom>
           Contact Us

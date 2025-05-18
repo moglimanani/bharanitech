@@ -41,6 +41,7 @@ export const BrandNameStyled = styled(Typography)(({ theme }) => ({
 
 export const AppBarStyled = styled(Box)(({ theme }) => ({
     // backgroundColor: theme.palette.appBarColour.main
+   // background: 'yellow',
 }))
 
 export const IconButtonStyled = styled(IconButton)(({ theme }) => ({

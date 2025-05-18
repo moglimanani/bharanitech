@@ -57,6 +57,9 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
 const CategoryChip = styled(Chip)(({ theme }) => ({
     marginBottom: theme.spacing(1),
+    background: '#127B93',
+    padding: '15px',
+    color: '#ffffff'
 }));
 
 const Actions = styled(Box)(({ theme }) => ({
@@ -148,7 +151,7 @@ const ResourceAdminListComponent: React.FC = () => {
 
                 return (
                     <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
-                        <StyledCard>
+                        <StyledCard >
                             <Actions>
                                 <IconButton
                                     href={item.url}
@@ -158,7 +161,7 @@ const ResourceAdminListComponent: React.FC = () => {
                                 >
                                     <OpenInNewIcon />
                                 </IconButton>
-                                <IconButton size="small" onClick={() => deleteHandler(item.id)} color="error">
+                                <IconButton size="small" onClick={() => deleteHandler(item.id)} color="error" style={{ background: '#ffffff'}}>
                                     <DeleteIcon />
                                 </IconButton>
                             </Actions>
@@ -166,7 +169,7 @@ const ResourceAdminListComponent: React.FC = () => {
                             {embedUrl && <VideoFrame src={embedUrl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />}
 
                             <StyledCardContent>
-                                <CategoryChip label={item.category?.title} size="small" color="primary" />
+                                <CategoryChip label={item.category?.title} size="small"  />
                                 <Typography variant="h6">{item.title}</Typography>
                                 <Typography variant="body2" color="text.secondary">
                                     {item.description}
