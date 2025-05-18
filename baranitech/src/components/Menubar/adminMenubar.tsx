@@ -107,7 +107,7 @@ const MenuBar: React.FC = () => {
           {!isMobile && (
             <MenusBoxStyled>
               {menuItems.map((item, id) => (
-                <ActiveLink key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
+                <ActiveLink  key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 } to={item.path}>
                   {item.name}

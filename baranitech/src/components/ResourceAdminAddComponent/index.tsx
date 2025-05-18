@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminResourceAddSchema } from '../../validationSchema/schema';
 import { InferType } from 'yup';
 import { useYouTubeCategories } from '../../contexts/youtubeCategoryContext';
-import { StyledContainer, StyledForm } from './styles';
+import { LearnButtonResStyled, StyledContainer, StyledForm, TitleResStyled } from './styles';
 import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
@@ -91,9 +91,9 @@ const ResourceAdminAddComponent: React.FC = () => {
         <StyledContainer maxWidth="xs">
             <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
                 {/* <Container maxWidth="sm" sx={{ mt: 5 }}> */}
-                <Typography variant="h4" gutterBottom>
+                <TitleResStyled variant="h4" gutterBottom>
                     Add New Resource
-                </Typography>
+                </TitleResStyled>
 
                 {success && <Alert severity="success">Resource created successfully!</Alert>}
 
@@ -179,7 +179,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                     )}
                 />
 
-                <Button
+                <LearnButtonResStyled
                     type="submit"
                     variant="contained"
                     color="primary"
@@ -187,7 +187,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                     disabled={isSubmitting || !isValid}
                 >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
-                </Button>
+                </LearnButtonResStyled>
 
             </StyledForm>
         </StyledContainer>

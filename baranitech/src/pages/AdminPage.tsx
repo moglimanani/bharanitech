@@ -11,7 +11,7 @@ export default function AdminPage() {
   UseRestoreUserSession()
   
   return (
-    <Container sx={{ mt: 5 }}>
+    <Container sx={{ mt: 1 }}>
        <Grid container>
       <Grid size={12}>
         <LearningResourcesStyled>
