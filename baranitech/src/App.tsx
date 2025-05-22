@@ -14,6 +14,7 @@ import ThreeColumnPage from './components/ThreeColumnPage/ThreeColumnPage';
 import ThreeColumnWhitePage from './components/ThreeColumnWhitePage/ThreeColumnWhitePage';
 import GetStartedToday from './components/GetStartedComponent';
 import Vacancies from './components/Vacancies';
+import LoaderWithIcon from './components/Loader';
 
 function App() {
   const ContainerStyled = styled(Grid)(() => ({
@@ -25,7 +26,7 @@ function App() {
   const { categories, loading, error } = useYouTubeCategories()
   const location = useLocation()
 
-  if (loading) return <div>Loading categories...</div>;
+  if (loading) return <LoaderWithIcon />;
   if (error) return <div>{error}</div>;
 
   const ifItsLoginOrRegisterPage = (location.pathname === import.meta.env.VITE_ROUTE_LOGIN_URL) || (location.pathname === import.meta.env.VITE_ROUTE_REGISTER_USER_URL)

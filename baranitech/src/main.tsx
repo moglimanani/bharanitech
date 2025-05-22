@@ -38,6 +38,8 @@ import JobsAdminPage from './pages/JobsAdminPage.tsx'
 import JobsAdminAddComponent from './components/JobsAdminAddComponent/index.tsx'
 import { JobCategoryProvider } from './contexts/jobCategoryContext.tsx'
 import JobAdminListComponent from './components/JobAdminListComponent/index.tsx'
+import ScrollToTop from './components/ScrollToTop/index.tsx'
+import ScrollToComponent from './components/ScrollToComponent/index.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -49,6 +51,7 @@ createRoot(document.getElementById('root')!).render(
             <UserProvider>
               <ErrorAlertProvider>
                 <BrowserRouter>
+                  <ScrollToTop />
                   <Routes>
                     <Route element={<App />}>
                       <Route path={import.meta.env.VITE_ROUTE_HOME_URL} element={<HomePage />} />
@@ -90,6 +93,7 @@ createRoot(document.getElementById('root')!).render(
                     </Route>
 
                   </Routes>
+                  <ScrollToComponent />
                 </BrowserRouter>
               </ErrorAlertProvider>
             </UserProvider>
