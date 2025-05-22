@@ -14,7 +14,6 @@ const ScrollToComponent: React.FC = () => {
 
     // Scroll event listener to toggle the visibility of the button
     const handleScroll = () => {
-        console.log('window.pageYOffset ',window.pageYOffset );
         
         if (window.pageYOffset > 300) {
             setVisible(true); // Show button when scrolled more than 300px
