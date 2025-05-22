@@ -1,9 +1,6 @@
 import { styled } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 
-
-
-
 export const CarouselStyled = styled(Carousel)(({theme})=>({
   background: '#ffffff',
   margin: '30px 30px',
@@ -16,23 +13,24 @@ export const CarouselStyled = styled(Carousel)(({theme})=>({
 }))
 
 export const CarouselImageStyled = styled('img')(({theme})=>({
-  width: '60% !important',
+  // width: '60% !important',
   borderRadius: '20px',
-  float: 'right'
+ // float: 'right'
 }))
 
 export const CarouselPtagStyled = styled('p')(({theme})=>({
-  background: '#ffffff !important',
-  padding: '20px !important',
-  bottom: '0 !important',
-  width: '30% !important',
-  top: '10px ',
+  background: '#C4F4FF !important',
+  // padding: '20px !important',
+  // bottom: '0 !important',
+  // width: '30% !important',
+  // top: '10px ',
   color: '#127B93 !important',
-  fontSize: '1.2em !important',
-  textAlign: 'left',
-  marginLeft: '0 !important',
-  left: '0 !important',
+  fontSize: '.88em !important',
+  // textAlign: 'left',
+  // marginLeft: '0 !important',
+  // left: '0 !important',
   opacity: '100 !important',
+  fontWeight: 'bold',
 }))
 
 export const CarouselButtonStyled = styled('button')(({theme})=>({

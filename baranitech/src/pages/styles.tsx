@@ -93,8 +93,10 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
    color: '#ffffff',
    fontSize: '0.88em',
    '& > div > img': {
-    width: '100%',
+    width: '50%',
     borderRadius: '20px',
+    margin: '0 20px',
+    float: 'right',
    },
    [theme.breakpoints.down('sm')]: {
      padding: '0px',
@@ -110,7 +112,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
 
  export const AboutUsPara1Styled = styled('p')(({theme})=>({
   // background: 'yellow',
-  maxWidth: '60%',
+  maxWidth: '80%',
    margin: '0',
    padding: '0 0 20px',
    color: '#ffffff',
