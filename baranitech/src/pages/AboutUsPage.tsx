@@ -8,30 +8,36 @@ export default function AboutUsPage() {
       </AboutUsTitleStyled>
       <AboutUsDivWrapperStyled>
       <AboutUsPara1Styled>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+      Barani tech YouTube Channel is widely considered as one of the best and top training 
+providers in India, Singapore, Indonesia, Malaysia and Most of the world. <br /><br />
 
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+Barani tech YouTube Channel has been an innovation leader in the development and delivery of 
+practical outsourcing training  past 5 years. Since then, we have supported thousands of 
+Engineers to upskills in their employees & Jobs with personalized content and learning 
+solutions.  <br /><br />
+Today, we have evolved to provide a full suite of outsourcing services in the learning 
+and development field, positioning ourselves among Electrical Engineer with excellent training 
+programs. 
       </AboutUsPara1Styled>
       <div> 
-          <img src="/login.png" alt="login" loading="lazy" />
+          <img src="/baraniTechLeader.jpg" alt="login" loading="lazy" />
         </div>
       </AboutUsDivWrapperStyled>
       
-      <AboutUsParaStyled>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </AboutUsParaStyled>
       <AboutUsDivStyled>
-       Lorem Ipsum is simply dummy
+      OUR MOTTO 
+      GO ALL OUT & DO BETTER 
       </AboutUsDivStyled>
       <AboutUsParaStyled>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+      We aim to offer adequate training solutions to most Engineering to improve their 
+      Skills, innovation, competitiveness, and achieving impactful on their Job Roles 
       </AboutUsParaStyled>
       <AboutUsParaStyled>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+      Learning & Development is our core competency, which is why we are capable of 
+offering better, faster and affordable training solutions. By doing what we do best, 
+we allow you to focus on what you do best running your Skills Development.
       </AboutUsParaStyled>
-      <AboutUsParaStyled>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </AboutUsParaStyled>
+     
     </AboutUsStyled>
   )
 }

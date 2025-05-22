@@ -5,18 +5,25 @@ const CarouselComponent = () => {
   return (
     <CarouselStyled autoPlay infiniteLoop showThumbs={false}>
       <div>
-        <CarouselImageStyled src="/carousel/image1.jpeg" />
-        <CarouselPtagStyled className="legend">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</CarouselPtagStyled>
+        <CarouselImageStyled src="/carousel/bharaniTechphase1.jpg" />
+        <CarouselPtagStyled className="legend"> Hands-on expertise in troubleshooting and commissioning of power system 
+protection, switchyard & switchgear equipment’s in the oil and gas, pulp and paper sectors in 
+Indonesia and Singapore. </CarouselPtagStyled>
         {/* <CarouselButtonStyled>Read More</CarouselButtonStyled> */}
       </div>
       <div>
-      <CarouselImageStyled src="/carousel/image1.jpeg" />
-        <CarouselPtagStyled className="legend">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</CarouselPtagStyled>
+      <CarouselImageStyled src="/carousel/bharaniTechphase2.jpg" />
+        <CarouselPtagStyled className="legend">
+        METHODOLOGIESI like are Interactive lectures and knowledge sharing ,
+Audio visual stimulants , Group discussion, Experiential learning activities and
+Assessment
+        </CarouselPtagStyled>
         {/* <CarouselButtonStyled>Read More</CarouselButtonStyled> */}
       </div>
       <div>
-      <CarouselImageStyled src="/carousel/image1.jpeg" />
-        <CarouselPtagStyled className="legend">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</CarouselPtagStyled>
+      <CarouselImageStyled src="/carousel/bharaniTechphase3.jpg" />
+        <CarouselPtagStyled className="legend">We actively leads the power system protection training programmed and has trained 
+        750+engineers in the field of power system protection a</CarouselPtagStyled>
         {/* <CarouselButtonStyled>Read More</CarouselButtonStyled> */}
       </div>
     </CarouselStyled>
