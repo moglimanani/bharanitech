@@ -29,10 +29,11 @@ function App() {
   if (error) return <div>{error}</div>;
 
   const ifItsLoginOrRegisterPage = (location.pathname === import.meta.env.VITE_ROUTE_LOGIN_URL) || (location.pathname === import.meta.env.VITE_ROUTE_REGISTER_USER_URL)
+  const isLogged = !ifItsLoginOrRegisterPage && user?.email
 
   return (
     <>
-      {!ifItsLoginOrRegisterPage && (user?.email ? <AdminMenubar /> : <MenuBar />)}
+      {isLogged ? <AdminMenubar /> : <MenuBar />}
       {!ifItsLoginOrRegisterPage && !(user?.email) && (
         <FlashOffer
           onClick={() => { }}
@@ -47,33 +48,40 @@ function App() {
           buttonlabel="Register" />
       )}
 
-      
 
-      <Vacancies />
+      {!ifItsLoginOrRegisterPage && !(user?.email) && (
+        <Vacancies />
+      )}
       <ContainerStyled sx={{ flex: 1, minHeight: '80vh', p: '0px' }}>
         <Grid container>
           <Grid size={{ xs: 12 }}>
             <TwoColumnStyled size={12}>
               <Grid container>
-                <Grid size={{ xs: 12, md: 2 }}>
-                  <AccordionComponent />
-                </Grid>
-                <Grid size={{ xs: 12, md: 10 }}>
+                {!ifItsLoginOrRegisterPage && !isLogged &&
+                  (<Grid size={{ xs: 12, md: 2 }}>
+                    <AccordionComponent />
+                  </Grid>
+                  )}
+                <Grid size={{ xs: 12, md: (ifItsLoginOrRegisterPage || user?.email) ? 12 : 10 }}>
                   <Outlet />
                 </Grid>
                 {/* <Grid size={{ xs: 12, md: 4 }}></Grid> */}
               </Grid>
             </TwoColumnStyled>
           </Grid>
-          <Grid size={12}>
-            <ThreeColumnPage />
-          </Grid>
-          <Grid size={12}>
-            <ThreeColumnWhitePage />
-          </Grid>
-          <Grid size={12}>
-            <GetStartedToday />
-          </Grid>
+          {!ifItsLoginOrRegisterPage && !(user?.email) && (
+            <>
+              <Grid size={12}>
+                <ThreeColumnPage />
+              </Grid>
+              <Grid size={12}>
+                <ThreeColumnWhitePage />
+              </Grid>
+              <Grid size={12}>
+                <GetStartedToday />
+              </Grid>
+            </>
+          )}
         </Grid>
 
       </ContainerStyled>
