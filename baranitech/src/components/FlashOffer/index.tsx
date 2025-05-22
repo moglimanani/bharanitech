@@ -20,20 +20,6 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
     });
   }, [controls]);
 
-  const handlePause = () => {
-    controls.stop();
-  };
-
-  const handleResume = () => {
-    controls.start({
-      x: "-100%",
-      transition: {
-        repeat: Infinity,
-        ease: "linear",
-        duration: 10,
-      },
-    });
-  };
 
   return (
     <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#c4f4ff", padding: "10px 0", marginBottom: "20px", color: "#484848" }}>
@@ -53,8 +39,6 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
     </motion.div>
 
     <button
-      onMouseEnter={() =>  handlePause()}
-      onMouseLeave={() => handleResume()}
       style={{
         position: "absolute",
         right: 20,
