@@ -16,7 +16,14 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::with('category')->get();
-        return JobResource::collection($jobs);
+        if ($jobs->count() > 0) {
+            return response()->json([
+                'status' => true,
+                'data' => $jobs,
+            ]);
+        } else {
+            return response()->json(['status' => true, 'data' => [], 'message' => 'No records available'], 200);
+        }
     }
 
     public function store(Request $request)
@@ -33,11 +40,11 @@ class JobController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['error' => $validator->messages(), 'status' => false, 'message' => 'All fields are mandatory'], 422);
         }
 
         $job = Job::create($request->all());
-        return new JobResource($job);
+        return response()->json(['status' => true, 'data' => new JobResource($job), 'message' => 'Record added successfully'], 200);
     }
 
     public function show($id)
@@ -84,12 +91,15 @@ class JobController extends Controller
 
             if ($validator->fails()) {
                 // return response()->json($validator->errors(), 422);
-                return response()->json([
-                'status' => false,
-                'data' => null,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
+                return response()->json(
+                    [
+                        'status' => false,
+                        'data' => null,
+                        'message' => 'Validation failed',
+                        'errors' => $validator->errors(),
+                    ],
+                    422,
+                );
             }
 
             $job->update($request->all());
