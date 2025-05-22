@@ -19,17 +19,17 @@ export const ContactUsFormSchema = yup.object({
         ),
     occupation: yup.string().required('Occupation is required.'),
     dob: yup.string()
-    .required('Date of birth is required')
-    // .transform((value) => (value === '' ? null : value))
-    .test('valid-date', 'Invalid date', (value) => {
-        const date = new Date(value!);
-        return !isNaN(date.getTime());
-      })
-      .test('min-age', 'You must be at least 18 years old', (value) => {
-        if (!value) return false;
-        const date = new Date(value);
-        return date <= eighteenYearsAgo;
-      })
+        .required('Date of birth is required')
+        // .transform((value) => (value === '' ? null : value))
+        .test('valid-date', 'Invalid date', (value) => {
+            const date = new Date(value!);
+            return !isNaN(date.getTime());
+        })
+        .test('min-age', 'You must be at least 18 years old', (value) => {
+            if (!value) return false;
+            const date = new Date(value);
+            return date <= eighteenYearsAgo;
+        })
 })
 
 export const AdminGalleryAddSchema = yup.object({
@@ -89,6 +89,22 @@ export const AdminResourceAddSchema = yup.object().shape({
         .required('YouTube URL is required')
         .matches(youtubeUrlRegex, 'Enter a valid YouTube URL'),
     description: yup.string().required('Description is required'),
+})
+
+export const AdminJobAddSchema = yup.object().shape({
+    title: yup.string().required('Job title is required'),
+    total_vacancy: yup.number().typeError('Total vacancy must be a number')
+        .transform((_value, originalValue) => {
+            return originalValue === '' ? undefined : Number(originalValue);
+        })
+        .moreThan(0, 'Total vacancy must be greater than 0')
+        .required('Total Vacancy is required'),
+    city: yup.string().required('City is required'),
+    state: yup.string().required('State is required'),
+    country: yup.string().required('Country is required'),
+    company: yup.string().required('Company is required'),
+    description: yup.string().required('Description is required'),
+    type: yup.string().required('Category is required'),
 })
 
 export const RegisterUserSchema = yup.object().shape({
