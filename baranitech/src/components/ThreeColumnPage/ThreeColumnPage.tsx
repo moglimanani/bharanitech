@@ -3,6 +3,7 @@ import { Box, CardMedia, Grid } from "@mui/material";
 import {
   ButtonOneStyled,
   ButtonWrapperStyled,
+  CardMediaStyled,
   ImageDivStyled,
   ParaOneStyled,
   ThreeColumnStyled,
@@ -70,7 +71,7 @@ const ThreeColumnPage: React.FC = () => {
           <TitleDivStyled>
             <CachedIcon /> Resources
           </TitleDivStyled>
-          <CardMedia
+          <CardMediaStyled
             component="iframe"
             height="200"
             src={`https://www.youtube.com/embed/nei0jR83Ozg?list=PLjbsavmwdHjcz_Vnc-Rz6I7M_9B53zPSk`}

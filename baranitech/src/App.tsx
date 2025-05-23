@@ -1,5 +1,5 @@
 import './styles/App.scss'
-import { styled } from '@mui/material'
+import { styled, useMediaQuery, useTheme } from '@mui/material'
 import { Grid } from '@mui/material';
 import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
@@ -26,11 +26,17 @@ function App() {
   const { categories, loading, error } = useYouTubeCategories()
   const location = useLocation()
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   if (loading) return <LoaderWithIcon />;
   if (error) return <div>{error}</div>;
 
   const ifItsLoginOrRegisterPage = (location.pathname === import.meta.env.VITE_ROUTE_LOGIN_URL) || (location.pathname === import.meta.env.VITE_ROUTE_REGISTER_USER_URL)
   const isLogged = !ifItsLoginOrRegisterPage && user?.email
+
+  // const isHomePage = (location.pathname === import.meta.env.VITE_ROUTE_HOME_URL)
+  
 
   return (
     <>
@@ -58,7 +64,7 @@ function App() {
           <Grid size={{ xs: 12 }}>
             <TwoColumnStyled size={12}>
               <Grid container>
-                {!ifItsLoginOrRegisterPage && !isLogged &&
+                {!ifItsLoginOrRegisterPage && !isLogged && !isMobile &&
                   (<Grid size={{ xs: 12, md: 2 }}>
                     <AccordionComponent />
                   </Grid>
