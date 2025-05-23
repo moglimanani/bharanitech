@@ -34,10 +34,8 @@ const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL, name: 'Gallery' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL, name: 'Resources' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Jobs' },
-  { path: '/trainings', name: 'Trainings' },
-  // { path: '/login', name: 'Login' },
+  { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL, name: 'Trainings' },
   { path: '/candidates', name: 'Candidates' },
-  // { path: '/testimonial', name: 'Testimonials' }
 ];
 
 const MenuBar: React.FC = () => {
