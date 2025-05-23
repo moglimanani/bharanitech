@@ -1,4 +1,4 @@
-import {  Box, Grid, styled, } from "@mui/material";
+import {  Box, Grid, styled, CardMedia} from "@mui/material";
 
 export const BoxWhiteStyled = styled(Box)(({theme})=>({
   background: '#fff',
@@ -78,3 +78,12 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     justifyContent: 'space-around',
 }))
 
+export const CardMediaStyled = styled(CardMedia)(({theme})=>({
+    margin: '30px 20px 10px',
+    width: '92%',
+    [theme.breakpoints.down('sm')]: {
+        // background: 'Yellow',
+         height: '220px'
+     }
+   
+}))

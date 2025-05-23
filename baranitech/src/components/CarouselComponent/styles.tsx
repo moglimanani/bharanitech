@@ -5,7 +5,7 @@ export const CarouselStyled = styled(Carousel)(({theme})=>({
   background: '#ffffff',
   margin: '30px 30px',
   borderRadius: '20px',
-  padding: '20px',
+  padding: '5px',
   display: 'flex',
   marginTop: '10px',
   justifyContent: 'space-around',
@@ -31,6 +31,14 @@ export const CarouselPtagStyled = styled('p')(({theme})=>({
   // left: '0 !important',
   opacity: '100 !important',
   fontWeight: 'bold',
+  [theme.breakpoints.down('sm')]: {
+    // background: 'Yellow',
+    fontSize: '.40em !important',
+    position: "absolute",
+    top: '50px',
+    height: '100%',  
+    display: 'none',  
+ },
 }))
 
 export const CarouselButtonStyled = styled('button')(({theme})=>({

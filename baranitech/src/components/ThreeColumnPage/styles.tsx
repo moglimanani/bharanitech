@@ -1,5 +1,5 @@
 
-import { Grid, styled } from "@mui/material";
+import { Grid, styled, CardMedia } from "@mui/material";
 
 
 
@@ -67,4 +67,15 @@ export const ButtonOneStyled = styled('button')(({theme})=>({
     alignItems: 'center',
     justifyContent: 'space-around',
 }))
+
+export const CardMediaStyled = styled(CardMedia)(({theme})=>({
+    margin: '0 20px 20px',
+    width: '89%',
+    height: '100%',
+     [theme.breakpoints.down('sm')]: {
+        // background: 'Yellow',
+         height: '220px'
+     }
+}))
+
 
