@@ -19,7 +19,7 @@ return new class extends Migration {
         });
 
         // Seed default categories
-        DB::table('training_categories')->insert([['id' => 1, 'title' => 'Module – Basic', 'description' => 'Module – Basic', 'created_at' => now(), 'updated_at' => now()], ['id' => 2, 'title' => 'Module – intermediate-stage-1', 'description' => 'Module – intermediate-stage-1', 'created_at' => now(), 'updated_at' => now()], ['id' => 3, 'title' => 'Module – intermediate-stage-2', 'description' => 'Module – intermediate-stage-2', 'created_at' => now(), 'updated_at' => now()], ['id' => 4, 'title' => 'Module – advance-stage-1', 'description' => 'Module – advance-stage-1', 'created_at' => now(), 'updated_at' => now()], ['id' => 5, 'title' => 'Module – advance-stage-2', 'description' => 'Module – advance-stage-2', 'created_at' => now(), 'updated_at' => now()]]);
+        DB::table('training_categories')->insert([['id' => 1, 'title' => 'Module - Basic', 'description' => 'Module - Basic', 'created_at' => now(), 'updated_at' => now()], ['id' => 2, 'title' => 'Module - intermediate-stage-1', 'description' => 'Module - intermediate-stage-1', 'created_at' => now(), 'updated_at' => now()], ['id' => 3, 'title' => 'Module - intermediate-stage-2', 'description' => 'Module - intermediate-stage-2', 'created_at' => now(), 'updated_at' => now()], ['id' => 4, 'title' => 'Module - advance-stage-1', 'description' => 'Module - advance-stage-1', 'created_at' => now(), 'updated_at' => now()], ['id' => 5, 'title' => 'Module - advance-stage-2', 'description' => 'Module - advance-stage-2', 'created_at' => now(), 'updated_at' => now()]]);
     }
 
     /**

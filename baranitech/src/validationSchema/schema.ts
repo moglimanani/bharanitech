@@ -136,3 +136,25 @@ export const RegisterUserSchema = yup.object().shape({
             'Invalid phone number'
         )
 })
+
+export const AdminTrainingAddSchema = yup.object().shape({
+    title: yup.string().required('Title is required'),
+    description: yup.string().required('Description is required'),
+    startDate: yup.string().required('Start date is required'),
+    type: yup.string().required('Type is required'),
+    endDate: yup
+        .string()
+        .required('End date is required')
+        .test('is-after-start', 'End date must be after start date', function (value) {
+            const { startDate } = this.parent;
+            return !value || !startDate || new Date(value) >= new Date(startDate);
+        }),
+    classification: yup.string().oneOf(['0', '1']).required(),
+    totalHours: yup.number().positive().required(),
+    totalPrice: yup.number().positive().required(),
+    city: yup.string().required(),
+    state: yup.string().required(),
+    country: yup.string().required(),
+    tableOfContents: yup.string().required(),
+    location: yup.string().required(),
+});
