@@ -9,6 +9,10 @@ export const CarouselStyled = styled(Carousel)(({theme})=>({
   display: 'flex',
   marginTop: '10px',
   justifyContent: 'space-around',
+  [theme.breakpoints.down('sm')]: {
+    // background: 'Yellow',
+    margin: '8px',
+ }
  
 }))
 

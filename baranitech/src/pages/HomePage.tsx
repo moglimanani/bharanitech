@@ -20,7 +20,7 @@ export default function HomePage() {
       </Grid>
       <TwoColumnStyled size={12}>
         <Grid container>
-          <Grid size={{ xs: 12, md: 10 }}>
+          <Grid>
             <PageWrapperStyled>
               <HeaderComponent title="Welcome to Barani Tech– Powering Your Future in Electrical Equipment & Protection Training" />
               <BodyPara1Styled>
@@ -28,7 +28,7 @@ export default function HomePage() {
                 next generation of electrical equipment and protection
                 professionals. Whether you're just starting out, advancing your
                 skills, or preparing for certification, we offer comprehensive,
-                hands-on training in:{" "}
+                hands-on training in:
               </BodyPara1Styled>
               <BodyPara1Styled>
                 Our expert-led courses cover everything from electrical
