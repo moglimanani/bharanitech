@@ -5,10 +5,12 @@ import {
   Container
 } from "@mui/material";
 import { AdminStyled, LearningResourcesStyled } from "./styles";
+import { useNavigate } from "react-router";
 
 export default function AdminPage() {
   UseRequireUserSession()
   UseRestoreUserSession()
+  const navigate = useNavigate()
   
   return (
     <Container sx={{ mt: 1 }}>
@@ -22,7 +24,7 @@ export default function AdminPage() {
       <Grid size={{ xs: 12, md: 3 }}>
         <AdminStyled>
           <div>Gallery</div>
-          <button> Read More </button>    
+          <button onClick={()=>navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)}> Read More </button>    
         </AdminStyled>  
         
       </Grid>
