@@ -27,6 +27,7 @@ export const TitleResStyled = styled( Typography)(({theme})=>({
     paddingTop: '10px',
     color: '#127B93',
     position: 'relative',
+    fontWeight: 'bold',
       
 }))
 

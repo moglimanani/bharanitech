@@ -52,9 +52,10 @@ export const ButtonPhotoStyled = styled(Button)(({theme})=>({
 
 export const TitleGalleryStyled = styled( Typography)(({theme})=>({
   textAlign: 'center',
-  fontSize: '1em',
+  fontSize: '1.3em',
   paddingTop: '10px',
   color: '#127B93',
   position: 'relative',
+  fontWeight: 'bold',
      
  }))

@@ -10,7 +10,7 @@ export default function GalleryAddAdminPage() {
   UseRestoreUserSession()
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div>
         <GalleryAdminAddForm />
     </div>
   )

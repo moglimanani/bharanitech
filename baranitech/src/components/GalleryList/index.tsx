@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from "react";
 import {
   Grid,
   Card,
@@ -6,10 +6,10 @@ import {
   CardContent,
   Typography,
   IconButton,
-} from '@mui/material';
-import httpService from '../../api/httpService';
-import CloseIcon from '@mui/icons-material/Close';
-import { useDialog } from '../../contexts/dialogContext';
+} from "@mui/material";
+import httpService from "../../api/httpService";
+import CloseIcon from "@mui/icons-material/Close";
+import { useDialog } from "../../contexts/dialogContext";
 
 export interface GalleryItem {
   id: number;
@@ -18,10 +18,10 @@ export interface GalleryItem {
 }
 
 interface PhotosType {
-  id: string,
-  title: string,
-  description: string,
-  photos: string[]
+  id: string;
+  title: string;
+  description: string;
+  photos: string[];
 }
 
 interface GalleryResponse {
@@ -35,70 +35,87 @@ interface GalleryResponse {
 //   imageUrl: `https://source.unsplash.com/random/400x300?sig=${index + 1}`,
 // }));
 
-
 const GalleryList: React.FC = () => {
-  const [gallery, setGallery] = useState<PhotosType[]>([])
-  const { confirm } = useDialog()
+  const [gallery, setGallery] = useState<PhotosType[]>([]);
+  const { confirm } = useDialog();
   const fetchGallery = async () => {
     try {
-      const res = await httpService.get<GalleryResponse>('/gallery');
+      const res = await httpService.get<GalleryResponse>("/gallery");
 
       if (res.status) {
-        const { data } = res
-        const photosArr = data && data.map(item => ({ id: item.id, title: item?.title ?? '', description: item?.description ?? '', photos: JSON.parse(JSON.stringify(item?.photos)) }))
-        setGallery([...photosArr])
+        const { data } = res;
+        const photosArr =
+          data &&
+          data.map((item) => ({
+            id: item.id,
+            title: item?.title ?? "",
+            description: item?.description ?? "",
+            photos: JSON.parse(JSON.stringify(item?.photos)),
+          }));
+        setGallery([...photosArr]);
       } else {
         // optional: show a toast or alert here
       }
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchGallery()
+    fetchGallery();
 
     return () => {
-      fetchGallery()
-    }
-  }, [])
+      fetchGallery();
+    };
+  }, []);
 
   const deleteGalleryItem = async (id: number | string) => {
     confirm({
-      title: 'Delete Gallery',
-      content: 'Are you sure you want to delete this gallery item?',
+      title: "Delete Gallery",
+      content: "Are you sure you want to delete this gallery item?",
       onConfirm: async () => {
         try {
-          const res = await httpService.delete<GalleryResponse>(`/gallery/${id}`);
+          const res = await httpService.delete<GalleryResponse>(
+            `/gallery/${id}`
+          );
 
           if (res.status) {
-            fetchGallery()
+            fetchGallery();
           } else {
             // optional: show a toast or alert here
           }
         } catch (err) {
           console.error(err);
         }
-      }
-    })
-
+      },
+    });
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} style={{ marginTop: "20px" }}>
       {gallery.map((item) => (
         <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
-          <Card sx={{ position: 'relative' }}>
+          <Card
+            sx={{
+              position: "relative",
+              background: "#ffffff",
+              padding: "3px",
+              borderRadius: "20px",
+            }}
+          >
             <IconButton
               aria-label="delete"
               size="small"
               onClick={() => deleteGalleryItem(item.id)}
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 top: 8,
                 right: 8,
-                backgroundColor: 'rgba(255,255,255,0.8)',
-                '&:hover': { backgroundColor: 'rgba(255,0,0,0.8)', color: 'white' },
+                backgroundColor: "rgba(255,255,255,0.8)",
+                "&:hover": {
+                  backgroundColor: "rgba(255,0,0,0.8)",
+                  color: "white",
+                },
               }}
             >
               <CloseIcon fontSize="small" />
@@ -108,9 +125,10 @@ const GalleryList: React.FC = () => {
               height="200"
               image={`${import.meta.env.VITE_BE_IMAGE_PATH}${item.photos[0]}`}
               alt={item.title}
+              style={{ borderRadius: "20px" }}
             />
             <CardContent>
-              <Typography variant="h6" component="div">
+              <Typography variant="body2" component="div">
                 {item.title}
               </Typography>
             </CardContent>

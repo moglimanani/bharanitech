@@ -89,7 +89,7 @@ const ResourceAdminAddComponent: React.FC = () => {
 
     return (
         <StyledContainer maxWidth="xs">
-            <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
+            <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 0 }}>
                 {/* <Container maxWidth="sm" sx={{ mt: 5 }}> */}
                 <TitleResStyled variant="h4" gutterBottom>
                     Add New Resource

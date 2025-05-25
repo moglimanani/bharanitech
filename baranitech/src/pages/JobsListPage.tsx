@@ -11,7 +11,7 @@ import {
   Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
+import { AdminTitleStyled, LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
 
 // Job interface
 interface Job {
@@ -93,9 +93,9 @@ const JobsListPage: React.FC = () => {
 
   return (
     <Container sx={{ mt: 1 }}>
-      <LearningResourcesStyled variant="h4" gutterBottom>
+      <AdminTitleStyled variant="h4" gutterBottom>
         Job Openings 
-      </LearningResourcesStyled>
+      </AdminTitleStyled>
       <Grid container spacing={3}>
         {jobs.map((job) => (
           <Grid size={{xs:12, sm:6, md:4}} key={job.id} style={{marginBottom: '30px'}}>

@@ -153,6 +153,17 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   color: '#ffffff',    
  }))
 
+ export const AdminTitleStyled = styled( Typography)(({theme})=>({
+  fontSize: '1.2em',
+  color: '#127B93',
+  background: '#c4f4ff',
+  margin: '30px 0', 
+  padding: '8px',
+  borderRadius: '0px 20px 20px 0px',
+  maxWidth: '300px', 
+  textAlign: 'left',  
+ }))
+
  export const TitleStyled = styled( Typography)(({theme})=>({
   textAlign: 'left',
   fontSize: '1em',
