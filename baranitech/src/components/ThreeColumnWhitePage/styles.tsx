@@ -60,7 +60,9 @@ export const ParaOneStyledWhite = styled('p')(({theme})=>({
         margin: '0',
         textAlign: 'left',
         padding: '0px 20px 15px',
-        color: '#4d4d4d'
+        color: '#4d4d4d',
+        height: '120px',
+        overflow: 'scroll'
 }))
 
 export const ButtonOneStyledWhite = styled('button')(({theme})=>({

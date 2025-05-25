@@ -50,7 +50,9 @@ export const ParaOneStyled = styled('p')(({theme})=>({
         fontSize: '0.88em',
         margin: '0',
         textAlign: 'left',
-        padding: '0px 20px 15px'
+        padding: '0px 20px 15px',
+        height: '120px',
+        overflow: 'scroll'
 }))
 
 export const ButtonOneStyled = styled('button')(({theme})=>({

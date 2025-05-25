@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { FlashOfferProps } from '../../types/flash';
 
@@ -8,8 +8,8 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
   buttonlabel
 }) => {
   const controls = useAnimation();
-   // Start the animation loop
-   useEffect(() => {
+
+  useEffect(() => {
     controls.start({
       x: "-100%",
       transition: {
@@ -20,43 +20,74 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
     });
   }, [controls]);
 
-
   return (
-    <div style={{ overflow: "hidden", whiteSpace: "nowrap", position: "relative", width: "100%", background: "#c4f4ff", padding: "10px 0", marginBottom: "20px", color: "#484848" }}>
-    <motion.div
-      animate={controls}
-      initial={{ x: "0%" }}
+    <div style={{
+      overflow: "hidden",
+      position: "relative",
+      width: "100%",
+      background: "#c4f4ff",
+      padding: "10px 0",
+      marginBottom: "20px",
+      color: "#484848"
+    }}>
+      {/* Fade overlays */}
+      <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100px",
+        height: "100%",
+        background: "linear-gradient(to right, #c4f4ff 0%, transparent 100%)",
+        zIndex: 2,
+        pointerEvents: "none"
+      }} />
+      <div style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        width: "100px",
+        height: "100%",
+        background: "linear-gradient(to left, #c4f4ff 0%, transparent 100%)",
+        zIndex: 2,
+        pointerEvents: "none"
+      }} />
+
+      {/* Scrolling text */}
+      <motion.div
+        animate={controls}
+        initial={{ x: "0%" }}
         style={{
           display: "inline-block",
           whiteSpace: "nowrap",
           paddingLeft: "100%",
         }}
-     
-    >
-      <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-        {message}
-      </span>
-    </motion.div>
+      >
+        <span style={{ fontSize: "20px", fontWeight: "bold" }}>
+          {message}
+        </span>
+      </motion.div>
 
-    <button
-      style={{
-        position: "absolute",
-        right: 20,
-        top: "50%",
-        transform: "translateY(-50%)",
-        padding: "10px 20px",
-        cursor: "pointer",
-        background: "#127B93",
-        color: "#fff",
-        border: "none",
-        borderRadius: "20px"
-      }}
-      onClick={onClick}
-    >
-      {buttonlabel}
-    </button>
-  </div>
-  )
+      {/* Button */}
+      <button
+        style={{
+          position: "absolute",
+          right: 20,
+          top: "50%",
+          transform: "translateY(-50%)",
+          padding: "10px 20px",
+          cursor: "pointer",
+          background: "#127B93",
+          color: "#fff",
+          border: "none",
+          borderRadius: "20px",
+          zIndex: 3
+        }}
+        onClick={onClick}
+      >
+        {buttonlabel}
+      </button>
+    </div>
+  );
 };
 
 export default FlashOffer;
