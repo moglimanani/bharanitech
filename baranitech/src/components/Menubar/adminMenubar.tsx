@@ -25,7 +25,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, NavLink, useMatch, useParams } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled } from './styles'
+import { ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ChipStyled } from './styles'
 import { useUser } from '../../contexts/userContext';
 import { Logout, Person } from '@mui/icons-material';
 
@@ -119,7 +119,7 @@ const MenuBar: React.FC = () => {
               {/* > */}
               <ActiveLink key="logout" to="#">
 
-                <Chip
+                <ChipStyled
                   ref={anchorRef}
                   avatar={<Person />}
                   label={user?.username}

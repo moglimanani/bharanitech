@@ -5,7 +5,8 @@ import {
     styled,
     IconButton,
     List,
-    ListItemText
+    ListItemText,
+    Chip
 } from '@mui/material';
 
 import { NavLink } from 'react-router';
@@ -42,6 +43,20 @@ export const BrandNameStyled = styled(Typography)(({ theme }) => ({
 export const AppBarStyled = styled(Box)(({ theme }) => ({
     // backgroundColor: theme.palette.appBarColour.main
    // background: 'yellow',
+}))
+
+export const ChipStyled = styled(Chip)(({ theme }) => ({
+    // backgroundColor: theme.palette.appBarColour.main
+   background: '#127B93',
+   color: '#ffffff',
+   "& > svg > path": {
+    color: '#ffffff'
+   },
+   '&:hover': {
+    color: '#ffffff',
+    background: '#076478',
+   }
+   
 }))
 
 export const IconButtonStyled = styled(IconButton)(({ theme }) => ({

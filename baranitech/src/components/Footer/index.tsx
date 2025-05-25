@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
       }}
     >
       <Typography variant="body2">
-        © {new Date().getFullYear()} Developed by <strong><a href='mailto:moglimani@gmail.com'>Mogli Developer</a></strong>
+        © {new Date().getFullYear()} Developed by <strong><a href='mailto:suryajehan10@gmail.com'>Mogli Developer</a></strong>
       </Typography>
     </Box>
   );

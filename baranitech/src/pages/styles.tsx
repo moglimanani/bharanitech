@@ -8,7 +8,7 @@ export const BodyPara1Styled = styled(Typography)(({theme})=>({
 }))
 
 export const PageWrapperStyled = styled(Box)(({theme})=>({
-  padding: '0px 16px 16px 20px',
+  // padding: '0px 16px 16px 20px',
   [theme.breakpoints.down('sm')]: {
     padding: '0',
     margin: ' 20px 0',
@@ -28,25 +28,26 @@ export const ListItemTextStyled = styled(ListItemText)(()=>({
   background: '#c4f4ff',
   // borderRadius: '20px',
   paddingBlock: '15px',
-  paddingLeft: '30px',
+  paddingLeft: '15px',
   maxWidth: '320px',
   textAlign: 'left',
   fontWeight: 'bold',
   listStyle: 'none',
-  borderRadius: '8px 50px 50px 8px'
+  borderRadius: '8px 50px 50px 8px',
+  marginLeft: '-15px',
  }))
 
 
 export const ListStyled = styled(List)(({theme})=>({
   textAlign: 'left',
-  paddingLeft: '20px',
+  paddingLeft: '15px',
   color: theme.palette.common.white
 }))
 
 export const TwoColumnStyled = styled(Grid)(({theme})=>({
   padding: "30px 30px 0px",
   [theme.breakpoints.down('sm')]: {
-    padding: '20px',
+    padding: '10px',
  }
 }))
 
@@ -270,25 +271,27 @@ export const AdminStyled = styled('div')(({ theme }) => ({
 
 
 export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
-  height: '100%',
+  // height: '100%',
   display: 'flex', 
   marginBottom: '30px',
   flexDirection: 'column',
   // boxShadow: theme.shadows[3],
   borderRadius: '20px !important',
-  background: '#ffffff',
+ // background: '#ffffff',
   '& > nav': {
     marginTop: '30px',
-    color: '#127B93',
+   // color: '#127B93',
+    color: '#ffffff',
     fontWeight: 'bold',
     'a': {
-      color: '#127B93', 
+      // color: '#127B93',
+      color: '#ffffff',
       padding: '15px' ,
       borderRadius: '20px',    
     },
     'a:hover': {
-      color: '#ffffff',
-      background: '#127B93',
+      color: '#127B93',
+      background: '#ffffff',
       
     }
   },
