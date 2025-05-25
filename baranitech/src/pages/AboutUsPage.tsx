@@ -24,10 +24,7 @@ programs.
         </div>
       </AboutUsDivWrapperStyled>
       
-      <AboutUsDivStyled>
-      OUR MOTTO 
-      GO ALL OUT & DO BETTER 
-      </AboutUsDivStyled>
+      <AboutUsDivStyled>WE STRIVE TO GO ALL IN AND GET EVEN BETTER</AboutUsDivStyled>
       <AboutUsParaStyled>
       We aim to offer adequate training solutions to most Engineering to improve their 
       Skills, innovation, competitiveness, and achieving impactful on their Job Roles 

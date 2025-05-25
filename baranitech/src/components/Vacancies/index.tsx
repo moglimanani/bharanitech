@@ -5,7 +5,7 @@ import { BadgeStyled, GridColorStyled, GridParaStyled, IconBadgeStyled, IconStyl
 function Vacancies() {
 
     return ( 
-      <Grid container>
+      <Grid container justifyContent='center'>
          <ItemRight>
              <VacanciesStyled variant="h5">Vacancies:  </VacanciesStyled>
          </ItemRight>
