@@ -12,6 +12,7 @@ class Training extends Model
         'city', 'state', 'country', 'table_of_contents', 'total_price'
     ];
 
+
     public function category()
     {
         return $this->belongsTo(TrainingCategory::class, 'type');

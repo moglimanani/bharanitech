@@ -120,9 +120,12 @@ const ResourceAdminListComponent: React.FC = () => {
     }
   };
   useEffect(() => {
+    const controller = new AbortController();
+
     fetchYoutube();
+    
     return () => {
-      fetchYoutube();
+      controller.abort(); // Cancel fetch on unmount
     };
   }, []);
 

@@ -82,9 +82,11 @@ const TrainingAdminListComponent: React.FC = () => {
     }
   };
   useEffect(() => {
+    const controller = new AbortController();
+
     fetchTrainings();
     return () => {
-      fetchTrainings();
+      controller.abort(); // Cancel fetch on unmount
     };
   }, []);
 

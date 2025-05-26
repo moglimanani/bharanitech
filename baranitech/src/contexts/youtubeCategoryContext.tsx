@@ -36,7 +36,12 @@ export const YouTubeCategoryProvider: React.FC<{ children: React.ReactNode }> = 
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     fetchCategories();
+    return () => {
+      controller.abort(); // Cancel fetch on unmount
+    };
   }, []);
 
   return (

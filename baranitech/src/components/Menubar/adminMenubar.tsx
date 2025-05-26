@@ -1,10 +1,6 @@
 import React, { memo, useRef, useState } from 'react';
 import {
-  AppBar,
-  Toolbar,
   Typography,
-  IconButton,
-  Button,
   Drawer,
   List,
   ListItem,
@@ -13,19 +9,15 @@ import {
   Box,
   useTheme,
   useMediaQuery,
-  styled,
   ListItemIcon,
-  Collapse,
-  Chip,
-  Avatar,
   Popper,
   ClickAwayListener,
   Paper,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, NavLink, useMatch, useParams } from 'react-router';
+import { Link } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ChipStyled } from './styles'
+import { ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ChipStyled } from './styles'
 import { useUser } from '../../contexts/userContext';
 import { Logout, Person } from '@mui/icons-material';
 
@@ -35,7 +27,7 @@ const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL, name: 'Resources' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Jobs' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL, name: 'Trainings' },
-  { path: '/candidates', name: 'Candidates' },
+  { path:import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL, name: 'Candidates' },
 ];
 
 const MenuBar: React.FC = () => {
@@ -44,9 +36,6 @@ const MenuBar: React.FC = () => {
   const { user, logout } = useUser()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const params = useParams()
-  const match = useMatch('/')
-  console.log('params', user);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
   const handleDrawerToggle = () => {
