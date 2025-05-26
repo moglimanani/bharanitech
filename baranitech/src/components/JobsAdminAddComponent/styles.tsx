@@ -25,15 +25,15 @@ export const TitleResStyled = styled( Typography)(({theme})=>({
     textAlign: 'left',
     fontSize: '1.3em',
     paddingTop: '10px',
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     position: 'relative',
       
 }))
 
 export const LearnButtonResStyled = styled(Button)(({theme})=>({
     fontSize: '.88rem',
-    color: '#ffffff',
-    background: '#127B93',
+    color: theme.palette.appBarColour.light,
+    background: theme.palette.appBarColour.main,
     borderRadius: '20px',
     margin: '10px 0 20px',
     padding: '10px 20px',  

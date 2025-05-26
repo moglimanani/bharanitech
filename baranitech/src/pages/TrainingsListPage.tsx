@@ -9,7 +9,7 @@ import {
   Stack,
   Chip,
 } from '@mui/material';
-import { LearningResourcesStyled, ParaStyled, StackStyled, StyledWrapperDivCard, StyledWrapperStack, TitleStyled } from './styles';
+import { AdminTitleStyled, LearningResourcesStyled, ParaStyled, StackStyled, StyledWrapperDivCard, StyledWrapperStack, TitleStyled } from './styles';
 
 // Define a type for training items
 interface Training {
@@ -52,9 +52,9 @@ const trainings: Training[] = [
 const TrainingsListPage: React.FC = () => {
   return (
     <Container  sx={{ mt: 1 }}>
-      <LearningResourcesStyled variant="h4" gutterBottom>
+      <AdminTitleStyled variant="h4" gutterBottom>
         Upcoming Trainings
-      </LearningResourcesStyled>
+      </AdminTitleStyled>
 
       <Grid container spacing={3} style={{marginBottom: '30px'}}>
         {trainings.map((training) => (

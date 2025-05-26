@@ -11,7 +11,7 @@ import {
   Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
+import { AdminTitleStyled, LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
 import { Margin } from '@mui/icons-material';
 
 // Resource interface
@@ -93,9 +93,9 @@ const ResourcesListPage: React.FC = () => {
 
   return (
     <Container sx={{ mt: 1 }}>
-      <LearningResourcesStyled variant="h4" gutterBottom>
+      <AdminTitleStyled variant="h4" gutterBottom>
         Learning Resources
-      </LearningResourcesStyled>
+      </AdminTitleStyled>
       <Grid container spacing={3} style={{marginBottom: '30px'}}>
         {resources.map((resource) => (
           <Grid size={{xs:12, sm:6, md:4}} key={resource.id}>

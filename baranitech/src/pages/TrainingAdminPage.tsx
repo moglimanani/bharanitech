@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router";
 import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
 import { Grid, Container } from "@mui/material";
-import { GalleyAdminStyled, LearningResourcesStyled } from "./styles";
+import { AdminTitleStyled, GalleyAdminStyled, } from "./styles";
 
 export default function TrainingAdminPage() {
   UseRequireUserSession();
@@ -12,15 +12,15 @@ export default function TrainingAdminPage() {
     <Container>
       <Grid container>
         <Grid size={12}>
-          <LearningResourcesStyled>
+          <AdminTitleStyled>
             Trainings Admin Page
-          </LearningResourcesStyled>
+          </AdminTitleStyled>
           <GalleyAdminStyled>
             <nav style={{ padding: "1rem" }}>
               <NavLink to=".">Trainings</NavLink> |{" "}
               <NavLink to={`add`}>Add new Training</NavLink>
             </nav>
-            <div style={{ margin: "30px" }}>
+            <div style={{ margin: "0 30px" }}>
               <Outlet />
             </div>
           </GalleyAdminStyled>

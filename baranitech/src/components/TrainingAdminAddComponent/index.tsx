@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
     Box, Button, Container, TextField, Typography, Alert,
-    MenuItem, FormControl, InputLabel, Select
+    MenuItem, FormControl, InputLabel, Select,
+    styled
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,6 +12,22 @@ import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { TrainingCategory, useTrainingCategories } from '../../contexts/trainingCategoryContext';
+
+
+const ContainerStyle = styled(Container)(({ theme }) => ({
+    background: theme.palette.appBarColour.light,
+    borderRadius: '20px',
+    paddingBottom: '30px'
+  }));
+
+const TypograpStyle = styled(Typography)(({ theme }) => ({
+    color: theme.palette.appBarColour.main,
+    fontSize: '1.3em',
+    fontWeight: 'bold',
+    margin: '0px auto 0',
+    padding: '20px'
+  }));
+  
 
 interface ApiResponse {
     status: boolean;
@@ -85,11 +102,11 @@ const TrainingAddComponent: React.FC = () => {
         }
     };
 
-
+  
     return (
-        <Container maxWidth="sm">
+        <ContainerStyle maxWidth="sm">
             <Box component="form" onSubmit={handleSubmit(onSubmit)} mt={4}>
-                <Typography variant="h4" gutterBottom>Add Training</Typography>
+                <TypograpStyle variant="h4" gutterBottom>Add Training</TypograpStyle>
 
                 {success && <Alert severity="success">Training created successfully!</Alert>}
 
@@ -167,7 +184,7 @@ const TrainingAddComponent: React.FC = () => {
                     {isSubmitting ? 'Submitting…' : 'Submit'}
                 </Button>
             </Box>
-        </Container>
+        </ContainerStyle>
     );
 };
 

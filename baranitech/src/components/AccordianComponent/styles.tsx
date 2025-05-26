@@ -5,13 +5,13 @@ export const AccordianWrapper = styled(Box)(() => ({
     padding: '0px'
 }))
 
-export const ListItemButtonStyled = styled(ListItemButton)(()=>({
-    backgroundColor: '#C4F4FF',
+export const ListItemButtonStyled = styled(ListItemButton)(({theme})=>({
+    backgroundColor: theme.palette.flashPrimaryBGColor.main,
     marginBottom: '2px',
     borderRadius: '20px',
-    color: '#4d4d4d',
+    color: theme.palette.secondary.main,
     '& > [class*="MuiListItemIcon-root"]': {
-        color: '#127B93',
+        color: theme.palette.appBarColour.main,
         minWidth: '35px',
     },
     '&:hover': {

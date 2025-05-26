@@ -39,18 +39,18 @@ export const DivWrapperStyled = styled('div')(({theme})=>({
 export const DivWrapperBoxStyled = styled('div')(({theme})=>({
   padding: '25px',
   margin: '0 auto 30px',
-  background: '#ffffff',
+  background: theme.palette.appBarColour.light,
   borderRadius: '20px',
   width: '95%',
   '& > h2': {
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     fontSize: '1.3em',
     textAlign: 'left',
     margin: '0'
   },
   '& > p': {
     margin: '0',
-    color: '#4d4d4d',
+    color: theme.palette.secondary.main,
     fontSize: '.88em',
     textAlign: 'left',
     padding: '0'
@@ -92,12 +92,12 @@ export const WrapperDivStyled = styled('div')(({theme})=>({
    maxWidth: '230px',
  },
   '& > div': {
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     fontSize: '.88em',
     fontWeight: 'bold'
   },
   '& > p': {
-    color: '#4d4d4d',
+    color: theme.palette.secondary.main,
     fontSize: '.88em'
   },
 

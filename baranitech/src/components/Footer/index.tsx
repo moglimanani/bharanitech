@@ -12,12 +12,12 @@ const Footer: React.FC = () => {
         px: 2,
         mt: 'auto',
        // backgroundColor: theme.palette.grey[900],
-       background: '#c4f4ff',
-       color: '#4d4d4d',
+       background: theme.palette.flashPrimaryBGColor.main,
+       color: theme.palette.secondary.main,
         //color: theme.palette.common.white,
         textAlign: 'center',
         'a': {
-          color: '#127B93',
+          color: theme.palette.appBarColour.main,
         }
       }}
     >

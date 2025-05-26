@@ -6,7 +6,7 @@ import {
   Grid,
   Container,
 } from "@mui/material";
-import { GalleyAdminStyled, LearningResourcesStyled } from "./styles";
+import { AdminTitleStyled, GalleyAdminStyled, LearningResourcesStyled } from "./styles";
 
 const mockItems: GalleryItem[] = Array.from({ length: 20 }, (_, index) => ({
   id: index + 1,
@@ -22,15 +22,15 @@ export default function GalleryAdminPage() {
     <Container >
        <Grid container>
          <Grid size={12}>
-                <LearningResourcesStyled>
+                <AdminTitleStyled>
                      Gallery Admin Page
-                </LearningResourcesStyled>
+                </AdminTitleStyled>
                 <GalleyAdminStyled>
                   <nav style={{ padding: '1rem' }}>
                     <NavLink to='.'>Gallery</NavLink> | <NavLink to={`add`}>Add New</NavLink>
                   </nav>
 
-                  <div style={{margin: '30px',}}>
+                  <div style={{margin: '0 30px',}}>
                       <Outlet />
                   </div>
                 </GalleyAdminStyled>

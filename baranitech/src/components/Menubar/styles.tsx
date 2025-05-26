@@ -16,7 +16,7 @@ export const ActiveLink = styled(NavLink)(({ theme }) => ({
     color: theme.palette.appBarColour.light,
      letterSpacing: '1px',
     '&.active': {
-        color: theme.palette.appBarColour.dark
+        color: theme.palette.appBarColour.dark,
     }
 }))
 export const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
@@ -47,14 +47,14 @@ export const AppBarStyled = styled(Box)(({ theme }) => ({
 
 export const ChipStyled = styled(Chip)(({ theme }) => ({
     // backgroundColor: theme.palette.appBarColour.main
-   background: '#127B93',
-   color: '#ffffff',
+   background: theme.palette.appBarColour.main,
+   color: theme.palette.appBarColour.light,
    "& > svg > path": {
-    color: '#ffffff'
+    color: theme.palette.appBarColour.light,
    },
    '&:hover': {
-    color: '#ffffff',
-    background: '#076478',
+    color: theme.palette.appBarColour.light,
+    background: theme.palette.appBarColour.main,
    }
    
 }))
@@ -79,7 +79,8 @@ export const MobileMenuListStyled = styled(List)(({ theme }) => ({
 }))
 
 export const MenusBoxStyled = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.common.white,
+    //backgroundColor: theme.palette.common.white,
+    backgroundColor: theme.palette.appBarColour.light,
     padding: '8px 16px',
     borderRadius: '8px',
     gap: '8px',
@@ -87,7 +88,7 @@ export const MenusBoxStyled = styled(Box)(({ theme }) => ({
     fontSize: '0.88em',
     fontWeight: 'bold',
     'a': {
-        color: theme.palette.appBarColour.main,
+       color: theme.palette.appBarColour.main,
         '::after': {
             content: '"|"',
             margin: '8px'

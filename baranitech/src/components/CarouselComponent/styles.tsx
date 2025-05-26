@@ -2,7 +2,7 @@ import { styled } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 
 export const CarouselStyled = styled(Carousel)(({theme})=>({
-  background: '#ffffff',
+  background: theme.palette.appBarColour.light,
   margin: '30px 30px',
   borderRadius: '20px',
   padding: '5px',
@@ -49,7 +49,7 @@ export const CarouselButtonStyled = styled('button')(({theme})=>({
   background: theme.palette.appBarColour.main,
   borderRadius: '20px',
   padding: '8px 25px',
-  color: '#ffffff',
+  color: theme.palette.appBarColour.light,
   border: 'none',
   bottom: '10px',
   position: 'absolute',
