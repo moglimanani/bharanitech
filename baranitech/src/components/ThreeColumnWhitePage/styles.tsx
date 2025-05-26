@@ -80,7 +80,7 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     justifyContent: 'space-around',
 }))
 
-export const CardMediaStyled = styled(CardMedia)(({theme})=>({
+export const CardMediaStyled = styled(Box)(({theme})=>({
     margin: '30px 20px 10px',
     width: '92%',
     [theme.breakpoints.down('sm')]: {
