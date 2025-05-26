@@ -9,7 +9,7 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
     textAlign: 'left',
      margin: '0',
      padding: '10px 0 0 20px',
-     color: '#127B93',
+     color: theme.palette.appBarColour.main,
   }))
 
   export const PareBoxStyled = styled('p')(({theme})=>({
@@ -17,7 +17,7 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      margin: '0',
      padding: '0 0 0 20px',
      fontSize: '1em',
-     color: '#4d4d4d'
+     color: theme.palette.secondary.main,
   }))
 
 
@@ -25,7 +25,7 @@ export const ThreeColumnStyledWhite = styled(Grid)(({theme})=>({
     display: 'flex',
     justifyContent: 'space-around',
     boxShadow: 'none !important',
-    background: '#ffffff',
+    background: theme.palette.appBarColour.light,
     borderRadius: '20px',
     padding: '0px',
     flexDirection: 'column',
@@ -34,7 +34,7 @@ export const ThreeColumnStyledWhite = styled(Grid)(({theme})=>({
 
 
 export const TitleDivStyledWhite = styled('div')(({theme})=>({
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     textAlign: 'left',
     padding: '10px 20px',
     display: 'flex',
@@ -60,7 +60,7 @@ export const ParaOneStyledWhite = styled('p')(({theme})=>({
         margin: '0',
         textAlign: 'left',
         padding: '0px 20px 15px',
-        color: '#4d4d4d',
+        color: theme.palette.secondary.main,
         height: '120px',
         overflow: 'scroll'
 }))
@@ -71,9 +71,9 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     textAlign: 'center',
     width: '150px',
     border: '0',
-    background: '#127B93',
+    background: theme.palette.appBarColour.main,
     padding: '10px 20px',
-    color: '#ffffff',
+    color: theme.palette.appBarColour.light,
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',

@@ -23,9 +23,9 @@ export const ListItemTextStyled = styled(ListItemText)(()=>({
  //fontStyle: "italic",
  }))
 
- export const HeadingStyled = styled(Typography)(()=>({
-  color: '#127B93',
-  background: '#c4f4ff',
+ export const HeadingStyled = styled(Typography)(({theme})=>({
+  color: theme.palette.appBarColour.main,
+  background: theme.palette.flashPrimaryBGColor.main,
   // borderRadius: '20px',
   paddingBlock: '15px',
   paddingLeft: '15px',
@@ -67,7 +67,7 @@ export const AboutUsStyled = styled('div')(({theme})=>({
 export const AboutUsTitleStyled = styled('h2')(({theme})=>({
  // background: 'yellow',
   padding: '0px 0px 0px',
-  color: '#ffffff',
+  color: theme.palette.appBarColour.light,
   fontWeight: 'bold',
   fontSize: '1.3em',
   [theme.breakpoints.down('sm')]: {
@@ -79,7 +79,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   // background: 'yellow',
    margin: '0',
    padding: '0 0 20px',
-   color: '#ffffff',
+   color: theme.palette.appBarColour.light,
    fontSize: '0.88em',
    [theme.breakpoints.down('sm')]: {
      padding: '20px 0',
@@ -91,7 +91,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
    margin: '0',
    padding: '0 20px 20px 0',
    display: 'flex',
-   color: '#ffffff',
+   color: theme.palette.appBarColour.light,
    fontSize: '0.88em',
    '& > div > img': {
     width: '50%',
@@ -116,7 +116,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   maxWidth: '80%',
    margin: '0',
    padding: '0 0 20px',
-   color: '#ffffff',
+   color: theme.palette.appBarColour.light,
    fontSize: '0.88em',
    [theme.breakpoints.down('sm')]: {
      padding: '0px',
@@ -132,8 +132,8 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
    margin: '10px 0 20px',
    maxWidth: '300px',
    padding: '15px 20px',
-   color: '#127B93',
-   background: '#c4f4ff',
+   color: theme.palette.appBarColour.main,
+   background: theme.palette.flashPrimaryBGColor.main,
    fontWeight: 'bold',
    borderRadius: '8px 50px 50px 8px',
    fontSize: '0.88em',
@@ -150,13 +150,13 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   textAlign: 'left',
   fontSize: '1.3em',
   paddingBottom: '15px',
-  color: '#ffffff',    
+  color: theme.palette.appBarColour.light,   
  }))
 
  export const AdminTitleStyled = styled( Typography)(({theme})=>({
   fontSize: '1.2em',
-  color: '#127B93',
-  background: '#c4f4ff',
+  color: theme.palette.appBarColour.main,
+  background: theme.palette.flashPrimaryBGColor.main,
   margin: '30px 0', 
   padding: '8px',
   borderRadius: '0px 20px 20px 0px',
@@ -168,7 +168,7 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   textAlign: 'left',
   fontSize: '1em',
   paddingTop: '10px',
-  color: '#127B93',
+  color: theme.palette.appBarColour.main,
   position: 'relative',
     
  }))
@@ -177,15 +177,15 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
   textAlign: 'left',
   fontSize: '.88rem',
   paddingTop: '5px',
-  color: '#484848',
+  color: theme.palette.secondary.main,
     
  }))
 
 
  export const LearnButtonStyled = styled(Button)(({theme})=>({
   fontSize: '.88rem',
-  color: '#ffffff',
-  background: '#127B93',
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
   borderRadius: '20px',
   margin: '10px 0 20px',
   padding: '10px 20px',  
@@ -216,7 +216,7 @@ export const BoxContactStyled = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   // boxShadow: theme.shadows[3],
   borderRadius: '20px',
-  background: '#ffffff'
+  background: theme.palette.appBarColour.light,
 }));
 
 export const GridContactStyled = styled(Grid)(({ theme }) => ({
@@ -224,7 +224,7 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
   flexDirection: 'row',
   // boxShadow: theme.shadows[3],
   borderRadius: '20px',
-  background: '#ffffff',
+  background: theme.palette.appBarColour.light,
   padding: '30px',
   marginBottom: '30px',
   '& > .hidden': {
@@ -253,16 +253,16 @@ export const AdminStyled = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   // boxShadow: theme.shadows[3],
   borderRadius: '20px',
-  background: '#ffffff',
+  background: theme.palette.appBarColour.light,
   '& > div': {
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     fontSize: '1.3em',
     paddingBottom: '15px',
   },
   '& > button': {
-    background: '#127B93',
+    background: theme.palette.appBarColour.main,
     border: 0,
-    color: '#ffffff',
+    color: theme.palette.appBarColour.light,
     padding: '10px 20px',
     borderRadius: '20px',
     [theme.breakpoints.down('sm')]: {
@@ -292,17 +292,17 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
   '& > nav': {
     marginTop: '30px',
    // color: '#127B93',
-    color: '#ffffff',
+    color: theme.palette.appBarColour.light,
     fontWeight: 'bold',
     'a': {
       // color: '#127B93',
-      color: '#ffffff',
+      color: theme.palette.appBarColour.light,
       padding: '15px' ,
       borderRadius: '20px',    
     },
     'a:hover': {
-      color: '#127B93',
-      background: '#ffffff',
+      color: theme.palette.appBarColour.main,
+      background: theme.palette.appBarColour.light,
       
     }
   },

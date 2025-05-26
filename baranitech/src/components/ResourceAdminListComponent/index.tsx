@@ -57,9 +57,9 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
 const CategoryChip = styled(Chip)(({ theme }) => ({
   marginBottom: theme.spacing(1),
-  background: "#127B93",
+  background: theme.palette.appBarColour.main,
   padding: "15px",
-  color: "#ffffff",
+  color: theme.palette.appBarColour.light,
 }));
 
 const Actions = styled(Box)(({ theme }) => ({

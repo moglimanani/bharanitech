@@ -4,7 +4,7 @@ import {  Grid, styled, Avatar, Button, } from "@mui/material";
 export const LoginWrapperStyled = styled(Grid)(({theme})=>({
    margin: '30px',
    padding: '15px 20px',
-   backgroundColor: '#ffffff',
+   backgroundColor: theme.palette.appBarColour.light,
    borderRadius: '20px',
    [theme.breakpoints.down('sm')]: {
     margin: '20px',
@@ -36,12 +36,12 @@ export const LoginWrapperStyled = styled(Grid)(({theme})=>({
 }))
 
 export const LoginWrapperIconStyled = styled(Avatar)(({theme})=>({
-  color: '#4d4d4d',
+  color: theme.palette.secondary.main,
   background: '#fff !important' ,
 }))
 
 export const LoginWrapperButtonStyled = styled(Button)(({theme})=>({
-  background: '#127B93' ,
+  background: theme.palette.appBarColour.main,
   borderRadius: '20px'
 
 }))

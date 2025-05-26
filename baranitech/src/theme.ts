@@ -36,7 +36,7 @@ const theme = createTheme({
       main: '#6a1b9a', // Purple theme
     },
     secondary: {
-      main: '#f50057',
+      main: '#484848',
     },
     buttonPrimaryBGColor: {
       main: '#117b93'

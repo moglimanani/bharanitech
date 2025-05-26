@@ -9,7 +9,7 @@ export const ThreeColumnStyled = styled(Grid)(({theme})=>({
     display: 'flex',
     justifyContent: 'space-around',
     boxShadow: 'none !important',
-    background: '#ffffff',
+    background: theme.palette.appBarColour.light,
     borderRadius: '20px',
     padding: '0px',
     margin: '10px 0 30px',
@@ -22,11 +22,11 @@ export const ThreeColumnStyled = styled(Grid)(({theme})=>({
 
 export const TitleDivStyled = styled('div')(({theme})=>({
     width: '94%',
-    background: '#127B93',
+    background: theme.palette.appBarColour.main,
     margin: '20px 0px',
     textAlign: 'left',
     padding: '10px 20px',
-    color: '#ffffff',
+    color: theme.palette.appBarColour.light,
     display: 'flex',
     'svg': {
         marginRight: '10px'
@@ -61,7 +61,7 @@ export const ButtonOneStyled = styled('button')(({theme})=>({
     textAlign: 'center',
     width: '150px',
     border: '0',
-    background: '#127B93',
+    background: theme.palette.appBarColour.main,
     padding: '10px 20px',
     color: '#ffffff',
     borderRadius: '20px',

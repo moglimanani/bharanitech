@@ -15,13 +15,13 @@ import { TrainingCategory, useTrainingCategories } from '../../contexts/training
 
 
 const ContainerStyle = styled(Container)(({ theme }) => ({
-    background: '#ffffff',
+    background: theme.palette.appBarColour.light,
     borderRadius: '20px',
     paddingBottom: '30px'
   }));
 
 const TypograpStyle = styled(Typography)(({ theme }) => ({
-    color: '#127B93',
+    color: theme.palette.appBarColour.main,
     fontSize: '1.3em',
     fontWeight: 'bold',
     margin: '0px auto 0',

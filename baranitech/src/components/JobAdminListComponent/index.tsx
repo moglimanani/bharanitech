@@ -57,9 +57,9 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
 const CategoryChip = styled(Chip)(({ theme }) => ({
   //marginBottom: theme.spacing(1),
-  background: "#127B93",
+  background: theme.palette.appBarColour.main,
   padding: "15px",
-  color: "#ffffff",
+  color: theme.palette.appBarColour.light,
 }));
 
 const Actions = styled(Box)(({ theme }) => ({
@@ -76,10 +76,10 @@ const StyleDate = styled(Typography)(({ theme }) => ({
   // right: theme.spacing(1),
   display: "flex",
   gap: theme.spacing(1),
-  background: '#d8d8d8',
+  background: theme.palette.secondary.main,
   fontSize: '12px',
   fontWeight: 'bold',
-  color: '#242105',
+  color: '#ffffff',
   padding: '5px',
   justifyContent: 'center',
   borderRadius: '20px',
@@ -106,7 +106,7 @@ const DescriptionStyle = styled(Typography)(({ theme }) => ({
 
 
 const VacancyStyle = styled(Typography)(({ theme }) => ({
-  color: '#ffffff',
+  color: theme.palette.appBarColour.light,
   fontSize: '12px',
   borderRadius: '50%',
   background: '#403f3d',
@@ -120,7 +120,7 @@ const VacancyStyle = styled(Typography)(({ theme }) => ({
 
 
 const TypeVacancyStyle = styled(Typography)(({ theme }) => ({
-  color: '#ffffff',
+  color: theme.palette.appBarColour.light,
   fontSize: '12px',
   borderRadius: '50%',
   background: '#403f3d',

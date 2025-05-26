@@ -94,7 +94,7 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
 
   export const GridColorStyled = styled(Grid)(({theme})=>({
     // fontFamily: 'Poetsen One',
-    background: '#ffffff',
+    background: theme.palette.appBarColour.light,
     borderRadius: '20px',
     display: 'flex',
     gap: '5px',
@@ -103,7 +103,7 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
     alignContent: 'center',
     alignItems: 'center',
     '& div > p': {
-      color: '#127B93',
+      color: theme.palette.appBarColour.main,
       fontWeight: 'bold',
     },
     [theme.breakpoints.down('sm')]: {
