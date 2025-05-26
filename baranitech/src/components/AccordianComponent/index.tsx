@@ -112,13 +112,13 @@ const AccordionComponent: React.FC = () => {
                   <ListItemIcon>
                     <SchoolOutlined />
                   </ListItemIcon>
-                  <ListItemText primary="Training 1" />
+                  <ListItemText primary="Online" />
                 </ListItemButtonStyled>
                 <ListItemButtonStyled sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <SchoolOutlined />
                   </ListItemIcon>
-                  <ListItemText primary="Training 2" />
+                  <ListItemText primary="Direct" />
                 </ListItemButtonStyled>
               </List>
             </Collapse>

@@ -79,7 +79,7 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
       },
   }))
 
-  export const IconBadgeStyled = styled(BadgeStyled)(({theme})=>({
+  export const IconBadgeStyled = styled(Badge)(({theme})=>({
     // fontFamily: 'Poetsen One',
     position: 'relative',
     '& > svg': {
