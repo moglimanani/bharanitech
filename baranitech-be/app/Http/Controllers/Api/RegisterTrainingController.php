@@ -48,7 +48,9 @@ class RegisterTrainingController extends Controller
     // Show all registrations
     public function index()
     {
-        $registrations = RegisterTraining::all();
+        // $registrations = RegisterTraining::all();
+        // $registrations = RegisterTraining::with('training')->get();
+        $registrations = RegisterTraining::with('training.category')->get();
 
         return response()->json([
             'status' => 'success',

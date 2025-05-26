@@ -44,6 +44,8 @@ import TrainingAdminPage from './pages/TrainingAdminPage.tsx';
 import TrainingAddComponent from './components/TrainingAdminAddComponent/index.tsx'
 import { TrainingCategoryProvider } from './contexts/trainingCategoryContext.tsx'
 import TrainingAdminListComponent from './components/TrainingAdminListComponent/index.tsx'
+import TrainingRegisteredAdminPage from './pages/TrainingRegisteredAdminPage.tsx'
+import TrainingRegistedAdminListComponent from './components/TrainingRegisteredAdminListComponent/index.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -100,6 +102,12 @@ createRoot(document.getElementById('root')!).render(
                           <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_ID_URL} element={<TrainingAdminListComponent />} />
                           <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_EDIT_URL} element={<TrainingAdminListComponent />} />
                           <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_ADD_URL} element={<TrainingAddComponent />} />
+                        </Route>
+                        <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL} element={<TrainingRegisteredAdminPage />}>
+                          <Route index element={<TrainingRegistedAdminListComponent />} />
+                          {/* <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_ID_URL} element={<TrainingAdminListComponent />} /> */}
+                          {/* <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_EDIT_URL} element={<TrainingAdminListComponent />} /> */}
+                          {/* <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_ADD_URL} element={<TrainingAddComponent />} /> */}
                         </Route>
                       </Route>
 

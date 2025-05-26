@@ -62,10 +62,11 @@ const GalleryList: React.FC = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     fetchGallery();
-
+    
     return () => {
-      fetchGallery();
+      controller.abort(); // Cancel fetch on unmount
     };
   }, []);
 

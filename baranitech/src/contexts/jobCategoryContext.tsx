@@ -35,7 +35,12 @@ export const JobCategoryProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     fetchCategories();
+    return () => {
+      controller.abort(); // Cancel fetch on unmount
+    };
   }, []);
 
   return (

@@ -156,9 +156,11 @@ const JobAdminListComponent: React.FC = () => {
     }
   };
   useEffect(() => {
+    const controller = new AbortController();
+
     fetchJobs();
     return () => {
-      fetchJobs();
+      controller.abort(); // Cancel fetch on unmount
     };
   }, []);
 
