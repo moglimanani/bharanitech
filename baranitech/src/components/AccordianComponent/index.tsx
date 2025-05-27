@@ -1,65 +1,3 @@
-// import React, { useState } from 'react';
-// import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-// const AccordionComponent: React.FC = () => {
-//   const [expanded, setExpanded] = useState<string | false>(false);
-
-//   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-//     setExpanded(isExpanded ? panel : false);
-//   };
-
-//   return (
-//     <div>
-//       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel1-content"
-//           id="panel1-header"
-//         >
-//           <Typography>Accordion 1</Typography>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//           <Typography>
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt arcu vel arcu tincidunt, eu feugiat enim accumsan.
-//           </Typography>
-//         </AccordionDetails>
-//       </Accordion>
-
-//       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel2-content"
-//           id="panel2-header"
-//         >
-//           <Typography>Accordion 2</Typography>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//           <Typography>
-//             Pellentesque in ipsum id orci porta dapibus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-//           </Typography>
-//         </AccordionDetails>
-//       </Accordion>
-
-//       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel3-content"
-//           id="panel3-header"
-//         >
-//           <Typography>Accordion 3</Typography>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//           <Typography>
-//             Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
-//           </Typography>
-//         </AccordionDetails>
-//       </Accordion>
-//     </div>
-//   );
-// };
-
-// export default AccordionComponent;
 import React, { useState } from 'react';
 import {
   List,
@@ -76,10 +14,23 @@ import {
 } from '@mui/icons-material';
 import { AccordianWrapper, ListItemButtonStyled } from './styles';
 import { Briefcase, NotebookText } from 'lucide-react';
+import { useYouTubeCategories } from '../../contexts/youtubeCategoryContext';
+import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
+import { useJobCategories } from '../../contexts/jobCategoryContext';
 
 const AccordionComponent: React.FC = () => {
   const [openTrainings, setOpenTrainings] = useState(false);
+  const [openTrainings0, setOpenTrainings0] = useState(false);
+  const [openTrainings1, setOpenTrainings1] = useState(false);
+  const [openResources, setOpenResources] = useState(false);
+  const [openResources0, setOpenResources0] = useState(false);
+  const [openResources1, setOpenResources1] = useState(false);
   const [openJobs, setOpenJobs] = useState(false);
+  const { categories } = useYouTubeCategories()
+  const { trainingCategories } = useTrainingCategories()
+  const { categories: jobCategories } = useJobCategories()
+
+  console.log('cat', jobCategories);
 
 
   return (
@@ -91,13 +42,60 @@ const AccordionComponent: React.FC = () => {
           </ListItemIcon>
           <ListItemText primary="About Us" />
         </ListItemButtonStyled>
-        <ListItemButtonStyled>
+        <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(false); setOpenResources(!openResources) }}>
           <ListItemIcon>
             <NotebookText />
           </ListItemIcon>
           <ListItemText primary="Resources" />
+          {openResources ? <ExpandLess /> : <ExpandMore />}
         </ListItemButtonStyled>
-        <ListItemButtonStyled onClick={() => setOpenTrainings(!openTrainings)}>
+
+        <Collapse in={openResources} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(!setOpenResources0) }}>
+              <ListItemIcon>
+                <SchoolOutlined />
+              </ListItemIcon>
+              <ListItemText primary="TrainingsProtection Relay Testing" />
+              {openResources0 ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButtonStyled>
+            <Collapse in={openResources0} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {categories?.filter(item => item.category === 0)?.map((catRealy) => (
+                  <ListItemButtonStyled>
+                    <ListItemIcon>
+                      <SchoolOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary={catRealy.title} />
+                  </ListItemButtonStyled>
+                ))}
+              </List>
+            </Collapse>
+
+            <ListItemButtonStyled onClick={() => { setOpenResources0(false); setOpenResources1(!setOpenResources1) }}>
+              <ListItemIcon>
+                <SchoolOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Equipment Testing" />
+              {openResources1 ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButtonStyled>
+            <Collapse in={openResources1} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {categories?.filter(item => item.category === 1)?.map((equipTest) => (
+                  <ListItemButtonStyled>
+                    <ListItemIcon>
+                      <SchoolOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary={equipTest.title} />
+                  </ListItemButtonStyled>
+                ))}
+              </List>
+            </Collapse>
+
+          </List>
+        </Collapse>
+
+        <ListItemButtonStyled onClick={() => { setOpenTrainings0(false); setOpenTrainings1(false); setOpenTrainings(!openTrainings) }}>
           <ListItemIcon>
             <SchoolOutlined />
           </ListItemIcon>
@@ -106,24 +104,48 @@ const AccordionComponent: React.FC = () => {
         </ListItemButtonStyled>
         <Collapse in={openTrainings} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <Collapse in={openTrainings} timeout="auto" unmountOnExit>
+            <ListItemButtonStyled onClick={() => { setOpenTrainings1(false); setOpenTrainings0(!openTrainings0) }}>
+              <ListItemIcon>
+                <SchoolOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Direct" />
+              {openTrainings0 ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButtonStyled>
+            <Collapse in={openTrainings0} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButtonStyled sx={{ pl: 6 }}>
-                  <ListItemIcon>
-                    <SchoolOutlined />
-                  </ListItemIcon>
-                  <ListItemText primary="Online" />
-                </ListItemButtonStyled>
-                <ListItemButtonStyled sx={{ pl: 6 }}>
-                  <ListItemIcon>
-                    <SchoolOutlined />
-                  </ListItemIcon>
-                  <ListItemText primary="Direct" />
-                </ListItemButtonStyled>
+                {trainingCategories?.map((training) => (
+                  <ListItemButtonStyled>
+                    <ListItemIcon>
+                      <SchoolOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary={training.title} />
+                  </ListItemButtonStyled>
+                ))}
+              </List>
+            </Collapse>
+            <ListItemButtonStyled onClick={() => { setOpenTrainings0(false); setOpenTrainings1(!openTrainings1) }}>
+              <ListItemIcon>
+                <SchoolOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Online" />
+              {openTrainings1 ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButtonStyled>
+            <Collapse in={openTrainings1} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {trainingCategories?.map((training) => (
+                  <ListItemButtonStyled>
+                    <ListItemIcon>
+                      <SchoolOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary={training.title} />
+                  </ListItemButtonStyled>
+                ))}
               </List>
             </Collapse>
           </List>
         </Collapse>
+
+
         <ListItemButtonStyled onClick={() => setOpenJobs(!openJobs)}>
           <ListItemIcon>
             <Briefcase />
@@ -133,18 +155,14 @@ const AccordionComponent: React.FC = () => {
         </ListItemButtonStyled>
         <Collapse in={openJobs} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButtonStyled sx={{ pl: 6 }}>
-              <ListItemIcon>
-                <Briefcase />
-              </ListItemIcon>
-              <ListItemText primary="Job 1" />
-            </ListItemButtonStyled>
-            <ListItemButtonStyled sx={{ pl: 6 }}>
-              <ListItemIcon>
-                <Briefcase />
-              </ListItemIcon>
-              <ListItemText primary="Job 2" />
-            </ListItemButtonStyled>
+            {jobCategories?.map(item => (
+              <ListItemButtonStyled key={item.id}>
+                <ListItemIcon>
+                  <Briefcase />
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButtonStyled>
+            ))}
           </List>
         </Collapse>
         <ListItemButtonStyled>
