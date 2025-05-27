@@ -7,7 +7,7 @@ export const BoxWhiteStyled = styled(Box)(({theme})=>({
 
 export const H2BoxStyled = styled('h2')(({theme})=>({
     textAlign: 'left',
-     margin: '0',
+     margin: '5px 0',
      padding: '10px 0 0 20px',
      color: theme.palette.appBarColour.main,
   }))
@@ -38,7 +38,7 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     textAlign: 'left',
     padding: '10px 20px',
     display: 'flex',
-    marginBottom: '10px'
+   //marginBottom: '10px'
 }))
 
 export const ImageDivStyledWhite = styled('div')(({theme})=>({
@@ -52,7 +52,8 @@ export const ImageDivStyledWhite = styled('div')(({theme})=>({
 }))
 export const ButtonWrapperStyledWhite = styled('div')(({theme})=>({
    display: 'flex',
-   justifyContent: 'flex-end'
+   justifyContent: 'flex-end',
+   marginBottom: '20px'
 }))
 
 export const ParaOneStyledWhite = styled('p')(({theme})=>({
@@ -61,15 +62,15 @@ export const ParaOneStyledWhite = styled('p')(({theme})=>({
         textAlign: 'left',
         padding: '0px 20px 15px',
         color: theme.palette.secondary.main,
-        height: '120px',
-        overflow: 'scroll'
+        // height: '120px',
+        // overflow: 'scroll'
 }))
 
 export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     fontSize: '0.88em',
-    margin: '10px 20px 30px',
+    //margin: '10px 20px 30px',
     textAlign: 'center',
-    width: '150px',
+    //width: '150px',
     border: '0',
     background: theme.palette.appBarColour.main,
     padding: '10px 20px',
@@ -81,7 +82,7 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
 }))
 
 export const CardMediaStyled = styled(Box)(({theme})=>({
-    margin: '30px 20px 10px',
+    margin: '20px 20px 5px',
     width: '92%',
     [theme.breakpoints.down('sm')]: {
         // background: 'Yellow',

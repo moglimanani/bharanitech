@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CardMedia, Grid, Typography, } from "@mui/material";
-import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, ImageDivStyledWhite, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledWhite, TitleDivStyledWhite } from "./styles";
+import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, ImageDivStyledWhite, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledBlue, ThreeColumnStyledWhite, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
 import { useAllTrainings } from "../../contexts/allTrainingsContext";
 import { TrainingType } from "../../types/trainings";
 
@@ -21,19 +21,19 @@ const TrainingsThreeColumnWhitePage: React.FC = () => {
       <Grid container spacing={2}>
         {
           trainings.map((item: TrainingType, id: number) => (
-            <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`alltraining-${id}-${item.id}`}>
+            <ThreeColumnStyledBlue size={{ xs: 12, md: 4 }} key={`alltraining-${id}-${item.id}`}>
               <TitleDivStyledWhite>{item.title}</TitleDivStyledWhite>
               <ParaOneStyledWhite>
               {item.description ? item.description : '-'}
               </ParaOneStyledWhite>
-              <Typography>Start Date: {item.startdate}</Typography>
-              <Typography>Price: {item.total_price}</Typography>
-              <Typography>Location:  {+item.classification === 0 ? `${item.city}, ${item.state}, ${item.country}` : 'Online'}</Typography>
+              <TypographyStyledWhite>Start Date: {item.startdate}</TypographyStyledWhite>
+              <TypographyStyledWhite>Price: {item.total_price}</TypographyStyledWhite>
+              <TypographyStyledWhite>Location:  {+item.classification === 0 ? `${item.city}, ${item.state}, ${item.country}` : 'Online'}</TypographyStyledWhite>
               <ButtonWrapperStyledWhite>
                 <ButtonOneStyledWhite>View More</ButtonOneStyledWhite>
               </ButtonWrapperStyledWhite>
 
-            </ThreeColumnStyledWhite>
+            </ThreeColumnStyledBlue>
           ))
         }
       </Grid>

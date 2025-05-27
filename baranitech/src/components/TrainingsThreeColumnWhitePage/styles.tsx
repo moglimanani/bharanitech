@@ -1,23 +1,24 @@
-import {  Box, Grid, styled, CardMedia} from "@mui/material";
+import {  Box, Grid, styled, Typography} from "@mui/material";
 
 export const BoxWhiteStyled = styled(Box)(({theme})=>({
-  background: '#fff',
-   
+  background: theme.palette.appBarColour.dark,
+  padding: '16px 16px 34px !important',
 }))
 
 export const H2BoxStyled = styled('h2')(({theme})=>({
     textAlign: 'left',
-     margin: '0',
+     margin: '0 0 10px',
      padding: '10px 0 0 20px',
-     color: theme.palette.appBarColour.main,
+     color: theme.palette.appBarColour.light,
   }))
 
   export const PareBoxStyled = styled('p')(({theme})=>({
     textAlign: 'left',
-     margin: '0',
+     margin: '0 0 20px',
      padding: '0 0 0 20px',
      fontSize: '1em',
-     color: theme.palette.secondary.main,
+    // color: theme.palette.secondary.main,
+    color: '#1a1643',
   }))
 
 
@@ -25,20 +26,36 @@ export const ThreeColumnStyledWhite = styled(Grid)(({theme})=>({
     display: 'flex',
     justifyContent: 'space-around',
     boxShadow: 'none !important',
-    background: theme.palette.appBarColour.light,
+    //background: theme.palette.appBarColour.light,
+    background: 'rgb(1 133 155)',
     borderRadius: '20px',
     padding: '0px',
     flexDirection: 'column',
    
 }))
 
+export const ThreeColumnStyledBlue = styled(Grid)(({theme})=>({
+    display: 'flex',
+    justifyContent: 'space-around',
+    boxShadow: 'none !important',
+    //background: theme.palette.appBarColour.light,
+    background: theme.palette.appBarColour.main,
+    borderRadius: '20px',
+    padding: '0px',
+    flexDirection: 'column',
+    margin: '0 20px'
+   
+}))
+
+
 
 export const TitleDivStyledWhite = styled('div')(({theme})=>({
-    color: theme.palette.appBarColour.main,
+    color: theme.palette.appBarColour.light,
     textAlign: 'left',
-    padding: '10px 20px',
+    padding: '20px 20px 5px',
     display: 'flex',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    fontSize: '1.3em'
 }))
 
 export const ImageDivStyledWhite = styled('div')(({theme})=>({
@@ -56,24 +73,34 @@ export const ButtonWrapperStyledWhite = styled('div')(({theme})=>({
 }))
 
 export const ParaOneStyledWhite = styled('p')(({theme})=>({
-        fontSize: '0.88em',
+        fontSize: '1em',
         margin: '0',
         textAlign: 'left',
         padding: '0px 20px 15px',
-        color: theme.palette.secondary.main,
-        height: '120px',
-        overflow: 'scroll'
+        color: theme.palette.flashPrimaryBGColor.main,
+        //height: '120px',
+       // overflow: 'scroll'
+}))
+
+export const TypographyStyledWhite = styled(Typography)(({theme})=>({
+    fontSize: '0.75em',
+    margin: '0',
+    textAlign: 'left',
+    padding: '0px 20px 5px',
+    //color: theme.palette.appBarColour.light,
+    color: '#f3f3f3',
+    //height: '120px',
+   // overflow: 'scroll'
 }))
 
 export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     fontSize: '0.88em',
     margin: '10px 20px 30px',
     textAlign: 'center',
-    width: '150px',
     border: '0',
-    background: theme.palette.appBarColour.main,
+    color: theme.palette.appBarColour.main,
     padding: '10px 20px',
-    color: theme.palette.appBarColour.light,
+    background: theme.palette.appBarColour.light,
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
