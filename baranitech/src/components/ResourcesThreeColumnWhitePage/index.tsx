@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardMedia, Grid, } from "@mui/material";
+import { Grid, } from "@mui/material";
 import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, ImageDivStyledWhite, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledWhite, TitleDivStyledWhite } from "./styles";
 import { useAllResources } from "../../contexts/allResourcesContext";
 import { ResourceType } from "../../types/resources";
@@ -20,8 +20,8 @@ const ResourcesThreeColumnWhitePage: React.FC = () => {
       <PareBoxStyled>In the digital age, YouTube isn't just for entertainment—it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: </PareBoxStyled>
       <Grid container spacing={2}>
         {
-          resources.map((item: ResourceType)=> (
-            <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }}>
+          resources.map((item: ResourceType, id: number)=> (
+            <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`learningres-${id}-${item.id}`}>
             <CardMediaStyled>
               <iframe
                 height="200"

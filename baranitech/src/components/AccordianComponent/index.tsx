@@ -155,7 +155,7 @@ const AccordionComponent: React.FC = () => {
         <Collapse in={openJobs} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {jobCategories?.map(item => (
-              <ListItemButtonStyled key={item.id}>
+              <ListItemButtonStyled key={`jobcat-${item.id}`}>
                 <ListItemIcon>
                   <Briefcase />
                 </ListItemIcon>

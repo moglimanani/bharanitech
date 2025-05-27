@@ -20,8 +20,8 @@ const TrainingsThreeColumnWhitePage: React.FC = () => {
       <PareBoxStyled>Our professional training programs are designed to equip individuals and teams with the skills and knowledge needed to excel in today's competitive environment. Conducted by experienced industry experts, our training sessions are available in both online and offline modes to ensure maximum flexibility and accessibility. </PareBoxStyled>
       <Grid container spacing={2}>
         {
-          trainings.map((item: TrainingType) => (
-            <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`alltraining${item.id}`}>
+          trainings.map((item: TrainingType, id: number) => (
+            <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`alltraining-${id}-${item.id}`}>
               <TitleDivStyledWhite>{item.title}</TitleDivStyledWhite>
               <ParaOneStyledWhite>
               {item.description ? item.description : '-'}
