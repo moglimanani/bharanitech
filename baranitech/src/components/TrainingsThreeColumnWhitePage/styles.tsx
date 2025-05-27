@@ -1,7 +1,7 @@
 import {  Box, Grid, styled, Typography} from "@mui/material";
 
 export const BoxWhiteStyled = styled(Box)(({theme})=>({
-  background: theme.palette.appBarColour.dark,
+  background: theme.palette.secondary.main,
   padding: '16px 16px 34px !important',
 }))
 
@@ -17,8 +17,7 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      margin: '0 0 20px',
      padding: '0 0 0 20px',
      fontSize: '1em',
-    // color: theme.palette.secondary.main,
-    color: '#1a1643',
+      color: theme.palette.flashPrimaryBGColor.main,
   }))
 
 
@@ -43,7 +42,6 @@ export const ThreeColumnStyledBlue = styled(Grid)(({theme})=>({
     borderRadius: '20px',
     padding: '0px',
     flexDirection: 'column',
-    margin: '0 20px'
    
 }))
 

@@ -93,11 +93,17 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
    display: 'flex',
    color: theme.palette.appBarColour.light,
    fontSize: '0.88em',
+   '& > div': {
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '-20px',
+    }
+   },
    '& > div > img': {
-    width: '50%',
-    borderRadius: '20px',
+    width: '100%',
     margin: '0 20px',
-    float: 'right',
+    //float: 'right',
    },
    [theme.breakpoints.down('sm')]: {
      padding: '0px',
@@ -154,14 +160,15 @@ export const AboutUsParaStyled = styled('p')(({theme})=>({
  }))
 
  export const AdminTitleStyled = styled( Typography)(({theme})=>({
-  fontSize: '1.2em',
+  fontSize: '1em',
   color: theme.palette.appBarColour.main,
   background: theme.palette.flashPrimaryBGColor.main,
   margin: '30px 0', 
   padding: '8px',
-  borderRadius: '0px 20px 20px 0px',
+  borderRadius: '8px 50px 50px 8px',
   maxWidth: '300px', 
   textAlign: 'left',  
+  fontWeight: 'bold'
  }))
 
  export const TitleStyled = styled( Typography)(({theme})=>({

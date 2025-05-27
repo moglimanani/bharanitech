@@ -32,9 +32,9 @@ const ResourcesThreeColumnWhitePage: React.FC = () => {
               />
             </CardMediaStyled>
             <TitleDivStyledWhite>{item.title}</TitleDivStyledWhite>
-            <ParaOneStyledWhite>
+            {/* <ParaOneStyledWhite>
              {item.description ? item.description : '-'}
-            </ParaOneStyledWhite>
+            </ParaOneStyledWhite> */}
             <ButtonWrapperStyledWhite>
               <ButtonOneStyledWhite>View More</ButtonOneStyledWhite>
             </ButtonWrapperStyledWhite>
