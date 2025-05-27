@@ -10,11 +10,11 @@ import AdminMenubar from './components/Menubar/adminMenubar';
 import { useYouTubeCategories } from './contexts/youtubeCategoryContext';
 import { TwoColumnStyled } from './pages/styles';
 import AccordionComponent from './components/AccordianComponent';
-import ThreeColumnPage from './components/ThreeColumnPage/ThreeColumnPage';
-import ThreeColumnWhitePage from './components/ThreeColumnWhitePage/ThreeColumnWhitePage';
 import GetStartedToday from './components/GetStartedComponent';
 import Vacancies from './components/Vacancies';
 import LoaderWithIcon from './components/Loader';
+import TrainingsThreeColumnWhitePage from './components/TrainingsThreeColumnWhitePage';
+import ResourcesThreeColumnWhitePage from './components/ResourcesThreeColumnWhitePage';
 
 function App() {
   const ContainerStyled = styled(Grid)(() => ({
@@ -78,11 +78,14 @@ function App() {
           </Grid>
           {!ifItsLoginOrRegisterPage && !(user?.email) && (
             <>
-              <Grid size={12}>
+              {/* <Grid size={12}>
                 <ThreeColumnPage />
+              </Grid> */}
+              <Grid size={12}>
+                <TrainingsThreeColumnWhitePage />
               </Grid>
               <Grid size={12}>
-                <ThreeColumnWhitePage />
+                <ResourcesThreeColumnWhitePage />
               </Grid>
               <Grid size={12}>
                 <GetStartedToday />

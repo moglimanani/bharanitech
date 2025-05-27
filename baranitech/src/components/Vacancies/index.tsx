@@ -14,8 +14,10 @@ function Vacancies() {
 
   useEffect(() => {
     if (Array.isArray(allJobs)) {
-      const sortedArr = [...allJobs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-      const unqiueBylatest: JobsType[] = Array.from(new Map(sortedArr?.map((data: JobsType) => [data.type, data]))?.values())
+      const sortedArr = [...allJobs].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+      
+      const unqiueBylatest: JobsType[] = Array.from(new Map([...sortedArr]?.map((data: JobsType) => [data.type, data]))?.values())
+      
       setJobs(unqiueBylatest)
     }
   }, [allJobs])
