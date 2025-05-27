@@ -30,8 +30,6 @@ const AccordionComponent: React.FC = () => {
   const { trainingCategories } = useTrainingCategories()
   const { categories: jobCategories } = useJobCategories()
 
-  console.log('cat', jobCategories);
-
 
   return (
     <AccordianWrapper>
@@ -52,7 +50,7 @@ const AccordionComponent: React.FC = () => {
 
         <Collapse in={openResources} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(!setOpenResources0) }}>
+            <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(!openResources0) }}>
               <ListItemIcon>
                 <SchoolOutlined />
               </ListItemIcon>
@@ -72,7 +70,7 @@ const AccordionComponent: React.FC = () => {
               </List>
             </Collapse>
 
-            <ListItemButtonStyled onClick={() => { setOpenResources0(false); setOpenResources1(!setOpenResources1) }}>
+            <ListItemButtonStyled onClick={() => { setOpenResources0(false); setOpenResources1(!openResources1) }}>
               <ListItemIcon>
                 <SchoolOutlined />
               </ListItemIcon>
@@ -102,6 +100,7 @@ const AccordionComponent: React.FC = () => {
           <ListItemText primary="Trainings" />
           {openTrainings ? <ExpandLess /> : <ExpandMore />}
         </ListItemButtonStyled>
+        
         <Collapse in={openTrainings} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButtonStyled onClick={() => { setOpenTrainings1(false); setOpenTrainings0(!openTrainings0) }}>
