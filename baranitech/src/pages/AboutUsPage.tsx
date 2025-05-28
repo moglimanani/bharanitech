@@ -17,23 +17,19 @@ Engineers to upskills in their employees & Jobs with personalized content and le
 solutions.  <br /><br />
 Today, we have evolved to provide a full suite of outsourcing services in the learning 
 and development field, positioning ourselves among Electrical Engineer with excellent training 
-programs. 
+programs.  <br /><br />
+<AboutUsDivStyled>WE STRIVE TO GO ALL IN AND GET EVEN BETTER</AboutUsDivStyled>
+We aim to offer adequate training solutions to most Engineering to improve their 
+Skills, innovation, competitiveness, and achieving impactful on their Job Roles
+<br /><br /> 
+Learning & Development is our core competency, which is why we are capable of 
+offering better, faster and affordable training solutions. By doing what we do best, 
+we allow you to focus on what you do best running your Skills Development.
       </AboutUsPara1Styled>
       <div> 
           <img src="/baraniTechLeader.jpg" alt="login" loading="lazy" />
         </div>
       </AboutUsDivWrapperStyled>
-      
-      <AboutUsDivStyled>WE STRIVE TO GO ALL IN AND GET EVEN BETTER</AboutUsDivStyled>
-      <AboutUsParaStyled>
-      We aim to offer adequate training solutions to most Engineering to improve their 
-      Skills, innovation, competitiveness, and achieving impactful on their Job Roles 
-      </AboutUsParaStyled>
-      <AboutUsParaStyled>
-      Learning & Development is our core competency, which is why we are capable of 
-offering better, faster and affordable training solutions. By doing what we do best, 
-we allow you to focus on what you do best running your Skills Development.
-      </AboutUsParaStyled>
      
     </AboutUsStyled>
   )
