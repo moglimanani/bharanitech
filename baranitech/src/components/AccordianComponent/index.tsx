@@ -50,20 +50,22 @@ const AccordionComponent: React.FC = () => {
 
         <Collapse in={openResources} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(!openResources0) }}>
-              <ListItemIcon>
+            <ListItemButtonStyled  onClick={() => { setOpenResources1(false); setOpenResources0(!openResources0) }}>
+              {/* <ListItemIcon>
                 <SchoolOutlined />
-              </ListItemIcon>
+              </ListItemIcon> */}
               <ListItemText primary="TrainingsProtection Relay Testing" />
-              {openResources0 ? <ExpandLess /> : <ExpandMore />}
+             <div>
+                  {openResources0 ? <ExpandLess /> : <ExpandMore />}
+              </div> 
             </ListItemButtonStyled>
             <Collapse in={openResources0} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {categories?.filter(item => item.category === 0)?.map((catRealy) => (
                   <ListItemButtonStyled>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <SchoolOutlined />
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary={catRealy.title} />
                   </ListItemButtonStyled>
                 ))}
@@ -71,9 +73,9 @@ const AccordionComponent: React.FC = () => {
             </Collapse>
 
             <ListItemButtonStyled onClick={() => { setOpenResources0(false); setOpenResources1(!openResources1) }}>
-              <ListItemIcon>
+              {/* <ListItemIcon>
                 <SchoolOutlined />
-              </ListItemIcon>
+              </ListItemIcon> */}
               <ListItemText primary="Equipment Testing" />
               {openResources1 ? <ExpandLess /> : <ExpandMore />}
             </ListItemButtonStyled>
@@ -81,9 +83,9 @@ const AccordionComponent: React.FC = () => {
               <List component="div" disablePadding>
                 {categories?.filter(item => item.category === 1)?.map((equipTest) => (
                   <ListItemButtonStyled>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <SchoolOutlined />
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary={equipTest.title} />
                   </ListItemButtonStyled>
                 ))}
@@ -104,9 +106,9 @@ const AccordionComponent: React.FC = () => {
         <Collapse in={openTrainings} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButtonStyled onClick={() => { setOpenTrainings1(false); setOpenTrainings0(!openTrainings0) }}>
-              <ListItemIcon>
+              {/* <ListItemIcon>
                 <SchoolOutlined />
-              </ListItemIcon>
+              </ListItemIcon> */}
               <ListItemText primary="Direct" />
               {openTrainings0 ? <ExpandLess /> : <ExpandMore />}
             </ListItemButtonStyled>
@@ -114,18 +116,18 @@ const AccordionComponent: React.FC = () => {
               <List component="div" disablePadding>
                 {trainingCategories?.map((training) => (
                   <ListItemButtonStyled>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <SchoolOutlined />
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary={training.title} />
                   </ListItemButtonStyled>
                 ))}
               </List>
             </Collapse>
             <ListItemButtonStyled onClick={() => { setOpenTrainings0(false); setOpenTrainings1(!openTrainings1) }}>
-              <ListItemIcon>
+              {/* <ListItemIcon>
                 <SchoolOutlined />
-              </ListItemIcon>
+              </ListItemIcon> */}
               <ListItemText primary="Online" />
               {openTrainings1 ? <ExpandLess /> : <ExpandMore />}
             </ListItemButtonStyled>
@@ -133,9 +135,9 @@ const AccordionComponent: React.FC = () => {
               <List component="div" disablePadding>
                 {trainingCategories?.map((training) => (
                   <ListItemButtonStyled>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <SchoolOutlined />
-                    </ListItemIcon>
+                    </ListItemIcon> */}
                     <ListItemText primary={training.title} />
                   </ListItemButtonStyled>
                 ))}
@@ -156,9 +158,9 @@ const AccordionComponent: React.FC = () => {
           <List component="div" disablePadding>
             {jobCategories?.map(item => (
               <ListItemButtonStyled key={`jobcat-${item.id}`}>
-                <ListItemIcon>
+                {/* <ListItemIcon>
                   <Briefcase />
-                </ListItemIcon>
+                </ListItemIcon> */}
                 <ListItemText primary={item.title} />
               </ListItemButtonStyled>
             ))}

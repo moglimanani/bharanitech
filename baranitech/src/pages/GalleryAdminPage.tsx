@@ -1,12 +1,15 @@
 import { Link, NavLink, Outlet } from "react-router";
 import GalleryList, { GalleryItem } from "../components/GalleryList";
-import { UseRequireUserSession } from "../hooks/useRequireUserSession"
-import { UseRestoreUserSession } from "../hooks/useRestoreUserSession"
+import { UseRequireUserSession } from "../hooks/useRequireUserSession";
+import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
+import { Grid, Container } from "@mui/material";
 import {
-  Grid,
-  Container,
-} from "@mui/material";
-import { AdminTitleStyled, GalleyAdminStyled, LearningResourcesStyled } from "./styles";
+  AdminTitleStyled,
+  GalleyAdminStyled,
+  LearningResourcesStyled,
+  NavAdminStyled,
+  WrapperAdminStyled,
+} from "./styles";
 
 const mockItems: GalleryItem[] = Array.from({ length: 20 }, (_, index) => ({
   id: index + 1,
@@ -15,30 +18,25 @@ const mockItems: GalleryItem[] = Array.from({ length: 20 }, (_, index) => ({
 }));
 
 export default function GalleryAdminPage() {
-  UseRequireUserSession()
-  UseRestoreUserSession()
+  UseRequireUserSession();
+  UseRestoreUserSession();
 
   return (
-    <Container >
-       <Grid container>
-         <Grid size={12}>
-                <AdminTitleStyled>
-                     Gallery Admin Page
-                </AdminTitleStyled>
-                <GalleyAdminStyled>
-                  <nav style={{ padding: '1rem' }}>
-                    <NavLink to='.'>Gallery</NavLink> | <NavLink to={`add`}>Add New</NavLink>
-                  </nav>
-
-                  <div style={{margin: '0 30px',}}>
-                      <Outlet />
-                  </div>
-                </GalleyAdminStyled>
-               
-          </Grid>
-       </Grid>
+    <Container>
+      <WrapperAdminStyled container>
+        <Grid size={12}>
+          <AdminTitleStyled>Gallery Admin Page</AdminTitleStyled>
+          <GalleyAdminStyled>
+            <nav>
+              <NavLink to=".">Gallery</NavLink>
+              <NavLink to={`add`}>Add New</NavLink>
+            </nav>
+          </GalleyAdminStyled>
+          <div style={{margin: '0 0 30px'}}>
+            <Outlet />
+          </div>
+        </Grid>
+      </WrapperAdminStyled>
     </Container>
-   
-  )
+  );
 }
-

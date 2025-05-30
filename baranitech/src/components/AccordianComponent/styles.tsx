@@ -9,6 +9,9 @@ export const ListItemButtonStyled = styled(ListItemButton)(({theme})=>({
     backgroundColor: theme.palette.flashPrimaryBGColor.main,
     marginBottom: '2px',
     borderRadius: '20px',
+    '& div > span': {
+        fontSize: '.88em',
+    },
     color: theme.palette.secondary.main,
     '& > [class*="MuiListItemIcon-root"]': {
         color: theme.palette.appBarColour.main,
