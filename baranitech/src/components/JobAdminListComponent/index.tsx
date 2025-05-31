@@ -208,7 +208,7 @@ const JobAdminListComponent: React.FC = () => {
                 >
                   <DeleteIcon />
                 </IconButton>
-                <IconButton
+                {/* <IconButton
                   size="small"
                   onClick={() => deleteHandler(item.id)}
                   color="error"
@@ -225,7 +225,7 @@ const JobAdminListComponent: React.FC = () => {
                   }}
                 >
                   <EditIcon />
-                </IconButton>
+                </IconButton> */}
               </Actions>
               <StyledCardContent>
                 <StyleDate>
@@ -244,7 +244,7 @@ const JobAdminListComponent: React.FC = () => {
                 </DescriptionStyle>
                 <JobStyle variant="body2">{item.title}</JobStyle>
                 <DescriptionStyle variant="body2">{item.description}</DescriptionStyle>
-                <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle>
+                {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
                 <VacancyStyle variant="body2">{item.total_vacancy}</VacancyStyle>
                 <AddressStyle variant="body2">{item.city}</AddressStyle>
                 <AddressStyle variant="body2">{item.state}</AddressStyle>

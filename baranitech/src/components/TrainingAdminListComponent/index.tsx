@@ -111,7 +111,7 @@ const TrainingAdminListComponent: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container>
       {/* <Typography variant="h4" gutterBottom>
         Training List
       </Typography> */}
@@ -121,14 +121,13 @@ const TrainingAdminListComponent: React.FC = () => {
 
       <Grid container spacing={2}>
         {trainings.map((training) => (
-          <Grid size={{ xs: 12, sm: 6 }} key={training.id}>
-            <StyledCard variant="outlined">
+          <Grid size={{ xs: 12, sm: 4 }} key={training.id}>
+            <StyledCard>
               <Actions>
                 <IconButton
                   size="small"
                   onClick={() => deleteHandler(training.id)}
                   color="error"
-                  style={{ background: "#ffffff" }}
                 >
                   <DeleteIcon />
                 </IconButton>
