@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-    TextField, Button, Box, Container, Typography, Alert,
+    TextField, Alert,
     MenuItem, Select, InputLabel, FormControl
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -29,10 +29,7 @@ const JobsAdminAddComponent: React.FC = () => {
     const {
         handleSubmit,
         control,
-        watch,
         reset,
-        setValue,
-        trigger,
         formState: { errors, isSubmitting, isValid },
     } = useForm<FormData>({
         resolver: yupResolver(AdminJobAddSchema),

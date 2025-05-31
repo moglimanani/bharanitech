@@ -23,7 +23,7 @@ function App() {
   }))
 
   const { user } = useUser()
-  const { categories, loading, error } = useYouTubeCategories()
+  const { loading, error } = useYouTubeCategories()
   const location = useLocation()
 
   const theme = useTheme();

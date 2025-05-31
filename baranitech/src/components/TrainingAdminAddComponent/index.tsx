@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Box, Button, Container, TextField, Typography, Alert,
     MenuItem, FormControl, InputLabel, Select,
@@ -11,7 +11,7 @@ import { InferType } from 'yup';
 import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
-import { TrainingCategory, useTrainingCategories } from '../../contexts/trainingCategoryContext';
+import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
 
 
 const ContainerStyle = styled(Container)(({ theme }) => ({
@@ -43,7 +43,6 @@ const TrainingAddComponent: React.FC = () => {
         control,
         handleSubmit,
         reset,
-        watch,
         formState: { errors, isSubmitting, isValid },
     } = useForm<FormData>({
         resolver: yupResolver(AdminTrainingAddSchema),

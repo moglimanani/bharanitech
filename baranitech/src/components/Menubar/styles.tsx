@@ -19,11 +19,11 @@ export const ActiveLink = styled(NavLink)(({ theme }) => ({
         color: theme.palette.appBarColour.dark,
     }
 }))
-export const ListItemTextStyled = styled(ListItemText)(({ theme }) => ({
+export const ListItemTextStyled = styled(ListItemText)(() => ({
     letterSpacing: '1px'
 }))
 
-export const LogoStyled = styled('img')(({ theme }) => ({
+export const LogoStyled = styled('img')(() => ({
     width: 'auto',
     height: 'auto'
 }))
@@ -40,7 +40,7 @@ export const BrandNameStyled = styled(Typography)(({ theme }) => ({
     }
 }))
 
-export const AppBarStyled = styled(Box)(({ theme }) => ({
+export const AppBarStyled = styled(Box)(() => ({
     // backgroundColor: theme.palette.appBarColour.main
    // background: 'yellow',
 }))

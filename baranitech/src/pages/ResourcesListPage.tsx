@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
-  Typography,
   Grid,
   Container,
   CircularProgress,
   Alert,
   Box,
-  Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { AdminTitleStyled, LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
-import { Margin } from '@mui/icons-material';
+import { AdminTitleStyled, LearnButtonStyled, ParaStyled, TitleStyled } from './styles';
 
 // Resource interface
 interface Resource {
@@ -23,7 +20,7 @@ interface Resource {
   type: string; // e.g., 'Article', 'Book', 'Video'
 }
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -112,7 +109,7 @@ const ResourcesListPage: React.FC = () => {
                 </ParaStyled>
               </CardContent>
               <Box sx={{ padding: 2 }}>
-                <LearnButtonStyled fullWidth variant="contained" color="primary" href={resource.link} target="_blank">
+                <LearnButtonStyled fullWidth variant="contained" color="primary" href={resource.link}>
                   Access Resource
                 </LearnButtonStyled>
               </Box>

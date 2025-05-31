@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { allJobsType, ApiResponse, JobCategoryType, JobsType } from '../types/jobs';
+import { allJobsType, ApiResponse, JobsType } from '../types/jobs';
 import httpService from '../api/httpService';
 
 const AllJobsContext = createContext<allJobsType | undefined>(undefined);

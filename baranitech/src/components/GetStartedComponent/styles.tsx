@@ -1,13 +1,13 @@
 
 import { Box, styled } from "@mui/material";
 
-export const BoxWrapperStyled = styled(Box)(({theme})=>({
+export const BoxWrapperStyled = styled(Box)(()=>({
   padding: '20px',
   display: 'flex',
   justifyContent: 'space-between'
 }))
 
-export const DivWrapperStyled = styled('div')(({theme})=>({
+export const DivWrapperStyled = styled('div')(()=>({
   padding: '20px',
   '& > h2': {
     color: '#fff',

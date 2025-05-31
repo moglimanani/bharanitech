@@ -1,5 +1,4 @@
 import { Badge, Paper, styled, Typography, Grid } from "@mui/material";
-import { color } from "framer-motion";
 
 export const VacanciesStyled = styled(Typography)(({ theme }) => ({
     justifyContent: 'flex-start',

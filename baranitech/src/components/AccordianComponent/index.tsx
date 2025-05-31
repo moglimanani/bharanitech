@@ -13,10 +13,12 @@ import {
   Image
 } from '@mui/icons-material';
 import { AccordianWrapper, ListItemButtonStyled } from './styles';
-import { Briefcase, NotebookText } from 'lucide-react';
 import { useYouTubeCategories } from '../../contexts/youtubeCategoryContext';
 import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
 import { useJobCategories } from '../../contexts/jobCategoryContext';
+import SchoolIcon from '@mui/icons-material/School';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 
 const AccordionComponent: React.FC = () => {
   const [openTrainings, setOpenTrainings] = useState(false);
@@ -42,7 +44,7 @@ const AccordionComponent: React.FC = () => {
         </ListItemButtonStyled>
         <ListItemButtonStyled onClick={() => { setOpenResources1(false); setOpenResources0(false); setOpenResources(!openResources) }}>
           <ListItemIcon>
-            <NotebookText />
+          <SchoolIcon />
           </ListItemIcon>
           <ListItemText primary="Resources" />
           {openResources ? <ExpandLess /> : <ExpandMore />}
@@ -97,7 +99,7 @@ const AccordionComponent: React.FC = () => {
 
         <ListItemButtonStyled onClick={() => { setOpenTrainings0(false); setOpenTrainings1(false); setOpenTrainings(!openTrainings) }}>
           <ListItemIcon>
-            <SchoolOutlined />
+            <CastForEducationIcon />
           </ListItemIcon>
           <ListItemText primary="Trainings" />
           {openTrainings ? <ExpandLess /> : <ExpandMore />}
@@ -149,7 +151,7 @@ const AccordionComponent: React.FC = () => {
 
         <ListItemButtonStyled onClick={() => setOpenJobs(!openJobs)}>
           <ListItemIcon>
-            <Briefcase />
+            <EngineeringIcon />
           </ListItemIcon>
           <ListItemText primary="Jobs" />
           {openJobs ? <ExpandLess /> : <ExpandMore />}

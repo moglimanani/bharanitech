@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Button,
   TextField,
   Typography,
   Grid,
@@ -8,14 +7,14 @@ import {
   CardMedia,
   CardContent,
   Alert,
-  IconButton,
+  IconButton
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminGalleryAddSchema } from '../../validationSchema/schema';
-import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGalleryStyled, TitleStyled } from './styles';
+import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGalleryStyled } from './styles';
 import httpService from '../../api/httpService';
 import { InferType } from 'yup';
 
@@ -165,7 +164,7 @@ const GalleryAdminAddForm: React.FC = () => {
 
         <ButtonPhotoStyled
           variant="contained"
-          component="label"
+          // component="label"
           startIcon={<PhotoCamera />}
           sx={{ mt: 2 }}
         >

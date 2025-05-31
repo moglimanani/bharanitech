@@ -2,21 +2,13 @@
 import React, { useState } from 'react';
 import {
   TextField,
-  Button,
-  Box,
   Container,
-  Typography,
   Grid,
   Alert,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
   styled,
   ContainerProps,
 } from '@mui/material';
-import { BoxContactStyled, GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
+import { GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ContactUsFormSchema } from '../validationSchema/schema';
@@ -62,7 +54,6 @@ const ContactPage: React.FC = () => {
   const [success, setSuccess] = useState(false)
   const { control, handleSubmit,
     formState,
-    setValue,
     trigger,
     reset } = useForm<FormData>({
       resolver: yupResolver(ContactUsFormSchema),

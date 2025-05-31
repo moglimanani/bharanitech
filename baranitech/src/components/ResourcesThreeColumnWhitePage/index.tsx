@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid, } from "@mui/material";
-import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, ImageDivStyledWhite, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledWhite, TitleDivStyledWhite } from "./styles";
+import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, PareBoxStyled, ThreeColumnStyledWhite, TitleDivStyledWhite } from "./styles";
 import { useAllResources } from "../../contexts/allResourcesContext";
 import { ResourceType } from "../../types/resources";
 

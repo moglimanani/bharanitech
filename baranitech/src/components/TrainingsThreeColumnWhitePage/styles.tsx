@@ -21,7 +21,7 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
   }))
 
 
-export const ThreeColumnStyledWhite = styled(Grid)(({theme})=>({
+export const ThreeColumnStyledWhite = styled(Grid)(()=>({
     display: 'flex',
     justifyContent: 'space-around',
     boxShadow: 'none !important',
@@ -56,7 +56,7 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     fontSize: '1.3em'
 }))
 
-export const ImageDivStyledWhite = styled('div')(({theme})=>({
+export const ImageDivStyledWhite = styled('div')(()=>({
     maxWidth: '400px',
     marginTop: '30px',
     padding: '0 20px',
@@ -65,7 +65,7 @@ export const ImageDivStyledWhite = styled('div')(({theme})=>({
         width: '100%',
     }
 }))
-export const ButtonWrapperStyledWhite = styled('div')(({theme})=>({
+export const ButtonWrapperStyledWhite = styled('div')(()=>({
    display: 'flex',
    justifyContent: 'flex-end'
 }))
@@ -80,7 +80,7 @@ export const ParaOneStyledWhite = styled('p')(({theme})=>({
        // overflow: 'scroll'
 }))
 
-export const TypographyStyledWhite = styled(Typography)(({theme})=>({
+export const TypographyStyledWhite = styled(Typography)(()=>({
     fontSize: '0.75em',
     margin: '0',
     textAlign: 'left',

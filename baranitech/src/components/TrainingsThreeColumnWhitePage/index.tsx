@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CardMedia, Grid, Typography, } from "@mui/material";
-import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, ImageDivStyledWhite, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledBlue, ThreeColumnStyledWhite, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
+import { Grid } from "@mui/material";
+import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, H2BoxStyled, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledBlue, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
 import { useAllTrainings } from "../../contexts/allTrainingsContext";
 import { TrainingType } from "../../types/trainings";
 

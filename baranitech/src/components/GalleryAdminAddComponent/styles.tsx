@@ -16,7 +16,7 @@ export const StyledContainer = styled(Container, {
     backgroundColor: theme.palette.background.paper,
 }))
 
-export const StyledForm = styled('form')(({ theme }) => ({
+export const StyledForm = styled('form')(() => ({
     width: '100%',
    // marginTop: theme.spacing(2),
 }));

@@ -7,7 +7,6 @@ import {
 } from '@mui/x-data-grid';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import httpService from '../../api/httpService';
-import { useDialog } from '../../contexts/dialogContext';
 
 export interface Category {
   id: number;
@@ -143,8 +142,7 @@ const columns: GridColDef<RegisteredUserDetails>[] = [
 // };
 
 const TrainingRegistedAdminListComponent: React.FC = () => {
-  const [error, setError] = React.useState<string | null>(null);
-  const { confirm } = useDialog();
+  const [_error, setError] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
 
   const [registeredUsers, setRegisteredUsers] = React.useState<RegisteredUserDetails[]>([])

@@ -16,7 +16,6 @@ import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
 import { useJobCategories } from "../../contexts/jobCategoryContext";
 import { format } from "date-fns";
-import { EditIcon } from "lucide-react";
 
 interface JobType {
   id: number | string;
@@ -38,20 +37,14 @@ interface ApiResponse {
 }
 
 // Styled components
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   position: "relative",
   height: "100%",
   display: "flex",
   flexDirection: "column",
 }));
 
-const VideoFrame = styled("iframe")(({ theme }) => ({
-  width: "100%",
-  height: 200,
-  border: 0,
-}));
-
-const StyledCardContent = styled(CardContent)(({ theme }) => ({
+const StyledCardContent = styled(CardContent)(() => ({
   flexGrow: 1,
 }));
 
@@ -86,7 +79,7 @@ const StyleDate = styled(Typography)(({ theme }) => ({
   marginBottom: '15px',
 }));
 
-const JobStyle = styled(Typography)(({ theme }) => ({
+const JobStyle = styled(Typography)(() => ({
   background: '#bdbdbd',
   padding: '5px',
   margin: '5px auto 5px',
@@ -95,12 +88,12 @@ const JobStyle = styled(Typography)(({ theme }) => ({
   borderRadius: '20px',
 }));
 
-const AddressStyle = styled(Typography)(({ theme }) => ({
+const AddressStyle = styled(Typography)(() => ({
   color: '#242105',
   fontSize: '11px',
 }));
 
-const DescriptionStyle = styled(Typography)(({ theme }) => ({
+const DescriptionStyle = styled(Typography)(() => ({
   padding: '10px 0'
 }));
 
@@ -114,20 +107,6 @@ const VacancyStyle = styled(Typography)(({ theme }) => ({
   height: '30px',
   position: 'absolute',
   left: '18px',
-  top: '134px',
-  paddingTop: '7px'
-}));
-
-
-const TypeVacancyStyle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.appBarColour.light,
-  fontSize: '12px',
-  borderRadius: '50%',
-  background: '#403f3d',
-  width: '30px',
-  height: '30px',
-  position: 'absolute',
-  right: '18px',
   top: '134px',
   paddingTop: '7px'
 }));
