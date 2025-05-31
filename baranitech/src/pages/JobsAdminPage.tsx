@@ -3,6 +3,8 @@ import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
 import { Grid, Container } from "@mui/material";
 import { AdminTitleStyled, GalleyAdminStyled, WrapperAdminStyled } from "./styles";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 
 export default function JobsAdminPage() {
   UseRequireUserSession();
@@ -20,8 +22,8 @@ export default function JobsAdminPage() {
         <Grid size={12}>
           <GalleyAdminStyled>
           <nav>
-              <NavLink to=".">Jobs</NavLink>
-              <NavLink to={`add`}>Add New</NavLink>
+              <NavLink to="."><FormatListNumberedIcon />  Jobs</NavLink>
+              <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
             </nav>
             </GalleyAdminStyled>
             <div style={{ margin: "0 0 30px" }}>

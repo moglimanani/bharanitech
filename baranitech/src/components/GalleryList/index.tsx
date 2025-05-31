@@ -6,10 +6,11 @@ import {
   CardContent,
   Typography,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import httpService from "../../api/httpService";
-import CloseIcon from "@mui/icons-material/Close";
 import { useDialog } from "../../contexts/dialogContext";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export interface GalleryItem {
   id: number;
@@ -38,6 +39,7 @@ interface GalleryResponse {
 const GalleryList: React.FC = () => {
   const [gallery, setGallery] = useState<PhotosType[]>([]);
   const { confirm } = useDialog();
+  const theme = useTheme();
   const fetchGallery = async () => {
     try {
       const res = await httpService.get<GalleryResponse>("/gallery");
@@ -113,13 +115,13 @@ const GalleryList: React.FC = () => {
                 top: 8,
                 right: 8,
                 backgroundColor: "rgba(255,255,255,0.8)",
+                color: theme.palette.appBarColour.main,
                 "&:hover": {
-                  backgroundColor: "rgba(255,0,0,0.8)",
-                  color: "white",
+                  backgroundColor: "rgba(255,255,255,0.8)",
                 },
               }}
             >
-              <CloseIcon fontSize="small" />
+              <DeleteIcon fontSize="small" />
             </IconButton>
             <CardMedia
               component="img"

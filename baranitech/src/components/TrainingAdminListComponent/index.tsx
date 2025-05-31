@@ -11,9 +11,13 @@ import {
   styled,
   Box,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import httpService from "../../api/httpService"; // Use your configured axios instance
 import { useDialog } from "../../contexts/dialogContext";
+import { ActionsBarStyled } from "../../pages/styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 
 export interface TrainingType {
   id: number;
@@ -56,6 +60,7 @@ const TrainingAdminListComponent: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { confirm } = useDialog();
+  const theme = useTheme();
   const fetchTrainings = async () => {
     try {
       const res = await httpService.get<ApiResponse>("/trainings");
@@ -113,24 +118,43 @@ const TrainingAdminListComponent: React.FC = () => {
         {trainings.map((training) => (
           <Grid size={{ xs: 12, sm: 4 }} key={training.id}>
             <StyledCard>
-              <Actions>
+            <ActionsBarStyled>
+                
+                <IconButton
+                  size="small"
+                  onClick={() => deleteHandler(training.id)}
+                  sx={{
+                    // position: "absolute",
+                    // top: 8,
+                    // right: 8,
+                    backgroundColor: "rgba(255,255,255,0.8)",
+                    color: theme.palette.appBarColour.main,
+                    "&:hover":{
+                      backgroundColor: "rgba(255,255,255,0.8)",
+                    }
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ActionsBarStyled>
+              {/* <Actions>
                 <IconButton
                   size="small"
                   onClick={() => deleteHandler(training.id)}
                   color="error"
                 >
-                  {/* <DeleteIcon /> */}
+                  <DeleteIcon />
                 </IconButton>
-              </Actions>
+              </Actions> */}
               <CardContent>
                 <Typography variant="h6">{training.title}</Typography>
-                <Typography variant="body2">
+                {/* <Typography variant="body2">
                   {training.description}
-                </Typography>
+                </Typography> */}
 
                 <Chip
-                  label={training.classification === "0" ? "Direct" : "Online"}
-                  color="primary"
+                  label={+training.classification === 0 ? "Direct" : "Online"}
+                  color={+training.classification === 0 ? "secondary" : "primary"}
                   size="small"
                   sx={{ mt: 1, mb: 1 }}
                 />
@@ -144,12 +168,12 @@ const TrainingAdminListComponent: React.FC = () => {
                 </Typography>
 
                 <Typography variant="body2" color="textSecondary">
-                  🕒 {training.total_hours} hrs • 💰 ₹{training.total_price}
+                  🕒 {training.total_hours} hrs • 💰 ${training.total_price}
                 </Typography>
 
-                <Typography variant="body2" color="textSecondary">
+                {/* <Typography variant="body2" color="textSecondary">
                   📘 TOC: {training.table_of_contents}
-                </Typography>
+                </Typography> */}
               </CardContent>
             </StyledCard>
           </Grid>

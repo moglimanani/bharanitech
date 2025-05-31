@@ -3,6 +3,8 @@ import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
 import { Grid, Container } from "@mui/material";
 import { AdminTitleStyled, GalleyAdminStyled, WrapperAdminStyled } from "./styles";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 
 export default function ResourceAdminPage() {
   UseRequireUserSession();
@@ -20,8 +22,8 @@ export default function ResourceAdminPage() {
           
           <GalleyAdminStyled>
           <nav>
-              <NavLink to=".">Resources</NavLink>
-              <NavLink to={`add`}>Add New</NavLink>
+              <NavLink to="."><FormatListNumberedIcon />  Resources</NavLink>
+              <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
             </nav>
             </GalleyAdminStyled>
             <div style={{margin: '0 0 30px'}}>

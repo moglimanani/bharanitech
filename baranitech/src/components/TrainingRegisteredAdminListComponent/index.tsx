@@ -84,7 +84,7 @@ const columns: GridColDef<RegisteredUserDetails>[] = [
     headerName: 'Training Price',
     width: 200,
     valueGetter: (_params, row) => {
-      return row?.training?.total_price ?? 'N/A'
+      return row?.training?.total_price ? `$ ${row?.training?.total_price}` : '$ 0'
     },
   },
    { field: 'user_name', headerName: 'Name', width: 150 },
@@ -104,18 +104,17 @@ const columns: GridColDef<RegisteredUserDetails>[] = [
         {params.row.requirements}
       </Typography>
     ),
+    cellClassName: 'cell-class',
   },
   {
     field: 'created_at',
-    headerName: 'Created Date',
+    headerName: 'Enquired Date',
     width: 180,
     valueFormatter: (params) => {
       return new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'short',
         day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
       }).format(new Date(params))
     }
 
@@ -191,6 +190,16 @@ const TrainingRegistedAdminListComponent: React.FC = () => {
         pageSizeOptions={[5, 10, 25]}
         pagination
         disableRowSelectionOnClick
+        sx={{
+          '& .cell-class': {
+            display: 'flex',
+            alignItems: 'center',
+            "& p":{
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }
+          },
+        }}
       />
     </Box>
   );

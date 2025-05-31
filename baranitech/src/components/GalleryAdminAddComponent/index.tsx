@@ -9,7 +9,6 @@ import {
   Alert,
   IconButton
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +16,7 @@ import { AdminGalleryAddSchema } from '../../validationSchema/schema';
 import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGalleryStyled } from './styles';
 import httpService from '../../api/httpService';
 import { InferType } from 'yup';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface PhotoPreview {
   file?: File;
@@ -164,7 +164,7 @@ const GalleryAdminAddForm: React.FC = () => {
 
         <ButtonPhotoStyled
           variant="contained"
-          // component="label"
+          component="label"
           startIcon={<PhotoCamera />}
           sx={{ mt: 2 }}
         >
@@ -201,10 +201,13 @@ const GalleryAdminAddForm: React.FC = () => {
                     top: 4,
                     right: 4,
                     backgroundColor: 'rgba(255,255,255,0.7)',
+                    "&:hover":{
+                      backgroundColor: 'rgba(255,255,255,0.7)'
+                    }
                   }}
                   onClick={() => handleRemovePhoto(index)}
                 >
-                  <CloseIcon fontSize="small" />
+                  <DeleteIcon fontSize="small" />
                 </IconButton>
                 <CardContent>
                   <Typography variant="body2" noWrap>
