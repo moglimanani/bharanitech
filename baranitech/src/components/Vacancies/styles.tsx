@@ -83,7 +83,6 @@ export const VacanciesStyled = styled(Typography)(({ theme }) => ({
     // fontFamily: 'Poetsen One',
     position: 'relative',
     '& > svg': {
-       marginTop: '5px',
        color: '#766B6B'
     },
     '& > span': {

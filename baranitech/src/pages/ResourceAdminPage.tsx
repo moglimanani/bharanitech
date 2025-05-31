@@ -10,11 +10,14 @@ export default function ResourceAdminPage() {
 
   return (
     <Container>
-      <WrapperAdminStyled container>
-        <Grid size={12}>
-          <AdminTitleStyled>
+      <Grid size={12} sx={{mb: 5}}>
+         <AdminTitleStyled>
             Resources Admin Page
           </AdminTitleStyled>
+      </Grid>
+      <WrapperAdminStyled container>
+        <Grid size={12}>
+          
           <GalleyAdminStyled>
           <nav>
               <NavLink to=".">Resources</NavLink>
