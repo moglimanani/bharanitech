@@ -37,8 +37,12 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     color: theme.palette.appBarColour.main,
     textAlign: 'left',
     padding: '10px 20px',
-    display: 'flex',
-   //marginBottom: '10px'
+    lineHeight: '1.5em',
+    height: '3em',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    width: '100%',
 }))
 
 export const ImageDivStyledWhite = styled('div')(({theme})=>({

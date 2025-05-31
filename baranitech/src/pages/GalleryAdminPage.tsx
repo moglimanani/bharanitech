@@ -23,9 +23,14 @@ export default function GalleryAdminPage() {
 
   return (
     <Container>
+      <Grid size={12} sx={{mb: 5}}>
+      <AdminTitleStyled>Gallery Admin Page</AdminTitleStyled>
+      </Grid>
+      
       <WrapperAdminStyled container>
+        
         <Grid size={12}>
-          <AdminTitleStyled>Gallery Admin Page</AdminTitleStyled>
+          
           <GalleyAdminStyled>
             <nav>
               <NavLink to=".">Gallery</NavLink>

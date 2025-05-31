@@ -10,11 +10,14 @@ export default function JobsAdminPage() {
 
   return (
     <Container>
-      <WrapperAdminStyled container>
-        <Grid size={12}>
-          <AdminTitleStyled>
-            Jobs Admin Page
+       <Grid size={12} sx={{mb: 5}}>
+         <AdminTitleStyled>
+          Jobs Admin Page
           </AdminTitleStyled>
+      </Grid>
+      <WrapperAdminStyled container>
+     
+        <Grid size={12}>
           <GalleyAdminStyled>
           <nav>
               <NavLink to=".">Jobs</NavLink>

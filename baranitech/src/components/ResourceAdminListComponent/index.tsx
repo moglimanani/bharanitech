@@ -62,6 +62,16 @@ const CategoryChip = styled(Chip)(({ theme }) => ({
   color: theme.palette.appBarColour.light,
 }));
 
+const TypographyStyled = styled(Typography)(({ theme }) => ({
+  lineHeight: '1.5em',
+  height: '1.5em',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  width: '100%',
+}));
+
+
 const Actions = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(1),
@@ -201,10 +211,10 @@ const ResourceAdminListComponent: React.FC = () => {
 
               <StyledCardContent>
                 <CategoryChip label={item.category?.title} size="small" />
-                <Typography variant="h6">{item.title}</Typography>
-                <Typography variant="body2" color="text.secondary">
+                <TypographyStyled variant="h6">{item.title}</TypographyStyled>
+                {/* <Typography variant="body2" color="text.secondary">
                   {item.description}
-                </Typography>
+                </Typography> */}
               </StyledCardContent>
             </StyledCard>
           </Grid>

@@ -21,10 +21,10 @@ export default function AdminPage() {
 
   return (
     <Container sx={{ mt: 1 }}>
-      <WrapperAdminStyled container>
-        <Grid size={12} sx={{mb: 5}}>
+      <Grid size={12} sx={{mb: 5}}>
           <AdminTitleStyled>Admin</AdminTitleStyled>
         </Grid>
+      <WrapperAdminStyled container>
         <Grid size={{ xs: 12, md: 3 }}>
           <AdminStyled>
             <div>Gallery</div>

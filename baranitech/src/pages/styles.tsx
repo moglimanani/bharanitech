@@ -169,7 +169,7 @@ export const AdminTitleStyled = styled(Typography)(({ theme }) => ({
   background: theme.palette.flashPrimaryBGColor.main,
   //margin: '30px 0',
   padding: "8px",
-  borderRadius: "0px 50px 50px 0px",
+  borderRadius: "12px 50px 50px 12px",
   maxWidth: "300px",
   textAlign: "left",
   fontWeight: "bold",
@@ -264,14 +264,14 @@ export const WrapperAdminStyled = styled(Grid)(({ theme }) => ({
  // background: theme.palette.appBarColour.light,
   background: 'rgb(4, 82, 95)',
   marginBottom: '30px',
-  padding: '5px',
-  borderRadius: '0px 20px 0px 20px',
+  padding: '20px',
+  borderRadius: '20px',
 }));
 
 export const AdminStyled = styled("div")(({ theme }) => ({
   display: "flex",
   padding: "20px",
-  margin: "0px 30px 30px 0px",
+  margin: "20px",
   flexDirection: "column",
   // boxShadow: theme.shadows[3],
   borderRadius: "20px",
@@ -305,7 +305,7 @@ export const AdminStyled = styled("div")(({ theme }) => ({
 export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
   // height: '100%',
   display: "flex",
-  margin: "30px auto",
+  margin: "20px auto 30px",
   fontSize: ".88em",
   fontFamily: "Comfortaa",
   // background: '#ffffff',
