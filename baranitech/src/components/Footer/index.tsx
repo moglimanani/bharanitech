@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 
 const Footer: React.FC = () => {

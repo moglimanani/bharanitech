@@ -38,20 +38,20 @@ interface ApiResponse {
 }
 
 // Styled components
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   position: "relative",
   height: "100%",
   display: "flex",
   flexDirection: "column",
 }));
 
-const VideoFrame = styled("iframe")(({ theme }) => ({
+const VideoFrame = styled("iframe")(() => ({
   width: "100%",
   height: 200,
   border: 0,
 }));
 
-const StyledCardContent = styled(CardContent)(({ theme }) => ({
+const StyledCardContent = styled(CardContent)(() => ({
   flexGrow: 1,
 }));
 
@@ -62,7 +62,7 @@ const CategoryChip = styled(Chip)(({ theme }) => ({
   color: theme.palette.appBarColour.light,
 }));
 
-const TypographyStyled = styled(Typography)(({ theme }) => ({
+const TypographyStyled = styled(Typography)(() => ({
   lineHeight: '1.5em',
   height: '1.5em',
   overflow: 'hidden',
@@ -79,11 +79,6 @@ const Actions = styled(Box)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
 }));
-
-interface YouTubeResourceListProps {
-  items: ResourceItem[];
-  onDelete?: (id: number) => void;
-}
 
 const getYouTubeEmbedUrl = (url: string): string | null => {
   const match = url.match(

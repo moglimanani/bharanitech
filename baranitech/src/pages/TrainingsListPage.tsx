@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-  Card,
   CardContent,
-  Typography,
   Grid,
   Container,
   Divider,
   Stack,
   Chip,
 } from '@mui/material';
-import { AdminTitleStyled, LearningResourcesStyled, ParaStyled, StackStyled, StyledWrapperDivCard, StyledWrapperStack, TitleStyled } from './styles';
+import { AdminTitleStyled, ParaStyled, StackStyled, StyledWrapperDivCard, TitleStyled } from './styles';
 
 // Define a type for training items
 interface Training {

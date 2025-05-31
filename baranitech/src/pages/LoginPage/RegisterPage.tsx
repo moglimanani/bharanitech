@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TextField,
-  Button,
   Container,
   Typography,
-  Avatar,
   Alert,
   Grid 
 } from '@mui/material';

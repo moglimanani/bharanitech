@@ -33,7 +33,7 @@ export const TitleDivStyled = styled('div')(({theme})=>({
     }
 }))
 
-export const ImageDivStyled = styled('div')(({theme})=>({
+export const ImageDivStyled = styled('div')(()=>({
     maxWidth: '400px',
     padding: '0 20px',
     marginBottom: '20px',
@@ -41,12 +41,12 @@ export const ImageDivStyled = styled('div')(({theme})=>({
         width: '100%',
     }
 }))
-export const ButtonWrapperStyled = styled('div')(({theme})=>({
+export const ButtonWrapperStyled = styled('div')(()=>({
    display: 'flex',
    justifyContent: 'flex-end'
 }))
 
-export const ParaOneStyled = styled('p')(({theme})=>({
+export const ParaOneStyled = styled('p')(()=>({
         fontSize: '0.88em',
         margin: '0',
         textAlign: 'left',

@@ -1,4 +1,4 @@
-import { AboutUsDivStyled, AboutUsDivWrapperStyled, AboutUsPara1Styled, AboutUsParaStyled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
+import { AboutUsDivStyled, AboutUsDivWrapperStyled, AboutUsPara1Styled, AboutUsStyled, AboutUsTitleStyled } from "./styles";
 
 export default function AboutUsPage() {
   return (

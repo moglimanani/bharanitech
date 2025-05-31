@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
-  Typography,
   Grid,
   Container,
   CircularProgress,
   Alert,
-  Box,
-  Button,
+  Box
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { AdminTitleStyled, LearnButtonStyled, LearningResourcesStyled, ParaStyled, TitleStyled } from './styles';
+import { AdminTitleStyled, LearnButtonStyled, ParaStyled, TitleStyled } from './styles';
 
 // Job interface
 interface Job {
@@ -22,7 +20,7 @@ interface Job {
   description: string;
 }
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',

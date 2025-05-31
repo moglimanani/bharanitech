@@ -8,10 +8,6 @@ import AboutUsPage from './pages/AboutUsPage';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
 import TestimonialPage from './pages/TestimonialPage';
-// @ts-ignore
-import "@fontsource/comfortaa";
-// @ts-ignore
-import "@fontsource-variable/montserrat";
 import LoginPage from './pages/LoginPage/LoginPage.tsx'
 import RegisterPage from './pages/LoginPage/RegisterPage'
 import JobsListPage from './pages/JobsListPage.tsx'
@@ -49,6 +45,34 @@ import TrainingRegistedAdminListComponent from './components/TrainingRegisteredA
 import { AllJobsProvider } from './contexts/allJobsContext.tsx'
 import { AllTrainingsProvider } from './contexts/allTrainingsContext.tsx'
 import { AllResourcesProvider } from './contexts/allResourcesContext.tsx'
+
+
+// Comfortaa - weights 300 to 700
+import '@fontsource/comfortaa/300.css';
+import '@fontsource/comfortaa/400.css';
+import '@fontsource/comfortaa/500.css';
+import '@fontsource/comfortaa/600.css';
+import '@fontsource/comfortaa/700.css';
+
+
+// Red Hat Display - normal and italic, weights 300 to 900
+import '@fontsource/red-hat-display/300.css';
+import '@fontsource/red-hat-display/400.css';
+import '@fontsource/red-hat-display/500.css';
+import '@fontsource/red-hat-display/600.css';
+import '@fontsource/red-hat-display/700.css';
+import '@fontsource/red-hat-display/800.css';
+import '@fontsource/red-hat-display/900.css';
+
+// Italic versions for Red Hat Display (if you use italic)
+import '@fontsource/red-hat-display/300-italic.css';
+import '@fontsource/red-hat-display/400-italic.css';
+import '@fontsource/red-hat-display/500-italic.css';
+import '@fontsource/red-hat-display/600-italic.css';
+import '@fontsource/red-hat-display/700-italic.css';
+import '@fontsource/red-hat-display/800-italic.css';
+import '@fontsource/red-hat-display/900-italic.css';
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -9,8 +9,7 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import { NavLink } from "react-router";
-
+import { ButtonProps } from "@mui/material/Button";
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
   padding: "10px 10px 10px 0px",
   textAlign: "left",
@@ -200,7 +199,7 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.main,
 }));
 
-export const LearnButtonStyled = styled(Button)(({ theme }) => ({
+export const LearnButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
@@ -209,7 +208,7 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   padding: "10px 20px",
 }));
 
-export const StyledWrapperDivCard = styled(Card)(({ theme }) => ({
+export const StyledWrapperDivCard = styled(Card)(() => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
@@ -217,7 +216,7 @@ export const StyledWrapperDivCard = styled(Card)(({ theme }) => ({
   borderRadius: "20px",
 }));
 
-export const StackStyled = styled(Stack)(({ theme }) => ({
+export const StackStyled = styled(Stack)(() => ({
   position: "absolute",
   top: "3px",
   right: "0px",
@@ -260,7 +259,7 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 
-export const WrapperAdminStyled = styled(Grid)(({ theme }) => ({
+export const WrapperAdminStyled = styled(Grid)(() => ({
  // background: theme.palette.appBarColour.light,
   background: 'rgb(4, 82, 95)',
   marginBottom: '30px',

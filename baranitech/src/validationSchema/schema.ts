@@ -38,14 +38,12 @@ export const AdminGalleryAddSchema = yup.object({
         .required("Title is required")
         .nullable()
         .transform(value => (value === '' ? null : value))
-        .notRequired()
         .min(3, 'At least 3 characters'),
 
     description: yup.string()
         .required("Title is required")
         .nullable()
         .transform(value => (value === '' ? null : value))
-        .notRequired()
         .min(10, 'At least 10 characters'),
 
     photos: yup.array()

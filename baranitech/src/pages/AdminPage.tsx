@@ -5,7 +5,6 @@ import {
   AdminButtonStyled,
   AdminStyled,
   AdminTitleStyled,
-  LearningResourcesStyled,
   WrapperAdminStyled,
 } from "./styles";
 import { useNavigate } from "react-router";

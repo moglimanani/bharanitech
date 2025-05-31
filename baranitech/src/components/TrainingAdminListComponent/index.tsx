@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import httpService from "../../api/httpService"; // Use your configured axios instance
 import { useDialog } from "../../contexts/dialogContext";
-import { DeleteIcon } from "lucide-react";
 
 export interface TrainingType {
   id: number;
@@ -37,22 +36,13 @@ interface ApiResponse {
   data: any;
 }
 // Styled components
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)(() => ({
   position: "relative",
   height: "100%",
   display: "flex",
   flexDirection: "column",
 }));
 
-const VideoFrame = styled("iframe")(({ theme }) => ({
-  width: "100%",
-  height: 200,
-  border: 0,
-}));
-
-const StyledCardContent = styled(CardContent)(({ theme }) => ({
-  flexGrow: 1,
-}));
 const Actions = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(1),
@@ -129,7 +119,7 @@ const TrainingAdminListComponent: React.FC = () => {
                   onClick={() => deleteHandler(training.id)}
                   color="error"
                 >
-                  <DeleteIcon />
+                  {/* <DeleteIcon /> */}
                 </IconButton>
               </Actions>
               <CardContent>

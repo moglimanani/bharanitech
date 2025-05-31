@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, CardMedia, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import {
   ButtonOneStyled,
   ButtonWrapperStyled,
@@ -72,11 +72,11 @@ const ThreeColumnPage: React.FC = () => {
             <CachedIcon /> Resources
           </TitleDivStyled>
           <CardMediaStyled
-            component="iframe"
-            height="200"
+            // component={"iframe" as any}
+            // height="200"
             src={`https://www.youtube.com/embed/nei0jR83Ozg?list=PLjbsavmwdHjcz_Vnc-Rz6I7M_9B53zPSk`}
             title={'Upcoming Trainings'}
-            allowFullScreen
+            // allowFullScreen
           />
           <ParaOneStyled>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

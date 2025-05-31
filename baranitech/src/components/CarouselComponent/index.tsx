@@ -1,5 +1,5 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { CarouselButtonStyled, CarouselImageStyled, CarouselPtagStyled, CarouselStyled } from "./styles";
+import { CarouselImageStyled, CarouselPtagStyled, CarouselStyled } from "./styles";
 
 const CarouselComponent = () => {
   return (

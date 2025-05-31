@@ -16,7 +16,7 @@ export const CarouselStyled = styled(Carousel)(({theme})=>({
  
 }))
 
-export const CarouselImageStyled = styled('img')(({theme})=>({
+export const CarouselImageStyled = styled('img')(()=>({
   // width: '60% !important',
   borderRadius: '20px',
  // float: 'right'

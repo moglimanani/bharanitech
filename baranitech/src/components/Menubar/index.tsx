@@ -1,24 +1,17 @@
 import React, { memo, useState } from 'react';
 import {
-  AppBar,
-  Toolbar,
   Typography,
-  IconButton,
-  Button,
   Drawer,
-  List,
   ListItem,
   ListItemButton,
-  ListItemText,
   Box,
   useTheme,
   useMediaQuery,
-  styled,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, NavLink, useMatch, useParams } from 'react-router';
+import { Link, useMatch, useParams } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import {ActiveLink, LogoStyled, BrandNameStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ListItemTextStyled} from './styles'
+import {ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ListItemTextStyled} from './styles'
 
 const menuItems = [
   { path: '/', name: 'Home' },

@@ -1,6 +1,6 @@
-import {  Box, Grid, styled, CardMedia} from "@mui/material";
+import {  Box, Grid, styled} from "@mui/material";
 
-export const BoxWhiteStyled = styled(Box)(({theme})=>({
+export const BoxWhiteStyled = styled(Box)(()=>({
   background: '#fff',
    
 }))
@@ -45,7 +45,7 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     width: '100%',
 }))
 
-export const ImageDivStyledWhite = styled('div')(({theme})=>({
+export const ImageDivStyledWhite = styled('div')(()=>({
     maxWidth: '400px',
     marginTop: '30px',
     padding: '0 20px',
@@ -54,7 +54,7 @@ export const ImageDivStyledWhite = styled('div')(({theme})=>({
         width: '100%',
     }
 }))
-export const ButtonWrapperStyledWhite = styled('div')(({theme})=>({
+export const ButtonWrapperStyledWhite = styled('div')(()=>({
    display: 'flex',
    justifyContent: 'flex-end',
    marginBottom: '20px'

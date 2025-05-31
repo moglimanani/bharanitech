@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router";
 import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
 import { Grid, Container } from "@mui/material";
-import { AdminTitleStyled, GalleyAdminStyled, LearningResourcesStyled, WrapperAdminStyled } from "./styles";
+import { AdminTitleStyled, GalleyAdminStyled, WrapperAdminStyled } from "./styles";
 
 export default function JobsAdminPage() {
   UseRequireUserSession();

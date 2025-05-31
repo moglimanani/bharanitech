@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgress, Typography, Box, Stack } from '@mui/material';
+import { Typography, Box, Stack } from '@mui/material';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { styled, keyframes } from '@mui/material/styles';
 
