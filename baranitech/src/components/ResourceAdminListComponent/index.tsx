@@ -15,6 +15,8 @@ import { useErrorAlert } from "../../contexts/errorAlertContext";
 import { useAxiosErrorHandler } from "../../hooks/useAxiosErrorHandler";
 import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
+import { ActionsBarStyled } from "../../pages/styles";
+import theme from "../../theme";
 
 interface categoryType {
   id: number | string;
@@ -72,13 +74,13 @@ const TypographyStyled = styled(Typography)(() => ({
 }));
 
 
-const Actions = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: theme.spacing(1),
-  right: theme.spacing(1),
-  display: "flex",
-  gap: theme.spacing(1),
-}));
+// const Actions = styled(Box)(({ theme }) => ({
+//   position: "absolute",
+//   top: theme.spacing(1),
+//   right: theme.spacing(1),
+//   display: "flex",
+//   gap: theme.spacing(1),
+// }));
 
 const getYouTubeEmbedUrl = (url: string): string | null => {
   const match = url.match(
@@ -168,33 +170,39 @@ const ResourceAdminListComponent: React.FC = () => {
                 borderRadius: "20px",
               }}
             >
-              <Actions>
+              <ActionsBarStyled>
                 <IconButton
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   size="small"
+                  sx={{
+                    backgroundColor: "rgba(255,255,255,0.8)",
+                    color: theme.palette.appBarColour.main,
+                    "&:hover":{
+                      backgroundColor: "rgba(255,255,255,0.8)",
+                    }
+                  }}
                 >
                   <OpenInNewIcon />
                 </IconButton>
                 <IconButton
                   size="small"
                   onClick={() => deleteHandler(item.id)}
-                  color="error"
                   sx={{
-                    position: "absolute",
-                    top: 8,
-                    right: 8,
+                    // position: "absolute",
+                    // top: 8,
+                    // right: 8,
                     backgroundColor: "rgba(255,255,255,0.8)",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,0,0,0.8)",
-                      color: "white",
-                    },
+                    color: theme.palette.appBarColour.main,
+                    "&:hover":{
+                      backgroundColor: "rgba(255,255,255,0.8)",
+                    }
                   }}
                 >
                   <DeleteIcon />
                 </IconButton>
-              </Actions>
+              </ActionsBarStyled>
 
               {embedUrl && (
                 <VideoFrame

@@ -169,11 +169,12 @@ export const AdminTitleStyled = styled(Typography)(({ theme }) => ({
   //margin: '30px 0',
   padding: "8px",
   borderRadius: "12px 50px 50px 12px",
-  maxWidth: "300px",
   textAlign: "left",
   fontWeight: "bold",
   fontFamily: "Poetsen One",
   letterSpacing: "1px",
+  maxWidth: 'fit-content',
+  paddingRight: '16px'
 }));
 
 export const AdminButtonStyled = styled(Button)(({ theme }) => ({
@@ -305,8 +306,10 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
   // height: '100%',
   display: "flex",
   margin: "20px auto 30px",
-  fontSize: ".88em",
-  fontFamily: "Comfortaa",
+  fontSize: "1em",
+  // fontFamily: "Comfortaa",
+  fontFamily: "cursive",
+
   // background: '#ffffff',
   "& > nav": {
     // color: '#127B93',
@@ -318,11 +321,21 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
     a: {
       // color: '#127B93',
       color: theme.palette.secondary.main,
-      padding: "10px",
       borderRadius: "20px",
       boxShadow: theme.shadows[3],
       background: theme.palette.flashPrimaryBGColor.main,
       textDecoration: "none",
+      justifyContent: "center",
+      display: "flex",
+      alignItems: "center",
+      padding: "8px 16px",
+      clipPath: 'polygon(20px 0, 100% 0, 100% 100%, 20px 100%, 0 50%)',
+      "& svg":{
+        paddingRight: '8px'
+      },
+      "&:first-child": {
+        clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%)'
+      }
     },
     "a:hover": {
       color: theme.palette.appBarColour.main,
@@ -330,3 +343,11 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
     },
   },
 }));
+
+export const ActionsBarStyled = styled(Box)(({theme})=>({
+  position: "absolute",
+  top: theme.spacing(1),
+  right: theme.spacing(1),
+  display: "flex",
+  gap: theme.spacing(1),
+}))

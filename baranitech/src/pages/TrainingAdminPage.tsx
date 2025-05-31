@@ -7,6 +7,8 @@ import {
   GalleyAdminStyled,
   WrapperAdminStyled,
 } from "./styles";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 
 export default function TrainingAdminPage() {
   UseRequireUserSession();
@@ -21,8 +23,8 @@ export default function TrainingAdminPage() {
         <Grid size={12}>
           <GalleyAdminStyled>
             <nav>
-              <NavLink to=".">Trainings</NavLink>
-              <NavLink to={`add`}>Add New</NavLink>
+              <NavLink to="."><FormatListNumberedIcon />  Trainings</NavLink>
+              <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
             </nav>
           </GalleyAdminStyled>
           <div style={{ margin: "0 0 30px" }}>
