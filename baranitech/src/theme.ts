@@ -7,12 +7,18 @@ declare module '@mui/material/styles' {
     orange: Palette['primary'];
     buttonPrimaryBGColor: Palette['primary'];
     flashPrimaryBGColor: Palette['primary'];
+    pinkColour: Palette['primary'];
+    purpleLight: Palette['primary'];
+    gold: Palette['primary'];
   }
   interface PaletteOptions {
     appBarColour?: PaletteOptions['primary'];
     orange?: PaletteOptions['primary'];
     buttonPrimaryBGColor?: PaletteOptions['primary'];
     flashPrimaryBGColor?: PaletteOptions['primary'];
+    pinkColour?: PaletteOptions['primary'];
+    purpleLight?: PaletteOptions['primary'];
+    gold?: PaletteOptions['primary'];
   }
 }
 
@@ -43,6 +49,16 @@ const theme = createTheme({
     },
     flashPrimaryBGColor: {
       main: '#c4f4ff'
+    },
+    pinkColour:{
+      main: '#ef476f'
+    },
+    purpleLight:{
+      main: "#9b9ece",
+      dark: "#6d326d"
+    },
+    gold:{
+      main: "#cca000",
     }
    
   },

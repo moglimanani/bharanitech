@@ -129,7 +129,6 @@ const GalleryAdminAddForm: React.FC = () => {
         <TitleGalleryStyled variant="h5" gutterBottom>
           Add Gallery
         </TitleGalleryStyled>
-
         <Controller
           name="title"
           control={control}

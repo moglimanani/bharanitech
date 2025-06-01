@@ -17,6 +17,7 @@ import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
 import { ActionsBarStyled } from "../../pages/styles";
 import theme from "../../theme";
+import { getYouTubeEmbedUrl } from "../../helper";
 
 interface categoryType {
   id: number | string;
@@ -82,12 +83,6 @@ const TypographyStyled = styled(Typography)(() => ({
 //   gap: theme.spacing(1),
 // }));
 
-const getYouTubeEmbedUrl = (url: string): string | null => {
-  const match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
-  );
-  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-};
 // const videos: ResourceItem[] = [
 //     {
 //       id: 1,

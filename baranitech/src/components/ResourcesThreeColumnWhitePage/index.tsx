@@ -3,6 +3,7 @@ import { Grid, } from "@mui/material";
 import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, CardMediaStyled, H2BoxStyled, PareBoxStyled, ThreeColumnStyledWhite, TitleDivStyledWhite } from "./styles";
 import { useAllResources } from "../../contexts/allResourcesContext";
 import { ResourceType } from "../../types/resources";
+import { getYouTubeEmbedUrl } from "../../helper";
 
 const ResourcesThreeColumnWhitePage: React.FC = () => {
   const [resources, setResources] = useState<ResourceType[]>([])
@@ -20,27 +21,33 @@ const ResourcesThreeColumnWhitePage: React.FC = () => {
       <PareBoxStyled>In the digital age, YouTube isn't just for entertainment—it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: </PareBoxStyled>
       <Grid container spacing={2}>
         {
-          resources.map((item: ResourceType, id: number)=> (
+          resources.map((item: ResourceType, id: number)=> {
+            console.log(item.title, item.url ? JSON.parse(`"${item.url.trim()}"`) : '');
+            
+            return (
             <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`learningres-${id}-${item.id}`}>
             <CardMediaStyled>
+              {getYouTubeEmbedUrl(item.url) !== null && (
               <iframe
                 height="200"
-                src={item.url}
+                src={getYouTubeEmbedUrl(item.url) || ''}
                 title={item.title}
                 allowFullScreen
                 width='100%'
               />
+              )}
             </CardMediaStyled>
             <TitleDivStyledWhite>{item.title}</TitleDivStyledWhite>
             {/* <ParaOneStyledWhite>
              {item.description ? item.description : '-'}
             </ParaOneStyledWhite> */}
-            <ButtonWrapperStyledWhite>
+            {/* <ButtonWrapperStyledWhite>
               <ButtonOneStyledWhite>View More</ButtonOneStyledWhite>
-            </ButtonWrapperStyledWhite>
+            </ButtonWrapperStyledWhite> */}
   
           </ThreeColumnStyledWhite>
-          ))
+          )
+})
         }
       </Grid>
     </BoxWhiteStyled>
