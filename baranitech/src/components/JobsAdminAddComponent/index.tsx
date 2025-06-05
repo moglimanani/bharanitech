@@ -3,7 +3,7 @@ import {
     TextField, Alert,
     MenuItem, Select, InputLabel, FormControl
 } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, Resolver, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminJobAddSchema } from '../../validationSchema/schema';
 import { InferType } from 'yup';
@@ -13,7 +13,7 @@ import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { useJobCategories } from '../../contexts/jobCategoryContext';
 
-type FormData = InferType<typeof AdminJobAddSchema>;
+type FormData = InferType<typeof AdminJobAddSchema> ;
 
 interface ApiResponse {
     status: boolean;
@@ -32,7 +32,7 @@ const JobsAdminAddComponent: React.FC = () => {
         reset,
         formState: { errors, isSubmitting, isValid },
     } = useForm<FormData>({
-        resolver: yupResolver(AdminJobAddSchema),
+        resolver: yupResolver(AdminJobAddSchema) as Resolver<FormData>,
         mode: 'onTouched',
         reValidateMode: 'onBlur',
         defaultValues: {

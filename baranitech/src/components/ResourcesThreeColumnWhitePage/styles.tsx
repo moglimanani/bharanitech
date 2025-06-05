@@ -10,6 +10,9 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      margin: '5px 0',
      padding: '10px 0 0 20px',
      color: theme.palette.appBarColour.main,
+     [theme.breakpoints.down('sm')]: {
+        padding: '10px 0 0 10px',
+     }
   }))
 
   export const PareBoxStyled = styled('p')(({theme})=>({
@@ -18,6 +21,9 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      padding: '0 0 0 20px',
      fontSize: '1em',
      color: theme.palette.secondary.main,
+     [theme.breakpoints.down('sm')]: {
+        padding: '10px 0 0 10px',
+     }
   }))
 
 
@@ -35,7 +41,7 @@ export const ThreeColumnStyledWhite = styled(Grid)(({theme})=>({
 
 export const TitleDivStyledWhite = styled('div')(({theme})=>({
     color: theme.palette.appBarColour.main,
-    textAlign: 'left',
+    textAlign: 'center',
     padding: '10px 20px',
     lineHeight: '1.5em',
     height: '3em',
@@ -87,10 +93,12 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
 
 export const CardMediaStyled = styled(Box)(({theme})=>({
     margin: '20px 20px 5px',
-    width: '92%',
+    // width: '92%',
     [theme.breakpoints.down('sm')]: {
         // background: 'Yellow',
-         height: '220px'
+         height: '220px',
+         margin: '20px 0px 5px',
+         width: '100%'
      }
    
 }))

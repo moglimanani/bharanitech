@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import {
     Box, Button, Container, TextField, Typography, Alert,
     MenuItem, FormControl, InputLabel, Select,
-    styled
+    styled,
+    InputAdornment
 } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminTrainingAddSchema } from '../../validationSchema/schema';
 import { InferType } from 'yup';
@@ -43,9 +44,10 @@ const TrainingAddComponent: React.FC = () => {
         control,
         handleSubmit,
         reset,
+        watch,
         formState: { errors, isSubmitting, isValid },
     } = useForm<FormData>({
-        resolver: yupResolver(AdminTrainingAddSchema),
+        resolver: yupResolver(AdminTrainingAddSchema) as Resolver<FormData>,
         mode: 'onTouched',
         reValidateMode: 'onBlur',
         defaultValues: {
@@ -64,10 +66,10 @@ const TrainingAddComponent: React.FC = () => {
             type: trainingCategories[0]?.title
         },
     });
-
+    const classification = watch('classification');
 
     const { showError } = useErrorAlert();
-    useAxiosErrorHandler(showError)
+    useAxiosErrorHandler(showError);
 
 
     const onSubmit = async (data: FormData) => {
@@ -81,9 +83,9 @@ const TrainingAddComponent: React.FC = () => {
             formData.append('classification', data.classification);
             formData.append('total_hours', data.totalHours.toString());
             formData.append('total_price', data.totalPrice.toString());
-            formData.append('city', data.city);
-            formData.append('state', data.state);
-            formData.append('country', data.country);
+            if (data.city) formData.append('city', data.city);
+            if (data.state) formData.append('state', data.state);
+            if (data.country) formData.append('country', data.country);
             formData.append('table_of_contents', data.tableOfContents);
             formData.append('location', data.location);
 
@@ -100,7 +102,6 @@ const TrainingAddComponent: React.FC = () => {
             showError?.('Failed to submit the form. Please try again.');
         }
     };
-
   
     return (
         <ContainerStyle maxWidth="sm">
@@ -152,7 +153,13 @@ const TrainingAddComponent: React.FC = () => {
                     ['country', 'Country'],
                     ['tableOfContents', 'Table of Contents'],
                     ['location', 'Location'],
-                ].map(([name, label]) => (
+                ] .filter(([name]) => {
+                    // Hide location fields if classification is '1' (online)
+                    if (+classification === 1 && ['city', 'state', 'country'].includes(name)) {
+                      return false;
+                    }
+                    return true;
+                  }).map(([name, label]) => (
                     <Controller
                         key={name}
                         name={name as keyof FormData}
@@ -165,6 +172,9 @@ const TrainingAddComponent: React.FC = () => {
                                 margin="normal"
                                 type={name.includes('Date') ? 'date' : name.includes('Price') || name.includes('Hours') ? 'number' : 'text'}
                                 InputLabelProps={name.includes('Date') ? { shrink: true } : undefined}
+                                InputProps={{
+                                    startAdornment: name.includes('Price') ? <InputAdornment position="start">$</InputAdornment> : null,
+                                  }}
                                 error={!!errors[name as keyof FormData]}
                                 helperText={errors[name as keyof FormData]?.message}
                             />

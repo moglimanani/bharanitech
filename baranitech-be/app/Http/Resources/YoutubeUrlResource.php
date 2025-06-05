@@ -15,6 +15,7 @@ class YoutubeUrlResource extends JsonResource
             'title' => $this->title,
             'url' => $this->url,
             'description' => $this->description,
+            'language' => $this->language
         ];
     }
 }

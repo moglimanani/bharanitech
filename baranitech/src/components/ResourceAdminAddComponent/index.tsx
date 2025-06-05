@@ -12,6 +12,7 @@ import { LearnButtonResStyled, StyledContainer, StyledForm, TitleResStyled } fro
 import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
+import { getLanguageType } from '../../helper';
 
 type FormData = InferType<typeof AdminResourceAddSchema>;
 interface YouTubeCategory {
@@ -48,7 +49,8 @@ const ResourceAdminAddComponent: React.FC = () => {
             description: '',
             url: '',
             ctype: '',
-            classification: '0'
+            classification: '0',
+            language: '0'
         }
     });
 
@@ -71,6 +73,7 @@ const ResourceAdminAddComponent: React.FC = () => {
         formData.append('description', data.description ?? '');
         formData.append('type', type.toString());
         formData.append('url', data.url ?? '');
+        formData.append('language', data.language ?? 0);
 
         try {
             const res = await httpService.post<ApiResponse>('/youtube', formData);
@@ -124,6 +127,24 @@ const ResourceAdminAddComponent: React.FC = () => {
                                         {item.title}
                                     </MenuItem>
                                 ))}
+                            </Select>
+                        )}
+                    />
+                </FormControl>
+
+                <FormControl fullWidth margin="normal">
+                    <InputLabel>Language</InputLabel>
+                    <Controller
+                        name="language"
+                        control={control}
+                        render={({ field }) => (
+                            <Select label="language" {...field}>
+                                {
+                                    getLanguageType.map((lang) => (
+                                        <MenuItem value={lang.id}>{lang.name}</MenuItem>
+                                    ))
+                                }
+                               
                             </Select>
                         )}
                     />

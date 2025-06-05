@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   AdminTitleStyled,
   GalleyAdminStyled,
@@ -15,7 +15,7 @@ export default function TrainingAdminPage() {
   UseRestoreUserSession();
 
   return (
-    <Container>
+    <Grid>
       <Grid size={12} sx={{ mb: 5 }}>
         <AdminTitleStyled>Trainings Admin Page</AdminTitleStyled>
       </Grid>
@@ -27,11 +27,13 @@ export default function TrainingAdminPage() {
               <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
             </nav>
           </GalleyAdminStyled>
-          <div style={{ margin: "0 0 30px" }}>
+          <hr />
+
+          <div style={{ margin: "20px 0" }}>
             <Outlet />
           </div>
         </Grid>
       </WrapperAdminStyled>
-    </Container>
+    </Grid>
   );
 }

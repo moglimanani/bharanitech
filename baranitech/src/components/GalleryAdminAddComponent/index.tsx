@@ -10,7 +10,7 @@ import {
   IconButton
 } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AdminGalleryAddSchema } from '../../validationSchema/schema';
 import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGalleryStyled } from './styles';
@@ -22,7 +22,6 @@ interface PhotoPreview {
   file?: File;
   url: string;
 }
-
 
 type FormData = InferType<typeof AdminGalleryAddSchema>;
 
@@ -40,7 +39,7 @@ const GalleryAdminAddForm: React.FC = () => {
     trigger,
     reset
   } = useForm<FormData>({
-    resolver: yupResolver(AdminGalleryAddSchema),
+    resolver: yupResolver(AdminGalleryAddSchema) as Resolver<FormData>,
     mode: 'onChange',
     reValidateMode: 'onBlur',
     defaultValues: {
@@ -129,7 +128,6 @@ const GalleryAdminAddForm: React.FC = () => {
         <TitleGalleryStyled variant="h5" gutterBottom>
           Add Gallery
         </TitleGalleryStyled>
-
         <Controller
           name="title"
           control={control}

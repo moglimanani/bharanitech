@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
   Stack,
+  Dialog,
 } from "@mui/material";
 import { ButtonProps } from "@mui/material/Button";
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
@@ -70,6 +71,7 @@ export const AboutUsStyled = styled("div")(({ theme }) => ({
   textAlign: "left",
   [theme.breakpoints.down("sm")]: {
     padding: "0px",
+    margin: '0px 16px'
   },
 }));
 
@@ -102,11 +104,15 @@ export const AboutUsDivWrapperStyled = styled("div")(({ theme }) => ({
   display: "flex",
   color: theme.palette.appBarColour.light,
   fontSize: "0.88em",
+  flexDirection: "column",
+  textAlign: 'justify',
+  paddingRight: '250px',
+  position: 'relative',
   "& > div": {
     width: "100%",
     height: "100%",
     [theme.breakpoints.down("sm")]: {
-      marginLeft: "-20px",
+      // marginLeft: "-20px",
     },
   },
   "& > div > img": {
@@ -127,9 +133,8 @@ export const AboutUsDivWrapperStyled = styled("div")(({ theme }) => ({
 
 export const AboutUsPara1Styled = styled("p")(({ theme }) => ({
   // background: 'yellow',
-  maxWidth: "80%",
   margin: "0",
-  padding: "0 0 20px",
+  padding: "0 20px 20px 0",
   color: theme.palette.appBarColour.light,
   fontSize: "0.88em",
   [theme.breakpoints.down("sm")]: {
@@ -141,13 +146,13 @@ export const AboutUsPara1Styled = styled("p")(({ theme }) => ({
 export const AboutUsDivStyled = styled("div")(({ theme }) => ({
   // background: 'yellow',
   margin: "10px 0 20px",
-  maxWidth: "300px",
   padding: "15px 20px",
   color: theme.palette.appBarColour.main,
   background: theme.palette.flashPrimaryBGColor.main,
   fontWeight: "bold",
   borderRadius: "8px 50px 50px 8px",
   fontSize: "0.88em",
+  maxWidth: 'fit-content',
   [theme.breakpoints.down("sm")]: {
     padding: "20px",
   },
@@ -261,11 +266,10 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
 }));
 
 export const WrapperAdminStyled = styled(Grid)(() => ({
- // background: theme.palette.appBarColour.light,
+  // background: theme.palette.appBarColour.light,
   background: 'rgb(4, 82, 95)',
   marginBottom: '30px',
   padding: '20px',
-  borderRadius: '20px',
 }));
 
 export const AdminStyled = styled("div")(({ theme }) => ({
@@ -277,6 +281,16 @@ export const AdminStyled = styled("div")(({ theme }) => ({
   borderRadius: "20px",
   fontFamily: "Poetsen One",
   background: theme.palette.appBarColour.light,
+  "&:hover": {
+    cursor: 'pointer',
+    backgroundColor: 'aliceblue',
+    "& div": {
+      color: theme.palette.pinkColour.main
+    },
+    "& svg": {
+      color: theme.palette.pinkColour.main
+    }
+  },
   "& > div": {
     color: theme.palette.appBarColour.main,
     fontSize: "1.3em",
@@ -330,7 +344,7 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
       alignItems: "center",
       padding: "8px 16px",
       clipPath: 'polygon(20px 0, 100% 0, 100% 100%, 20px 100%, 0 50%)',
-      "& svg":{
+      "& svg": {
         paddingRight: '8px'
       },
       "&:first-child": {
@@ -344,10 +358,55 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
   },
 }));
 
-export const ActionsBarStyled = styled(Box)(({theme})=>({
+export const ActionsBarStyled = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(1),
   right: theme.spacing(1),
   display: "flex",
   gap: theme.spacing(1),
+}))
+
+export const DialogStyled = styled(Dialog)(({ theme }) => ({
+  background: 'rgba(250, 250, 250, 0.8)',
+  "& .MuiPaper-root": {
+    backgroundColor: theme.palette.purpleLight.dark,
+    padding: '16px',
+    "h2": {
+      color: theme.palette.common.white,
+      padding: 0
+    },
+    "hr": {
+      color: theme.palette.common.white,
+      width: '100%'
+    },
+    "& .MuiDialogContent-root": {
+      padding: "0 0 16px 0",
+      "p": {
+        color: theme.palette.common.white,
+        fontFamily: 'fantacy',
+      }
+    },
+    "button": {
+      background: theme.palette.common.white,
+      color: theme.palette.purpleLight.dark,
+
+      "&:hover": {
+        background: theme.palette.gold.main,
+        color: theme.palette.common.white
+      }
+    }
+  }
+}))
+
+export const ImageClientStyled = styled("img")(({theme})=>({
+  right: '16px',
+  width: '230px',
+  position: 'absolute',
+  boxShadow: '0 4px 20px rgb(228 255 197 / 50%)',
+  [theme.breakpoints.down("sm")]: {
+    position: 'relative',
+    right: 'auto',
+    width: '100%',
+    marginTop: '20px'
+  }
 }))

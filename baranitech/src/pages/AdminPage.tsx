@@ -1,6 +1,6 @@
 import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   AdminButtonStyled,
   AdminStyled,
@@ -19,20 +19,18 @@ export default function AdminPage() {
   const navigate = useNavigate();
 
   return (
-    <Container sx={{ mt: 1 }}>
-      <Grid size={12} sx={{mb: 5}}>
-          <AdminTitleStyled>Admin</AdminTitleStyled>
-        </Grid>
+    <Grid>
+      <Grid size={12} sx={{ mb: 5 }}>
+        <AdminTitleStyled>Home</AdminTitleStyled>
+      </Grid>
       <WrapperAdminStyled container>
         <Grid size={{ xs: 12, md: 3 }}>
-          <AdminStyled>
+          <AdminStyled onClick={() =>
+            navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+          }>
             <div>Gallery</div>
             <div>
-              <AdminButtonStyled
-                onClick={() =>
-                  navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
-                }
-              >
+              <AdminButtonStyled>
                 <CollectionsIcon sx={{ fontSize: "8em" }} />
               </AdminButtonStyled>
             </div>
@@ -88,6 +86,6 @@ export default function AdminPage() {
           </AdminStyled>
         </Grid>
       </WrapperAdminStyled>
-    </Container>
+    </Grid>
   );
 }

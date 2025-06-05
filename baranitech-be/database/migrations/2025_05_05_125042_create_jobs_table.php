@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('type')->constrained('job_categories'); // Foreign key referencing job_categories table
             $table->integer('total_vacancy');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('company');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('company')->nullable();
             $table->text('description');
             $table->string('title');
             $table->timestamps();

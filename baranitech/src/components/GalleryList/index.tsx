@@ -115,9 +115,10 @@ const GalleryList: React.FC = () => {
                 top: 8,
                 right: 8,
                 backgroundColor: "rgba(255,255,255,0.8)",
-                color: theme.palette.appBarColour.main,
+                color: theme.palette.pinkColour.main,
                 "&:hover": {
                   backgroundColor: "rgba(255,255,255,0.8)",
+                  zoom: 1.1
                 },
               }}
             >
@@ -128,7 +129,7 @@ const GalleryList: React.FC = () => {
               height="200"
               image={`${import.meta.env.VITE_BE_IMAGE_PATH}${item.photos[0]}`}
               alt={item.title}
-              style={{ borderRadius: "20px" }}
+              style={{ borderRadius: "20px 20px 0px 0px" }}
             />
             <CardContent>
               <Typography variant="body2" component="div">

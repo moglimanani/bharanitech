@@ -1,4 +1,4 @@
-import { Container, ContainerProps, Button, Typography } from "@mui/material";
+import { Container, ContainerProps, Button, Typography, ButtonProps } from "@mui/material";
 import { styled } from '@mui/material/styles';
 // import Container, { ContainerProps } from '@mui/material/Container';
 
@@ -36,7 +36,7 @@ export const ButtonStyled = styled(Button)(({theme})=>({
     justifyContent: 'space-around',
 }))
 
-export const ButtonPhotoStyled = styled(Button)(({theme})=>({
+export const ButtonPhotoStyled = styled(Button)<ButtonProps>(({theme})=>({
     fontSize: '0.88em',
     textAlign: 'center',
     margin: '0 auto',

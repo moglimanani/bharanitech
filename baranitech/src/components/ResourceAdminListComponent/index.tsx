@@ -5,8 +5,7 @@ import {
   Typography,
   IconButton,
   Grid,
-  Chip,
-  Box,
+  Chip
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -17,6 +16,7 @@ import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
 import { ActionsBarStyled } from "../../pages/styles";
 import theme from "../../theme";
+import { getLanguageType, getYouTubeEmbedUrl } from "../../helper";
 
 interface categoryType {
   id: number | string;
@@ -33,6 +33,7 @@ export interface ResourceItem {
   title: string;
   url: string; // YouTube video URL
   description: string;
+  language: number;
 }
 interface ApiResponse {
   status: boolean;
@@ -82,12 +83,6 @@ const TypographyStyled = styled(Typography)(() => ({
 //   gap: theme.spacing(1),
 // }));
 
-const getYouTubeEmbedUrl = (url: string): string | null => {
-  const match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
-  );
-  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-};
 // const videos: ResourceItem[] = [
 //     {
 //       id: 1,
@@ -160,7 +155,8 @@ const ResourceAdminListComponent: React.FC = () => {
     <Grid container spacing={3}>
       {youtubes.map((item) => {
         const embedUrl = getYouTubeEmbedUrl(item.url);
-
+        const languageType = getLanguageType.find(ltype => +item.language === +ltype.id)?.name ?? ''
+        
         return (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
             <StyledCard
@@ -214,6 +210,7 @@ const ResourceAdminListComponent: React.FC = () => {
 
               <StyledCardContent>
                 <CategoryChip label={item.category?.title} size="small" />
+                <CategoryChip label={languageType} size="small" />
                 <TypographyStyled variant="h6">{item.title}</TypographyStyled>
                 {/* <Typography variant="body2" color="text.secondary">
                   {item.description}

@@ -54,3 +54,15 @@ export const validatePhone = (phone: string): string => {
   
     return '';
   };
+
+ export const getYouTubeEmbedUrl = (url: string): string | null => {
+    const match = url.match(
+      /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
+    );
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+
+  export const getLanguageType = [{
+    id: 0, name: 'English'},
+    {id: 1, name: 'தமிழ்'}
+  ]

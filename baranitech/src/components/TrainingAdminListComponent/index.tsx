@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Container,
   Typography,
   CircularProgress,
   Alert,
@@ -106,7 +105,7 @@ const TrainingAdminListComponent: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Grid>
       {/* <Typography variant="h4" gutterBottom>
         Training List
       </Typography> */}
@@ -179,7 +178,7 @@ const TrainingAdminListComponent: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 

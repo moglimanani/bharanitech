@@ -6,7 +6,9 @@ import {
     DialogContentText,
     DialogActions,
     Button,
+    useTheme,
 } from '@mui/material';
+import { DialogStyled } from '../pages/styles';
 
 interface ConfirmDialogOptions {
     title?: string;
@@ -31,6 +33,7 @@ export const useDialog = () => {
 export const DialogProvider = ({ children }: { children: ReactNode }) => {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<ConfirmDialogOptions | null>(null);
+    const theme = useTheme()
 
     const confirm = (opts: ConfirmDialogOptions) => {
         setOptions(opts);
@@ -50,8 +53,9 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
     return (
         <DialogContext.Provider value={{ confirm }}>
             {children}
-            <Dialog open={open} onClose={handleCancel}>
+            <DialogStyled open={open} onClose={handleCancel} hideBackdrop>
                 <DialogTitle>{options?.title || 'Confirm'}</DialogTitle>
+                <hr />
                 <DialogContent>
                     <DialogContentText>
                         {options?.content || 'Are you sure you want to proceed?'}
@@ -59,11 +63,11 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCancel}>Cancel</Button>
-                    <Button onClick={handleConfirm} color="error" autoFocus>
+                    <Button onClick={handleConfirm} autoFocus>
                         Confirm
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </DialogStyled>
         </DialogContext.Provider>
     );
 };

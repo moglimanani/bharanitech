@@ -18,10 +18,12 @@ return new class extends Migration
         });
 
         // Seed default categories
-        \DB::table('job_categories')->insert([
+         DB::table('job_categories')->insert([
             ['id' => 1, 'title' => 'T&C Engineering'],
             ['id' => 2, 'title' => 'Protection Engineering'],
             ['id' => 3, 'title' => 'SCADA Engineering'],
+            ['id' => 4, 'title' => 'Supervisor'],
+            ['id' => 5, 'title' => 'Maintainance Engineer']   
         ]);
     }
 

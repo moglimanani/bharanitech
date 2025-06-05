@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { UseRequireUserSession } from "../hooks/useRequireUserSession";
 import { UseRestoreUserSession } from "../hooks/useRestoreUserSession";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import { AdminTitleStyled, WrapperAdminStyled } from "./styles";
 
 export default function TrainingRegisteredAdminPage() {
@@ -9,7 +9,7 @@ export default function TrainingRegisteredAdminPage() {
   UseRestoreUserSession();
 
   return (
-    <Container>
+    <Grid>
       <Grid size={12} sx={{ mb: 5 }}>
         <AdminTitleStyled>Trainings Registered Admin Page</AdminTitleStyled>
       </Grid>
@@ -22,6 +22,6 @@ export default function TrainingRegisteredAdminPage() {
           </div>
         </Grid>
       </WrapperAdminStyled>
-    </Container>
+    </Grid>
   );
 }

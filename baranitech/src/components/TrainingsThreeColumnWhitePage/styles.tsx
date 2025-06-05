@@ -10,6 +10,9 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      margin: '0 0 10px',
      padding: '10px 0 0 20px',
      color: theme.palette.appBarColour.light,
+     [theme.breakpoints.down('sm')]: {
+        padding: '10px 0 0 10px',
+     }
   }))
 
   export const PareBoxStyled = styled('p')(({theme})=>({
@@ -18,6 +21,9 @@ export const H2BoxStyled = styled('h2')(({theme})=>({
      padding: '0 0 0 20px',
      fontSize: '1em',
       color: theme.palette.flashPrimaryBGColor.main,
+      [theme.breakpoints.down('sm')]: {
+        padding: '10px 0 0 10px',
+     }
   }))
 
 
