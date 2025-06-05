@@ -32,10 +32,10 @@ class JobController extends Controller
             'type' => 'required|exists:job_categories,id',
             'title' => 'required|string|max:255',
             'total_vacancy' => 'required|integer',
-            'city' => 'required|string',
-            'state' => 'required|string',
-            'country' => 'required|string',
-            'company' => 'required|string',
+            'city' => 'nullable|string',
+            'state' => 'nullable|string',
+            'country' => 'nullable|string',
+            'company' => 'nullable|string',
             'description' => 'required|string',
         ]);
 

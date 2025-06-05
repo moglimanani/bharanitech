@@ -41,10 +41,9 @@ export const AdminGalleryAddSchema = yup.object({
         .min(3, 'At least 3 characters'),
 
     description: yup.string()
-        .required("Title is required")
         .nullable()
-        .transform(value => (value === '' ? null : value))
-        .min(10, 'At least 10 characters'),
+        .optional()
+        .transform(value => (value === '' ? null : value)),
 
     photos: yup.array()
         .of(
@@ -87,6 +86,7 @@ export const AdminResourceAddSchema = yup.object().shape({
         .required('YouTube URL is required')
         .matches(youtubeUrlRegex, 'Enter a valid YouTube URL'),
     description: yup.string().required('Description is required'),
+    language: yup.string().required('Language is required'),
 })
 
 export const AdminJobAddSchema = yup.object().shape({
@@ -97,10 +97,10 @@ export const AdminJobAddSchema = yup.object().shape({
         })
         .moreThan(0, 'Total vacancy must be greater than 0')
         .required('Total Vacancy is required'),
-    city: yup.string().required('City is required'),
-    state: yup.string().required('State is required'),
-    country: yup.string().required('Country is required'),
-    company: yup.string().required('Company is required'),
+    city: yup.string().optional(),
+    state: yup.string().optional(),
+    country: yup.string().optional(),
+    company: yup.string().optional(),
     description: yup.string().required('Description is required'),
     type: yup.string().required('Category is required'),
 })
@@ -150,9 +150,21 @@ export const AdminTrainingAddSchema = yup.object().shape({
     classification: yup.string().oneOf(['0', '1']).required(),
     totalHours: yup.number().positive().required(),
     totalPrice: yup.number().positive().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    country: yup.string().required(),
+    city: yup.string().when('classification', {
+        is: "0", //online
+        then: schema => schema.required('City is required'),
+        otherwise: schema => schema.notRequired(),
+      }),
+    state: yup.string().when('classification', {
+        is: "0", //online
+        then: schema => schema.required('City is required'),
+        otherwise: schema => schema.notRequired(),
+      }),
+    country: yup.string().when('classification', {
+        is: "0", //online
+        then: schema => schema.required('City is required'),
+        otherwise: schema => schema.notRequired(),
+      }),
     tableOfContents: yup.string().required(),
     location: yup.string().required(),
 });

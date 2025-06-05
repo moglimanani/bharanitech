@@ -61,3 +61,8 @@ export const validatePhone = (phone: string): string => {
     );
     return match ? `https://www.youtube.com/embed/${match[1]}` : null;
   };
+
+  export const getLanguageType = [{
+    id: 0, name: 'English'},
+    {id: 1, name: 'தமிழ்'}
+  ]

@@ -38,6 +38,7 @@ class YoutubeUrlController extends Controller
                 'title' => 'required|string|max:255',
                 'url' => 'required|url|unique:youtube_urls,url',
                 'description' => 'nullable|string',
+                'language' => 'nullable|in:0,1',
             ]);
 
             if ($validator->fails()) {
@@ -56,6 +57,7 @@ class YoutubeUrlController extends Controller
                 'url' => $request->url,
                 'description' => $request->description,
                 'type' => $request->type,
+                'language' => $request->input('language', 0)
             ]);
             $video->load('category'); 
 
@@ -107,6 +109,7 @@ class YoutubeUrlController extends Controller
                 'title' => 'nullable|string|max:255',
                 'url' => 'nullable|url|unique:youtube_urls,url,' . $video->id,
                 'description' => 'nullable|string',
+                'language' => 'nullable|in:0,1',
             ]);
 
             if ($validator->fails()) {
@@ -138,6 +141,7 @@ class YoutubeUrlController extends Controller
                 // 'video_id' => $videoId ?? $video->video_id, // Only update if URL is provided
                 'description' => $request->input('description', $video->description),
                 'type' => $request->input('type', $video->type), // Default to current value if not provided
+                'language' => $request->input('language', $video->language), // retain old if not given
             ]);
             // $video->load('category'); 
 

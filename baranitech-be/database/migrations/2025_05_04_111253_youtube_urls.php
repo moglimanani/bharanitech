@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('url', 2048)->unique();
             $table->text('description')->nullable();
+            $table->text('language')->default(0); // 0 => English, 1 => Tamil
             $table->timestamps();
         });
     }

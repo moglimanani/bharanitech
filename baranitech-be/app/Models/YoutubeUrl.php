@@ -14,6 +14,7 @@ class YoutubeUrl extends Model
         'title',
         'url',
         'description',
+        'language'
     ];
 
     public function category()
