@@ -72,3 +72,9 @@ export const validatePhone = (phone: string): string => {
     category: number; // 0 or 1
     title: string;
   }
+
+  export const toInputDateFormat = (dateStr: string): string => {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return ''; // invalid date
+    return date.toISOString().split('T')[0]; // "YYYY-MM-DD"
+  };

@@ -8,14 +8,14 @@ import {
   CardContent,
   Chip,
   styled,
-  Box,
   IconButton,
-  useTheme,
 } from "@mui/material";
 import httpService from "../../api/httpService"; // Use your configured axios instance
 import { useDialog } from "../../contexts/dialogContext";
-import { ActionsBarStyled } from "../../pages/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ActionWrapper } from "../commonStyles";
+import { useNavigate } from "react-router";
+import EditIcon from '@mui/icons-material/Edit';
 
 
 export interface TrainingType {
@@ -46,20 +46,12 @@ const StyledCard = styled(Card)(() => ({
   flexDirection: "column",
 }));
 
-const Actions = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: theme.spacing(1),
-  right: theme.spacing(1),
-  display: "flex",
-  gap: theme.spacing(1),
-}));
-
 const TrainingAdminListComponent: React.FC = () => {
   const [trainings, setTrainings] = useState<TrainingType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { confirm } = useDialog();
-  const theme = useTheme();
+  const navigate = useNavigate();
   const fetchTrainings = async () => {
     try {
       const res = await httpService.get<ApiResponse>("/trainings");
@@ -117,34 +109,23 @@ const TrainingAdminListComponent: React.FC = () => {
         {trainings.map((training) => (
           <Grid size={{ xs: 12, sm: 4 }} key={training.id}>
             <StyledCard>
-            <ActionsBarStyled>
-                
+            <ActionWrapper>
                 <IconButton
+                  aria-label="edit"
+                  size="small"
+                  onClick={() => navigate(`edit/${training.id}`)}
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
                   size="small"
                   onClick={() => deleteHandler(training.id)}
-                  sx={{
-                    // position: "absolute",
-                    // top: 8,
-                    // right: 8,
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    color: theme.palette.appBarColour.main,
-                    "&:hover":{
-                      backgroundColor: "rgba(255,255,255,0.8)",
-                    }
-                  }}
                 >
-                  <DeleteIcon />
+                  <DeleteIcon fontSize="small" />
                 </IconButton>
-              </ActionsBarStyled>
-              {/* <Actions>
-                <IconButton
-                  size="small"
-                  onClick={() => deleteHandler(training.id)}
-                  color="error"
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Actions> */}
+              </ActionWrapper>
+             
               <CardContent>
                 <Typography variant="h6">{training.title}</Typography>
                 {/* <Typography variant="body2">
