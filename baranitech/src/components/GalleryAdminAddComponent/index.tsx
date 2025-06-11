@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextField,
   Typography,
@@ -17,7 +17,8 @@ import { ButtonPhotoStyled, ButtonStyled, StyledContainer, StyledForm, TitleGall
 import httpService from '../../api/httpService';
 import { InferType } from 'yup';
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import { useNavigate, useParams } from 'react-router';
+import { useMatch } from 'react-router-dom';
 interface PhotoPreview {
   file?: File;
   url: string;
@@ -53,6 +54,52 @@ const GalleryAdminAddForm: React.FC = () => {
   const [photos, setPhotos] = useState<PhotoPreview[]>([]);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL}/${import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL}`
+  const ifItsEditPage = useMatch(fullEditPath);
+  const params = useParams()
+  const navigate = useNavigate()
+
+  const getParticularRecord = async () => {
+    try {
+      const res = await httpService.get<GalleryResponse>(`/gallery/${params.pid}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (res.status) {
+        console.log(res);
+        setValue('title', res.data.title)
+        setValue('description', res.data.description ?? '')
+        // Prefill image previews (read from public storage URL)
+        const photoPreviews: PhotoPreview[] = res.data.photos.map((path: string) => ({
+          url: `${import.meta.env.VITE_BE_IMAGE_PATH}/${path}`,
+        }));
+
+        setPhotos(photoPreviews);
+
+        // Optional: set value in react-hook-form if needed for validation
+        setValue('photos', photoPreviews as any, { shouldValidate: true });
+
+      } else {
+        console.log('nnnnn');
+
+        // optional: show a toast or alert here
+        navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+      }
+    } catch (err) {
+      console.error(err);
+      navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+    }
+  }
+  useEffect(() => {
+    if (ifItsEditPage) {
+      // get particular api
+      getParticularRecord()
+
+    }
+  }, [ifItsEditPage])
+
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -117,16 +164,67 @@ const GalleryAdminAddForm: React.FC = () => {
     }
   };
 
+  const handleUpdate = async (data: FormData) => {
+    const formData = new FormData();
+    formData.append('title', data.title ?? '');
+    formData.append('description', data.description ?? '');
+    formData.append('_method', 'PUT');
+
+    // const oldPhotos = photos.filter(photo => !photo.file && photo.url).map(photo => photo.url);
+    const oldPhotos = photos
+      .filter(p => !p.file && p.url)
+      .map(p => {
+        const path = new URL(p.url).pathname;
+        return path.replace(/^\/?storage\//, '').replace(/^\/?photos\//, 'photos/'); // ✅ strips "storage/"
+      });
+
+    const newPhotos = photos.filter(photo => photo.file instanceof File);
+    console.log('update oldPhotos', oldPhotos, `${import.meta.env.VITE_BE_IMAGE_PATH}`);
+    // ✅ Append existing photo paths
+    oldPhotos.forEach((path) => {
+      formData.append('existingPhotos[]', path); // string paths of old photos
+    });
+
+
+    // ✅ Append new photo files
+    newPhotos.forEach((photo) => {
+      formData.append('photos[]', photo.file!);
+    });
+
+    try {
+      const res = await httpService.post<GalleryResponse>(`/gallery/${params.pid}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (res.status) {
+        setOpenSnackbar(true);
+        reset()
+        setPhotos([]);
+        setValue('photos', [], { shouldValidate: true });
+        trigger('photos');
+        navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL);
+      } else {
+        // optional: show a toast or alert here
+        navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+
   return (
     <StyledContainer maxWidth="xs">
-      <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
+      <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
         {openSnackbar && (
           <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-            Gallery added successfully!
+            {ifItsEditPage ? 'Gallery added successfully!' : 'Gallery updated successfully!'}
           </Alert>
         )}
         <TitleGalleryStyled variant="h5" gutterBottom>
-          Add Gallery
+          {ifItsEditPage ? 'Edit Gallery' : 'Add Gallery'}
         </TitleGalleryStyled>
         <Controller
           name="title"
@@ -199,7 +297,7 @@ const GalleryAdminAddForm: React.FC = () => {
                     top: 4,
                     right: 4,
                     backgroundColor: 'rgba(255,255,255,0.7)',
-                    "&:hover":{
+                    "&:hover": {
                       backgroundColor: 'rgba(255,255,255,0.7)'
                     }
                   }}
@@ -216,7 +314,6 @@ const GalleryAdminAddForm: React.FC = () => {
             </Grid>
           ))}
         </Grid>
-
         <ButtonStyled
           type="submit"
           variant="contained"
@@ -224,8 +321,10 @@ const GalleryAdminAddForm: React.FC = () => {
           sx={{ mt: 4 }}
           disabled={!isValid}
         >
-          Submit
+          {ifItsEditPage ? 'Update' : 'Submit'}
         </ButtonStyled>
+
+
       </StyledForm>
     </StyledContainer>
   );

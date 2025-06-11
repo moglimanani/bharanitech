@@ -112,7 +112,7 @@ createRoot(document.getElementById('root')!).render(
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL} element={<GalleryAdminPage />}>
                                 <Route index element={<GalleryList />} />
                                 <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ID_URL} element={<GalleryAdminPage />} />
-                                <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL} element={<GalleryAdminPage />} />
+                                <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL} element={<GalleryAddAdminPage />} />
                                 <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_ADD_URL} element={<GalleryAddAdminPage />} />
                               </Route>
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL} element={<ResourceAdminPage />}>

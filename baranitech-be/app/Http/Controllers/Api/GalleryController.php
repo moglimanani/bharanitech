@@ -7,6 +7,7 @@ use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class GalleryController extends Controller
 {
@@ -89,8 +90,8 @@ class GalleryController extends Controller
         ]);
     }
 
-    // Update a gallery by ID
-    public function update(Request $request, $id)
+    // Get a single gallery by ID
+    public function show($id)
     {
         $gallery = Gallery::find($id);
 
@@ -104,11 +105,35 @@ class GalleryController extends Controller
             );
         }
 
+        return response()->json(
+            [
+                'status' => true,
+                'message' => 'Gallery retrieved successfully.',
+                'data' => $gallery,
+            ],
+            200,
+        );
+    }
+
+    public function update(Request $request, $id)
+    {
+        $gallery = Gallery::find($id);
+        if (!$gallery) {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Gallery not found.',
+                ],
+                404,
+            );
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'photos' => 'sometimes|required|array',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image files
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'existingPhotos' => 'sometimes|array',
+            'existingPhotos.*' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -122,31 +147,43 @@ class GalleryController extends Controller
             );
         }
 
-        // Handle file uploads (if any)
-        $photos = $gallery->photos;
-        if ($request->hasFile('photos')) {
-            // Delete old photos from storage
-            foreach ($photos as $photo) {
-                Storage::disk('public')->delete($photo); // Delete old photos
-            }
+        $validatedData = $validator->validated();
 
-            // Store new photos
-            $photos = [];
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store('photos', 'public'); // Store in 'photos' directory inside the 'public' disk
-                $photos[] = $path;
+        // Step 1: Normalize existing gallery photos
+        $currentPhotos = is_array($gallery->photos) ? $gallery->photos : json_decode($gallery->photos, true) ?? [];
+
+        $finalPhotos = [];
+
+        // Step 2: Clean and normalize input existingPhotos
+        $existingPhotos = $request->input('existingPhotos', []);
+        $existingPhotos = array_map(function ($url) {
+            return str_replace([url('/storage/') . '/', url('/storage')], '', $url); // normalize
+        }, $existingPhotos);
+
+        // Step 3: Remove deleted photos
+        foreach ($currentPhotos as $oldPhoto) {
+            if (!in_array($oldPhoto, $existingPhotos)) {
+                Storage::disk('public')->delete($oldPhoto);
+            } else {
+                $finalPhotos[] = $oldPhoto;
             }
         }
 
-        $validatedData = $validator->validated();
-        $validatedData['photos'] = $photos; // Save the new file paths
+        // Step 4: Add new photo uploads
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('photos', 'public');
+                $finalPhotos[] = $path;
+            }
+        }
+        $validatedData['photos'] = $finalPhotos;
 
         $gallery->update($validatedData);
 
         return response()->json([
-            'status' => 'success',
-            'data' => $gallery,
+            'status' => true,
             'message' => 'Gallery updated successfully.',
+            'data' => $gallery,
         ]);
     }
 
