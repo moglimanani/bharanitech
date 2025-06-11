@@ -13,6 +13,7 @@ import httpService from '../../api/httpService';
 import { useErrorAlert } from '../../contexts/errorAlertContext';
 import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { getLanguageType } from '../../helper';
+import { useMatch, useNavigate, useParams } from 'react-router';
 
 type FormData = InferType<typeof AdminResourceAddSchema>;
 interface YouTubeCategory {
@@ -23,14 +24,19 @@ interface YouTubeCategory {
 interface ApiResponse {
     status: boolean;
     data: any;
-  }
+}
 const ResourceAdminAddComponent: React.FC = () => {
     const { categories } = useYouTubeCategories();
     const [relayTestingCategories, setRelayTestingCategories] = useState<YouTubeCategory[]>([]);
     const [equipmentTestingCategories, setEquipmentTestingCategories] = useState<YouTubeCategory[]>([]);
     const [success, setSuccess] = useState(false);
+    const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL}/${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL}`
+    const ifItsEditPage = useMatch(fullEditPath);
+
+    const params = useParams()
+    const navigate = useNavigate()
     const { showError } = useErrorAlert();
-      useAxiosErrorHandler(showError);
+    useAxiosErrorHandler(showError);
 
     const {
         handleSubmit,
@@ -54,6 +60,41 @@ const ResourceAdminAddComponent: React.FC = () => {
         }
     });
 
+    const getParticularRecord = async () => {
+        try {
+            const res = await httpService.get<ApiResponse>(`/youtube/${params.pid}`);            
+
+            if (res.status) {
+                setValue('title', res.data.title)
+                setValue('description', res.data.description ?? '')
+                setValue('language', res.data.language ?? '')
+                setValue('classification', res.data.type.category)
+                setTimeout(() => {
+                    setValue('ctype', res.data.type.title);
+                    trigger('ctype');
+                }, 100);
+                // setValue('ctype',  res.data.type.title)
+                setValue('url', res.data.url)
+                trigger('ctype')
+                trigger()
+            } else {
+                // optional: show a toast or alert here
+                navigate(import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL)
+            }
+        } catch (err) {
+            console.error(err);
+            navigate(import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL)
+        }
+    }
+
+    useEffect(() => {
+        if (ifItsEditPage) {
+            // get particular api
+            getParticularRecord()
+
+        }
+    }, [ifItsEditPage, categories])
+
     const classification = watch('classification');
 
     useEffect(() => {
@@ -64,10 +105,10 @@ const ResourceAdminAddComponent: React.FC = () => {
     useEffect(() => {
         setValue('ctype', ''); // Clear the type when classification changes
         trigger('ctype')
-      }, [classification, setValue]);
+    }, [classification, setValue]);
 
     const onSubmit = async (data: FormData) => {
-        const type: number = categories.find(item => item.title === data.ctype)?.id ?? 0;        
+        const type: number = categories.find(item => item.title === data.ctype)?.id ?? 0;
         const formData = new FormData();
         formData.append('title', data.title ?? '');
         formData.append('description', data.description ?? '');
@@ -77,25 +118,48 @@ const ResourceAdminAddComponent: React.FC = () => {
 
         try {
             const res = await httpService.post<ApiResponse>('/youtube', formData);
-      
+
             if (res.status) {
                 setSuccess(true);
-              reset()
+                reset()
             } else {
-              // optional: show a toast or alert here
+                // optional: show a toast or alert here
             }
-          } catch (err) {
+        } catch (err) {
             console.error(err);
-          }
+        }
     };
-    
+    const handleUpdate = async (data: FormData) => {
+        const type: number = categories.find(item => item.title === data.ctype)?.id ?? 0;
+        const formData = new FormData();
+        formData.append('title', data.title ?? '');
+        formData.append('description', data.description ?? '');
+        formData.append('type', type.toString());
+        formData.append('url', data.url ?? '');
+        formData.append('language', data.language ?? 0);
+
+        try {
+            const res = await httpService.put<ApiResponse>(`/youtube/${params.pid}`, formData);
+
+            if (res.status) {
+                setSuccess(true);
+                reset()
+                navigate(import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL)
+            } else {
+                // optional: show a toast or alert here
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
     return (
         <StyledContainer maxWidth="xs">
-            <StyledForm onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 0 }}>
+            <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 0 }}>
                 {/* <Container maxWidth="sm" sx={{ mt: 5 }}> */}
                 <TitleResStyled variant="h4" gutterBottom>
-                    Add New Resource
+                    {ifItsEditPage ? 'Edit Resource' : 'Add Resource'}
                 </TitleResStyled>
 
                 {success && <Alert severity="success">Resource created successfully!</Alert>}
@@ -144,7 +208,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                                         <MenuItem value={lang.id}>{lang.name}</MenuItem>
                                     ))
                                 }
-                               
+
                             </Select>
                         )}
                     />
@@ -175,7 +239,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                             label="YouTube URL"
                             fullWidth
                             {...field}
-                             margin="normal"
+                            margin="normal"
                             error={!!errors.url}
                             helperText={errors.url?.message}
                         />
@@ -192,7 +256,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                             fullWidth
                             multiline
                             rows={4}
-                             margin="normal"
+                            margin="normal"
                             {...field}
                             error={!!errors.description}
                             helperText={errors.description?.message}
@@ -207,7 +271,9 @@ const ResourceAdminAddComponent: React.FC = () => {
                     fullWidth
                     disabled={isSubmitting || !isValid}
                 >
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                    {isSubmitting && 'Submitting...'}
+                    {!isSubmitting && ifItsEditPage && 'Update'}
+                    {!isSubmitting && !ifItsEditPage && 'Submit'}
                 </LearnButtonResStyled>
 
             </StyledForm>

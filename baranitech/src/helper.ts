@@ -66,3 +66,9 @@ export const validatePhone = (phone: string): string => {
     id: 0, name: 'English'},
     {id: 1, name: 'தமிழ்'}
   ]
+
+  export interface YouTubeCategoryType {
+    id: number;
+    category: number; // 0 or 1
+    title: string;
+  }

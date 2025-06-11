@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useErrorAlert } from "../../contexts/errorAlertContext";
 import { useAxiosErrorHandler } from "../../hooks/useAxiosErrorHandler";
 import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
-import { ActionsBarStyled } from "../../pages/styles";
-import theme from "../../theme";
 import { getLanguageType, getYouTubeEmbedUrl } from "../../helper";
+import { ActionWrapper } from "../commonStyles";
+import EditIcon from '@mui/icons-material/Edit';
+import { useMatch, useNavigate, useParams } from "react-router";
 
 interface categoryType {
   id: number | string;
@@ -104,6 +104,7 @@ const ResourceAdminListComponent: React.FC = () => {
   const { showError } = useErrorAlert();
   useAxiosErrorHandler(showError);
   const { confirm } = useDialog();
+  const navigate = useNavigate()
 
   const fetchYoutube = async () => {
     try {
@@ -166,40 +167,22 @@ const ResourceAdminListComponent: React.FC = () => {
                 borderRadius: "20px",
               }}
             >
-              <ActionsBarStyled>
-                <IconButton
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  sx={{
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    color: theme.palette.appBarColour.main,
-                    "&:hover":{
-                      backgroundColor: "rgba(255,255,255,0.8)",
-                    }
-                  }}
-                >
-                  <OpenInNewIcon />
-                </IconButton>
-                <IconButton
-                  size="small"
-                  onClick={() => deleteHandler(item.id)}
-                  sx={{
-                    // position: "absolute",
-                    // top: 8,
-                    // right: 8,
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    color: theme.palette.appBarColour.main,
-                    "&:hover":{
-                      backgroundColor: "rgba(255,255,255,0.8)",
-                    }
-                  }}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </ActionsBarStyled>
-
+               <ActionWrapper>
+              <IconButton
+                aria-label="edit"
+                size="small"
+                onClick={() =>navigate(`edit/${item.id}`)}
+              >
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={() => deleteHandler(item.id)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </ActionWrapper>
               {embedUrl && (
                 <VideoFrame
                   src={embedUrl}
@@ -212,9 +195,6 @@ const ResourceAdminListComponent: React.FC = () => {
                 <CategoryChip label={item.category?.title} size="small" />
                 <CategoryChip label={languageType} size="small" />
                 <TypographyStyled variant="h6">{item.title}</TypographyStyled>
-                {/* <Typography variant="body2" color="text.secondary">
-                  {item.description}
-                </Typography> */}
               </StyledCardContent>
             </StyledCard>
           </Grid>

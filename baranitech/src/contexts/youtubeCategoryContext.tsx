@@ -1,14 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-
-export interface YouTubeCategory {
-  id: number;
-  category: number; // 0 or 1
-  title: string;
-}
+import { YouTubeCategoryType } from '../helper';
 
 interface YouTubeCategoryContextType {
-  categories: YouTubeCategory[];
+  categories: YouTubeCategoryType[];
   loading: boolean;
   error: string | null;
   refresh: () => void;
@@ -17,7 +12,7 @@ interface YouTubeCategoryContextType {
 const YouTubeCategoryContext = createContext<YouTubeCategoryContextType | undefined>(undefined);
 
 export const YouTubeCategoryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [categories, setCategories] = useState<YouTubeCategory[]>([]);
+  const [categories, setCategories] = useState<YouTubeCategoryType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

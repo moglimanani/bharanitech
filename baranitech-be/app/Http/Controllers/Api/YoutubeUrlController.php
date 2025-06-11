@@ -83,9 +83,9 @@ class YoutubeUrlController extends Controller
         $video = YoutubeUrl::with('category')->find($id);
 
         if (!$video) {
-            return response()->json(['success' => false, 'data' => [], 'message' => 'No data found'], 200);
+            return response()->json(['status' => false, 'data' => [], 'message' => 'No data found'], 200);
         }
-        return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
+        return response()->json(['status' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record found'], 200);
         // return response()->json($video);
     }
 
@@ -120,7 +120,7 @@ class YoutubeUrlController extends Controller
             if ($request->filled('type')) {
                 $validCategory = YoutubeCategory::find($request->type);
                 if (!$validCategory) {
-                    return response()->json(['success' => false, 'message' => 'Invalid category type'], 422);
+                    return response()->json(['status' => false, 'message' => 'Invalid category type'], 422);
                 }
             }
 
@@ -145,7 +145,7 @@ class YoutubeUrlController extends Controller
             ]);
             // $video->load('category'); 
 
-            return response()->json(['success' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
+            return response()->json(['status' => true, 'data' => new YoutubeUrlResource($video), 'message' => 'Record updated'], 200);
         } catch (Exception $e) {
             return response()->json(
                 [
