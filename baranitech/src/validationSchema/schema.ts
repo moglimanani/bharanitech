@@ -97,10 +97,10 @@ export const AdminJobAddSchema = yup.object().shape({
         })
         .moreThan(0, 'Total vacancy must be greater than 0')
         .required('Total Vacancy is required'),
-    city: yup.string().optional(),
-    state: yup.string().optional(),
-    country: yup.string().optional(),
-    company: yup.string().optional(),
+    city: yup.string().nullable().optional(),
+    state: yup.string().nullable().optional(),
+    country: yup.string().nullable().optional(),
+    company: yup.string().nullable().optional(),
     description: yup.string().required('Description is required'),
     type: yup.string().required('Category is required'),
 })
