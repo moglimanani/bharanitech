@@ -16,7 +16,7 @@ import { useDialog } from "../../contexts/dialogContext";
 import { getLanguageType, getYouTubeEmbedUrl } from "../../helper";
 import { ActionWrapper } from "../commonStyles";
 import EditIcon from '@mui/icons-material/Edit';
-import { useMatch, useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 interface categoryType {
   id: number | string;
@@ -126,7 +126,7 @@ const ResourceAdminListComponent: React.FC = () => {
     const controller = new AbortController();
 
     fetchYoutube();
-    
+
     return () => {
       controller.abort(); // Cancel fetch on unmount
     };
@@ -157,7 +157,7 @@ const ResourceAdminListComponent: React.FC = () => {
       {youtubes.map((item) => {
         const embedUrl = getYouTubeEmbedUrl(item.url);
         const languageType = getLanguageType.find(ltype => +item.language === +ltype.id)?.name ?? ''
-        
+
         return (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
             <StyledCard
@@ -167,22 +167,22 @@ const ResourceAdminListComponent: React.FC = () => {
                 borderRadius: "20px",
               }}
             >
-               <ActionWrapper>
-              <IconButton
-                aria-label="edit"
-                size="small"
-                onClick={() =>navigate(`edit/${item.id}`)}
-              >
-                <EditIcon fontSize="small" />
-              </IconButton>
-              <IconButton
-                aria-label="delete"
-                size="small"
-                onClick={() => deleteHandler(item.id)}
-              >
-                <DeleteIcon fontSize="small" />
-              </IconButton>
-            </ActionWrapper>
+              <ActionWrapper>
+                <IconButton
+                  aria-label="edit"
+                  size="small"
+                  onClick={() => navigate(`edit/${item.id}`)}
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
+                  size="small"
+                  onClick={() => deleteHandler(item.id)}
+                >
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </ActionWrapper>
               {embedUrl && (
                 <VideoFrame
                   src={embedUrl}

@@ -16,6 +16,9 @@ import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
 import { useJobCategories } from "../../contexts/jobCategoryContext";
 import { format } from "date-fns";
+import { ActionWrapper } from "../commonStyles";
+import { useNavigate } from "react-router";
+import EditIcon from '@mui/icons-material/Edit';
 
 interface JobType {
   id: number | string;
@@ -117,6 +120,7 @@ const JobAdminListComponent: React.FC = () => {
   const [jobs, setJobs] = useState<JobType[]>([]);
   const { categories } = useJobCategories();
   const { showError } = useErrorAlert();
+  const navigate = useNavigate();
   useAxiosErrorHandler(showError);
   const { confirm } = useDialog();
 
@@ -169,43 +173,22 @@ const JobAdminListComponent: React.FC = () => {
         return (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item?.id}>
             <StyledCard style={{borderRadius: '20px', position: 'relative'}}>
-              <Actions>
+            <ActionWrapper>
                 <IconButton
+                  aria-label="edit"
                   size="small"
-                  onClick={() => deleteHandler(item.id)}
-                  color="error"
-                  sx={{
-                    position: "absolute",
-                    top: 8,
-                    right: 6,
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,0,0,0.8)",
-                      color: "white",
-                    },
-                  }}
+                  onClick={() => navigate(`edit/${item.id}`)}
                 >
-                  <DeleteIcon />
+                  <EditIcon fontSize="small" />
                 </IconButton>
-                {/* <IconButton
+                <IconButton
+                  aria-label="delete"
                   size="small"
                   onClick={() => deleteHandler(item.id)}
-                  color="error"
-                  sx={{
-                    position: "absolute",
-                    top: 7,
-                    left: -233,
-                    // right: 150,
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,0,0,0.8)",
-                      color: "white",
-                    },
-                  }}
                 >
-                  <EditIcon />
-                </IconButton> */}
-              </Actions>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </ActionWrapper>
               <StyledCardContent>
                 <StyleDate>
                   {item.created_at &&
