@@ -166,5 +166,9 @@ export const AdminTrainingAddSchema = yup.object().shape({
         otherwise: schema => schema.notRequired(),
       }),
     tableOfContents: yup.string().required(),
-    location: yup.string().required(),
+    location: yup.string().when('classification', {
+        is: "0", //online
+        then: schema => schema.required('Location is required'),
+        otherwise: schema => schema.notRequired(),
+      }),
 });

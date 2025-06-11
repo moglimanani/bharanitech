@@ -130,7 +130,7 @@ createRoot(document.getElementById('root')!).render(
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL} element={<TrainingAdminPage />}>
                                 <Route index element={<TrainingAdminListComponent />} />
                                 <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_ID_URL} element={<TrainingAdminListComponent />} />
-                                <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_EDIT_URL} element={<TrainingAdminListComponent />} />
+                                <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_EDIT_URL} element={<TrainingAddComponent />} />
                                 <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_ADD_URL} element={<TrainingAddComponent />} />
                               </Route>
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL} element={<TrainingRegisteredAdminPage />}>

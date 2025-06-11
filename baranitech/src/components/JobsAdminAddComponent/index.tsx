@@ -152,7 +152,7 @@ const JobsAdminAddComponent: React.FC = () => {
             <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
                 {/* <Container maxWidth="sm" sx={{ mt: 5 }}> */}
                 <TitleResStyled variant="h4" gutterBottom>
-                    Add New Job
+                    {ifItsEditPage ? 'Edit Job' : 'Add Job'}
                 </TitleResStyled>
 
                 {success && <Alert severity="success">Job created successfully!</Alert>}
