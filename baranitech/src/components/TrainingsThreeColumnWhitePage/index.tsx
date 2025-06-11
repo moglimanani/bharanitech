@@ -7,7 +7,6 @@ import { TrainingType } from "../../types/trainings";
 const TrainingsThreeColumnWhitePage: React.FC = () => {
   const [trainings, setAllTrainings] = useState<TrainingType[]>([])
   const { allTrainings } = useAllTrainings()
-  console.log('all', allTrainings);
 
   useEffect(() => {
     const sortedArr = [...allTrainings].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())

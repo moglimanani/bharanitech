@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useMatch, useParams } from 'react-router';
+import { Link } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import {ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ListItemTextStyled} from './styles'
 
@@ -28,9 +28,6 @@ const MenuBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const params = useParams()
-  const match = useMatch('/')
-  console.log('params', params, match);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

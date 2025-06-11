@@ -6,7 +6,7 @@ export const ActionWrapper = styled(Box)(({theme}) => ({
     'button': {
         marginRight: "8px",
         backgroundColor: "rgba(255,255,255,0.8)",
-        color: theme.palette.pinkColour.main,
+        color: theme.palette.appBarColour.main,
         "&:hover": {
           backgroundColor: "rgba(255,255,255,0.8)",
         },

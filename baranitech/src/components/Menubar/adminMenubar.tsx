@@ -27,7 +27,7 @@ const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL, name: 'Resources' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Jobs' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL, name: 'Trainings' },
-  { path:import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL, name: 'Candidates' },
+  { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL, name: 'Candidates' },
 ];
 
 const MenuBar: React.FC = () => {
@@ -94,7 +94,7 @@ const MenuBar: React.FC = () => {
           {!isMobile && (
             <MenusBoxStyled>
               {menuItems.map((item, id) => (
-                <ActiveLink  key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
+                <ActiveLink end key={`mobileMenuItem-${id}`} className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""
                 } to={item.path}>
                   {item.name}
@@ -120,7 +120,7 @@ const MenuBar: React.FC = () => {
                   <ClickAwayListener onClickAway={handleClose}>
                     <Paper elevation={3}>
                       <List component="nav" dense>
-                        <ListItemButton onClick={() =>{logout();}}>
+                        <ListItemButton onClick={() => { logout(); }}>
                           <ListItemIcon><Logout /></ListItemIcon>
                           <ListItemText primary="Logout" />
                         </ListItemButton>
