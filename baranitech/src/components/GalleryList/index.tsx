@@ -6,11 +6,13 @@ import {
   CardContent,
   Typography,
   IconButton,
-  useTheme,
 } from "@mui/material";
 import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+import { ActionWrapper } from "../commonStyles";
+import { useNavigate } from "react-router";
 
 export interface GalleryItem {
   id: number;
@@ -39,7 +41,8 @@ interface GalleryResponse {
 const GalleryList: React.FC = () => {
   const [gallery, setGallery] = useState<PhotosType[]>([]);
   const { confirm } = useDialog();
-  const theme = useTheme();
+  const navigate = useNavigate(); 
+
   const fetchGallery = async () => {
     try {
       const res = await httpService.get<GalleryResponse>("/gallery");
@@ -66,7 +69,7 @@ const GalleryList: React.FC = () => {
   useEffect(() => {
     const controller = new AbortController();
     fetchGallery();
-    
+
     return () => {
       controller.abort(); // Cancel fetch on unmount
     };
@@ -106,24 +109,23 @@ const GalleryList: React.FC = () => {
               borderRadius: "20px",
             }}
           >
-            <IconButton
-              aria-label="delete"
-              size="small"
-              onClick={() => deleteGalleryItem(item.id)}
-              sx={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                backgroundColor: "rgba(255,255,255,0.8)",
-                color: theme.palette.pinkColour.main,
-                "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.8)",
-                  zoom: 1.1
-                },
-              }}
-            >
-              <DeleteIcon fontSize="small" />
-            </IconButton>
+            <ActionWrapper>
+              <IconButton
+                aria-label="edit"
+                size="small"
+                onClick={() =>navigate(`edit/${item.id}`)}
+              >
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={() => deleteGalleryItem(item.id)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </ActionWrapper>
+
             <CardMedia
               component="img"
               height="200"
