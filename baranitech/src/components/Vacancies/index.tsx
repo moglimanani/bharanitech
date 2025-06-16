@@ -1,41 +1,44 @@
 import { Grid } from "@mui/material";
 import WorkIcon from '@mui/icons-material/Work';
-import { GridColorStyled, IconBadgeStyled, ItemRight, JobsStyled, VacanciesStyled } from "./styles";
+import { GridColorStyled, IconBadgeStyled, JobsStyled } from "./styles";
 import { useJobCategories } from "../../contexts/jobCategoryContext";
 import { useEffect, useState } from "react";
 import { useAllJobs } from "../../contexts/allJobsContext";
-import { JobsType } from "../../types/jobs";
 
 function Vacancies() {
 
-  const [jobs, setJobs] = useState<JobsType[]>([])
+  const [jobs, setJobs] = useState<Record<number, number>>({})
   const { categories } = useJobCategories()
   const { allJobs } = useAllJobs()
 
   useEffect(() => {
     if (Array.isArray(allJobs)) {
       const sortedArr = [...allJobs].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+      const added = sortedArr.reduce<Record<number, number>>((acc, item) => {
+        acc[item.category.id] = (acc[item.category.id] || 0) + item.total_vacancy
+        return acc 
+      }, {})
       
-      const unqiueBylatest: JobsType[] = Array.from(new Map([...sortedArr]?.map((data: JobsType) => [data.type, data]))?.values())
+      // const unqiueBylatest: JobsType[] = Array.from(new Map([...sortedArr]?.map((data: JobsType) => [data.type, data]))?.values())
       
-      setJobs(unqiueBylatest)
+      setJobs(added)
     }
   }, [allJobs])
 
 
   return (
     <Grid container justifyContent='center'>
-      <ItemRight>
+      {/* <ItemRight>
         <VacanciesStyled variant="h5">Vacancies:  </VacanciesStyled>
-      </ItemRight>
+      </ItemRight> */}
       {
         jobs && categories?.map((item) => (
-          <GridColorStyled spacing={2} key={`jobCat${item.id}`}>
+          <GridColorStyled spacing={1} key={`jobCat${item.id}`}>
             <Grid>
               <JobsStyled align='left'>{item.title}</JobsStyled>
             </Grid>
             <Grid>
-              <IconBadgeStyled badgeContent={jobs?.find((jItem: JobsType) => jItem?.type === item.id)?.total_vacancy ?? 0} color="primary"  >
+              <IconBadgeStyled badgeContent={jobs[item.id] == null ? 0 : jobs[item.id]} color="primary" showZero max={99999}>
                 <WorkIcon color="action" />
               </IconBadgeStyled>
             </Grid>

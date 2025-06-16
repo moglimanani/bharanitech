@@ -15,6 +15,9 @@ import Vacancies from './components/Vacancies';
 import LoaderWithIcon from './components/Loader';
 import TrainingsThreeColumnWhitePage from './components/TrainingsThreeColumnWhitePage';
 import ResourcesThreeColumnWhitePage from './components/ResourcesThreeColumnWhitePage';
+import { useAllTrainings } from './contexts/allTrainingsContext';
+import { useEffect, useState } from 'react';
+import { TrainingType } from './types/trainings';
 
 function App() {
   const ContainerStyled = styled(Grid)(() => ({
@@ -25,9 +28,21 @@ function App() {
   const { user } = useUser()
   const { loading, error } = useYouTubeCategories()
   const location = useLocation()
+  const [futureTrainings, setFutureTrainings] = useState<TrainingType[]>([])
+  const { allTrainings } = useAllTrainings()
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const getFutureTrainings = () => {
+    const futureTrainings = allTrainings.filter((item) => new Date(item.startdate) > new Date()).sort((training1: TrainingType, training2: TrainingType) => new Date(training1.startdate).getTime() - new Date(training2.startdate).getTime())
+
+    setFutureTrainings(futureTrainings)
+  }
+
+  useEffect(() => {
+    getFutureTrainings()
+  }, [allTrainings])
 
   if (loading) return <LoaderWithIcon />;
   if (error) return <div>{error}</div>;
@@ -36,26 +51,19 @@ function App() {
   const isLogged = !ifItsLoginOrRegisterPage && user?.email
 
   // const isHomePage = (location.pathname === import.meta.env.VITE_ROUTE_HOME_URL)
-  
+
+  const Flashes = futureTrainings.length > 0 && futureTrainings.slice(0, 2).map(item => (
+    <FlashOffer
+      onClick={() => { }}
+      message={`${item.title} - Book your spot now before registration closes. Don’t miss out!`}
+      buttonlabel="Register" />
+  ))
+
 
   return (
     <>
       {isLogged ? <AdminMenubar /> : <MenuBar />}
-      {!ifItsLoginOrRegisterPage && !(user?.email) && (
-        <FlashOffer
-          onClick={() => { }}
-          message="Book your spot now before registration closes. Don’t miss out!"
-          buttonlabel="Register" />
-      )}
-
-      {!ifItsLoginOrRegisterPage && !(user?.email) && (
-        <FlashOffer
-          onClick={() => { }}
-          message="Book your spot now before registration closes. Don’t miss out!"
-          buttonlabel="Register" />
-      )}
-
-
+      {Flashes}
       {!ifItsLoginOrRegisterPage && !(user?.email) && (
         <Vacancies />
       )}

@@ -21,9 +21,7 @@ const ResourcesThreeColumnWhitePage: React.FC = () => {
       <PareBoxStyled>In the digital age, YouTube isn't just for entertainment—it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: </PareBoxStyled>
       <Grid container spacing={2}>
         {
-          resources.map((item: ResourceType, id: number)=> {
-            console.log(item.title, item.url ? JSON.parse(`"${item.url.trim()}"`) : '');
-            
+          resources.map((item: ResourceType, id: number)=> {            
             return (
             <ThreeColumnStyledWhite size={{ xs: 12, md: 4 }} key={`learningres-${id}-${item.id}`}>
             <CardMediaStyled>
