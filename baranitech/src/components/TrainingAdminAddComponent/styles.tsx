@@ -18,7 +18,18 @@ export const StyledContainer = styled(Container, {
 
 export const StyledForm = styled('form')(({ theme }) => ({
     width: '100%',
-    marginTop: theme.spacing(2),
+ // marginTop: theme.spacing(2),
+ marginLeft: '20px',
+ [theme.breakpoints.down("sm")]: {
+    marginLeft: '0px'
+  },
+}));
+
+export const StyledCont = styled('div')(({ theme }) => ({
+    display: 'flex',
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: 'column',
+      },
 }));
 
 export const TitleResStyled = styled( Typography)(({theme})=>({

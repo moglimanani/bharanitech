@@ -69,7 +69,7 @@ const MenuBar: React.FC = () => {
           )}
           <Typography variant="h6" sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
             <LogoStyled src='/logo.png' alt='Barani Tech logo' loading='lazy' />
-            <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
+            <BrandNameStyled align='left' display='flex'>
               Barani Tech
             </BrandNameStyled>
           </Typography>

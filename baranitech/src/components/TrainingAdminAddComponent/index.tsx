@@ -15,6 +15,8 @@ import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
 import { useMatch, useNavigate, useParams } from 'react-router';
 import { toInputDateFormat } from '../../helper';
+import { StyledCont } from '../ResourceAdminAddComponent/styles';
+import { StyledForm } from './styles';
 
 
 const ContainerStyle = styled(Container)(({ theme }) => ({
@@ -201,8 +203,9 @@ const TrainingAddComponent: React.FC = () => {
                     </TypograpStyle>
 
                 {success && <Alert severity="success">Training created successfully!</Alert>}
-
-                <Controller
+                <StyledCont>
+                        <StyledForm sx={{ mx: "auto", p: 0 }}>
+                        <Controller
                     name="classification"
                     control={control}
                     render={({ field }) => (
@@ -216,7 +219,8 @@ const TrainingAddComponent: React.FC = () => {
                     )}
                 />
 
-                <FormControl fullWidth margin="normal">
+                
+<FormControl fullWidth margin="normal">
                     <InputLabel>Category</InputLabel>
                     <Controller
                         name="type"
@@ -279,7 +283,7 @@ const TrainingAddComponent: React.FC = () => {
                             />
                         )}
                     />
-                     <Controller
+                    <Controller
                         name='endDate'
                         control={control}
                         render={({ field }) => (
@@ -310,6 +314,14 @@ const TrainingAddComponent: React.FC = () => {
                             />
                         )}
                     />
+                    
+
+                        </StyledForm>
+                
+
+                
+                    <StyledForm>
+                   
                      <Controller
                         name='totalPrice'
                         control={control}
@@ -405,6 +417,15 @@ const TrainingAddComponent: React.FC = () => {
                         )}
                     />
 
+
+                    </StyledForm>
+                </StyledCont>
+               
+
+
+                
+                     
+                 
                 <Button
                     type="submit"
                     variant="contained"
