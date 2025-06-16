@@ -194,7 +194,7 @@ const TrainingAddComponent: React.FC = () => {
     };
 
     return (
-        <ContainerStyle maxWidth="sm">
+        <ContainerStyle maxWidth="xl">
             <Box component="form" onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} mt={4}>
                 <TypograpStyle variant="h4" gutterBottom>
                 {ifItsEditPage ? 'Edit Training' : 'Add Training'}

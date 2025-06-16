@@ -24,8 +24,8 @@ export const ListItemTextStyled = styled(ListItemText)(() => ({
 }))
 
 export const LogoStyled = styled('img')(() => ({
-    width: 'auto',
-    height: 'auto'
+    width: '100px',
+    height: '100px'
 }))
 
 export const BrandNameStyled = styled(Typography)(({ theme }) => ({

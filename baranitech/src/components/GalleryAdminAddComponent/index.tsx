@@ -216,7 +216,7 @@ const GalleryAdminAddForm: React.FC = () => {
 
 
   return (
-    <StyledContainer maxWidth="xs">
+    <StyledContainer maxWidth="xl">
       <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
         {openSnackbar && (
           <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
