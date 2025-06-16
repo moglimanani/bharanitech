@@ -39,11 +39,11 @@ export default function AdminPage() {
         </Grid>
         <Grid size={{ xs: 12, md: 3 }}>
           <AdminStyled>
-            <div>Recources</div>
+            <div>Resources</div>
             <div>
               <AdminButtonStyled
                 onClick={() =>
-                  navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+                  navigate(import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL)
                 }
               >
                 <AutoStoriesIcon sx={{ fontSize: "8em" }} />
@@ -59,7 +59,7 @@ export default function AdminPage() {
             <div>
               <AdminButtonStyled
                 onClick={() =>
-                  navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+                  navigate(import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL)
                 }
               >
                 <WorkOutlineIcon sx={{ fontSize: "8em" }} />
@@ -75,7 +75,7 @@ export default function AdminPage() {
             <div>
               <AdminButtonStyled
                 onClick={() =>
-                  navigate(import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL)
+                  navigate(import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL)
                 }
               >
                 <CastForEducationIcon sx={{ fontSize: "8em" }} />
