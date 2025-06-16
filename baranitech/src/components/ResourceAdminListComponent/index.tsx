@@ -63,6 +63,7 @@ const CategoryChip = styled(Chip)(({ theme }) => ({
   background: theme.palette.appBarColour.main,
   padding: "15px",
   color: theme.palette.appBarColour.light,
+  display: 'flex',
 }));
 
 const TypographyStyled = styled(Typography)(() => ({

@@ -33,6 +33,7 @@ export const BrandNameStyled = styled(Typography)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     paddingLeft: '15px',
+    paddingTop: '15px',
     color: theme.palette.common.white,
     fontFamily: 'monoton',
     [theme.breakpoints.down('sm')]: {

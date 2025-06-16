@@ -102,16 +102,9 @@ const DescriptionStyle = styled(Typography)(() => ({
 
 
 const VacancyStyle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.appBarColour.light,
-  fontSize: '12px',
-  borderRadius: '50%',
-  background: '#403f3d',
-  width: '30px',
-  height: '30px',
-  position: 'absolute',
-  left: '18px',
-  top: '134px',
-  paddingTop: '7px'
+  // borderRadius: '50%',
+  // background: '#403f3d',
+  paddingBottom: '10px'
 }));
 
 
@@ -207,7 +200,7 @@ const JobAdminListComponent: React.FC = () => {
                 <JobStyle variant="body2">{item.title}</JobStyle>
                 <DescriptionStyle variant="body2">{item.description}</DescriptionStyle>
                 {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
-                <VacancyStyle variant="body2">{item.total_vacancy}</VacancyStyle>
+                <VacancyStyle variant="body2">Vacancy : {item.total_vacancy}  </VacancyStyle>
                 <AddressStyle variant="body2">{item.city}</AddressStyle>
                 <AddressStyle variant="body2">{item.state}</AddressStyle>
                 <AddressStyle variant="body2">{item.country}</AddressStyle>
