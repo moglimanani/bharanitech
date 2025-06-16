@@ -17,7 +17,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ChipStyled } from './styles'
+import { ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ChipStyled, BrandNameStyled } from './styles'
 import { useUser } from '../../contexts/userContext';
 import { Logout, Person } from '@mui/icons-material';
 
@@ -87,9 +87,9 @@ const MenuBar: React.FC = () => {
           )}
           <Typography variant="h6" sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
             <LogoStyled src='/logo.png' alt='Barani Tech logo' loading='lazy' />
-            {/* <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
+            <BrandNameStyled sx={{ flexGrow: 1 }} align='left' display='flex'>
               Barani Tech
-            </BrandNameStyled> */}
+            </BrandNameStyled>
           </Typography>
           {!isMobile && (
             <MenusBoxStyled>

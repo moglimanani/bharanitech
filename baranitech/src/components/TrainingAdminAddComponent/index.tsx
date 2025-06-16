@@ -233,46 +233,177 @@ const TrainingAddComponent: React.FC = () => {
                     />
                 </FormControl>
 
-                {[
-                    ['title', 'Title'],
-                    ['description', 'Description'],
-                    ['startDate', 'Start Date'],
-                    ['endDate', 'End Date'],
-                    ['totalHours', 'Total Hours'],
-                    ['totalPrice', 'Total Price'],
-                    ['location', 'Address'],
-                    ['city', 'City'],
-                    ['state', 'State'],
-                    ['country', 'Country'],
-                    ['tableOfContents', 'Table of Contents'],
-                ].filter(([name]) => {
-                    // Hide location fields if classification is '1' (online)
-                    if (+classification === 1 && ['city', 'state', 'country', 'location'].includes(name)) {
-                        return false;
-                    }
-                    return true;
-                }).map(([name, label]) => (
-                    <Controller
-                        key={name}
-                        name={name as keyof FormData}
+                <Controller
+                        name='title'
                         control={control}
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                label={label}
+                                label='Title'
                                 fullWidth
                                 margin="normal"
-                                type={name.includes('Date') ? 'date' : name.includes('Price') || name.includes('Hours') ? 'number' : 'text'}
-                                InputLabelProps={name.includes('Date') ? { shrink: true } : undefined}
-                                InputProps={{
-                                    startAdornment: name.includes('Price') ? <InputAdornment position="start">$</InputAdornment> : null,
-                                }}
-                                error={!!errors[name as keyof FormData]}
-                                helperText={errors[name as keyof FormData]?.message}
+                                type='text'
+                                error={!!errors.title}
+                                helperText={errors.title?.message}
                             />
                         )}
                     />
-                ))}
+                     <Controller
+                        name='description'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Description'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                error={!!errors.description}
+                                helperText={errors.description?.message}
+                            />
+                        )}
+                    />
+                     <Controller
+                        name='startDate'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Start Date'
+                                fullWidth
+                                margin="normal"
+                                type='date'
+                                InputLabelProps={{ shrink: true }}
+                                error={!!errors.startDate}
+                                helperText={errors.startDate?.message}
+                            />
+                        )}
+                    />
+                     <Controller
+                        name='endDate'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='End Date'
+                                fullWidth
+                                margin="normal"
+                                type='date'
+                                InputLabelProps={{ shrink: true }}
+                                error={!!errors.endDate}
+                                helperText={errors.endDate?.message}
+                            />
+                        )}
+                    />
+                     <Controller
+                        name='totalHours'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Total Hours'
+                                fullWidth
+                                margin="normal"
+                                type='number'
+                                error={!!errors.totalHours}
+                                helperText={errors.totalHours?.message}
+                            />
+                        )}
+                    />
+                     <Controller
+                        name='totalPrice'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Total Price'
+                                fullWidth
+                                margin="normal"
+                                type='number'
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start">$</InputAdornment> ,
+                                }}
+                                error={!!errors.totalPrice}
+                                helperText={errors.totalPrice?.message}
+                            />
+                        )}
+                    />
+                      <Controller
+                        name='location'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Address'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                error={!!errors.location}
+                                helperText={errors.location?.message}
+                            />
+                        )}
+                    />
+                      <Controller
+                        name='city'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='City'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                error={!!errors.city}
+                                helperText={errors.city?.message}
+                            />
+                        )}
+                    />
+                      <Controller
+                        name='state'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='State'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                error={!!errors.state}
+                                helperText={errors.state?.message}
+                            />
+                        )}
+                    />
+                      <Controller
+                        name='country'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Country'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                error={!!errors.country}
+                                helperText={errors.country?.message}
+                            />
+                        )}
+                    />
+                      <Controller
+                        name='tableOfContents'
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label='Table of Contents'
+                                fullWidth
+                                margin="normal"
+                                type='text'
+                                rows={5}
+                                error={!!errors.tableOfContents}
+                                helperText={errors.tableOfContents?.message}
+                            />
+                        )}
+                    />
 
                 <Button
                     type="submit"
