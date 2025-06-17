@@ -59,7 +59,8 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     padding: '20px 20px 5px',
     display: 'flex',
     marginBottom: '10px',
-    fontSize: '1.3em'
+    fontSize: '1.3em',
+    textTransform: 'capitalize',
 }))
 
 export const ImageDivStyledWhite = styled('div')(()=>({
@@ -83,7 +84,8 @@ export const ParaOneStyledWhite = styled('p')(({theme})=>({
         padding: '0px 20px 15px',
         color: theme.palette.flashPrimaryBGColor.main,
         //height: '120px',
-       // overflow: 'scroll'
+       // overflow: 'scroll',
+       textTransform: 'capitalize',
 }))
 
 export const TypographyStyledWhite = styled(Typography)(()=>({

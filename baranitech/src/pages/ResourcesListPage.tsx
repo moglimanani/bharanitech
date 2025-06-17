@@ -91,7 +91,7 @@ const ResourcesListPage: React.FC = () => {
   return (
     <Container sx={{ mt: 1 }}>
       <AdminTitleStyled variant="h4" gutterBottom>
-        Learning Resources
+        Learning Resources12
       </AdminTitleStyled>
       <Grid container spacing={3} style={{marginBottom: '30px'}}>
         {resources.map((resource) => (

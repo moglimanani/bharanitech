@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { FlashOfferProps } from '../../types/flash';
+ 
 
 const FlashOffer: React.FC<FlashOfferProps> = ({
   message,
@@ -19,6 +20,7 @@ const FlashOffer: React.FC<FlashOfferProps> = ({
       },
     });
   }, [controls]);
+
 
   return (
     <div style={{
