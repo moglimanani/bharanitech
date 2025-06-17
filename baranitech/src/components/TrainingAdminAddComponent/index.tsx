@@ -16,7 +16,7 @@ import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
 import { useMatch, useNavigate, useParams } from 'react-router';
 import { toInputDateFormat } from '../../helper';
 import { StyledCont } from '../ResourceAdminAddComponent/styles';
-import { StyledForm } from './styles';
+import { LearnButtonResStyled, StyledForm } from './styles';
 
 
 const ContainerStyle = styled(Container)(({ theme }) => ({
@@ -420,13 +420,9 @@ const TrainingAddComponent: React.FC = () => {
 
                     </StyledForm>
                 </StyledCont>
-               
-
-
-                
-                     
+                        
                  
-                <Button
+                <LearnButtonResStyled
                     type="submit"
                     variant="contained"
                     color="primary"
@@ -435,7 +431,7 @@ const TrainingAddComponent: React.FC = () => {
                     sx={{ mt: 2 }}
                 >
                      {ifItsEditPage ? 'Update' : 'Submit'}
-                </Button>
+                </LearnButtonResStyled>
             </Box>
         </ContainerStyle>
     );

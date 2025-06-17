@@ -6,6 +6,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Box,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -176,133 +177,133 @@ const ResourceAdminAddComponent: React.FC = () => {
   };
 
   return (
-    <StyledContainer
-      maxWidth="xl"
-      onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)}
-    >
-      <TitleResStyled variant="h4" gutterBottom>
-        {ifItsEditPage ? "Edit Resource" : "Add Resource"}
-      </TitleResStyled>
-      <StyledCont>
-        <StyledForm sx={{ mx: "auto", p: 0 }}>
-        
-          {success && (
-            <Alert severity="success">Resource created successfully!</Alert>
-          )}
+    <StyledContainer maxWidth="xl">
+      <Box
+        component="form"
+        onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)}
+      >
+        <TitleResStyled variant="h4" gutterBottom>
+          {ifItsEditPage ? "Edit Resource" : "Add Resource"}
+        </TitleResStyled>
+        <StyledCont>
+          <StyledForm sx={{ mx: "auto", p: 0 }}>
+            {success && (
+              <Alert severity="success">Resource created successfully!</Alert>
+            )}
 
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Classification</InputLabel>
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Classification</InputLabel>
+              <Controller
+                name="classification"
+                control={control}
+                render={({ field }) => (
+                  <Select label="Classification" {...field}>
+                    <MenuItem value="0">Protection Relay Testing</MenuItem>
+                    <MenuItem value="1">Equipment Testing</MenuItem>
+                  </Select>
+                )}
+              />
+            </FormControl>
+
+            {/* Type */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Type</InputLabel>
+              <Controller
+                name="ctype"
+                control={control}
+                render={({ field }) => (
+                  <Select label="Type" {...field}>
+                    {(classification === "0"
+                      ? relayTestingCategories
+                      : equipmentTestingCategories
+                    ).map((item) => (
+                      <MenuItem key={item.id} value={item.title}>
+                        {item.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Language</InputLabel>
+              <Controller
+                name="language"
+                control={control}
+                render={({ field }) => (
+                  <Select label="language" {...field}>
+                    {getLanguageType.map((lang) => (
+                      <MenuItem value={lang.id}>{lang.name}</MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </StyledForm>
+          <StyledForm>
+            {/* Title */}
             <Controller
-              name="classification"
+              name="title"
               control={control}
               render={({ field }) => (
-                <Select label="Classification" {...field}>
-                  <MenuItem value="0">Protection Relay Testing</MenuItem>
-                  <MenuItem value="1">Equipment Testing</MenuItem>
-                </Select>
+                <TextField
+                  label="Resource Name"
+                  fullWidth
+                  margin="normal"
+                  {...field}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />
               )}
             />
-          </FormControl>
-
-          {/* Type */}
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Type</InputLabel>
+            {/* URL */}
             <Controller
-              name="ctype"
+              name="url"
               control={control}
               render={({ field }) => (
-                <Select label="Type" {...field}>
-                  {(classification === "0"
-                    ? relayTestingCategories
-                    : equipmentTestingCategories
-                  ).map((item) => (
-                    <MenuItem key={item.id} value={item.title}>
-                      {item.title}
-                    </MenuItem>
-                  ))}
-                </Select>
+                <TextField
+                  label="YouTube URL"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.url}
+                  helperText={errors.url?.message}
+                />
               )}
             />
-          </FormControl>
 
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Language</InputLabel>
+            {/* Description */}
             <Controller
-              name="language"
+              name="description"
               control={control}
               render={({ field }) => (
-                <Select label="language" {...field}>
-                  {getLanguageType.map((lang) => (
-                    <MenuItem value={lang.id}>{lang.name}</MenuItem>
-                  ))}
-                </Select>
+                <TextField
+                  label="Description"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  margin="normal"
+                  {...field}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
+                />
               )}
             />
-          </FormControl>
-        </StyledForm>
-        <StyledForm>
-          {/* Title */}
-          <Controller
-            name="title"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Resource Name"
-                fullWidth
-                margin="normal"
-                {...field}
-                error={!!errors.title}
-                helperText={errors.title?.message}
-              />
-            )}
-          />
-          {/* URL */}
-          <Controller
-            name="url"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="YouTube URL"
-                fullWidth
-                {...field}
-                margin="normal"
-                error={!!errors.url}
-                helperText={errors.url?.message}
-              />
-            )}
-          />
-
-          {/* Description */}
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Description"
-                fullWidth
-                multiline
-                rows={4}
-                margin="normal"
-                {...field}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-              />
-            )}
-          />
-
-          <LearnButtonResStyled
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={isSubmitting || !isValid}
-          >
-            {isSubmitting && "Submitting..."}
-            {!isSubmitting && ifItsEditPage && "Update"}
-            {!isSubmitting && !ifItsEditPage && "Submit"}
-          </LearnButtonResStyled>
-        </StyledForm>
-      </StyledCont>
+          </StyledForm>
+        </StyledCont>
+        <LearnButtonResStyled
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={isSubmitting || !isValid}
+        >
+          {isSubmitting && "Submitting..."}
+          {!isSubmitting && ifItsEditPage && "Update"}
+          {!isSubmitting && !ifItsEditPage && "Submit"}
+        </LearnButtonResStyled>
+      </Box>
     </StyledContainer>
   );
 };
