@@ -6,6 +6,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Box,
 } from "@mui/material";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -163,155 +164,156 @@ const JobsAdminAddComponent: React.FC = () => {
   };
 
   return (
-    <StyledContainer
-      maxWidth="xl"
-      onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)}
-    >
-      <TitleResStyled variant="h4" gutterBottom>
-        {ifItsEditPage ? "Edit Job" : "Add Job"}
-      </TitleResStyled>
-      <StyledCont>
-        <StyledForm>
-          {success && (
-            <Alert severity="success">Job created successfully!</Alert>
-          )}
-
-          {/* Title */}
-          <Controller
-            name="title"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Job Title"
-                fullWidth
-                margin="normal"
-                {...field}
-                error={!!errors.title}
-                helperText={errors.title?.message}
-              />
+    <StyledContainer maxWidth="xl">
+      <Box
+        component="form"
+        onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)}
+      >
+        <TitleResStyled variant="h4" gutterBottom>
+          {ifItsEditPage ? "Edit Job" : "Add Job"}
+        </TitleResStyled>
+        <StyledCont>
+          <StyledForm>
+            {success && (
+              <Alert severity="success">Job created successfully!</Alert>
             )}
-          />
 
-          {/* Description */}
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Description"
-                fullWidth
-                multiline
-                rows={4}
-                margin="normal"
-                {...field}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-              />
-            )}
-          />
-
-          <Controller
-            name="total_vacancy"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Vacancies"
-                fullWidth
-                margin="normal"
-                {...field}
-                error={!!errors.total_vacancy}
-                helperText={errors.total_vacancy?.message}
-              />
-            )}
-          />
-
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Category</InputLabel>
+            {/* Title */}
             <Controller
-              name="type"
+              name="title"
               control={control}
               render={({ field }) => (
-                <Select label="Type" {...field}>
-                  {categories.map((item) => (
-                    <MenuItem key={item.id} value={item.title}>
-                      {item.title}
-                    </MenuItem>
-                  ))}
-                </Select>
+                <TextField
+                  label="Job Title"
+                  fullWidth
+                  margin="normal"
+                  {...field}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />
               )}
             />
-          </FormControl>
-        </StyledForm>
-        <StyledForm>
-          <Controller
-            name="city"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="City"
-                fullWidth
-                {...field}
-                margin="normal"
-                error={!!errors.city}
-                helperText={errors.city?.message}
-              />
-            )}
-          />
-          <Controller
-            name="state"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="State"
-                fullWidth
-                {...field}
-                margin="normal"
-                error={!!errors.state}
-                helperText={errors.state?.message}
-              />
-            )}
-          />
-          <Controller
-            name="country"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Country"
-                fullWidth
-                {...field}
-                margin="normal"
-                error={!!errors.country}
-                helperText={errors.country?.message}
-              />
-            )}
-          />
 
-          <Controller
-            name="company"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Company"
-                fullWidth
-                {...field}
-                margin="normal"
-                error={!!errors.company}
-                helperText={errors.company?.message}
-              />
-            )}
-          />
+            {/* Description */}
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Description"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  margin="normal"
+                  {...field}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
+                />
+              )}
+            />
 
-          <LearnButtonResStyled
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={isSubmitting || !isValid}
-          >
-            {ifItsEditPage ? "Update" : "Submit"}
-          </LearnButtonResStyled>
-        </StyledForm>
-      </StyledCont>
+            <Controller
+              name="total_vacancy"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Vacancies"
+                  fullWidth
+                  margin="normal"
+                  {...field}
+                  error={!!errors.total_vacancy}
+                  helperText={errors.total_vacancy?.message}
+                />
+              )}
+            />
+
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Category</InputLabel>
+              <Controller
+                name="type"
+                control={control}
+                render={({ field }) => (
+                  <Select label="Type" {...field}>
+                    {categories.map((item) => (
+                      <MenuItem key={item.id} value={item.title}>
+                        {item.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </StyledForm>
+          <StyledForm>
+            <Controller
+              name="city"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="City"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.city}
+                  helperText={errors.city?.message}
+                />
+              )}
+            />
+            <Controller
+              name="state"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="State"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.state}
+                  helperText={errors.state?.message}
+                />
+              )}
+            />
+            <Controller
+              name="country"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Country"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.country}
+                  helperText={errors.country?.message}
+                />
+              )}
+            />
+
+            <Controller
+              name="company"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Company"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.company}
+                  helperText={errors.company?.message}
+                />
+              )}
+            />
+          </StyledForm>
+        </StyledCont>
+        <LearnButtonResStyled
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={isSubmitting || !isValid}
+        >
+          {ifItsEditPage ? "Update" : "Submit"}
+        </LearnButtonResStyled>
+      </Box>
     </StyledContainer>
   );
 };

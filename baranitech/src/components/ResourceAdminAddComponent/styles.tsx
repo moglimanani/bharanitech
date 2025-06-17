@@ -49,6 +49,7 @@ export const LearnButtonResStyled = styled(Button)(({theme})=>({
     borderRadius: '20px',
     margin: '10px 0 20px',
     padding: '10px 20px',  
+    maxWidth: '200px',
       
    }))
   
