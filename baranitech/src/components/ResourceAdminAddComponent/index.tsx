@@ -7,6 +7,7 @@ import {
   InputLabel,
   FormControl,
   Box,
+  Grid,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,9 +16,7 @@ import { InferType } from "yup";
 import { useYouTubeCategories } from "../../contexts/youtubeCategoryContext";
 import {
   LearnButtonResStyled,
-  StyledCont,
   StyledContainer,
-  StyledForm,
   TitleResStyled,
 } from "./styles";
 import httpService from "../../api/httpService";
@@ -45,9 +44,8 @@ const ResourceAdminAddComponent: React.FC = () => {
     YouTubeCategory[]
   >([]);
   const [success, setSuccess] = useState(false);
-  const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL}/${
-    import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL
-  }`;
+  const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL}/${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL
+    }`;
   const ifItsEditPage = useMatch(fullEditPath);
 
   const params = useParams();
@@ -185,12 +183,13 @@ const ResourceAdminAddComponent: React.FC = () => {
         <TitleResStyled variant="h4" gutterBottom>
           {ifItsEditPage ? "Edit Resource" : "Add Resource"}
         </TitleResStyled>
-        <StyledCont>
-          <StyledForm sx={{ mx: "auto", p: 0 }}>
-            {success && (
-              <Alert severity="success">Resource created successfully!</Alert>
-            )}
 
+        {success && (
+          <Alert severity="success">Resource created successfully!</Alert>
+        )}
+
+        <Grid container spacing={{ xs: 1, sm: 2 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <FormControl fullWidth margin="normal">
               <InputLabel>Classification</InputLabel>
               <Controller
@@ -204,7 +203,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 )}
               />
             </FormControl>
-
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
             {/* Type */}
             <FormControl fullWidth margin="normal">
               <InputLabel>Type</InputLabel>
@@ -225,7 +225,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 )}
               />
             </FormControl>
-
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
             <FormControl fullWidth margin="normal">
               <InputLabel>Language</InputLabel>
               <Controller
@@ -240,9 +241,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 )}
               />
             </FormControl>
-          </StyledForm>
-          <StyledForm>
-            {/* Title */}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
             <Controller
               name="title"
               control={control}
@@ -257,6 +257,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 />
               )}
             />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
             {/* URL */}
             <Controller
               name="url"
@@ -272,6 +274,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 />
               )}
             />
+          </Grid>
+          <Grid size={{ xs: 12 }}>
 
             {/* Description */}
             <Controller
@@ -290,19 +294,33 @@ const ResourceAdminAddComponent: React.FC = () => {
                 />
               )}
             />
-          </StyledForm>
-        </StyledCont>
-        <LearnButtonResStyled
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          disabled={isSubmitting || !isValid}
-        >
-          {isSubmitting && "Submitting..."}
-          {!isSubmitting && ifItsEditPage && "Update"}
-          {!isSubmitting && !ifItsEditPage && "Submit"}
-        </LearnButtonResStyled>
+          </Grid>
+          <Grid size={{ xs: 12 }}>
+
+            <LearnButtonResStyled
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isSubmitting || !isValid}
+            >
+              {isSubmitting && "Submitting..."}
+              {!isSubmitting && ifItsEditPage && "Update"}
+              {!isSubmitting && !ifItsEditPage && "Submit"}
+            </LearnButtonResStyled>
+          </Grid>
+
+        </Grid>
+
+
+
+
+
+
+
+
+
+
       </Box>
     </StyledContainer>
   );

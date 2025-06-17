@@ -7,6 +7,7 @@ import {
   InputLabel,
   FormControl,
   Box,
+  Grid,
 } from "@mui/material";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,9 +15,7 @@ import { AdminJobAddSchema } from "../../validationSchema/schema";
 import { InferType } from "yup";
 import {
   LearnButtonResStyled,
-  StyledCont,
   StyledContainer,
-  StyledForm,
   TitleResStyled,
 } from "./styles";
 import httpService from "../../api/httpService";
@@ -37,9 +36,8 @@ const JobsAdminAddComponent: React.FC = () => {
   const [success, setSuccess] = useState(false);
 
   const { showError } = useErrorAlert();
-  const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL}/${
-    import.meta.env.VITE_ROUTE_ADMIN_JOBS_EDIT_URL
-  }`;
+  const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL}/${import.meta.env.VITE_ROUTE_ADMIN_JOBS_EDIT_URL
+    }`;
   const ifItsEditPage = useMatch(fullEditPath);
   const params = useParams();
   const navigate = useNavigate();
@@ -172,11 +170,11 @@ const JobsAdminAddComponent: React.FC = () => {
         <TitleResStyled variant="h4" gutterBottom>
           {ifItsEditPage ? "Edit Job" : "Add Job"}
         </TitleResStyled>
-        <StyledCont>
-          <StyledForm>
-            {success && (
-              <Alert severity="success">Job created successfully!</Alert>
-            )}
+        {success && (
+          <Alert severity="success">Job created successfully!</Alert>
+        )}
+        <Grid container spacing={{ xs: 1, sm: 2 }}>
+          <Grid size={{ xs: 12, sm: 6 }} >
 
             {/* Title */}
             <Controller
@@ -193,6 +191,109 @@ const JobsAdminAddComponent: React.FC = () => {
                 />
               )}
             />
+          </Grid>
+
+         
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Category</InputLabel>
+              <Controller
+                name="type"
+                control={control}
+                render={({ field }) => (
+                  <Select label="Type" {...field}>
+                    {categories.map((item) => (
+                      <MenuItem key={item.id} value={item.title}>
+                        {item.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Controller
+              name="city"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="City"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.city}
+                  helperText={errors.city?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Controller
+              name="state"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="State"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.state}
+                  helperText={errors.state?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Controller
+              name="country"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Country"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.country}
+                  helperText={errors.country?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
+            <Controller
+              name="company"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Company"
+                  fullWidth
+                  {...field}
+                  margin="normal"
+                  error={!!errors.company}
+                  helperText={errors.company?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
+            <Controller
+              name="total_vacancy"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Vacancies"
+                  fullWidth
+                  margin="normal"
+                  {...field}
+                  error={!!errors.total_vacancy}
+                  helperText={errors.total_vacancy?.message}
+                />
+              )}
+            />
+          </Grid>
+         
+          <Grid size={{ xs: 12 }}>
 
             {/* Description */}
             <Controller
@@ -211,108 +312,19 @@ const JobsAdminAddComponent: React.FC = () => {
                 />
               )}
             />
-
-            <Controller
-              name="total_vacancy"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Vacancies"
-                  fullWidth
-                  margin="normal"
-                  {...field}
-                  error={!!errors.total_vacancy}
-                  helperText={errors.total_vacancy?.message}
-                />
-              )}
-            />
-
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Category</InputLabel>
-              <Controller
-                name="type"
-                control={control}
-                render={({ field }) => (
-                  <Select label="Type" {...field}>
-                    {categories.map((item) => (
-                      <MenuItem key={item.id} value={item.title}>
-                        {item.title}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-            </FormControl>
-          </StyledForm>
-          <StyledForm>
-            <Controller
-              name="city"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="City"
-                  fullWidth
-                  {...field}
-                  margin="normal"
-                  error={!!errors.city}
-                  helperText={errors.city?.message}
-                />
-              )}
-            />
-            <Controller
-              name="state"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="State"
-                  fullWidth
-                  {...field}
-                  margin="normal"
-                  error={!!errors.state}
-                  helperText={errors.state?.message}
-                />
-              )}
-            />
-            <Controller
-              name="country"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Country"
-                  fullWidth
-                  {...field}
-                  margin="normal"
-                  error={!!errors.country}
-                  helperText={errors.country?.message}
-                />
-              )}
-            />
-
-            <Controller
-              name="company"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  label="Company"
-                  fullWidth
-                  {...field}
-                  margin="normal"
-                  error={!!errors.company}
-                  helperText={errors.company?.message}
-                />
-              )}
-            />
-          </StyledForm>
-        </StyledCont>
-        <LearnButtonResStyled
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          disabled={isSubmitting || !isValid}
-        >
-          {ifItsEditPage ? "Update" : "Submit"}
-        </LearnButtonResStyled>
+          </Grid>
+          <Grid size={{ xs: 12 }}>
+            <LearnButtonResStyled
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isSubmitting || !isValid}
+            >
+              {ifItsEditPage ? "Update" : "Submit"}
+            </LearnButtonResStyled>
+          </Grid>
+        </Grid>
       </Box>
     </StyledContainer>
   );
