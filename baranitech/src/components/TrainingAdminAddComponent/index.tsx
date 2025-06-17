@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Box, Button, Container, TextField, Typography, Alert,
+    Box, Container, TextField, Typography, Alert,
     MenuItem, FormControl, InputLabel, Select,
     styled,
-    InputAdornment
+    InputAdornment,
+    Grid
 } from '@mui/material';
 import { useForm, Controller, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,8 +16,7 @@ import { useAxiosErrorHandler } from '../../hooks/useAxiosErrorHandler';
 import { useTrainingCategories } from '../../contexts/trainingCategoryContext';
 import { useMatch, useNavigate, useParams } from 'react-router';
 import { toInputDateFormat } from '../../helper';
-import { StyledCont } from '../ResourceAdminAddComponent/styles';
-import { LearnButtonResStyled, StyledForm } from './styles';
+import { LearnButtonResStyled } from './styles';
 
 
 const ContainerStyle = styled(Container)(({ theme }) => ({
@@ -73,6 +73,7 @@ const TrainingAddComponent: React.FC = () => {
             type: trainingCategories[0]?.title
         },
     });
+    
     const classification = watch('classification');
 
     const { showError } = useErrorAlert();
@@ -85,16 +86,16 @@ const TrainingAddComponent: React.FC = () => {
     const getParticularRecord = async () => {
         try {
             const res = await httpService.get<ApiResponse>(`/trainings/${params.pid}`);
-            
+
             if (res.status) {
                 setValue('title', res.data.title)
                 setValue('description', res.data.description)
                 setValue('classification', res.data.classification)
                 setValue('type', res.data.category.title)
-                if(res.data.startdate){
+                if (res.data.startdate) {
                     setValue('startDate', toInputDateFormat(res.data.startdate))
                 }
-                if(res.data.enddate){
+                if (res.data.enddate) {
                     setValue('endDate', toInputDateFormat(res.data.enddate))
                 }
                 setValue('totalPrice', res.data.total_price)
@@ -199,239 +200,253 @@ const TrainingAddComponent: React.FC = () => {
         <ContainerStyle maxWidth="xl">
             <Box component="form" onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} mt={4}>
                 <TypograpStyle variant="h4" gutterBottom>
-                {ifItsEditPage ? 'Edit Training' : 'Add Training'}
-                    </TypograpStyle>
+                    {ifItsEditPage ? 'Edit Training' : 'Add Training'}
+                </TypograpStyle>
 
                 {success && <Alert severity="success">Training created successfully!</Alert>}
-                <StyledCont>
-                        <StyledForm sx={{ mx: "auto", p: 0 }}>
+                <Grid container spacing={{ xs: 1, sm: 2 }}>
+                    <Grid size={{ xs: 12, sm: 6 }} >
                         <Controller
-                    name="classification"
-                    control={control}
-                    render={({ field }) => (
+                            name="classification"
+                            control={control}
+                            render={({ field }) => (
+                                <FormControl fullWidth margin="normal">
+                                    <InputLabel>Classification</InputLabel>
+                                    <Select label="Classification" {...field}>
+                                        <MenuItem value="0">Direct</MenuItem>
+                                        <MenuItem value="1">Online</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
                         <FormControl fullWidth margin="normal">
-                            <InputLabel>Classification</InputLabel>
-                            <Select label="Classification" {...field}>
-                                <MenuItem value="0">Direct</MenuItem>
-                                <MenuItem value="1">Online</MenuItem>
-                            </Select>
+                            <InputLabel>Category</InputLabel>
+                            <Controller
+                                name="type"
+                                control={control}
+                                render={({ field }) => (
+                                    <Select label="Type" {...field}>
+                                        {trainingCategories.map((item) => (
+                                            <MenuItem key={item.id} value={item.title}>
+                                                {item.title}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                )}
+                            />
                         </FormControl>
-                    )}
-                />
-
-                
-<FormControl fullWidth margin="normal">
-                    <InputLabel>Category</InputLabel>
-                    <Controller
-                        name="type"
-                        control={control}
-                        render={({ field }) => (
-                            <Select label="Type" {...field}>
-                                {trainingCategories.map((item) => (
-                                    <MenuItem key={item.id} value={item.title}>
-                                        {item.title}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        )}
-                    />
-                </FormControl>
-
-                <Controller
-                        name='title'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Title'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.title}
-                                helperText={errors.title?.message}
-                            />
-                        )}
-                    />
-                     <Controller
-                        name='description'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Description'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.description}
-                                helperText={errors.description?.message}
-                            />
-                        )}
-                    />
-                     <Controller
-                        name='startDate'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Start Date'
-                                fullWidth
-                                margin="normal"
-                                type='date'
-                                InputLabelProps={{ shrink: true }}
-                                error={!!errors.startDate}
-                                helperText={errors.startDate?.message}
-                            />
-                        )}
-                    />
-                    <Controller
-                        name='endDate'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='End Date'
-                                fullWidth
-                                margin="normal"
-                                type='date'
-                                InputLabelProps={{ shrink: true }}
-                                error={!!errors.endDate}
-                                helperText={errors.endDate?.message}
-                            />
-                        )}
-                    />
-                     <Controller
-                        name='totalHours'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Total Hours'
-                                fullWidth
-                                margin="normal"
-                                type='number'
-                                error={!!errors.totalHours}
-                                helperText={errors.totalHours?.message}
-                            />
-                        )}
-                    />
-                    
-
-                        </StyledForm>
-                
-
-                
-                    <StyledForm>
-                   
-                     <Controller
-                        name='totalPrice'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Total Price'
-                                fullWidth
-                                margin="normal"
-                                type='number'
-                                InputProps={{
-                                    startAdornment: <InputAdornment position="start">$</InputAdornment> ,
-                                }}
-                                error={!!errors.totalPrice}
-                                helperText={errors.totalPrice?.message}
-                            />
-                        )}
-                    />
-                      <Controller
-                        name='location'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Address'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.location}
-                                helperText={errors.location?.message}
-                            />
-                        )}
-                    />
-                      <Controller
-                        name='city'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='City'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.city}
-                                helperText={errors.city?.message}
-                            />
-                        )}
-                    />
-                      <Controller
-                        name='state'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='State'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.state}
-                                helperText={errors.state?.message}
-                            />
-                        )}
-                    />
-                      <Controller
-                        name='country'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Country'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                error={!!errors.country}
-                                helperText={errors.country?.message}
-                            />
-                        )}
-                    />
-                      <Controller
-                        name='tableOfContents'
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label='Table of Contents'
-                                fullWidth
-                                margin="normal"
-                                type='text'
-                                rows={5}
-                                error={!!errors.tableOfContents}
-                                helperText={errors.tableOfContents?.message}
-                            />
-                        )}
-                    />
-
-
-                    </StyledForm>
-                </StyledCont>
-                        
-                 
-                <LearnButtonResStyled
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    disabled={isSubmitting || !isValid}
-                    sx={{ mt: 2 }}
-                >
-                     {ifItsEditPage ? 'Update' : 'Submit'}
-                </LearnButtonResStyled>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='title'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Title'
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.title}
+                                    helperText={errors.title?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='startDate'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Start Date'
+                                    fullWidth
+                                    margin="normal"
+                                    type='date'
+                                    InputLabelProps={{ shrink: true }}
+                                    error={!!errors.startDate}
+                                    helperText={errors.startDate?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='endDate'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='End Date'
+                                    fullWidth
+                                    margin="normal"
+                                    type='date'
+                                    InputLabelProps={{ shrink: true }}
+                                    error={!!errors.endDate}
+                                    helperText={errors.endDate?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 3 }} >
+                        <Controller
+                            name='totalHours'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Total Hours'
+                                    fullWidth
+                                    margin="normal"
+                                    type='number'
+                                    error={!!errors.totalHours}
+                                    helperText={errors.totalHours?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 3 }} >
+                        <Controller
+                            name='totalPrice'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Total Price'
+                                    fullWidth
+                                    margin="normal"
+                                    type='number'
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                    }}
+                                    error={!!errors.totalPrice}
+                                    helperText={errors.totalPrice?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='location'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Address'
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.location}
+                                    helperText={errors.location?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='city'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='City'
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.city}
+                                    helperText={errors.city?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='state'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='State'
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.state}
+                                    helperText={errors.state?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }} >
+                        <Controller
+                            name='country'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Country'
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.country}
+                                    helperText={errors.country?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12 }} >
+                        <Controller
+                            name='description'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Description'
+                                    multiline
+                                    rows={5}
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    error={!!errors.description}
+                                    helperText={errors.description?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12 }} >
+                        <Controller
+                            name='tableOfContents'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    label='Table of Contents'
+                                    multiline
+                                    fullWidth
+                                    margin="normal"
+                                    type='text'
+                                    rows={5}
+                                    error={!!errors.tableOfContents}
+                                    helperText={errors.tableOfContents?.message}
+                                />
+                            )}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12 }} >
+                        <LearnButtonResStyled
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            disabled={isSubmitting || !isValid}
+                            sx={{ mt: 2 }}
+                        >
+                            {ifItsEditPage ? 'Update' : 'Submit'}
+                        </LearnButtonResStyled>
+                    </Grid>
+                </Grid>
             </Box>
         </ContainerStyle>
     );
