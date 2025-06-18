@@ -267,7 +267,7 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
     },
   },
   "& > .hidden > img": {
-   // width: "100%",
+   width: "100%",
    borderRadius: '20px',
   },
 }));
