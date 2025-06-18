@@ -8,7 +8,7 @@ import {
   styled,
   ContainerProps,
 } from '@mui/material';
-import { GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
+import { AboutUsPara1Styled, AboutUsTitleStyled, GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ContactUsFormSchema } from '../validationSchema/schema';
@@ -97,9 +97,9 @@ const ContactPage: React.FC = () => {
 
     <Container sx={{ mt: 1 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <LearningResourcesStyled variant="h4" gutterBottom>
-          Contact Us
-        </LearningResourcesStyled>
+        <AboutUsTitleStyled>
+            Contact Us
+        </AboutUsTitleStyled>
         {success && <Alert severity="success">Your message has been sent successfully!</Alert>}
         <GridContactStyled>
           <Grid size={6} className={'fullwidth'}>

@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import MenuBar from './components/Menubar'
 import Footer from './components/Footer'
 import FlashOffer from './components/FlashOffer'
-import { Outlet, useLocation } from 'react-router';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import { useUser } from './contexts/userContext';
 import AdminMenubar from './components/Menubar/adminMenubar';
 import { useYouTubeCategories } from './contexts/youtubeCategoryContext';
@@ -30,6 +30,7 @@ function App() {
   const location = useLocation()
   const [futureTrainings, setFutureTrainings] = useState<TrainingType[]>([])
   const { allTrainings } = useAllTrainings()
+  const navigate = useNavigate()
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -54,7 +55,7 @@ function App() {
 
   const Flashes = futureTrainings.length > 0 && futureTrainings.slice(0, 2).map(item => (
     <FlashOffer
-      onClick={() => { }}
+      onClick={() => { navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL); }}
       message={`${item.title} - Book your spot now before registration closes. Don’t miss out!`}
       buttonlabel="Register" />
   ))

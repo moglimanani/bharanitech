@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import {ActiveLink, LogoStyled, AppBarStyled, MenusBoxStyled, ToolbarStyled, IconButtonStyled, MobileMenuListStyled, ListItemTextStyled, BrandNameStyled} from './styles'
 
@@ -28,6 +28,7 @@ const MenuBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -67,7 +68,7 @@ const MenuBar: React.FC = () => {
               <MenuIcon />
             </IconButtonStyled>
           )}
-          <Typography variant="h6" sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
+          <Typography variant="h6" onClick={() => { navigate(import.meta.env.VITE_ROUTE_HOME_URL);}} sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
             <LogoStyled src='/logo.png' alt='Barani Tech logo' loading='lazy' />
             <BrandNameStyled align='left' display='flex'>
               Barani Tech

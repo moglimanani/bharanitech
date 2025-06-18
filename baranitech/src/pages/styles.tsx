@@ -76,14 +76,19 @@ export const AboutUsStyled = styled("div")(({ theme }) => ({
 }));
 
 export const AboutUsTitleStyled = styled("h2")(({ theme }) => ({
-  // background: 'yellow',
-  padding: "0px 0px 0px",
-  color: theme.palette.appBarColour.light,
+  fontSize: "1em",
+  color: theme.palette.appBarColour.main,
+  background: theme.palette.flashPrimaryBGColor.main,
+  //margin: '30px 0',
+  padding: "8px",
+  marginBottom: '30px',
+  borderRadius: "12px 50px 50px 12px",
+  textAlign: "left",
   fontWeight: "bold",
-  fontSize: "1.3em",
-  [theme.breakpoints.down("sm")]: {
-    padding: "0px",
-  },
+  fontFamily: "Poetsen One",
+  letterSpacing: "1px",
+  maxWidth: 'fit-content',
+  paddingRight: '16px'
 }));
 
 export const AboutUsParaStyled = styled("p")(({ theme }) => ({
@@ -136,7 +141,6 @@ export const AboutUsPara1Styled = styled("p")(({ theme }) => ({
   margin: "0",
   padding: "0 20px 20px 0",
   color: theme.palette.appBarColour.light,
-  fontSize: "0.88em",
   [theme.breakpoints.down("sm")]: {
     padding: "0px",
     maxWidth: "100%",
@@ -173,6 +177,7 @@ export const AdminTitleStyled = styled(Typography)(({ theme }) => ({
   background: theme.palette.flashPrimaryBGColor.main,
   //margin: '30px 0',
   padding: "8px",
+  marginBottom: '30px',
   borderRadius: "12px 50px 50px 12px",
   textAlign: "left",
   fontWeight: "bold",
@@ -369,7 +374,7 @@ export const ActionsBarStyled = styled(Box)(({ theme }) => ({
 export const DialogStyled = styled(Dialog)(({ theme }) => ({
   background: 'rgba(250, 250, 250, 0.8)',
   "& .MuiPaper-root": {
-    backgroundColor: theme.palette.purpleLight.dark,
+    backgroundColor: theme.palette.appBarColour.main,
     padding: '16px',
     "h2": {
       color: theme.palette.common.white,
@@ -388,11 +393,11 @@ export const DialogStyled = styled(Dialog)(({ theme }) => ({
     },
     "button": {
       background: theme.palette.common.white,
-      color: theme.palette.purpleLight.dark,
+      color: theme.palette.appBarColour.main,
 
       "&:hover": {
-        background: theme.palette.gold.main,
-        color: theme.palette.common.white
+        background: theme.palette.flashPrimaryBGColor.main,
+        color: theme.palette.appBarColour.main,
       }
     }
   }
