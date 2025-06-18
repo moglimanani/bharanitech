@@ -224,7 +224,7 @@ const ContactPage: React.FC = () => {
             {/* </BoxContactStyled> */}
           </Grid>
           <Grid size={6} className={'hidden'}>
-            <img src="/login.png" alt="login" loading="lazy" />
+            <img src="/contact.png" alt="contact" loading="lazy" />
           </Grid>
         </GridContactStyled>
       </form>

@@ -254,6 +254,7 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
   padding: "30px",
   marginBottom: "30px",
   "& > .hidden": {
+    padding: '20px',
     [theme.breakpoints.down("sm")]: {
       margin: "0",
       padding: "0",
@@ -266,7 +267,8 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
     },
   },
   "& > .hidden > img": {
-    width: "100%",
+   // width: "100%",
+   borderRadius: '20px',
   },
 }));
 
