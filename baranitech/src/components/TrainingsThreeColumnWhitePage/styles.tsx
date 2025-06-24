@@ -1,5 +1,6 @@
 import {  Box, Grid, styled, Typography} from "@mui/material";
 
+
 export const BoxWhiteStyled = styled(Box)(({theme})=>({
   background: theme.palette.secondary.main,
   padding: '16px 16px 34px !important',
@@ -44,22 +45,19 @@ export const ThreeColumnStyledBlue = styled(Grid)(({theme})=>({
     justifyContent: 'space-around',
     boxShadow: 'none !important',
     //background: theme.palette.appBarColour.light,
-    background: theme.palette.appBarColour.main,
+    background: theme.palette.flashPrimaryBGColor.main,
     borderRadius: '20px',
     padding: '0px',
     flexDirection: 'column',
-   
 }))
 
-
-
 export const TitleDivStyledWhite = styled('div')(({theme})=>({
-    color: theme.palette.appBarColour.light,
+    color: theme.palette.appBarColour.main,
     textAlign: 'left',
     padding: '20px 20px 5px',
     display: 'flex',
     marginBottom: '10px',
-    fontSize: '1.3em',
+    fontSize: '1.6em',
     textTransform: 'capitalize',
 }))
 
@@ -78,23 +76,24 @@ export const ButtonWrapperStyledWhite = styled('div')(()=>({
 }))
 
 export const ParaOneStyledWhite = styled('p')(({theme})=>({
-        fontSize: '1em',
+        fontSize: '1.2em',
         margin: '0',
         textAlign: 'left',
         padding: '0px 20px 15px',
-        color: theme.palette.flashPrimaryBGColor.main,
+        //color: theme.palette.flashPrimaryBGColor.main,
+        color: theme.palette.secondary.main,
         //height: '120px',
        // overflow: 'scroll',
        textTransform: 'capitalize',
 }))
 
 export const TypographyStyledWhite = styled(Typography)(()=>({
-    fontSize: '0.75em',
+    fontSize: '0.88em',
     margin: '0',
     textAlign: 'left',
     padding: '0px 20px 5px',
     //color: theme.palette.appBarColour.light,
-    color: '#f3f3f3',
+    // color: '#f3f3f3',
     //height: '120px',
    // overflow: 'scroll'
 }))
@@ -104,9 +103,10 @@ export const ButtonOneStyledWhite = styled('button')(({theme})=>({
     margin: '10px 20px 30px',
     textAlign: 'center',
     border: '0',
-    color: theme.palette.appBarColour.main,
+    // color: theme.palette.appBarColour.main,
+    background : theme.palette.appBarColour.main,
     padding: '10px 20px',
-    background: theme.palette.appBarColour.light,
+    color: theme.palette.appBarColour.light,
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
@@ -122,3 +122,7 @@ export const CardMediaStyled = styled(Box)(({theme})=>({
      }
    
 }))
+
+
+
+  
