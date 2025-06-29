@@ -11,7 +11,6 @@ import {
   PageWrapperStyled,
   TwoColumnStyled,
 } from "./styles";
-// import PricingTable from "../components/Pricing";
 
 export default function HomePage() {
   return (
@@ -19,10 +18,7 @@ export default function HomePage() {
       <Grid size={12}>
         <CarouselComponent />
       </Grid>
-      {/* <Grid size={12}>
-         <PricingTable />
-      </Grid>
-       */}
+      
       <TwoColumnStyled size={12}>
         <Grid container>
           <Grid>

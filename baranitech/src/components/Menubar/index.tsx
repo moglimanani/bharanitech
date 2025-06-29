@@ -68,7 +68,7 @@ const MenuBar: React.FC = () => {
               <MenuIcon />
             </IconButtonStyled>
           )}
-          <Typography variant="h6" onClick={() => { navigate(import.meta.env.VITE_ROUTE_HOME_URL);}} sx={{ flexGrow: 1 }} display='flex' alignItems='flex-start'>
+          <Typography variant="h6" onClick={() => { navigate(import.meta.env.VITE_ROUTE_HOME_URL);}} sx={{ flexGrow: 1, cursor: 'pointer' }}  display='flex' alignItems='center'>
             <LogoStyled src='/logo.png' alt='Barani Tech logo' loading='lazy' />
             <BrandNameStyled align='left' display='flex'>
               Barani Tech

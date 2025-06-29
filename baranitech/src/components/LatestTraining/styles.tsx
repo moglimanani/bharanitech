@@ -1,4 +1,4 @@
-import { Container, ContainerProps, Typography , Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 // import Container, { ContainerProps } from '@mui/material/Container';
 
@@ -11,12 +11,12 @@ export const StyledH2 = styled('h2')(({ theme }) => ({
 }));
 
 export const StyledpriceRow = styled(Grid)(({ theme }) => ({
-  width: '90%',
   maxWidth: '1100px',
   margin: 'auto',
   display: 'grid',
   gridTemplateColumns: '3fr 3fr 3fr',
   gridGap: '25px',
+  padding: '10px 0 0 20px',
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: '3fr',
   },
@@ -28,12 +28,17 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   borderRadius: '12px',
   color: '#484848',
   textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'relative',
   '& > p': {
     fontSize: '22px',
+    textTransform: 'capitalize',
+    marginBottom: '0px'
   },
   '& > h3': {
     fontSize: '44px',
-    margin: '20px 0 40px',
+    margin: '10px 0 10px',
     fontWeight: '500',
     color: '#127B93',
   },
@@ -42,18 +47,17 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   },
   '& > ul': {
     textAlign: 'left',
-    margin: '20px 0',
+    margin: '10px 0',
     color: '#363535',
     listStyle: 'none',
+
   },
   '& > ul > li': {
     margin: '15px 0',
   },
   '& > button': {
-    width: '100%',
+    width: '80%',
     padding: '14px 0',
-    background: 'transparent',
-    color: '#363535',
     fontSize: '15px',
     border: '1px solid #127B93',
     borderRadius: '6px',
@@ -61,10 +65,12 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
     cursor: 'pointer',
     transition: 'background 0.5s',
     fontWeight: 'bold',
-  },
-  '& > button:hover': {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translate(-50%)',
+    bottom: '10px',
     background: '#127B93',
     color: '#fff',
-  }
+  },
 }));
 
