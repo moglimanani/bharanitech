@@ -73,6 +73,7 @@ import '@fontsource/red-hat-display/700-italic.css';
 import '@fontsource/red-hat-display/800-italic.css';
 import '@fontsource/red-hat-display/900-italic.css';
 import TrainingsViewPage from './pages/TrainingsViewPage.tsx'
+import ResourceViewPage from './pages/ResourceViewPage.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -98,7 +99,11 @@ createRoot(document.getElementById('root')!).render(
                               <Route path={import.meta.env.VITE_ROUTE_REGISTER_USER_URL} element={<RegisterPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_CONTACT_URL} element={<ContactPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_URL} element={<AdminPage />} />
-                              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL} element={<ResourcesListPage />} />
+                              <Route path={import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}>
+                                <Route index element={<ResourcesListPage />} />
+                                <Route path={import.meta.env.VITE_ROUTE_RESOURCES_ID_URL} element={<ResourceViewPage />} />
+                              </Route>
+
                               <Route path={import.meta.env.VITE_ROUTE_TESTIMONIAL_URL} element={<TestimonialPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_URL} element={<YoutubeListPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_ADD_URL} element={<YoutubeUrlAddPage />} />
