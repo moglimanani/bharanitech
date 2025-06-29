@@ -8,46 +8,21 @@ import {
   Chip,
 } from '@mui/material';
 import { AdminTitleStyled, ParaStyled, StackStyled, StyledWrapperDivCard, TitleStyled } from './styles';
+import { useAllTrainings } from '../contexts/allTrainingsContext';
+import { TrainingType } from '../types/trainings';
+import { useNavigate } from 'react-router';
 
-// Define a type for training items
-interface Training {
-  id: number;
-  title: string;
-  description: string;
-  trainer_name: string;
-  duration_minutes: number;
-  date: string;
-}
 
-// Mock training data
-const trainings: Training[] = [
-  {
-    id: 1,
-    title: 'React Basics',
-    description: 'Learn the fundamentals of React including JSX and state management.',
-    trainer_name: 'John Doe',
-    duration_minutes: 90,
-    date: '2025-05-10',
-  },
-  {
-    id: 2,
-    title: 'Advanced TypeScript',
-    description: 'Deep dive into TypeScript with real-world patterns.',
-    trainer_name: 'Jane Smith',
-    duration_minutes: 120,
-    date: '2025-05-12',
-  },
-  {
-    id: 3,
-    title: 'UI Design Principles',
-    description: 'Understand design fundamentals for better UI/UX.',
-    trainer_name: 'Alice Johnson',
-    duration_minutes: 75,
-    date: '2025-05-15',
-  },
-];
+
 
 const TrainingsListPage: React.FC = () => {
+  const {allTrainings} = useAllTrainings()
+  const navigate = useNavigate()
+
+  if(!allTrainings ||  allTrainings.length === 0){
+    return <div>Sorry, No trainings found.</div>
+  }
+
   return (
     <Container  sx={{ mt: 1 }}>
       <AdminTitleStyled variant="h4" gutterBottom>
@@ -55,11 +30,11 @@ const TrainingsListPage: React.FC = () => {
       </AdminTitleStyled>
 
       <Grid container spacing={3} style={{marginBottom: '30px'}}>
-        {trainings.map((training) => (
+        {allTrainings.map((training: TrainingType) => (
           <Grid size={{xs:12, sm:6, md:4}} key={training.id}>
             <StyledWrapperDivCard>
               <CardContent>
-                <TitleStyled variant="h6" gutterBottom>
+                <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>
                   {training.title}
                   <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
                     <Stack direction="row" spacing={1}>
@@ -74,13 +49,13 @@ const TrainingsListPage: React.FC = () => {
                 </ParaStyled>
                 <Divider sx={{ my: 1 }} />
                 <ParaStyled variant="body2">
-                  <strong>Trainer:</strong> {training.trainer_name}
+                  <strong>Trainer:</strong> Ezhumalai
                 </ParaStyled>
+                {/* <ParaStyled variant="body2">
+                  <strong>Sta:</strong> {training.duration_minutes} mins
+                </ParaStyled> */}
                 <ParaStyled variant="body2">
-                  <strong>Duration:</strong> {training.duration_minutes} mins
-                </ParaStyled>
-                <ParaStyled variant="body2">
-                  <strong>Date:</strong> {training.date}
+                  <strong>Date:</strong> {training.startdate}
                 </ParaStyled>
               </CardContent>
             </StyledWrapperDivCard>

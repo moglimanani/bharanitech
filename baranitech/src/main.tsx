@@ -72,6 +72,7 @@ import '@fontsource/red-hat-display/600-italic.css';
 import '@fontsource/red-hat-display/700-italic.css';
 import '@fontsource/red-hat-display/800-italic.css';
 import '@fontsource/red-hat-display/900-italic.css';
+import TrainingsViewPage from './pages/TrainingsViewPage.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -106,7 +107,7 @@ createRoot(document.getElementById('root')!).render(
                               <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ADD_URL} element={<TrainingAddPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_TRAININGS_URL} >
                                 <Route index element={<TrainingsListPage />} />
-                                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsListPage />} />
+                                <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ID_URL} element={<TrainingsViewPage />} />
                                 <Route path={import.meta.env.VITE_ROUTE_TRAININGS_EDIT_URL} element={<TrainingsListPage />} />
                               </Route>
                               <Route path={import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL} element={<GalleryAdminPage />}>
