@@ -12,6 +12,7 @@ export interface ResourceType {
   description: string;
   created_at: string;
   type: number;
+  language: string;
 }
 
 export interface allResourcesType {
