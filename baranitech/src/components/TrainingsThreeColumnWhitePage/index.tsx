@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, H2BoxStyled, ParaOneStyledWhite, PareBoxStyled, ThreeColumnStyledBlue, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
+import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, H2BoxStyled, ParaOneStyledWhite, PareBoxStyled, StyledH2, ThreeColumnStyledBlue, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
 import { useAllTrainings } from "../../contexts/allTrainingsContext";
 import { TrainingType } from "../../types/trainings";
 
@@ -35,6 +35,7 @@ const TrainingsThreeColumnWhitePage: React.FC = () => {
             </ThreeColumnStyledBlue>
           ))
         }
+        
       </Grid>
     </BoxWhiteStyled>
   );
