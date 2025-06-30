@@ -59,10 +59,10 @@ const ResourcesListPage: React.FC = () => {
                   {resource.title}
                 </TitleStyled>
                 <ParaStyled variant="body2" color="text.secondary">
-                  Type: {categories.find((cat) => cat.id === resource.type)?.title}
+                 <span>Type:</span>  {categories.find((cat) => cat.id === resource.type)?.title}
                 </ParaStyled>
                 <ParaStyled variant="body2" color="text.secondary">
-                  Language: {getLanguageType[+resource.language].name}
+                <span>Language:</span> {getLanguageType[+resource.language].name}
                 </ParaStyled>
                 <ParaStyled variant="body2" color="text.secondary">
                   {resource.description}
