@@ -49,6 +49,7 @@ export const TitleDivStyledWhite = styled('div')(({theme})=>({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     width: '100%',
+    textTransform: 'capitalize',
 }))
 
 export const ImageDivStyledWhite = styled('div')(()=>({

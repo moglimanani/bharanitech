@@ -208,6 +208,7 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
   fontSize: ".88rem",
   paddingTop: "5px",
+  textTransform: 'capitalize',
   color: theme.palette.secondary.main,
   '& span': {
     color: theme.palette.appBarColour.main,

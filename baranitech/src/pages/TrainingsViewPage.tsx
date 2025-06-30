@@ -31,7 +31,8 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 const StyledDiv = styled('div')(({ theme }) => ({
   color: theme.palette.secondary.main,
   fontSize: '14px',
-  padding: '5px 10px 5px'
+  padding: '5px 10px 5px',
+  textTransform: 'capitalize',
 
 }));
 
