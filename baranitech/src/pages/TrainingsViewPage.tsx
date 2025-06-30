@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Typography, CircularProgress, Paper, Button } from '@mui/material';
+import { Box, Typography, CircularProgress, Paper, Button, Stack, Chip } from '@mui/material';
 import { styled } from '@mui/system';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
@@ -22,17 +22,17 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
-    color: theme.palette.appBarColour.main,
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-    padding: '5px 10px 5px',
+  color: theme.palette.appBarColour.main,
+  fontWeight: 'bold',
+  textTransform: 'capitalize',
+  padding: '5px 10px 5px',
 }));
 
 const StyledDiv = styled('div')(({ theme }) => ({
   color: theme.palette.secondary.main,
   fontSize: '14px',
   padding: '5px 10px 5px'
-  
+
 }));
 
 const StyledDivPage = styled('div')(({ theme }) => ({
@@ -72,59 +72,66 @@ const TrainingsViewPage: React.FC = () => {
   }, [tid]);
   const isLocation = training && training.city && training.state && training.country
   return (
-    <div style={{margin: '0 30px'}}>
-    <AboutUsTitleStyled>Training View</AboutUsTitleStyled> 
-     <Container>
-       
-      {loading ? (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
-          <CircularProgress />
-        </Box>
-      ) : error ? (
-        <Typography color="error">{error}</Typography>
-      ) : training ? (
-        <StyledPaper elevation={3}>
-          <StyledTypography variant="h5" gutterBottom>
-            {training.title}
-          </StyledTypography>
-          <StyledDiv>
-            <span>Description:</span>
-            <span>{training.description}</span>
-          </StyledDiv>
-          <StyledDiv>
-            <span>Start Date:</span>
-            <span>{training.startdate}</span>
-          </StyledDiv>
-          <StyledDiv>
-            <span>Instructor:</span>
-            <span>Ezhumalai</span>
-          </StyledDiv>
-          <StyledDiv>
-            <span>Price:</span>
-            <span>{training.total_price}</span>
-          </StyledDiv>
-          <StyledDiv>
-          <span>Location:</span>
-          {
-            +training.classification !== 0 && (
-              <span>Online</span>
-            )
-          }
-          {
-            +training.classification === 0 && isLocation && (
-              <span>Location:  {training.city}, {training.state}, {training.country}</span>
-            )
-          }
-          </StyledDiv>
-          <StyledDivPage>
-                 <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>Back to Training page</LearnButtonStyled>
-          </StyledDivPage>
-          
-        </StyledPaper>
-      ) : (
-        <Typography>No training found.</Typography>
-      )}
-    </Container>
+    <div style={{ margin: '0 30px' }}>
+      <AboutUsTitleStyled>Training View</AboutUsTitleStyled>
+      <Container>
+
+        {loading ? (
+          <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Typography color="error">{error}</Typography>
+        ) : training ? (
+          <StyledPaper elevation={3}>
+            <Stack spacing={1} sx={{ alignItems: 'flex-end' }}>
+              <Stack direction="row" spacing={1}>
+
+                {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined" />}
+                {+training.classification === 1 && <Chip label="Online" color="warning" variant="outlined" />}
+              </Stack>
+
+            </Stack>
+            <StyledTypography variant="h5" gutterBottom>
+              {training.title}
+            </StyledTypography>
+            <StyledDiv>
+              <span>{training.description}</span>
+            </StyledDiv>
+            <StyledDiv>
+              <span>Start Date:</span>
+              <span>{training.startdate}</span>
+            </StyledDiv>
+            <StyledDiv>
+              <span>Instructor:</span>
+              <span>Ezhumalai</span>
+            </StyledDiv>
+            <StyledDiv>
+              <span>Price:</span>
+              <span>₹{training.total_price}/-</span>
+            </StyledDiv>
+            <StyledDiv>
+              <span>Location:</span>
+              {
+                +training.classification !== 0 && (
+                  <span>Online</span>
+                )
+              }
+              {
+                +training.classification === 0 && isLocation && (
+                  <span>Location:  {training.city}, {training.state}, {training.country}</span>
+                )
+              }
+            </StyledDiv>
+            <StyledDivPage>
+              <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>{`<<`} Back to Training page</LearnButtonStyled>
+            </StyledDivPage>
+
+          </StyledPaper>
+        ) : (
+          <Typography>No training found.</Typography>
+        )}
+      </Container>
     </div>
   );
 };
