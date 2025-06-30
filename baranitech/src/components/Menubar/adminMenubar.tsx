@@ -25,7 +25,7 @@ const menuItems = [
   { path: import.meta.env.VITE_ROUTE_ADMIN_URL, name: 'Home' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL, name: 'Gallery' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL, name: 'Resources' },
-  { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Jobs' },
+  { path: import.meta.env.VITE_ROUTE_ADMIN_JOBS_URL, name: 'Careers' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_URL, name: 'Trainings' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL, name: 'Training Candidates' },
   { path: import.meta.env.VITE_ROUTE_ADMIN_TRAINING_REGISTERED_URL, name: 'Job Candidates' },

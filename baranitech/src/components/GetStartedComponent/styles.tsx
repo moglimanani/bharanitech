@@ -77,6 +77,8 @@ export const DivWrapperInnerStyled = styled('div')(({theme})=>({
     [theme.breakpoints.down('sm')]: {
       // background: 'yellow',
      // flexDirection: 'column',
+     width: 'auto'
+     
     
    }
   },
@@ -90,11 +92,13 @@ export const WrapperDivStyled = styled('div')(({theme})=>({
    // flexDirection: 'column',
    margin: '10px 0 0 10px',
    maxWidth: '230px',
+   padding: '10px'
+
  },
   '& > div': {
     color: theme.palette.appBarColour.main,
     fontSize: '.88em',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   '& > p': {
     color: theme.palette.secondary.main,
