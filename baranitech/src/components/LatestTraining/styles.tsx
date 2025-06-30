@@ -11,8 +11,8 @@ export const StyledH2 = styled('h2')(({ theme }) => ({
 }));
 
 export const StyledpriceRow = styled(Grid)(({ theme }) => ({
-  maxWidth: '1100px',
-  margin: 'auto',
+  maxWidth: '1240px',
+  margin: '0 auto',
   display: 'grid',
   gridTemplateColumns: '3fr 3fr 3fr',
   gridGap: '25px',
@@ -24,20 +24,22 @@ export const StyledpriceRow = styled(Grid)(({ theme }) => ({
 
 export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   background: '#c4f4ff',
-  padding: '5%',
+  padding: '2%',
+  minHeight: '350px',
   borderRadius: '12px',
   color: '#484848',
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   position: 'relative',
+  textTransform: 'capitalize',
   '& > p': {
-    fontSize: '22px',
+    fontSize: '24px',
     textTransform: 'capitalize',
     marginBottom: '0px'
   },
   '& > h3': {
-    fontSize: '44px',
+    fontSize: '32px',
     margin: '10px 0 10px',
     fontWeight: '500',
     color: '#127B93',
@@ -47,7 +49,7 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   },
   '& > ul': {
     textAlign: 'left',
-    margin: '10px 0',
+    margin: '0',
     color: '#363535',
     listStyle: 'none',
 

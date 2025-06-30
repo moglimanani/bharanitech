@@ -3,15 +3,24 @@ import {Grid, Card, CardMedia, Typography, CardContent, Dialog, DialogContent, I
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
-const GalleryContainer = styled('div')(({ theme }) => ({
-  padding: theme.spacing(4),
-}));
 type ImageItem = {
-    src: string;
-    title: string;
-  };
+  src: string;
+  title: string;
+};
+
+const GalleryContainer = styled('div')(({ theme }) => ({
+  padding: '10px 20px 40px 30px',
+}));
+
+const GalleryTypographyFont = styled(Typography)(({ theme }) => ({
+  color: theme.palette.appBarColour.main,
+  fontWeight: 'bold',
+}));
+
+
+
 const ImageCard = styled(Card)(({ theme }) => ({
-    borderRadius: theme.shape.borderRadius * 2,
+    borderRadius: '12px',
     boxShadow: theme.shadows[3],
     transition: 'transform 0.3s ease',
     cursor: 'pointer',
@@ -61,9 +70,9 @@ export default function GalleryListPage() {
                 alt={img.title}
               />
               <CardContent>
-                <Typography variant="h6" component="div">
+                <GalleryTypographyFont variant="h6">
                   {img.title}
-                </Typography>
+                </GalleryTypographyFont>
               </CardContent>
             </ImageCard>
           </Grid>
@@ -71,7 +80,7 @@ export default function GalleryListPage() {
       </Grid>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
       <DialogHeader>
-          <Typography variant="h6">{selectedImage?.title}</Typography>
+          <GalleryTypographyFont variant="h6">{selectedImage?.title}</GalleryTypographyFont>
           <IconButton onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>

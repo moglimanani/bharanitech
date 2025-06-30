@@ -5,35 +5,61 @@ import { styled } from '@mui/system';
 import { useAllResources } from '../contexts/allResourcesContext';
 import { ResourceType } from '../types/resources';
 import { getLanguageType } from '../helper';
+import { AboutUsTitleStyled } from './styles';
 
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
-  maxWidth: 600,
-  margin: '50px auto',
-  padding: theme.spacing(4),
-}));
-
-const VideoFrame = styled("iframe")(() => ({
-  width: "100%",
-  height: "auto",
-  border: 0,
+  maxWidth: '1280px',
+  margin: '20px 0 30px',
+  textAlign: 'left',
+  //padding: theme.spacing(2),
 }));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
+  padding: theme.spacing(2),
   backgroundColor: '#f9f9f9',
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: '12px',
 }));
 
-const Label = styled(Typography)({
-  fontWeight: 600,
-  marginBottom: 4,
-});
+const StyledTypography = styled(Typography)(({ theme }) => ({
+    color: theme.palette.appBarColour.main,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    padding: '5px 10px 5px',
+}));
 
-const Value = styled(Typography)({
-  marginBottom: 16,
-});
+const StyledDiv = styled('div')(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  fontSize: '14px',
+  padding: '5px 10px 5px'
+  
+}));
+
+const StyledDivPage = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
+}));
+
+export const LearnButtonStyled = styled(Button)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  borderRadius: "20px",
+  margin: "10px 0 20px",
+  padding: "10px 20px",
+}));
+
+const VideoFrame = styled("iframe")(({theme}) => ({
+  width: "50%",
+  height: "auto",
+  border: 0,
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+}));
+
+
 
 const ResourceViewPage: React.FC = () => {
   const [resource, setResource] = useState<ResourceType | null>(null);
@@ -57,6 +83,8 @@ const ResourceViewPage: React.FC = () => {
   }, [rid]);
 
   return (
+    <div style={{margin: '0 30px'}}>
+     <AboutUsTitleStyled>Resources View</AboutUsTitleStyled> 
     <Container>
       {loading ? (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
@@ -66,17 +94,26 @@ const ResourceViewPage: React.FC = () => {
         <Typography color="error">{error}</Typography>
       ) : resource ? (
         <StyledPaper elevation={3}>
-          <Typography variant="h5" gutterBottom>
+          <StyledTypography variant="h5" gutterBottom>
             {resource.title}
-          </Typography>
-          <Label>Description:</Label>
-          <Value>{resource.description}</Value>
-          <Label>Type:</Label>
-          <Value>{resource.category.title}</Value>
-          <Label>Instructor:</Label>
-          <Value>Ezhumalai</Value>
-          <Label>Language:</Label>
-          <Value>{getLanguageType[+resource.language].name}</Value>
+          </StyledTypography>
+          <StyledDiv>
+            <span>Description:</span>
+            <span>{resource.description}</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Type:</span>
+            <span>{resource.category.title}</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Instructor:</span>
+            <span>Ezhumalai</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Language:</span>
+            <span>{getLanguageType[+resource.language].name}</span>
+          </StyledDiv>
+        
           {resource.url && (
             <VideoFrame
               src={resource.url}
@@ -84,12 +121,16 @@ const ResourceViewPage: React.FC = () => {
               allowFullScreen
             />
           )}
-          <Button onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}`)}>Back to Resource page</Button>
+          <StyledDivPage>
+             <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}`)}>Back to Resource page</LearnButtonStyled>
+          </StyledDivPage>
+          
         </StyledPaper>
       ) : (
         <Typography>No resource found.</Typography>
       )}
     </Container>
+    </div>
   );
 };
 

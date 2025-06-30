@@ -4,29 +4,51 @@ import { Box, Typography, CircularProgress, Paper, Button } from '@mui/material'
 import { styled } from '@mui/system';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
+import { AboutUsTitleStyled } from './styles';
 
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
-  maxWidth: 600,
-  margin: '50px auto',
-  padding: theme.spacing(4),
+  maxWidth: '1280px',
+  margin: '20px 0 30px',
+  textAlign: 'left',
+  //padding: theme.spacing(2),
 }));
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
+  padding: theme.spacing(2),
   backgroundColor: '#f9f9f9',
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: '12px',
 }));
 
-const Label = styled(Typography)({
-  fontWeight: 600,
-  marginBottom: 4,
-});
+const StyledTypography = styled(Typography)(({ theme }) => ({
+    color: theme.palette.appBarColour.main,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    padding: '5px 10px 5px',
+}));
 
-const Value = styled(Typography)({
-  marginBottom: 16,
-});
+const StyledDiv = styled('div')(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  fontSize: '14px',
+  padding: '5px 10px 5px'
+  
+}));
+
+const StyledDivPage = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
+}));
+
+export const LearnButtonStyled = styled(Button)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  borderRadius: "20px",
+  margin: "10px 0 20px",
+  padding: "10px 20px",
+}));
+
 
 const TrainingsViewPage: React.FC = () => {
   const [training, setTraining] = useState<TrainingType | null>(null);
@@ -50,7 +72,10 @@ const TrainingsViewPage: React.FC = () => {
   }, [tid]);
   const isLocation = training && training.city && training.state && training.country
   return (
-    <Container>
+    <div style={{margin: '0 30px'}}>
+    <AboutUsTitleStyled>Training View</AboutUsTitleStyled> 
+     <Container>
+       
       {loading ? (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
           <CircularProgress />
@@ -59,35 +84,48 @@ const TrainingsViewPage: React.FC = () => {
         <Typography color="error">{error}</Typography>
       ) : training ? (
         <StyledPaper elevation={3}>
-          <Typography variant="h5" gutterBottom>
+          <StyledTypography variant="h5" gutterBottom>
             {training.title}
-          </Typography>
-          <Label>Description:</Label>
-          <Value>{training.description}</Value>
-          <Label>Start Date:</Label>
-          <Value>{training.startdate}</Value>
-          <Label>Instructor:</Label>
-          <Value>Ezhumalai</Value>
-          <Label>Price:</Label>
-          <Value>{training.total_price}</Value>
-          <Label>Location:</Label>
+          </StyledTypography>
+          <StyledDiv>
+            <span>Description:</span>
+            <span>{training.description}</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Start Date:</span>
+            <span>{training.startdate}</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Instructor:</span>
+            <span>Ezhumalai</span>
+          </StyledDiv>
+          <StyledDiv>
+            <span>Price:</span>
+            <span>{training.total_price}</span>
+          </StyledDiv>
+          <StyledDiv>
+          <span>Location:</span>
           {
             +training.classification !== 0 && (
-              <Value>Online</Value>
+              <span>Online</span>
             )
           }
           {
             +training.classification === 0 && isLocation && (
-              <Value>Location:  {training.city}, {training.state}, {training.country}</Value>
+              <span>Location:  {training.city}, {training.state}, {training.country}</span>
             )
           }
-
-          <Button onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>Back to Training page</Button>
+          </StyledDiv>
+          <StyledDivPage>
+                 <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>Back to Training page</LearnButtonStyled>
+          </StyledDivPage>
+          
         </StyledPaper>
       ) : (
         <Typography>No training found.</Typography>
       )}
     </Container>
+    </div>
   );
 };
 

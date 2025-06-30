@@ -197,10 +197,11 @@ export const AdminButtonStyled = styled(Button)(({ theme }) => ({
 
 export const TitleStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
-  fontSize: "1em",
+  fontSize: "1.4em",
   paddingTop: "10px",
   color: theme.palette.appBarColour.main,
   position: "relative",
+  textTransform: 'capitalize',
 }));
 
 export const ParaStyled = styled(Typography)(({ theme }) => ({
@@ -208,6 +209,11 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
   fontSize: ".88rem",
   paddingTop: "5px",
   color: theme.palette.secondary.main,
+  '& span': {
+    color: theme.palette.appBarColour.main,
+    fontWeight: '600',
+    fontSize: '.95rem',
+  }
 }));
 
 export const LearnButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
