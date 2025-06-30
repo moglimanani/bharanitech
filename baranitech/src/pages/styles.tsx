@@ -235,8 +235,8 @@ export const StyledWrapperDivCard = styled(Card)(() => ({
 
 export const StackStyled = styled(Stack)(() => ({
   position: "absolute",
-  top: "3px",
-  right: "0px",
+  top: "-10px",
+  right: "-10px",
 }));
 
 //contact page

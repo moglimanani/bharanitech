@@ -6,6 +6,7 @@ import {
   Divider,
   Stack,
   Chip,
+  Button,
 } from '@mui/material';
 import { AdminTitleStyled, ParaStyled, StackStyled, StyledWrapperDivCard, TitleStyled } from './styles';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
@@ -26,7 +27,7 @@ const TrainingsListPage: React.FC = () => {
   return (
     <Container  sx={{ mt: 1 }}>
       <AdminTitleStyled variant="h4" gutterBottom>
-        Upcoming Trainings
+        Trainings
       </AdminTitleStyled>
 
       <Grid container spacing={3} style={{marginBottom: '30px'}}>
@@ -39,7 +40,8 @@ const TrainingsListPage: React.FC = () => {
                   <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
                     <Stack direction="row" spacing={1}>
                      
-                      <Chip label="success" color="success" />
+                      {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined"  />}
+                      {+training.classification === 1 && <Chip label="Online" color="warning" variant="outlined"  />}
                     </Stack>
                    
                   </StackStyled>
@@ -57,6 +59,7 @@ const TrainingsListPage: React.FC = () => {
                 <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled>
+                <Button color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Apply now</Button>
               </CardContent>
             </StyledWrapperDivCard>
           </Grid>
