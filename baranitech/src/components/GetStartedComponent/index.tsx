@@ -2,6 +2,7 @@ import React from "react";
 import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, ImageWrapperStyled, WrapperDivStyled } from "./styles";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router';
+import { Button } from "@mui/material";
 
 const GetStartedToday: React.FC = () => {
   const navigate = useNavigate()
@@ -14,10 +15,10 @@ const GetStartedToday: React.FC = () => {
             Furthermore, our courses are available internationally and are UK
             accredited.
           </p>
-          <button onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></button>
+          <Button onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></Button>
         </DivWrapperStyled>
         <ImageWrapperStyled>
-          <img src="/radio.png" alt="tower" loading="lazy" />
+          <img src="/radio.png" alt="tower" loading="lazy" height={160} />
         </ImageWrapperStyled>
       </BoxWrapperStyled>
       <DivWrapperBoxStyled>

@@ -183,7 +183,7 @@ const AccordionComponent: React.FC = () => {
           <ListItemIcon>
             <EngineeringIcon />
           </ListItemIcon>
-          <ListItemText primary="Jobs" />
+          <ListItemText primary="Careers" />
           <IconButton
             aria-label="expand"
             onClick={(e) => {

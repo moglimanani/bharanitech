@@ -17,8 +17,8 @@ const menuItems = [
   { path: '/', name: 'Home' },
   { path: '/aboutus', name: 'About Us' },
   { path: '/resources', name: 'Resources' },
-  { path: '/jobs', name: 'Jobs' },
   { path: '/trainings', name: 'Trainings' },
+  { path: '/jobs', name: 'Careers' },
   // { path: '/login', name: 'Login' },
   { path: '/contact', name: 'Contact Us' },
   // { path: '/testimonial', name: 'Testimonials' }
@@ -63,7 +63,7 @@ const MenuBar: React.FC = () => {
             <IconButtonStyled
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2 }}
+              sx={{ cursor: 'pointer' }}
             >
               <MenuIcon />
             </IconButtonStyled>
