@@ -7,13 +7,22 @@ import {
   Stack,
   Chip,
   Button,
+  styled,
 } from '@mui/material';
 import { AdminTitleStyled, ParaStyled, StackStyled, StyledWrapperDivCard, TitleStyled } from './styles';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
 import { useNavigate } from 'react-router';
 
-
+export const LearnButtonStyled = styled(Button)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  borderRadius: "20px",
+  margin: "20px 0 5px",
+  padding: "10px 20px",
+  width: '100%',
+}));
 
 
 const TrainingsListPage: React.FC = () => {
@@ -59,7 +68,7 @@ const TrainingsListPage: React.FC = () => {
                 <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled>
-                <Button color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Apply now</Button>
+                <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Apply now</LearnButtonStyled>
               </CardContent>
             </StyledWrapperDivCard>
           </Grid>
