@@ -40,7 +40,7 @@ const StyledDiv = styled('div')(({ theme }) => ({
 
 const StyledDivPage = styled('div')(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
 }));
 
 export const LearnButtonStyled = styled(Button)(({ theme }) => ({
