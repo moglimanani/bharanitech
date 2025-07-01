@@ -1,5 +1,9 @@
 import { Badge, Paper, styled, Typography, Grid } from "@mui/material";
 
+export const VacanciesStyledMain = styled(Grid)(({ theme }) => ({
+  background: theme.palette.flashPrimaryBGColor.main,
+}));
+
 export const VacanciesStyled = styled(Typography)(({ theme }) => ({
   justifyContent: 'flex-start',
   [theme.breakpoints.up('sm')]: {
@@ -82,10 +86,10 @@ export const IconBadgeStyled = styled(Badge)(({ theme }) => ({
   // fontFamily: 'Poetsen One',
   position: 'relative',
   '& > svg': {
-    color: '#766B6B'
+    color: theme.palette.flashPrimaryBGColor.main,
   },
   '& > span': {
-    background: '#292966'
+    background: theme.palette.secondary.main,
   },
   [theme.breakpoints.down('sm')]: {
     '& > svg': {
@@ -96,7 +100,7 @@ export const IconBadgeStyled = styled(Badge)(({ theme }) => ({
 
 export const GridColorStyled = styled(Grid)(({ theme }) => ({
   // fontFamily: 'Poetsen One',
-  background: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
   borderRadius: '20px',
   display: 'flex',
   gap: '8px',
@@ -105,7 +109,7 @@ export const GridColorStyled = styled(Grid)(({ theme }) => ({
   alignContent: 'center',
   alignItems: 'center',
   '& div > p': {
-    color: theme.palette.appBarColour.main,
+    color: theme.palette.appBarColour.light,
     fontWeight: 'bold',
   },
   [theme.breakpoints.down('sm')]: {

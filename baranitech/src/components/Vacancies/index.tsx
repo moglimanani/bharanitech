@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import WorkIcon from '@mui/icons-material/Work';
-import { GridColorStyled, IconBadgeStyled, JobsStyled } from "./styles";
+import { GridColorStyled, IconBadgeStyled, JobsStyled, VacanciesStyledMain } from "./styles";
 import { useJobCategories } from "../../contexts/jobCategoryContext";
 import { useEffect, useState } from "react";
 import { useAllJobs } from "../../contexts/allJobsContext";
@@ -27,7 +27,7 @@ function Vacancies() {
 
 
   return (
-    <Grid container justifyContent='center'>
+    <VacanciesStyledMain container justifyContent='center'>
       {/* <ItemRight>
         <VacanciesStyled variant="h5">Vacancies:  </VacanciesStyled>
       </ItemRight> */}
@@ -46,7 +46,7 @@ function Vacancies() {
         ))
       }
 
-    </Grid>
+    </VacanciesStyledMain>
   );
 }
 
