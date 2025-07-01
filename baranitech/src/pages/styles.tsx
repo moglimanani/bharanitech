@@ -160,7 +160,6 @@ export const AboutUsDivStyled = styled("div")(({ theme }) => ({
   background: theme.palette.flashPrimaryBGColor.main,
   fontWeight: "bold",
   borderRadius: "8px 50px 50px 8px",
-  fontSize: "0.88em",
   maxWidth: 'fit-content',
   [theme.breakpoints.down("sm")]: {
     padding: "20px",

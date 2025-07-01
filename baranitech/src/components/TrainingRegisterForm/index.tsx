@@ -12,6 +12,15 @@ const StyledField = styled(TextField)`
   margin-bottom: 16px !important;
 `;
 
+export const LearnButtonStyled = styled(Button)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  borderRadius: "20px",
+  margin: "10px 0 20px",
+  padding: "10px 20px",
+}));
+
 type FormData = InferType<typeof TrainingRegisterFormSchema>;
 
 
@@ -172,8 +181,8 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
         </Grid>
       </DialogContent>
       <DialogActions>
-          <Button onClick={()=>handleCancel()}>Cancel</Button>
-          <Button type="submit" variant="contained" disabled={!isValid || isSubmitting}>Register</Button>
+          <LearnButtonStyled onClick={()=>handleCancel()}>Cancel</LearnButtonStyled>
+          <LearnButtonStyled type="submit" variant="contained" disabled={!isValid || isSubmitting}>Register</LearnButtonStyled  >
         </DialogActions>
     </form>
   )
