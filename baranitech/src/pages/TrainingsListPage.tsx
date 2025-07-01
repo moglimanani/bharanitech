@@ -68,7 +68,7 @@ const TrainingsListPage: React.FC = () => {
                 <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled>
-                <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Apply now</LearnButtonStyled>
+                <Button color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Job Details</Button>
               </CardContent>
             </StyledWrapperDivCard>
           </Grid>

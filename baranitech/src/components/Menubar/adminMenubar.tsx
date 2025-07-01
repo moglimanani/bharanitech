@@ -40,7 +40,7 @@ const MenuBar: React.FC = () => {
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!logutOpen);
+    setMobileOpen((prev) => !prev);
   };
 
   const drawer = (
