@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, JSXElementConstructor, JSX } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -12,13 +12,16 @@ import { DialogStyled } from '../pages/styles';
 
 interface ConfirmDialogOptions {
     title?: string;
-    content?: string;
+    content?: string | JSX.Element;
     onConfirm: () => void;
     onCancel?: () => void;
+    bgvariant?: 'light' | 'dark'; // add this line
+    hideButtons?: boolean;
 }
 
 interface DialogContextType {
     confirm: (options: ConfirmDialogOptions) => void;
+    handleCancel: () => void;
 }
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
@@ -51,22 +54,29 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <DialogContext.Provider value={{ confirm }}>
+        <DialogContext.Provider value={{ confirm, handleCancel }}>
             {children}
-            <DialogStyled open={open} onClose={handleCancel} hideBackdrop>
+            <DialogStyled open={open} onClose={handleCancel} hideBackdrop bgvariant={options?.bgvariant}>
                 <DialogTitle>{options?.title || 'Confirm'}</DialogTitle>
                 <hr />
                 <DialogContent>
-                    <DialogContentText>
-                        {options?.content || 'Are you sure you want to proceed?'}
-                    </DialogContentText>
+                    {
+                        typeof options?.content === 'string' ? (
+                            <DialogContentText> {options?.content || 'Are you sure you want to proceed?'}</DialogContentText>
+                          ) : (
+                            options?.content // ← ✅ render your <FormComponent />
+                          )
+                    }
+                       
                 </DialogContent>
+                {!options?.hideButtons && (
                 <DialogActions>
-                    <Button onClick={handleCancel}>Cancel</Button>
-                    <Button onClick={handleConfirm} autoFocus>
+                    <Button variant="contained" color="secondary" onClick={handleCancel}>Cancel</Button>
+                    <Button variant="contained" color="secondary" onClick={handleConfirm} autoFocus>
                         Confirm
                     </Button>
                 </DialogActions>
+                )}
             </DialogStyled>
         </DialogContext.Provider>
     );

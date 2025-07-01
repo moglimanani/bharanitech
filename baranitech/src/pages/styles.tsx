@@ -9,6 +9,7 @@ import {
   Button,
   Stack,
   Dialog,
+  DialogProps,
 } from "@mui/material";
 import { ButtonProps } from "@mui/material/Button";
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
@@ -17,6 +18,10 @@ export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
   alignItems: "flex-start",
   color: theme.palette.common.white,
 }));
+type BgVariantType = 'light' | 'dark'; // default dark
+interface DialogStyledProps  extends DialogProps {
+  bgvariant?: BgVariantType;
+}
 
 export const PageWrapperStyled = styled(Box)(({ theme }) => ({
   // padding: '0px 16px 16px 20px',
@@ -380,13 +385,13 @@ export const ActionsBarStyled = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1),
 }))
 
-export const DialogStyled = styled(Dialog)(({ theme }) => ({
+export const DialogStyled = styled(Dialog)<DialogStyledProps>(({ theme }) => ({
   background: 'rgba(250, 250, 250, 0.8)',
   "& .MuiPaper-root": {
-    backgroundColor: theme.palette.appBarColour.main,
+    backgroundColor: `({bgvariant }) => bgvariant ==='light' ? theme.palette.common.white : theme.palette.appBarColour.main }`,
     padding: '16px',
     "h2": {
-      color: theme.palette.common.white,
+      color: `({bgvariant }) => bgvariant ==='light' ? theme.palette.appBarColour.main } theme.palette.common.white`,
       padding: 0
     },
     "hr": {
@@ -408,7 +413,7 @@ export const DialogStyled = styled(Dialog)(({ theme }) => ({
         background: theme.palette.flashPrimaryBGColor.main,
         color: theme.palette.appBarColour.main,
       }
-    }
+    },
   }
 }))
 

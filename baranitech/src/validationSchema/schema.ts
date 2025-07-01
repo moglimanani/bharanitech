@@ -31,6 +31,33 @@ export const ContactUsFormSchema = yup.object({
             return date <= eighteenYearsAgo;
         })
 })
+export const TrainingRegisterFormSchema = yup.object().shape({
+    user_name: yup.string().required('Name is required'),
+    user_occupation: yup.string().required('Occupation is required'),
+    user_age: yup
+      .number()
+      .typeError('Age must be a number')
+      .positive()
+      .integer()
+      .required('Age is required'),
+    user_phone: yup
+      .string()
+      .matches(/^\+?[0-9]{10,15}$/, 'Enter a valid phone number')
+      .required('Phone number is required'),
+    user_address: yup.string().required('Address is required'),
+    user_city: yup.string().required('City is required'),
+    user_state: yup.string().required('State is required'),
+    user_country: yup.string().required('Country is required'),
+    user_email: yup
+      .string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    requirements: yup.string().required('Please enter your requirements'),
+    training_id: yup
+      .number()
+      .typeError('Training ID must be a number')
+      .required('Training ID is required'),
+  });
 
 export const AdminGalleryAddSchema = yup.object({
     title: yup

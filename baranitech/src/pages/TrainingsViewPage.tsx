@@ -5,6 +5,8 @@ import { styled } from '@mui/system';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
 import { AboutUsTitleStyled } from './styles';
+import { useDialog } from '../contexts/dialogContext';
+import { TrainingRegisterForm } from '../components/TrainingRegisterForm';
 
 
 // Styled Components
@@ -56,6 +58,7 @@ const TrainingsViewPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { allTrainings } = useAllTrainings()
+  const { confirm } = useDialog()
   const navigate = useNavigate()
   const { tid } = useParams();
 
@@ -71,7 +74,8 @@ const TrainingsViewPage: React.FC = () => {
     }
 
   }, [tid]);
-  const isLocation = training && training.city && training.state && training.country
+
+  const isLocation = training && training.city && training.state && training.country;
   return (
     <div style={{ margin: '0 30px' }}>
       <AboutUsTitleStyled>Training View</AboutUsTitleStyled>
@@ -93,8 +97,11 @@ const TrainingsViewPage: React.FC = () => {
               </Stack>
 
             </Stack>
-            <StyledTypography variant="h5" gutterBottom>
+            <StyledTypography variant="h5">
               {training.title}
+            </StyledTypography>
+            <StyledTypography variant="h6" gutterBottom>
+              {training.category.title}
             </StyledTypography>
             <StyledDiv>
               <span>{training.description}</span>
@@ -112,6 +119,10 @@ const TrainingsViewPage: React.FC = () => {
               <span>₹{training.total_price}/-</span>
             </StyledDiv>
             <StyledDiv>
+              <span>Total Hours:</span>
+              <span>{training.total_hours} Hrs</span>
+            </StyledDiv>
+            <StyledDiv>
               <span>Location:</span>
               {
                 +training.classification !== 0 && (
@@ -126,6 +137,14 @@ const TrainingsViewPage: React.FC = () => {
             </StyledDiv>
             <StyledDivPage>
               <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>{`<<`} Back to Training page</LearnButtonStyled>
+              <LearnButtonStyled
+                onClick={() => confirm({
+                  bgvariant: 'light', title: `Training Registration: ${training.title}`,
+                  content: <TrainingRegisterForm id={training.id} />,
+                  onConfirm: ()=>{},
+                  onCancel: () => { },
+                  hideButtons: true
+                })}>Register training</LearnButtonStyled>
             </StyledDivPage>
 
           </StyledPaper>
