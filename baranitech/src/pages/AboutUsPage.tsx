@@ -1,7 +1,9 @@
 import { AboutUsDivStyled, AboutUsDivWrapperStyled, AboutUsPara1Styled, AboutUsStyled, AboutUsTitleStyled, ImageClientStyled } from "./styles";
 
+
 export default function AboutUsPage() {
   return (
+   
     <AboutUsStyled>
       <AboutUsTitleStyled>
         AboutUsPage
@@ -30,7 +32,8 @@ export default function AboutUsPage() {
         </AboutUsPara1Styled>
         <ImageClientStyled src="/baraniTechLeader.jpg" alt="login" loading="lazy" />
       </AboutUsDivWrapperStyled>
-
+     
     </AboutUsStyled>
+  
   )
 }

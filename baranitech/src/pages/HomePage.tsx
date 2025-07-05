@@ -3,6 +3,7 @@ import {
 } from "@mui/material";
 import CarouselComponent from "../components/CarouselComponent";
 import HeaderComponent from "../components/HeaderComponent";
+
 import {
   BodyPara1Styled,
   HeadingStyled,
