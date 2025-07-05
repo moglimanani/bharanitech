@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   TextField,
   Container,
@@ -7,22 +6,29 @@ import {
   Alert,
   styled,
   ContainerProps,
-} from '@mui/material';
-import { AboutUsPara1Styled, AboutUsTitleStyled, GridContactStyled, LearnButtonStyled, LearningResourcesStyled, } from './styles';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { ContactUsFormSchema } from '../validationSchema/schema';
-import { InferType } from 'yup';
-import httpService from '../api/httpService';
+} from "@mui/material";
+import {
+  AboutUsPara1Styled,
+  AboutUsTitleStyled,
+  GridContactStyled,
+  LearnButtonStyled,
+  LearningResourcesStyled,
+} from "./styles";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ContactUsFormSchema } from "../validationSchema/schema";
+import { InferType } from "yup";
+import httpService from "../api/httpService";
+import { motion } from "framer-motion";
 
 interface ContactFormDataType {
-  username: string,
-  email: string,
-  subject: string,
-  message: string,
-  occupation: string,
-  dob: string,
-  phone: string
+  username: string;
+  email: string;
+  subject: string;
+  message: string;
+  occupation: string;
+  dob: string;
+  phone: string;
 }
 interface ApiResponse {
   status: boolean;
@@ -31,78 +37,79 @@ interface ApiResponse {
 }
 
 export const StyledContainer = styled(Container, {
-  shouldForwardProp: (prop) => !['variant', 'sx'].includes(prop as string)
+  shouldForwardProp: (prop) => !["variant", "sx"].includes(prop as string),
 })<ContainerProps>(({ theme }) => ({
   marginTop: theme.spacing(10),
   padding: theme.spacing(4),
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.spacing(1),
   boxShadow: theme.shadows[3],
   backgroundColor: theme.palette.background.paper,
-}))
+}));
 
-export const StyledForm = styled('form')(({ theme }) => ({
-  width: '100%',
+export const StyledForm = styled("form")(({ theme }) => ({
+  width: "100%",
   marginTop: theme.spacing(2),
 }));
 type FormData = InferType<typeof ContactUsFormSchema>;
 
 const ContactPage: React.FC = () => {
-  const [success, setSuccess] = useState(false)
-  const { control, handleSubmit,
-    formState,
-    trigger,
-    reset } = useForm<FormData>({
+  const [success, setSuccess] = useState(false);
+  const { control, handleSubmit, formState, trigger, reset } =
+    useForm<FormData>({
       resolver: yupResolver(ContactUsFormSchema),
-      mode: 'all',
-      reValidateMode: 'onChange',
+      mode: "all",
+      reValidateMode: "onChange",
       defaultValues: {
-        username: '',
-        email: '',
-        subject: '',
-        message: '',
-        occupation: '',
-        dob: '',
-        phone: ''
-      }
-    })
-  const { errors, isSubmitting, isValid } = formState
+        username: "",
+        email: "",
+        subject: "",
+        message: "",
+        occupation: "",
+        dob: "",
+        phone: "",
+      },
+    });
+  const { errors, isSubmitting, isValid } = formState;
 
   const submitContactForm = async (data: ContactFormDataType) => {
     try {
-      const response = await httpService.post<ApiResponse>(`${import.meta.env.VITE_API_BASE_URL}contact`, data);
+      const response = await httpService.post<ApiResponse>(
+        `${import.meta.env.VITE_API_BASE_URL}contact`,
+        data
+      );
 
       if (response.status) {
-        alert('Message sent successfully!');
-        reset()
-        setSuccess(true)
+        alert("Message sent successfully!");
+        reset();
+        setSuccess(true);
         // Optionally reset the form here
       }
     } catch (error: any) {
-      console.error('Error submitting contact form:', error);
-      alert('Something went wrong. Please try again.');
+      console.error("Error submitting contact form:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 
   const onSubmit = async (data: FormData) => {
-    submitContactForm(data)
-
+    submitContactForm(data);
   };
 
-
   return (
-
     <Container sx={{ mt: 1 }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <AboutUsTitleStyled>
-            Contact Us
-        </AboutUsTitleStyled>
-        {success && <Alert severity="success">Your message has been sent successfully!</Alert>}
+        <AboutUsTitleStyled>Contact Us</AboutUsTitleStyled>
+
+        {success && (
+          <Alert severity="success">
+            Your message has been sent successfully!
+          </Alert>
+        )}
         <GridContactStyled>
-          <Grid size={6} className={'fullwidth'}>
+          <Grid size={6} className={"fullwidth"}>
             <Controller
               name="username"
               control={control}
@@ -133,9 +140,9 @@ const ContactPage: React.FC = () => {
               )}
             />
             <Controller
-              name='phone'
+              name="phone"
               control={control}
-              defaultValue=''
+              defaultValue=""
               render={({ field }) => (
                 <TextField
                   fullWidth
@@ -167,7 +174,7 @@ const ContactPage: React.FC = () => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  type='date'
+                  type="date"
                   label="Date of Birth"
                   InputLabelProps={{ shrink: true }}
                   fullWidth
@@ -176,7 +183,7 @@ const ContactPage: React.FC = () => {
                   helperText={errors.dob?.message}
                   onBlur={() => {
                     field.onBlur(); // still call field's onBlur
-                    trigger('dob'); // manually trigger validation
+                    trigger("dob"); // manually trigger validation
                   }}
                 />
               )}
@@ -223,13 +230,23 @@ const ContactPage: React.FC = () => {
             </LearnButtonStyled>
             {/* </BoxContactStyled> */}
           </Grid>
-          <Grid size={6} className={'hidden'}>
-            <img src="/contact.png" alt="contact" loading="lazy" />
+          <Grid size={6} className={"hidden"}>
+            <motion.img
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.2,
+                scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+              }}
+              src="/contact.png"
+              alt="contact"
+              loading="lazy"
+            />
           </Grid>
         </GridContactStyled>
       </form>
     </Container>
-  )
+  );
 };
 
 export default ContactPage;

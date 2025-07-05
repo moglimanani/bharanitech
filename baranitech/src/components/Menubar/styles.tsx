@@ -49,6 +49,17 @@ export const BrandNameStyled = styled(Typography)(({ theme }) => ({
     }
 }))
 
+export const AppBarjusitfyStyled = styled('div')(({theme}) => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    justifyContent: 'right',
+    alignContent: 'flex-end',
+    textAlign: 'right',
+}))
+
+
+
 export const AppBarStyled = styled(Box)(() => ({
     // backgroundColor: theme.palette.appBarColour.main
     // background: 'yellow',
@@ -56,14 +67,14 @@ export const AppBarStyled = styled(Box)(() => ({
 
 export const ChipStyled = styled(Chip)(({ theme }) => ({
     // backgroundColor: theme.palette.appBarColour.main
-    background: theme.palette.appBarColour.main,
-    color: theme.palette.appBarColour.light,
+    background: theme.palette.flashPrimaryBGColor.main,
+    color: theme.palette.appBarColour.main,
     "& > svg > path": {
-        color: theme.palette.appBarColour.light,
+        color: theme.palette.appBarColour.main,
     },
     '&:hover': {
-        color: theme.palette.appBarColour.light,
-        background: theme.palette.appBarColour.main,
+        color: theme.palette.appBarColour.main,
+        background: theme.palette.appBarColour.light,
     }
 
 }))

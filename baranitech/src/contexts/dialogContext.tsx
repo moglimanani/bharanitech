@@ -7,8 +7,17 @@ import {
     DialogActions,
     Button,
     useTheme,
+    styled
 } from '@mui/material';
 import { DialogStyled } from '../pages/styles';
+
+const DialogTitleStyle = styled(DialogTitle)(({ theme }) => ({
+    background: theme.palette.appBarColour.main,
+    color: theme.palette.appBarColour.light,
+    textTransform: 'capitalize',
+   
+}));
+
 
 interface ConfirmDialogOptions {
     title?: string;
@@ -57,8 +66,7 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
         <DialogContext.Provider value={{ confirm, handleCancel }}>
             {children}
             <DialogStyled open={open} onClose={handleCancel} hideBackdrop bgvariant={options?.bgvariant}>
-                <DialogTitle>{options?.title || 'Confirm'}</DialogTitle>
-                <hr />
+                <DialogTitleStyle>{options?.title || 'Confirm'}</DialogTitleStyle>  
                 <DialogContent>
                     {
                         typeof options?.content === 'string' ? (

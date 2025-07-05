@@ -97,12 +97,12 @@ export const WrapperDivStyled = styled('div')(({theme})=>({
  },
   '& > div': {
     color: theme.palette.appBarColour.main,
-    fontSize: '.88em',
+    fontSize: '1.2em',
     fontWeight: 'bold',
   },
   '& > p': {
     color: theme.palette.secondary.main,
-    fontSize: '.88em'
+    fontSize: '.95em'
   },
 
 }))

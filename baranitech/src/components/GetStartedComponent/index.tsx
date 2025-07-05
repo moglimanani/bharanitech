@@ -2,7 +2,8 @@ import React from "react";
 import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, ImageWrapperStyled, WrapperDivStyled } from "./styles";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router';
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
+import {motion} from 'framer-motion';
 
 const GetStartedToday: React.FC = () => {
   const navigate = useNavigate()
@@ -15,7 +16,12 @@ const GetStartedToday: React.FC = () => {
             Furthermore, our courses are available internationally and are UK
             accredited.
           </p>
-          <Button onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></Button>
+        
+          <motion.button  whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></motion.button>
+          
+          {/* <Button onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></Button> */}
         </DivWrapperStyled>
         <ImageWrapperStyled>
           <img src="/radio.png" alt="tower" loading="lazy" height={160} />
