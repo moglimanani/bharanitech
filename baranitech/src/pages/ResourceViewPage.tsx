@@ -6,12 +6,15 @@ import {
   CircularProgress,
   Paper,
   Button,
+  IconButton,
 } from "@mui/material";
 import { flexDirection, styled } from "@mui/system";
 import { useAllResources } from "../contexts/allResourcesContext";
 import { ResourceType } from "../types/resources";
 import { getLanguageType } from "../helper";
-import { AboutUsTitleStyled, LangStyled } from "./styles";
+import { AboutUsTitleStyled, BackButtonStyled, LangStyled } from "./styles";
+import ReplyAllIcon from '@mui/icons-material/ReplyAll';
+import { LeftRightBlock } from "../components/LatestTraining/styles";
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
@@ -58,22 +61,24 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   '&:hover': {
     border: '1px solid #484848',
     color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
   }
 }));
 
 const VideoFrame = styled("iframe")(({ theme }) => ({
-  width: "50%",
-  height: "auto",
+  width: "100%",
+  height: "400px",
   border: 0,
   [theme.breakpoints.down("md")]: {
     width: "100%",
+    height: "200px",
   },
 }));
 
 const StyledDivMain = styled("div")(({ theme }) => ({
   display: "flex",
-  justifyContent: "space-between",
+  // justifyContent: "space-between",
+  flexDirection: 'column',
   position: 'relative',
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
@@ -120,49 +125,59 @@ const ResourceViewPage: React.FC = () => {
         ) : resource ? (
           <StyledPaper elevation={3}>
             <StyledDivMain>
-              <div style={{width: '80%'}}>
-                <LangStyled style={{right: 0}}>
-                {getLanguageType[+resource.language].name}
+             
+                <LangStyled>
+                  {getLanguageType[+resource.language].name}
                 </LangStyled>
                 <StyledTypography variant="h5" gutterBottom>
                   {resource.title}
                 </StyledTypography>
-                <StyledDiv>
-                  <span>Description:</span>
-                  <span>{resource.description}</span>
-                </StyledDiv>
-                <StyledDiv>
-                  <span>Type:</span>
-                  <span>{resource.category.title}</span>
-                </StyledDiv>
-                <StyledDiv>
-                  <span>Instructor:</span>
-                  <span>Ezhumalai</span>
-                </StyledDiv>
-                {/* <StyledDiv>
-                  <span>Language:</span>
-                  <span>{getLanguageType[+resource.language].name}</span>
-                </StyledDiv> */}
-              </div>
-
-              <div style={{width: '90%'}}>
+                {/* <div style={{display: 'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }}> */}
                 {resource.url && (
-                  <VideoFrame style={{width: '100%', height: '250px', marginTop: '55px'}}
+                  <VideoFrame 
                     src={resource.url}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
                 )}
-              </div>
+                
+                
+                <StyledDiv>
+                  {/* <span>Description:</span> */}
+                  <div
+      dangerouslySetInnerHTML={{ __html: resource.description }}
+    />
+                  {/* <span>{resource.description}</span> */}
+                </StyledDiv>
+                <StyledDiv>
+                <LeftRightBlock>
+                  <div>
+                  <span>Type: {resource.category.title}</span>
+                  </div>
+                  <div>
+                  <span>Instructor:  Ezhumalai</span>
+                  </div>
+                  </LeftRightBlock>
+                
+                
+                </StyledDiv>
+                {/* <StyledDiv>
+                
+                </StyledDiv> */}
+                {/* <StyledDiv>
+                  <span>Language:</span>
+                  <span>{getLanguageType[+resource.language].name}</span>
+                </StyledDiv> */}
+              
+               
+              {/* </div> */}
             </StyledDivMain>
             <StyledDivPage>
-              <LearnButtonStyled
-                onClick={() =>
+              <BackButtonStyled color="primary" aria-label="back"  onClick={() =>
                   navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}`)
-                }
-              >
-                Back to Resource page
-              </LearnButtonStyled>
+                }>
+                <ReplyAllIcon />
+              </BackButtonStyled>
             </StyledDivPage>
           </StyledPaper>
         ) : (

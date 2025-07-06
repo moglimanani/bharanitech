@@ -59,7 +59,7 @@ const ResourcesListPage: React.FC = () => {
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={resource.id}>
             <StyledCard>
               <CardContent>
-                 <LangStyled>
+                 <LangStyled style={{top: '20px'}}>
                   {getLanguageType[+resource.language].name}
                   </LangStyled>
                 <TitleStyled variant="h6" gutterBottom  onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{cursor: 'pointer' }}>
@@ -73,9 +73,9 @@ const ResourcesListPage: React.FC = () => {
                  <span>Type: </span>  
                   {categories.find((cat) => cat.id === resource.type)?.title}
                 </ParaStyled>
-                <ParaStyled variant="body2" color="text.secondary">
+                {/* <ParaStyled variant="body2" color="text.secondary">
                   {resource.description}
-                </ParaStyled>
+                </ParaStyled> */}
                 <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                 {resource.url && (
                 <VideoFrame
