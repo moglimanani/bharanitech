@@ -2,7 +2,6 @@ import React from "react";
 import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, ImageWrapperStyled, WrapperDivStyled } from "./styles";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router';
-// import { Button } from "@mui/material";
 import {motion} from 'framer-motion';
 
 const GetStartedToday: React.FC = () => {
@@ -17,9 +16,18 @@ const GetStartedToday: React.FC = () => {
             accredited.
           </p>
         
-          <motion.button  whileHover={{ scale: 1.2 }}
+          <motion.button  whileHover={{ scale: 1.2,cursor: 'pointer' }}
             whileTap={{ scale: 0.8 }}
-            onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></motion.button>
+            onClick={() => {
+              navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL);
+              setTimeout(() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth',
+              });
+              }, 10);
+             
+              }}>Enroll <KeyboardArrowRightIcon /></motion.button>
           
           {/* <Button onClick={() => {navigate(import.meta.env.VITE_ROUTE_TRAININGS_URL)}}>Enroll <KeyboardArrowRightIcon /></Button> */}
         </DivWrapperStyled>

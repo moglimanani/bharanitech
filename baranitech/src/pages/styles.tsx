@@ -10,6 +10,7 @@ import {
   Stack,
   Dialog,
   DialogProps,
+  IconButton,
 } from "@mui/material";
 import { ButtonProps } from "@mui/material/Button";
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
@@ -113,7 +114,7 @@ export const AboutUsDivWrapperStyled = styled("div")(({ theme }) => ({
   padding: "0 20px 20px 0",
   display: "flex",
   color: theme.palette.appBarColour.light,
-  fontSize: "0.88em",
+  // fontSize: "0.88em",
   flexDirection: "column",
   textAlign: 'justify',
   paddingRight: '250px',
@@ -203,7 +204,8 @@ export const TitleStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
   fontSize: "1.4em",
   paddingTop: "10px",
-  marginTop: '30px',
+  paddingRight: "60px",
+  marginTop: '0px',
   color: theme.palette.appBarColour.main,
   position: "relative",
   textTransform: 'capitalize',
@@ -234,7 +236,7 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   '&:hover': {
     border: '1px solid #484848',
     color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
   }
 }));
 
@@ -441,6 +443,7 @@ export const ImageClientStyled = styled("img")(({theme})=>({
 export const LangStyled = styled("p")(({theme})=>({
   position:'absolute' ,
   right: '10px',
+  margin: '0',
   border: '1px solid #720834c9',
   padding: '5px 10px',
   borderRadius: '12px',
@@ -448,8 +451,24 @@ export const LangStyled = styled("p")(({theme})=>({
   fontSize: '.85em',
   color: '#720834c9',
   background: '#fff',
+  fontWeight: 'bold',
   [theme.breakpoints.down("sm")]: {
    
   }
 }))
 
+export const BackButtonStyled = styled(IconButton)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  border: '1px solid #484848',
+  borderRadius: "20px",
+  margin: "10px 0 20px",
+  padding: "10px 20px",
+  transition: 'all 0.2s',
+  '&:hover': {
+    border: '1px solid #484848',
+    color: theme.palette.appBarColour.main,
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
+  }
+}));

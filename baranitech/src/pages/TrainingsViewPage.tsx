@@ -4,10 +4,11 @@ import { Box, Typography, CircularProgress, Paper, Button, Stack, Chip } from '@
 import { styled } from '@mui/system';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
-import { AboutUsTitleStyled } from './styles';
+import { AboutUsTitleStyled, BackButtonStyled } from './styles';
 import { useDialog } from '../contexts/dialogContext';
 import { TrainingRegisterForm } from '../components/TrainingRegisterForm';
-
+import ReplyAllIcon from '@mui/icons-material/ReplyAll';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
@@ -34,7 +35,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const StyledDiv = styled('div')(({ theme }) => ({
   color: theme.palette.secondary.main,
-  fontSize: '14px',
+  // fontSize: '14px',
   padding: '5px 10px 5px',
   textTransform: 'capitalize',
 
@@ -57,23 +58,22 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   '&:hover': {
     border: '1px solid #484848',
     color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
   }
 }));
 
 const StyledSpanPage = styled('span')(({ theme }) => ({
-  border: '1px solid green',
   marginRight: '10px',
-  padding: '10px',
   borderRadius: '12px',
   color: 'green',
+  fontSize: '1.5em'
 }));
 
 const StyledSpanRetPage = styled('span')(({ theme }) => ({
-  marginRight: '10px',
+  marginRight: '5px',
   borderRadius: '12px',
   color: 'red',
-  textDecoration: 'lineThrough',
+  textDecoration: 'line-through'
 }));
 
 
@@ -137,36 +137,30 @@ const TrainingsViewPage: React.FC = () => {
               <span>Start Date:</span>
               <span>{training.startdate}</span>
             </StyledDiv> */}
-            <StyledDiv>
-              <span>Instructor:</span>
-              <span>Ezhumalai</span>
-            </StyledDiv>
+           
             <StyledDiv>
               <span>Total Hours:</span>
-              <span>{training.total_hours} Hrs</span>
-            </StyledDiv>
-            <StyledDiv style={{marginTop: '10px'}}>
-              {/* <span>Price:</span> */}
-              
-              <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage>
-              <StyledSpanPage>₹{training.total_price}/-</StyledSpanPage>
+              <span> {+training.total_hours} Hrs</span>
             </StyledDiv>
             <StyledDiv>
-              {/* <span>Location:</span>
-              {
-                +training.classification !== 0 && (
-                  <span>Online</span>
-                )
-              } */}
+              {/* <span>Price:</span> */}
+              
+              Course price: <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage>
+              <StyledSpanPage>₹{training.total_price}/-</StyledSpanPage> <span style={{fontSize: '13px'}}>(Discount 50% applied).</span>
+            </StyledDiv>
+           
               {
                 +training.classification === 0 && isLocation && (
-                  <span>Location:  {training.city}, {training.state}, {training.country}</span>
+                  <StyledDiv><span>Location:  {training.city}, {training.state}, {training.country}</span></StyledDiv>
                 )
               }
+            <StyledDiv>
+              <span>Instructor: Ezhumalai</span>
             </StyledDiv>
             <StyledDivPage>
-              <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>{`<<`} Back to Training page</LearnButtonStyled>
+              {/* <LearnButtonStyled onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>{`<<`} Back to Training page</LearnButtonStyled> */}
               <LearnButtonStyled
+              startIcon={<EditNoteIcon />}
                 onClick={() => confirm({
                   bgvariant: 'light', title: `Training Registration: ${training.title}`,
                   content: <TrainingRegisterForm id={training.id} />,
@@ -174,6 +168,11 @@ const TrainingsViewPage: React.FC = () => {
                   onCancel: () => { },
                   hideButtons: true
                 })}>Register training</LearnButtonStyled>
+
+                 <BackButtonStyled color="primary" aria-label="back"  onClick={() =>
+                  navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>
+                <ReplyAllIcon />
+              </BackButtonStyled>
             </StyledDivPage>
 
           </StyledPaper>

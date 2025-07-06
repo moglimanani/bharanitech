@@ -115,14 +115,6 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
             <StyledField
-              fullWidth label="Phone"
-              {...register("user_phone", { required: "Phone required" })}
-              error={!!errors.user_phone}
-              helperText={errors.user_phone?.message}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <StyledField
               fullWidth label="Age" type="number"
               {...register("user_age", { required: "Age is required" })}
               error={!!errors.user_age}
@@ -137,7 +129,7 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
               helperText={errors.training_id?.message}
             />
           </Grid> */}
-          <Grid size={{ xs: 12, md: 6 }}>
+          <Grid size={{ xs: 12}}>
             <StyledField
               fullWidth label="Address"
               {...register("user_address", { required: "Address required" })}
@@ -170,6 +162,14 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
+            <StyledField
+              fullWidth label="Phone"
+              {...register("user_phone", { required: "Phone required" })}
+              error={!!errors.user_phone}
+              helperText={errors.user_phone?.message}
+            />
+          </Grid>
+          <Grid size={{ xs: 12 }}>
             <StyledField
               fullWidth label="Training Requirements"
               multiline minRows={3}

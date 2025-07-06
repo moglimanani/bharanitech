@@ -59,7 +59,6 @@ const JobsListPage: React.FC = () => {
                     </Stack>
                   </Stack>
                   <div style={{position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
-                    Posted Date: 
                     {new Date(job.created_at).toLocaleDateString("en-GB", {
                       day: "numeric",
                       month: "long",
