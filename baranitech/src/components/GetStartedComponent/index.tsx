@@ -2,9 +2,7 @@ import React from "react";
 import { BoxWrapperStyled, DivWrapperBoxStyled, DivWrapperInnerStyled, DivWrapperStyled, ImageWrapperStyled, WrapperDivStyled } from "./styles";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useNavigate } from 'react-router';
-// import { Button } from "@mui/material";
 import {motion} from 'framer-motion';
-import { set } from "date-fns";
 
 const GetStartedToday: React.FC = () => {
   const navigate = useNavigate()
