@@ -1,5 +1,5 @@
 import { TrainingType } from '../../types/trainings';
-import { StyledpriceCol, StyledpriceRow } from './styles';
+import { LearnButtonStyled, StyledpriceCol, StyledpriceRow } from './styles';
 
 interface LatestTrainingPropsType {
   trainings: TrainingType[]
@@ -33,7 +33,10 @@ const LatestTraining = ({ trainings }: LatestTrainingPropsType) => {
           
           <li>{item.description ? item.description : '-'}</li>
         </ul>
-        <button>Apply</button>
+       
+           <LearnButtonStyled sx={{cursor: 'pointer' }} >
+           Apply
+            </LearnButtonStyled>
       </StyledpriceCol>
     )
 

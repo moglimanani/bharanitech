@@ -14,14 +14,22 @@ import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
 import { useNavigate } from 'react-router';
 
+
 export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
+  border: '1px solid #484848',
   borderRadius: "20px",
-  margin: "20px 0 5px",
+  margin: "10px 0 20px",
   padding: "10px 20px",
+  transition: 'all 0.2s',
   width: '100%',
+  '&:hover': {
+    border: '1px solid #484848',
+    color: theme.palette.appBarColour.main,
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+  }
 }));
 
 
@@ -44,6 +52,10 @@ const TrainingsListPage: React.FC = () => {
           <Grid size={{xs:12, sm:6, md:4}} key={training.id}>
             <StyledWrapperDivCard>
               <CardContent>
+              <div style={{position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
+                    {training.startdate}
+                </div>
+                
                 <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>
                   {training.title}
                   <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
@@ -55,9 +67,9 @@ const TrainingsListPage: React.FC = () => {
                    
                   </StackStyled>
                 </TitleStyled>
-                <ParaStyled variant="body2" color="textSecondary" gutterBottom>
+                {/* <ParaStyled variant="body2" color="textSecondary" gutterBottom>
                   {training.description}
-                </ParaStyled>
+                </ParaStyled> */}
                 <Divider sx={{ my: 1 }} />
                 <ParaStyled variant="body2">
                   <strong>Trainer:</strong> Ezhumalai
@@ -65,9 +77,9 @@ const TrainingsListPage: React.FC = () => {
                 {/* <ParaStyled variant="body2">
                   <strong>Sta:</strong> {training.duration_minutes} mins
                 </ParaStyled> */}
-                <ParaStyled variant="body2">
+                {/* <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
-                </ParaStyled>
+                </ParaStyled> */}
                 <LearnButtonStyled color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{cursor: 'pointer' }}>Job Details</LearnButtonStyled>
               </CardContent>
             </StyledWrapperDivCard>

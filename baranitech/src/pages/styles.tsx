@@ -203,6 +203,7 @@ export const TitleStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
   fontSize: "1.4em",
   paddingTop: "10px",
+  marginTop: '30px',
   color: theme.palette.appBarColour.main,
   position: "relative",
   textTransform: 'capitalize',
@@ -221,13 +222,20 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
   }
 }));
 
-export const LearnButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
+export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
+  border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",
   padding: "10px 20px",
+  transition: 'all 0.2s',
+  '&:hover': {
+    border: '1px solid #484848',
+    color: theme.palette.appBarColour.main,
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+  }
 }));
 
 export const StyledWrapperDivCard = styled(Card)(() => ({
@@ -236,12 +244,13 @@ export const StyledWrapperDivCard = styled(Card)(() => ({
   flexDirection: "column",
   // boxShadow: theme.shadows[3],
   borderRadius: "20px",
+  position: 'relative',
 }));
 
 export const StackStyled = styled(Stack)(() => ({
   position: "absolute",
-  top: "-10px",
-  right: "-10px",
+  top: "-30px",
+  right: "0px",
 }));
 
 //contact page
@@ -428,3 +437,19 @@ export const ImageClientStyled = styled("img")(({theme})=>({
     marginTop: '20px'
   }
 }))
+
+export const LangStyled = styled("p")(({theme})=>({
+  position:'absolute' ,
+  right: '10px',
+  border: '1px solid #720834c9',
+  padding: '5px 10px',
+  borderRadius: '12px',
+  top: '0px',
+  fontSize: '.85em',
+  color: '#720834c9',
+  background: '#fff',
+  [theme.breakpoints.down("sm")]: {
+   
+  }
+}))
+
