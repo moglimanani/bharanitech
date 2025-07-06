@@ -21,6 +21,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: '#f9f9f9',
   borderRadius: '12px',
+  position: 'relative',
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -28,6 +29,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   fontWeight: 'bold',
   textTransform: 'capitalize',
   padding: '5px 10px 5px',
+  marginTop: '10px',
 }));
 
 const StyledDiv = styled('div')(({ theme }) => ({
@@ -47,9 +49,31 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
+  border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",
   padding: "10px 20px",
+  transition: 'all 0.2s',
+  '&:hover': {
+    border: '1px solid #484848',
+    color: theme.palette.appBarColour.main,
+    backgroundImage: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+  }
+}));
+
+const StyledSpanPage = styled('span')(({ theme }) => ({
+  border: '1px solid green',
+  marginRight: '10px',
+  padding: '10px',
+  borderRadius: '12px',
+  color: 'green',
+}));
+
+const StyledSpanRetPage = styled('span')(({ theme }) => ({
+  marginRight: '10px',
+  borderRadius: '12px',
+  color: 'red',
+  textDecoration: 'lineThrough',
 }));
 
 
@@ -97,38 +121,43 @@ const TrainingsViewPage: React.FC = () => {
               </Stack>
 
             </Stack>
+            <div style={{position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
+              {training.startdate}
+              </div>
             <StyledTypography variant="h5">
               {training.title}
             </StyledTypography>
-            <StyledTypography variant="h6" gutterBottom>
+            <StyledTypography variant="h6" gutterBottom style={{marginTop: '-5px'}}>
               {training.category.title}
             </StyledTypography>
             <StyledDiv>
               <span>{training.description}</span>
             </StyledDiv>
-            <StyledDiv>
+            {/* <StyledDiv>
               <span>Start Date:</span>
               <span>{training.startdate}</span>
-            </StyledDiv>
+            </StyledDiv> */}
             <StyledDiv>
               <span>Instructor:</span>
               <span>Ezhumalai</span>
             </StyledDiv>
             <StyledDiv>
-              <span>Price:</span>
-              <span>₹{training.total_price}/-</span>
-            </StyledDiv>
-            <StyledDiv>
               <span>Total Hours:</span>
               <span>{training.total_hours} Hrs</span>
             </StyledDiv>
+            <StyledDiv style={{marginTop: '10px'}}>
+              {/* <span>Price:</span> */}
+              
+              <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage>
+              <StyledSpanPage>₹{training.total_price}/-</StyledSpanPage>
+            </StyledDiv>
             <StyledDiv>
-              <span>Location:</span>
+              {/* <span>Location:</span>
               {
                 +training.classification !== 0 && (
                   <span>Online</span>
                 )
-              }
+              } */}
               {
                 +training.classification === 0 && isLocation && (
                   <span>Location:  {training.city}, {training.state}, {training.country}</span>

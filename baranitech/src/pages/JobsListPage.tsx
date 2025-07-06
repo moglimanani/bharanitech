@@ -16,7 +16,6 @@ import {
   TitleStyled,
 } from "./styles";
 import { useAllJobs } from "../contexts/allJobsContext";
-import { motion } from "framer-motion";
 
 const StyledCard = styled(Card)(() => ({
   height: "100%",
@@ -25,7 +24,10 @@ const StyledCard = styled(Card)(() => ({
   //boxShadow: theme.shadows[3],
   //borderRadius: theme.shape.borderRadius,
   borderRadius: "20px",
+  position: 'relative',
 }));
+
+
 
 const JobsListPage: React.FC = () => {
   const { allJobs } = useAllJobs();
@@ -56,6 +58,14 @@ const JobsListPage: React.FC = () => {
                       />
                     </Stack>
                   </Stack>
+                  <div style={{position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
+                    Posted Date: 
+                    {new Date(job.created_at).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </div>
                   <TitleStyled variant="h6" gutterBottom>
                     {job.title}
                   </TitleStyled>
@@ -72,18 +82,7 @@ const JobsListPage: React.FC = () => {
                   >
                     {job.description}
                   </ParaStyled>
-                  <ParaStyled
-                    variant="body2"
-                    sx={{ mt: 2 }}
-                    color="text.secondary"
-                  >
-                    Posted Date:{" "}
-                    {new Date(job.created_at).toLocaleDateString("en-GB", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </ParaStyled>
+                 
                 </CardContent>
                 <Box sx={{ padding: 2 }}>
                   <LearnButtonStyled

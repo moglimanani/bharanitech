@@ -76,3 +76,21 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   },
 }));
 
+
+
+
+export const LearnButtonStyled = styled('button')(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.appBarColour.light,
+  background: theme.palette.appBarColour.main,
+  border: '1px solid #484848',
+  borderRadius: "20px",
+  margin: "10px 0 20px",
+  padding: "10px 20px",
+  transition: 'all 0.2s',
+  '&:hover': {
+    border: '1px solid #484848',
+    color: theme.palette.appBarColour.light,
+    backgroundImage: 'linear-gradient(to top, #48c6ef 0%, #6f86d6 100%)',
+  }
+}));
