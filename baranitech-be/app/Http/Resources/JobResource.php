@@ -20,7 +20,8 @@ class JobResource extends JsonResource
             'company' => $this->company,
             'description' => $this->description,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
+            'salary' => $this->salary,
         ];
     }
 }

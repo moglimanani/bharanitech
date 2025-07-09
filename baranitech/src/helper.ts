@@ -78,3 +78,12 @@ export const validatePhone = (phone: string): string => {
     if (isNaN(date.getTime())) return ''; // invalid date
     return date.toISOString().split('T')[0]; // "YYYY-MM-DD"
   };
+
+  export const formatCurrency = (value: number): string => {
+    return  new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0,
+    }).format(value);
+    // value.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+  };

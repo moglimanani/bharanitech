@@ -12,7 +12,7 @@ import {
   DialogProps,
   IconButton,
 } from "@mui/material";
-import { ButtonProps } from "@mui/material/Button";
+
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
   padding: "10px 10px 10px 0px",
   textAlign: "left",
@@ -20,7 +20,7 @@ export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.white,
 }));
 type BgVariantType = 'light' | 'dark'; // default dark
-interface DialogStyledProps  extends DialogProps {
+interface DialogStyledProps extends DialogProps {
   bgvariant?: BgVariantType;
 }
 
@@ -289,8 +289,8 @@ export const GridContactStyled = styled(Grid)(({ theme }) => ({
     },
   },
   "& > .hidden > img": {
-   width: "100%",
-   borderRadius: '20px',
+    width: "100%",
+    borderRadius: '20px',
   },
 }));
 
@@ -378,7 +378,10 @@ export const GalleyAdminStyled = styled(Grid)(({ theme }) => ({
       },
       "&:first-child": {
         clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%)'
-      }
+      },
+      "&.boxer": {
+        clipPath: 'none',
+      },
     },
     "a:hover": {
       color: theme.palette.appBarColour.main,
@@ -427,7 +430,7 @@ export const DialogStyled = styled(Dialog)<DialogStyledProps>(({ theme }) => ({
   }
 }))
 
-export const ImageClientStyled = styled("img")(({theme})=>({
+export const ImageClientStyled = styled("img")(({ theme }) => ({
   right: '16px',
   width: '230px',
   position: 'absolute',
@@ -440,8 +443,8 @@ export const ImageClientStyled = styled("img")(({theme})=>({
   }
 }))
 
-export const LangStyled = styled("p")(({theme})=>({
-  position:'absolute' ,
+export const LangStyled = styled("p")(({ theme }) => ({
+  position: 'absolute',
   right: '10px',
   margin: '0',
   border: '1px solid #720834c9',
@@ -453,7 +456,7 @@ export const LangStyled = styled("p")(({theme})=>({
   background: '#fff',
   fontWeight: 'bold',
   [theme.breakpoints.down("sm")]: {
-   
+
   }
 }))
 
