@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\TrainingCategoryController;
 use App\Http\Controllers\Api\RegisterTrainingController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\JobCandidateController;
 
 // Route::apiResource('login', LoginController::class);
 // get all
@@ -100,3 +101,6 @@ Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);
 
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/contact', [ContactController::class, 'index']);
+
+Route::post('/register-job-candidate', [JobCandidateController::class, 'register']);
+Route::get('/register-job-candidate', [JobCandidateController::class, 'index']);

@@ -19,6 +19,7 @@ import { format } from "date-fns";
 import { ActionWrapper } from "../commonStyles";
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
+import { formatCurrency } from "../../helper";
 
 interface JobType {
   id: number | string;
@@ -32,6 +33,7 @@ interface JobType {
   company: string;
   description: string;
   type: number;
+  salary: number;
 }
 
 interface ApiResponse {
@@ -200,6 +202,7 @@ const JobAdminListComponent: React.FC = () => {
                 <JobStyle variant="body2">{item.title}</JobStyle>
                 <DescriptionStyle variant="body2">{item.description}</DescriptionStyle>
                 {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
+                <VacancyStyle variant="body2">Salary : {formatCurrency(item.salary ?? 0)}/-  </VacancyStyle>
                 <VacancyStyle variant="body2">Vacancy : {item.total_vacancy}  </VacancyStyle>
                 <AddressStyle variant="body2">{item.city}</AddressStyle>
                 <AddressStyle variant="body2">{item.state}</AddressStyle>

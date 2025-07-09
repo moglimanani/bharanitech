@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 import { AdminTitleStyled, GalleyAdminStyled, WrapperAdminStyled } from "./styles";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 export default function JobsAdminPage() {
   UseRequireUserSession();
@@ -22,8 +23,9 @@ export default function JobsAdminPage() {
         <Grid size={12}>
           <GalleyAdminStyled>
             <nav>
-              <NavLink to="."><FormatListNumberedIcon />  Jobs</NavLink>
-              <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
+              <NavLink to="." end={false}><FormatListNumberedIcon />  Jobs</NavLink>
+              <NavLink to={`add`} className="boxer" end={false}><PostAddIcon />  Add New</NavLink>
+              <NavLink to={`candidates`} end={false}><PersonSearchIcon />  Candidates</NavLink>
             </nav>
           </GalleyAdminStyled>
           <hr />

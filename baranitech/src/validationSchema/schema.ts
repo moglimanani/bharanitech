@@ -130,6 +130,10 @@ export const AdminJobAddSchema = yup.object().shape({
     company: yup.string().nullable().optional(),
     description: yup.string().required('Description is required'),
     type: yup.string().required('Category is required'),
+    salary:  yup.number()
+    .typeError('Salary must be a number')
+    .min(1, 'Salary must be some number')
+    .nullable()
 })
 
 export const RegisterUserSchema = yup.object().shape({

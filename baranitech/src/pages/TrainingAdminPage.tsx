@@ -9,6 +9,7 @@ import {
 } from "./styles";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 export default function TrainingAdminPage() {
   UseRequireUserSession();
@@ -23,8 +24,9 @@ export default function TrainingAdminPage() {
         <Grid size={12}>
           <GalleyAdminStyled>
             <nav>
-              <NavLink to="."><FormatListNumberedIcon />  Trainings</NavLink>
-              <NavLink to={`add`}><PostAddIcon />  Add New</NavLink>
+              <NavLink to="."><FormatListNumberedIcon />Trainings</NavLink>
+              <NavLink to={`add`} className="boxer"><PostAddIcon />  Add New</NavLink>
+              <NavLink to={`candidates`} ><PersonSearchIcon />  Candidates</NavLink>
             </nav>
           </GalleyAdminStyled>
           <hr />

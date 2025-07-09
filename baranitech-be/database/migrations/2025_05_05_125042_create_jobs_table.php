@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('title');
             $table->timestamps();
+            $table->decimal('salary', 10, 2)->nullable(); // or ->default(0)
         });
     }
 

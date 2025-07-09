@@ -37,6 +37,7 @@ class JobController extends Controller
             'country' => 'nullable|string',
             'company' => 'nullable|string',
             'description' => 'required|string',
+            'salary' => 'required|numeric|min:0',
         ]);
 
         if ($validator->fails()) {

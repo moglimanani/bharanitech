@@ -64,6 +64,7 @@ const JobsAdminAddComponent: React.FC = () => {
       company: "",
       description: "",
       type: categories[0]?.title,
+      salary: 0
     },
   });
 
@@ -87,6 +88,7 @@ const JobsAdminAddComponent: React.FC = () => {
         setValue("state", res.data.state);
         setValue("country", res.data.country);
         setValue("company", res.data.company);
+        setValue("salary", res.data.salary ?? 0);
         trigger();
       } else {
         // optional: show a toast or alert here
@@ -116,6 +118,7 @@ const JobsAdminAddComponent: React.FC = () => {
     formData.append("state", data.state ?? "");
     formData.append("country", data.country ?? "");
     formData.append("company", data.company ?? "");
+    formData.append("salary", data?.salary?.toString() ?? "0");
 
     try {
       const res = await httpService.post<ApiResponse>("/jobs", formData);
@@ -142,6 +145,7 @@ const JobsAdminAddComponent: React.FC = () => {
     formData.append("state", data.state ?? "");
     formData.append("country", data.country ?? "");
     formData.append("company", data.company ?? "");
+    formData.append("salary", data?.salary?.toString() ?? "0");
 
     try {
       const res = await httpService.put<ApiResponse>(
@@ -260,7 +264,7 @@ const JobsAdminAddComponent: React.FC = () => {
               )}
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 3 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <Controller
               name="company"
               control={control}
@@ -276,7 +280,23 @@ const JobsAdminAddComponent: React.FC = () => {
               )}
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 3 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <Controller
+              name="salary"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  label="Salary"
+                  fullWidth
+                  margin="normal"
+                  {...field}
+                  error={!!errors.salary}
+                  helperText={errors.salary?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <Controller
               name="total_vacancy"
               control={control}
