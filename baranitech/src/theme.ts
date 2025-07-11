@@ -62,6 +62,20 @@ const theme = createTheme({
     }
    
   },
+  components:{
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: 'backButton',
+          '& .MuiBox-root':{
+            'a':{
+              backgroundColor: 'black'
+            }
+          },
+        },
+      }
+    }
+  }
   // components: {
   //   MuiAppBar: {
   //     styleOverrides: {

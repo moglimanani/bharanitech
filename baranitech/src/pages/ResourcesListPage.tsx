@@ -50,7 +50,7 @@ const ResourcesListPage: React.FC = () => {
   }
 
   return (
-    <Container sx={{ mt: 1 }}>
+    <Container sx={{mt:1,p:{ xs: 0, md: '8px 24px' }}}>
       <AdminTitleStyled variant="h4" gutterBottom>
         Resources
       </AdminTitleStyled>

@@ -70,7 +70,7 @@ export const TwoColumnStyled = styled(Grid)(({ theme }) => ({
 // AboutUs
 
 export const AboutUsStyled = styled("div")(({ theme }) => ({
-  margin: "0px 30px 20px",
+  margin: "8px 30px 20px",
   // padding: "0px 20px 0px",
   //background: '#ffffff',
   borderRadius: "20px",
@@ -189,7 +189,7 @@ export const AdminTitleStyled = styled(Typography)(({ theme }) => ({
   fontFamily: "Poetsen One",
   letterSpacing: "1px",
   maxWidth: 'fit-content',
-  paddingRight: '16px'
+  paddingRight: '16px',
 }));
 
 export const AdminButtonStyled = styled(Button)(({ theme }) => ({
@@ -463,7 +463,8 @@ export const LangStyled = styled("p")(({ theme }) => ({
 export const BackButtonStyled = styled(IconButton)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
-  background: theme.palette.appBarColour.main,
+  // background: theme.palette.appBarColour.main,
+  background: theme.palette.common.black,
   border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",

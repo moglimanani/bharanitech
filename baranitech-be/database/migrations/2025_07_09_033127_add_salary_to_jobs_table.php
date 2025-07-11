@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->decimal('salary', 10, 2)->nullable()->after('title');
-        });
+        // Schema::table('jobs', function (Blueprint $table) {
+        //     $table->decimal('salary', 10, 2)->nullable()->after('title');
+        // });
+        if (!Schema::hasColumn('jobs', 'salary')) {
+            Schema::table('jobs', function (Blueprint $table) {
+                $table->decimal('salary', 10, 2)->nullable()->after('title');
+            });
+        }
     }
 
     /**
@@ -21,8 +26,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->dropColumn('salary');
-        });
+        // Schema::table('jobs', function (Blueprint $table) {
+        //     $table->dropColumn('salary');
+        // });
+        if (Schema::hasColumn('jobs', 'salary')) {
+            Schema::table('jobs', function (Blueprint $table) {
+                $table->dropColumn('salary');
+            });
+        }
     }
 };

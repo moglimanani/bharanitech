@@ -55,7 +55,7 @@ export default function AdminPage() {
         </Grid>
         <Grid size={{ xs: 12, md: 3 }}>
           <AdminStyled>
-            <div>Job</div>
+            <div>Career</div>
             <div>
               <AdminButtonStyled
                 onClick={() =>

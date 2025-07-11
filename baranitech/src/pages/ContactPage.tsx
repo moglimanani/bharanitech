@@ -99,7 +99,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <Container sx={{ mt: 1 }}>
+    <Container sx={{ mt: 1, p:{ xs: 0, md: 3 }}}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AboutUsTitleStyled>Contact Us</AboutUsTitleStyled>
 
