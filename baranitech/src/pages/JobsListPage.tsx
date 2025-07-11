@@ -16,6 +16,8 @@ import {
   TitleStyled,
 } from "./styles";
 import { useAllJobs } from "../contexts/allJobsContext";
+import { useDialog } from "../contexts/dialogContext";
+import { useNavigate } from "react-router";
 
 const StyledCard = styled(Card)(() => ({
   height: "100%",
@@ -31,11 +33,13 @@ const StyledCard = styled(Card)(() => ({
 
 const JobsListPage: React.FC = () => {
   const { allJobs } = useAllJobs();
+   const { confirm } = useDialog()
+    const navigate = useNavigate()
 
   return (
-    <Container sx={{ mt: 1 }}>
+    <Container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
-        Job Openings
+        Careers
       </AdminTitleStyled>
       <Grid container spacing={3}>
         {allJobs.map((job) => {
@@ -58,7 +62,7 @@ const JobsListPage: React.FC = () => {
                       />
                     </Stack>
                   </Stack>
-                  <div style={{position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
+                  <div style={{ position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
                     {new Date(job.created_at).toLocaleDateString("en-GB", {
                       day: "numeric",
                       month: "long",
@@ -81,15 +85,16 @@ const JobsListPage: React.FC = () => {
                   >
                     {job.description}
                   </ParaStyled>
-                 
+
                 </CardContent>
                 <Box sx={{ padding: 2 }}>
                   <LearnButtonStyled
                     fullWidth
                     variant="contained"
                     color="primary"
+                    onClick={() => navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}/${job.id}`)}
                   >
-                    Apply Now
+                    Details
                   </LearnButtonStyled>
                 </Box>
               </StyledCard>

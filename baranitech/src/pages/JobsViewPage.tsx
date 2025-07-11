@@ -12,6 +12,9 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import SchoolIcon from '@mui/icons-material/School';
 import theme from '../theme';
 import { formatCurrency } from '../helper';
+import { useAllJobs } from '../contexts/allJobsContext';
+import { JobsType } from '../types/jobs';
+import { JobsRegisterForm } from '../components/JobsRegisterForm';
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
@@ -105,29 +108,29 @@ const StyledSpanRetPage = styled('span')(({ theme }) => ({
 }));
 
 
-const TrainingsViewPage: React.FC = () => {
-  const [training, setTraining] = useState<TrainingType | null>(null);
+const JobsViewPage: React.FC = () => {
+  const [jobs, setJobs] = useState<JobsType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { allTrainings } = useAllTrainings()
+  const {allJobs} = useAllJobs();
   const { confirm } = useDialog()
   const navigate = useNavigate()
-  const { tid } = useParams();
+  const { jid } = useParams();
 
   useEffect(() => {
-    if (!tid) return;
-    const found = allTrainings.find((training: TrainingType) => +training.id === +tid);
+    if (!jid) return;
+    const found = allJobs.find((job: JobsType) => +job.id === +jid);
 
     if (found) {
-      setTraining(found);
+      setJobs(found);
       setLoading(false);
     } else {
       setError('Training not found');
     }
 
-  }, [tid]);
+  }, [jid]);
 
-  const isLocation = training && training.city && training.state && training.country;
+  const isLocation =  jobs?.city && jobs?.state && jobs?.country;
   return (
     <ContainerBox>
       <AboutUsTitleStyled>Training</AboutUsTitleStyled>
@@ -139,49 +142,38 @@ const TrainingsViewPage: React.FC = () => {
           </Box>
         ) : error ? (
           <Typography color="error">{error}</Typography>
-        ) : training ? (
+        ) : jobs ? (
           <StyledPaper elevation={3}>
             <Stack spacing={1} sx={{ alignItems: 'flex-end', paddingRight: '16px' }}>
               <Stack direction="row" spacing={1}>
 
-                {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined" />}
-                {+training.classification === 1 && <Chip label="Online" color="warning" variant="outlined" />}
+                {<Chip label={jobs.total_vacancy} color="success" variant="outlined" />}
               </Stack>
 
             </Stack>
             <SchoolIcon sx={{ color: theme.palette.appBarColour.main, fontSize: '4em' }} />
             <div style={{ position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', left: '16px' }}>
-              {training.startdate}
+              {jobs.created_at}
             </div>
             <StyledTypographyTitle>
-              {training.title}
+              {jobs.title}
             </StyledTypographyTitle>
             <StyledTypographyCategory>
-              {training.category.title.replace(/-/g, ' ')}
+              {jobs.category.title.replace(/-/g, ' ')}
             </StyledTypographyCategory>
-            <StyledDiv>
-              <span>{training.description}</span>
-            </StyledDiv>
+            {/* <StyledDiv>
+              <span>{jobs.description}</span>
+            </StyledDiv> */}
             <StyledDiv>
               <div
-                dangerouslySetInnerHTML={{ __html: training.table_of_contents }}
+                dangerouslySetInnerHTML={{ __html: jobs.description }}
               />
             </StyledDiv>
 
-            <StyledDiv>
-              <span>Total Hours:</span>
-              <span> {+training.total_hours} Hrs</span>
-            </StyledDiv>
-            <StyledDiv>
-              <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage><br />
-              <StyledSpanPage>{formatCurrency(training.total_price)}/-</StyledSpanPage> <br /><span style={{ fontSize: '12px' }}>(Discount 50% applied).</span>
-            </StyledDiv>
-
-            {
-              +training.classification === 0 && isLocation && (
-                <StyledDiv><span>Location:  {training.city}, {training.state}, {training.country}</span></StyledDiv>
-              )
-            }
+              {isLocation && (
+                <StyledDiv><span>Location:  {jobs.city}, {jobs.state}, {jobs.country}</span></StyledDiv>
+              )}
+              
             <StyledDiv>
               <span>Instructor: Ezhumalai</span>
             </StyledDiv>
@@ -191,15 +183,15 @@ const TrainingsViewPage: React.FC = () => {
               <LearnButtonStyled
                 startIcon={<EditNoteIcon />}
                 onClick={() => confirm({
-                  bgvariant: 'light', title: `Training Registration: ${training.title}`,
-                  content: <TrainingRegisterForm id={training.id} />,
+                  bgvariant: 'light', title: `Application: ${jobs.title}`,
+                  content: <JobsRegisterForm id={jobs.id} />,
                   onConfirm: () => { },
                   onCancel: () => { },
                   hideButtons: true
-                })}>Register</LearnButtonStyled>
+                })}>Apply</LearnButtonStyled>
 
               <BackButtonStyled aria-label="back" onClick={() =>
-                navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}`)}>
+                navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}`)}>
                 <ReplyAllIcon />
               </BackButtonStyled>
             </StyledDivPage>
@@ -213,4 +205,4 @@ const TrainingsViewPage: React.FC = () => {
   );
 };
 
-export default TrainingsViewPage;
+export default JobsViewPage;

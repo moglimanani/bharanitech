@@ -75,6 +75,7 @@ import TrainingsViewPage from './pages/TrainingsViewPage.tsx'
 import ResourceViewPage from './pages/ResourceViewPage.tsx'
 import GalleryListPage from './pages/GalleryListPage.tsx'
 import CandidateRegistedListComponent from './components/CandidatesRegisteredJobList/index.tsx'
+import JobsViewPage from './pages/JobsViewPage.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -108,7 +109,10 @@ createRoot(document.getElementById('root')!).render(
                               <Route path={import.meta.env.VITE_ROUTE_TESTIMONIAL_URL} element={<TestimonialPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_URL} element={<YoutubeListPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_YOUTUBE_ADD_URL} element={<YoutubeUrlAddPage />} />
-                              <Route path={import.meta.env.VITE_ROUTE_JOBS_URL} element={<JobsListPage />} />
+                              <Route path={import.meta.env.VITE_ROUTE_JOBS_URL}>
+                                <Route index element={<JobsListPage />} />
+                                <Route path={import.meta.env.VITE_ROUTE_JOBS_ID_URL} element={<JobsViewPage />} />
+                              </Route>
                               <Route path={import.meta.env.VITE_ROUTE_JOBS_ADD_URL} element={<JobAddPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_TRAININGS_ADD_URL} element={<TrainingAddPage />} />
                               <Route path={import.meta.env.VITE_ROUTE_TRAININGS_URL} >

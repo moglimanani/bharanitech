@@ -25,7 +25,7 @@ class JobCandidateController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:job_candidates,email',
+            'email' => 'required|email',
             'phone' => 'nullable|string|max:15',
             'job_id' => 'required|exists:jobs,id', // Ensure the job_id exists in the jobs table
             'occupation' => 'nullable|string|max:255', // Validate occupation
@@ -62,8 +62,9 @@ class JobCandidateController extends Controller
         // Return the success response
         return response()->json(
             [
+                'status' => true,
                 'message' => 'Job Candidate registered successfully!',
-                'job_candidate' => $jobCandidate,
+                'data' => $jobCandidate,
             ],
             201,
         );

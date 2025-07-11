@@ -44,7 +44,7 @@ const TrainingsListPage: React.FC = () => {
   }
 
   return (
-    <Container sx={{ mt: 1 }}>
+    <Container sx={{mt:1,p:{ xs: 0, md: '8px 24px' }}}>
       <AdminTitleStyled variant="h4" gutterBottom>
         Trainings
       </AdminTitleStyled>
@@ -82,7 +82,7 @@ const TrainingsListPage: React.FC = () => {
                 {/* <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled> */}
-                <LearnButtonStyled color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)}>Job Details</LearnButtonStyled>
+                <LearnButtonStyled color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)}>More Details</LearnButtonStyled>
               </CardContent>
             </StyledWrapperDivCard>
           </Grid>
