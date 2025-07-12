@@ -92,25 +92,33 @@ export default function GalleryListPage() {
       <AdminTitleStyled variant="h4" gutterBottom>
         Gallery
       </AdminTitleStyled>
-      <Grid container spacing={4}>
-        {images.map((img, index) => (
-          <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-            <ImageCard onClick={() => handleOpen(img)}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={`${import.meta.env.VITE_BE_IMAGE_PATH}/${img?.photo}`}
-                alt={img.title}
-              />
-              <CardContent>
-                <GalleryTypographyFont variant="h6">
-                  {img.title}
-                </GalleryTypographyFont>
-              </CardContent>
-            </ImageCard>
+      {
+        !images || images.length === 0 && (
+          <Typography margin={3}>Sorry, No photo avaialble at this time.</Typography>
+        )
+      }
+      {
+        !(!images || images.length === 0) && (
+          <Grid container spacing={4}>
+            {images.map((img, index) => (
+              <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <ImageCard onClick={() => handleOpen(img)}>
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={`${import.meta.env.VITE_BE_IMAGE_PATH}/${img?.photo}`}
+                    alt={img.title}
+                  />
+                  <CardContent>
+                    <GalleryTypographyFont variant="h6">
+                      {img.title}
+                    </GalleryTypographyFont>
+                  </CardContent>
+                </ImageCard>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        )}
       <Dialog open={open} onClose={handleClose} maxWidth="md">
         <DialogHeader>
           <GalleryTypographyFont variant="h6">{selectedImage?.title}</GalleryTypographyFont>
