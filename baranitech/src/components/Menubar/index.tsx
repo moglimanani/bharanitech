@@ -19,7 +19,7 @@ const menuItems = [
   { path: '/resources', name: 'Resources' },
   { path: '/trainings', name: 'Trainings' },
   { path: '/jobs', name: 'Careers' },
-  // { path: '/login', name: 'Login' },
+  { path: '/gallery', name: 'Gallery' },
   { path: '/contact', name: 'Contact Us' },
   // { path: '/testimonial', name: 'Testimonials' }
 ];

@@ -70,7 +70,7 @@ export const DialogProvider = ({ children }: { children: ReactNode }) => {
                 <DialogContent>
                     {
                         typeof options?.content === 'string' ? (
-                            <DialogContentText> {options?.content || 'Are you sure you want to proceed?'}</DialogContentText>
+                            <DialogContentText style={{color: 'black', margin: '10px 0px'}}> {options?.content || 'Are you sure you want to proceed?'}</DialogContentText>
                           ) : (
                             options?.content // ← ✅ render your <FormComponent />
                           )
