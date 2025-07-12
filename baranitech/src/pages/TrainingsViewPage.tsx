@@ -48,7 +48,7 @@ const StyledTypographyCategory = styled(Typography)(({ theme }) => ({
   textTransform: 'capitalize',
   padding: '15px 10px',
   marginTop: '10px',
-  background: '#c47878',
+  background: '#ed6c02',
   fontSize: '1.2em',
 }));
 const StyledTypographyTitle = styled(Typography)(({ theme }) => ({
@@ -93,7 +93,7 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
 const StyledSpanPage = styled('span')(({ theme }) => ({
   marginRight: '10px',
   borderRadius: '12px',
-  color: '#820e49',
+  color: '#ed6c02',
   fontSize: '2.5em'
 }));
 
@@ -159,9 +159,9 @@ const TrainingsViewPage: React.FC = () => {
             <StyledTypographyCategory>
               {training.category.title.replace(/-/g, ' ')}
             </StyledTypographyCategory>
-            <StyledDiv>
+            {/* <StyledDiv>
               <span>{training.description}</span>
-            </StyledDiv>
+            </StyledDiv> */}
             <StyledDiv>
               <div
                 dangerouslySetInnerHTML={{ __html: training.table_of_contents }}
@@ -170,11 +170,12 @@ const TrainingsViewPage: React.FC = () => {
 
             <StyledDiv>
               <span>Total Hours:</span>
-              <span> {+training.total_hours} Hrs</span>
+              <span> {+training.total_hours}12 Hrs</span>
             </StyledDiv>
             <StyledDiv>
-              <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage><br />
-              <StyledSpanPage>{formatCurrency(training.total_price)}/-</StyledSpanPage> <br /><span style={{ fontSize: '12px' }}>(Discount 50% applied).</span>
+              {/* <StyledSpanRetPage>₹{training.total_price * 2}/-</StyledSpanRetPage><br /> */}
+              <StyledSpanPage>{formatCurrency(training.total_price)}/-</StyledSpanPage> <br />
+              {/* <span style={{ fontSize: '12px' }}>(Discount 50% applied).</span> */}
             </StyledDiv>
 
             {

@@ -224,6 +224,25 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
   }
 }));
 
+export const ParaStyledOverflow = styled(Typography)(({ theme }) => ({
+  textAlign: "left",
+  fontSize: ".88rem",
+  paddingTop: "5px",
+  textTransform: 'capitalize',
+  lineHeight: '1.5em',
+  height: '1.5em',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  width: '100%',
+  color: theme.palette.secondary.main,
+  '& span': {
+    color: theme.palette.appBarColour.main,
+    fontWeight: '600',
+    fontSize: '.95rem',
+  }
+}));
+
 export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
@@ -464,7 +483,7 @@ export const BackButtonStyled = styled(IconButton)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   // background: theme.palette.appBarColour.main,
-  background: theme.palette.common.black,
+  background: theme.palette.appBarColour.main,
   border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",
