@@ -51,7 +51,7 @@ const StyledTypographyCategory = styled(Typography)(({ theme }) => ({
   textTransform: 'capitalize',
   padding: '15px 10px',
   marginTop: '10px',
-  background: '#c47878',
+  background: '#2e7d32',
   fontSize: '1.2em',
 }));
 const StyledTypographyTitle = styled(Typography)(({ theme }) => ({
@@ -147,7 +147,7 @@ const JobsViewPage: React.FC = () => {
             <Stack spacing={1} sx={{ alignItems: 'flex-end', paddingRight: '16px' }}>
               <Stack direction="row" spacing={1}>
 
-                {<Chip label={jobs.total_vacancy} color="success" variant="outlined" />}
+                {<Chip label={jobs.total_vacancy} color="success" variant="filled" />}
               </Stack>
 
             </Stack>

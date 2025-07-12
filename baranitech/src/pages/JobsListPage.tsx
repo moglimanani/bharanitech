@@ -15,6 +15,7 @@ import {
   LearnButtonStyled,
   ParaStyled,
   TitleStyled,
+  ParaStyledOverflow
 } from "./styles";
 import { useAllJobs } from "../contexts/allJobsContext";
 import { useDialog } from "../contexts/dialogContext";
@@ -66,7 +67,7 @@ const JobsListPage: React.FC = () => {
                           <Chip
                             label={job.total_vacancy ?? 0}
                             color="info"
-                            variant="outlined"
+                            variant="filled"
                           />
                         </Stack>
                       </Stack>
@@ -86,13 +87,13 @@ const JobsListPage: React.FC = () => {
                       <ParaStyled variant="body2" color="text.secondary">
                         {isLocation ? job.city + ", " + job.country : "XXXXXX"}
                       </ParaStyled>
-                      <ParaStyled
+                      <ParaStyledOverflow
                         variant="body2"
                         sx={{ mt: 2 }}
                         color="text.secondary"
                       >
                         {job.description}
-                      </ParaStyled>
+                      </ParaStyledOverflow>
 
                     </CardContent>
                     <Box sx={{ padding: 2 }}>

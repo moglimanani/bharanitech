@@ -99,7 +99,13 @@ const AddressStyle = styled(Typography)(() => ({
 }));
 
 const DescriptionStyle = styled(Typography)(() => ({
-  padding: '10px 0'
+  padding: '10px 0',
+  lineHeight: '1.5em',
+  height: '3em',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  width: '100%',
 }));
 
 
