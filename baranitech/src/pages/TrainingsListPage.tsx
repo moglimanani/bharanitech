@@ -8,6 +8,7 @@ import {
   Chip,
   Button,
   styled,
+  Typography,
 } from '@mui/material';
 import { AdminTitleStyled, ParaStyled, StackStyled, StyledWrapperDivCard, TitleStyled } from './styles';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
@@ -39,55 +40,63 @@ const TrainingsListPage: React.FC = () => {
   const { allTrainings } = useAllTrainings()
   const navigate = useNavigate()
 
-  if (!allTrainings || allTrainings.length === 0) {
-    return <div>Sorry, No trainings found.</div>
-  }
+  // if (!allTrainings || allTrainings.length === 0) {
+  //   return <div>Sorry, No trainings found.</div>
+  // }
 
   return (
-    <Container sx={{mt:1,p:{ xs: 0, md: '8px 24px' }}}>
+    <Container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
         Trainings
       </AdminTitleStyled>
 
-      <Grid container spacing={3} style={{ marginBottom: '30px' }}>
-        {allTrainings.map((training: TrainingType) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={training.id}>
-            <StyledWrapperDivCard>
-              <CardContent>
-                <div style={{ display: 'flex', justifyContent: 'flex-start', fontSize: '0.8rem' }}>
-                  {format(new Date(training.startdate), "dd MMM yyyy")}
-                </div>
+      {
+        !allTrainings || allTrainings.length === 0 && (
+          <Typography margin={3}>Sorry, No trainings available.</Typography>
+        )
+      }
+      {
+        !(!allTrainings || allTrainings.length === 0) && (
+          <Grid container spacing={3} style={{ marginBottom: '30px' }}>
+            {allTrainings.map((training: TrainingType) => (
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={training.id}>
+                <StyledWrapperDivCard>
+                  <CardContent>
+                    <div style={{ display: 'flex', justifyContent: 'flex-start', fontSize: '0.8rem' }}>
+                      {format(new Date(training.startdate), "dd MMM yyyy")}
+                    </div>
 
-                <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{ cursor: 'pointer' }}>
-                  {training.title}
-                  <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
-                    <Stack direction="row" spacing={1}>
+                    <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{ cursor: 'pointer' }}>
+                      {training.title}
+                      <StackStyled spacing={1} sx={{ alignItems: 'center' }}>
+                        <Stack direction="row" spacing={1}>
 
-                      {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined" />}
-                      {+training.classification === 1 && <Chip label="Online" color="warning" variant="outlined" />}
-                    </Stack>
+                          {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined" />}
+                          {+training.classification === 1 && <Chip label="Online" color="warning" variant="outlined" />}
+                        </Stack>
 
-                  </StackStyled>
-                </TitleStyled>
-                {/* <ParaStyled variant="body2" color="textSecondary" gutterBottom>
+                      </StackStyled>
+                    </TitleStyled>
+                    {/* <ParaStyled variant="body2" color="textSecondary" gutterBottom>
                   {training.description}
                 </ParaStyled> */}
-                <Divider sx={{ my: 1 }} />
-                <ParaStyled variant="body2">
-                  <strong>Trainer:</strong> Ezhumalai
-                </ParaStyled>
-                <ParaStyled variant="body2">
-                  <strong>Course duration:</strong> {+training.total_hours} Hours
-                </ParaStyled>
-                {/* <ParaStyled variant="body2">
+                    <Divider sx={{ my: 1 }} />
+                    <ParaStyled variant="body2">
+                      <strong>Trainer:</strong> Ezhumalai
+                    </ParaStyled>
+                    <ParaStyled variant="body2">
+                      <strong>Course duration:</strong> {+training.total_hours} Hours
+                    </ParaStyled>
+                    {/* <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled> */}
-                <LearnButtonStyled color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)}>More Details</LearnButtonStyled>
-              </CardContent>
-            </StyledWrapperDivCard>
-          </Grid>
-        ))}
-      </Grid>
+                    <LearnButtonStyled color="primary" variant="contained" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)}>More Details</LearnButtonStyled>
+                  </CardContent>
+                </StyledWrapperDivCard>
+              </Grid>
+            ))}
+          </Grid>)
+      }
     </Container>
   );
 };

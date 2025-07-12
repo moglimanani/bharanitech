@@ -7,6 +7,7 @@ import {
   CircularProgress,
   Alert,
   Box,
+  Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { AdminTitleStyled, LangStyled, LearnButtonStyled, ParaStyled, TitleStyled } from './styles';
@@ -33,12 +34,11 @@ const VideoFrame = styled("iframe")(() => ({
 
 const ResourcesListPage: React.FC = () => {
   const [error] = useState<string | null>(null);
-  const {categories} = useYouTubeCategories();
+  const { categories } = useYouTubeCategories();
   const { allResources: youtubes } = useAllResources()
   const navigate = useNavigate()
-  console.log(categories, youtubes);
 
-  if (!youtubes || youtubes.length === 0) return (<></>)
+  // if (!youtubes || youtubes.length === 0) return (<></>)
 
 
   if (error) {
@@ -50,51 +50,59 @@ const ResourcesListPage: React.FC = () => {
   }
 
   return (
-    <Container sx={{mt:1,p:{ xs: 0, md: '8px 24px' }}}>
+    <Container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
         Resources
       </AdminTitleStyled>
-      <Grid container spacing={3} style={{ marginBottom: '30px' }}>
-        {youtubes.map((resource) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={resource.id}>
-            <StyledCard>
-              <CardContent>
-                 <LangStyled style={{top: '20px'}}>
-                  {getLanguageType[+resource.language].name}
-                  </LangStyled>
-                <TitleStyled variant="h6" gutterBottom  onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{cursor: 'pointer' }}>
-                  {resource.title}
-                </TitleStyled>
-               
-                {/* <ParaStyled variant="body2" color="text.secondary">
+      {
+        !youtubes || youtubes.length === 0 && (
+          <Typography margin={3}>Sorry, No resource available at this time.</Typography>
+        )
+      }
+      {
+        !(!youtubes || youtubes.length === 0) && (
+          <Grid container spacing={3} style={{ marginBottom: '30px' }}>
+            {youtubes.map((resource) => (
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={resource.id}>
+                <StyledCard>
+                  <CardContent>
+                    <LangStyled style={{ top: '20px' }}>
+                      {getLanguageType[+resource.language].name}
+                    </LangStyled>
+                    <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }}>
+                      {resource.title}
+                    </TitleStyled>
+
+                    {/* <ParaStyled variant="body2" color="text.secondary">
                 <span>Language:</span> {getLanguageType[+resource.language].name}
                 </ParaStyled> */}
-                <ParaStyled variant="body2" color="text.secondary">
-                 <span>Type: </span>  
-                  {categories.find((cat) => cat.id === resource.type)?.title}
-                </ParaStyled>
-                {/* <ParaStyled variant="body2" color="text.secondary">
+                    <ParaStyled variant="body2" color="text.secondary">
+                      <span>Type: </span>
+                      {categories.find((cat) => cat.id === resource.type)?.title}
+                    </ParaStyled>
+                    {/* <ParaStyled variant="body2" color="text.secondary">
                   {resource.description}
                 </ParaStyled> */}
-                <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                {resource.url && (
-                <VideoFrame
-                  src={resource.url}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-                </ParaStyled>
-              </CardContent>
-              <Box sx={{ padding: 2 }}>
-                <LearnButtonStyled fullWidth variant="contained" color="primary" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{cursor: 'pointer' }} >
-                  Learn
-                </LearnButtonStyled>
-              </Box>
-            </StyledCard>
+                    <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                      {resource.url && (
+                        <VideoFrame
+                          src={resource.url}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      )}
+                    </ParaStyled>
+                  </CardContent>
+                  <Box sx={{ padding: 2 }}>
+                    <LearnButtonStyled fullWidth variant="contained" color="primary" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }} >
+                      Learn
+                    </LearnButtonStyled>
+                  </Box>
+                </StyledCard>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        )}
     </Container>
   );
 };
