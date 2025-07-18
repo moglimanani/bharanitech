@@ -2,7 +2,6 @@ import { formatDate } from 'date-fns';
 import { TrainingType } from '../../types/trainings';
 import { LearnButtonStyled, LeftRightBlock, StyledpriceCol, StyledpriceRow } from './styles';
 import { useNavigate } from 'react-router';
-import TableRowsIcon from '@mui/icons-material/TableRows';
 import InfoIcon from '@mui/icons-material/Info';
 interface LatestTrainingPropsType {
   trainings: TrainingType[]
@@ -20,7 +19,7 @@ const LatestTraining = ({ trainings }: LatestTrainingPropsType) => {
     return (
       <StyledpriceCol key={`trainingBlocks=${id}`}>
         <p>{item.title}</p>
-        <h3>₹{item.total_price ?? '0.00'}/-</h3>
+        <h3>${item.total_price ?? '0'}/-</h3>
         <ul>
           <li>
             <LeftRightBlock>

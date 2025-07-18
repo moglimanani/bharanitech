@@ -101,6 +101,7 @@ export const IconBadgeStyled = styled(Badge)(({ theme }) => ({
 export const GridColorStyled = styled(Grid)(({ theme }) => ({
   // fontFamily: 'Poetsen One',
   background: theme.palette.appBarColour.main,
+  cursor: 'pointer',
   borderRadius: '20px',
   display: 'flex',
   gap: '8px',

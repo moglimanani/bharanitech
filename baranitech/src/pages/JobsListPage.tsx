@@ -81,6 +81,9 @@ const JobsListPage: React.FC = () => {
                       <TitleStyled variant="h6" gutterBottom>
                         {job.title}
                       </TitleStyled>
+                      <ParaStyled>
+                        {job.category.title.replace(/-/g, ' ')}
+                      </ParaStyled>
                       <ParaStyled variant="body2" color="text.secondary">
                         <strong>{job.company ?? "XXXX"}</strong>
                       </ParaStyled>

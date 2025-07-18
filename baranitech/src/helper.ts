@@ -80,9 +80,9 @@ export const validatePhone = (phone: string): string => {
   };
 
   export const formatCurrency = (value: number): string => {
-    return  new Intl.NumberFormat('en-IN', {
+    return  new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'INR',
+      currency: 'USD',
       minimumFractionDigits: 0,
     }).format(value);
     // value.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });

@@ -8,6 +8,7 @@ import {
   FormControl,
   Box,
   Grid,
+  InputAdornment,
 } from "@mui/material";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -286,6 +287,11 @@ const JobsAdminAddComponent: React.FC = () => {
               control={control}
               render={({ field }) => (
                 <TextField
+                slotProps={{
+                  input: {
+                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  },
+                }}
                   label="Salary"
                   fullWidth
                   margin="normal"
