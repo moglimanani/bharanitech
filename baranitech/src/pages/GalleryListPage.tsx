@@ -17,6 +17,12 @@ type ImageItem = {
 const GalleryTypographyFont = styled(Typography)(({ theme }) => ({
   color: theme.palette.appBarColour.main,
   fontWeight: 'bold',
+  WebkitLineClamp: 1,
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  minHeight: '33px'
 }));
 
 

@@ -15,7 +15,8 @@ import {
   LearnButtonStyled,
   ParaStyled,
   TitleStyled,
-  ParaStyledOverflow
+  ParaStyledOverflow,
+  TypeStyled
 } from "./styles";
 import { useAllJobs } from "../contexts/allJobsContext";
 import { useDialog } from "../contexts/dialogContext";
@@ -81,9 +82,9 @@ const JobsListPage: React.FC = () => {
                       <TitleStyled variant="h6" gutterBottom>
                         {job.title}
                       </TitleStyled>
-                      <ParaStyled>
+                      <TypeStyled>
                         {job.category.title.replace(/-/g, ' ')}
-                      </ParaStyled>
+                      </TypeStyled>
                       <ParaStyled variant="body2" color="text.secondary">
                         <strong>{job.company ?? "XXXX"}</strong>
                       </ParaStyled>

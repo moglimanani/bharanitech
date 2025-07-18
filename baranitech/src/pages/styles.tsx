@@ -203,13 +203,17 @@ export const AdminButtonStyled = styled(Button)(({ theme }) => ({
 
 export const TitleStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
-  fontSize: "1.4em",
-  paddingTop: "10px",
+  fontSize: "1.2em",
   paddingRight: "60px",
   marginTop: '0px',
   color: theme.palette.appBarColour.main,
   position: "relative",
   textTransform: 'capitalize',
+  WebkitLineClamp: 1,
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
 }));
 
 export const ParaStyled = styled(Typography)(({ theme }) => ({
