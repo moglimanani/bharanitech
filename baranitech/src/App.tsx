@@ -55,6 +55,7 @@ function App() {
 
   const Flashes = futureTrainings.length > 0 && futureTrainings.slice(0, 2).map(item => (
     <FlashOffer
+      key={`flashTraining-${item.id}`}
       onClick={() => { navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${item.id}`); }}
       message={`${item.title} - Book your spot now before registration closes. Don’t miss out!`}
       buttonlabel="Register" />

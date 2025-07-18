@@ -1,4 +1,5 @@
 // src/theme.ts
+import { grey, red, indigo } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -10,6 +11,8 @@ declare module '@mui/material/styles' {
     pinkColour: Palette['primary'];
     purpleLight: Palette['primary'];
     gold: Palette['primary'];
+    red: Palette['primary'];
+    indigo: Palette['primary'];
   }
   interface PaletteOptions {
     appBarColour?: PaletteOptions['primary'];
@@ -19,6 +22,8 @@ declare module '@mui/material/styles' {
     pinkColour?: PaletteOptions['primary'];
     purpleLight?: PaletteOptions['primary'];
     gold?: PaletteOptions['primary'];
+    red?: PaletteOptions['primary'];
+    indigo?: PaletteOptions['primary'];
   }
 }
 
@@ -33,10 +38,10 @@ const theme = createTheme({
       main: '#127B93',
       light: '#fff',
       dark: '#03a9f4',
-      contrastText: '#242105',
+      contrastText: '#242105', //yellow
     },
     background:{
-        default: '#e6eef0'
+        default: '#e6eef0' //mint
     },
     primary: {
       main: '#6a1b9a', // Purple theme
@@ -59,8 +64,18 @@ const theme = createTheme({
     },
     gold:{
       main: "#cca000",
+    },
+    grey,
+    indigo:{
+      main: indigo[500],
+      dark: indigo[800],
+      light: indigo[300]
+    },
+    red:{
+      main: red[800],
+      dark: red[900],
+      light: red[200]
     }
-   
   },
   components:{
     MuiButton: {
