@@ -19,6 +19,7 @@ import { InferType } from 'yup';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate, useParams } from 'react-router';
 import { useMatch } from 'react-router-dom';
+import { convertByteToMB } from '../../helper';
 interface PhotoPreview {
   file?: File;
   url: string;
@@ -54,6 +55,7 @@ const GalleryAdminAddForm: React.FC = () => {
   const [photos, setPhotos] = useState<PhotoPreview[]>([]);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [photSizeIssue, setPhotoSizeIssue] = useState<boolean>(false);
   const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_GALLERY_URL}/${import.meta.env.VITE_ROUTE_ADMIN_GALLERY_EDIT_URL}`
   const ifItsEditPage = useMatch(fullEditPath);
   const params = useParams()
@@ -135,13 +137,21 @@ const GalleryAdminAddForm: React.FC = () => {
     const formData = new FormData();
     formData.append('title', data.title ?? '');
     formData.append('description', data.description ?? '');
-
+    let totalSize = 0;
     // Append each photo file
     photos.forEach((photo) => {
       if (photo.file instanceof File) {
         formData.append('photos[]', photo.file); // Adjust if your backend expects photos[]
+        totalSize += photo.file.size;
       }
     });
+
+    if (+convertByteToMB(totalSize) > 2) {
+      setPhotoSizeIssue(true)
+      return;
+    } else {
+      setPhotoSizeIssue(false)
+    }
 
     try {
       const res = await httpService.post<GalleryResponse>('/gallery', formData, {
@@ -169,6 +179,7 @@ const GalleryAdminAddForm: React.FC = () => {
     formData.append('title', data.title ?? '');
     formData.append('description', data.description ?? '');
     formData.append('_method', 'PUT');
+    let totalPhotoSize = 0
 
     // const oldPhotos = photos.filter(photo => !photo.file && photo.url).map(photo => photo.url);
     const oldPhotos = photos
@@ -179,7 +190,6 @@ const GalleryAdminAddForm: React.FC = () => {
       });
 
     const newPhotos = photos.filter(photo => photo.file instanceof File);
-    console.log('update oldPhotos', oldPhotos, `${import.meta.env.VITE_BE_IMAGE_PATH}`);
     // ✅ Append existing photo paths
     oldPhotos.forEach((path) => {
       formData.append('existingPhotos[]', path); // string paths of old photos
@@ -188,8 +198,16 @@ const GalleryAdminAddForm: React.FC = () => {
 
     // ✅ Append new photo files
     newPhotos.forEach((photo) => {
+      totalPhotoSize += photo?.file?.size ?? 0;
       formData.append('photos[]', photo.file!);
     });
+
+    if (+convertByteToMB(totalPhotoSize) > 2) {
+      setPhotoSizeIssue(true)
+    } else {
+      setPhotoSizeIssue(false)
+
+    }
 
     try {
       const res = await httpService.post<GalleryResponse>(`/gallery/${params.pid}`, formData, {
@@ -214,13 +232,17 @@ const GalleryAdminAddForm: React.FC = () => {
     }
   }
 
-
   return (
     <StyledContainer maxWidth="xl">
-      <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }}>
+      <StyledForm onSubmit={handleSubmit(ifItsEditPage ? handleUpdate : onSubmit)} sx={{ maxWidth: 600, mx: 'auto', p: 2 }} encType="multipart/form-data">
         {openSnackbar && (
           <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
             {ifItsEditPage ? 'Gallery added successfully!' : 'Gallery updated successfully!'}
+          </Alert>
+        )}
+        {photSizeIssue && (
+          <Alert onClose={() => setOpenSnackbar(false)} severity="error" sx={{ width: '100%' }}>
+            Photos must be less than 2MB
           </Alert>
         )}
         <TitleGalleryStyled variant="h5" gutterBottom>
@@ -273,6 +295,7 @@ const GalleryAdminAddForm: React.FC = () => {
             onChange={handlePhotoUpload}
           />
         </ButtonPhotoStyled>
+        <Typography variant="body1" color="primary" component="span" fontSize={'0.8em'}>Accepts only jpeg,png,jpg,gif & svg</Typography>
 
         {photoError && (
           <Alert severity="error" sx={{ mt: 2 }}>
@@ -308,6 +331,9 @@ const GalleryAdminAddForm: React.FC = () => {
                 <CardContent>
                   <Typography variant="body2" noWrap>
                     {photo.file?.name}
+                  </Typography>
+                  <Typography variant="body2" noWrap>
+                    {photo.file ? `${convertByteToMB(photo.file?.size ?? 0)} MB` : ''}
                   </Typography>
                 </CardContent>
               </Card>

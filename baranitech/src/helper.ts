@@ -87,3 +87,8 @@ export const validatePhone = (phone: string): string => {
     }).format(value);
     // value.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
   };
+
+  export const convertByteToMB = (byteSize: number) => {
+    const mb = byteSize / 1024 / 1024;
+    return mb.toFixed(2);
+  };
