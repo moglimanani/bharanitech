@@ -11,6 +11,7 @@ import {
   Dialog,
   DialogProps,
   IconButton,
+  FormGroup,
 } from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
@@ -223,6 +224,25 @@ export const ParaStyled = styled(Typography)(({ theme }) => ({
     fontSize: '.95rem',
   }
 }));
+export const TypeStyled = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
+  fontSize: ".88rem",
+  padding: "5px",
+  textTransform: 'capitalize',
+  color: theme.palette.red.dark,
+  backgroundColor: theme.palette.grey[200],
+  '& span': {
+    color: theme.palette.appBarColour.main,
+    fontWeight: '600',
+    fontSize: '.95rem',
+  },
+  WebkitLineClamp: 1,
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+}));
+
 
 export const ParaStyledOverflow = styled(Typography)(({ theme }) => ({
   textAlign: "left",
@@ -494,4 +514,15 @@ export const BackButtonStyled = styled(IconButton)(({ theme }) => ({
     color: theme.palette.appBarColour.main,
     backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
   }
+}));
+
+
+export const FilterFormStyled = styled(FormGroup)(({ theme }) => ({
+  fontSize: ".88rem",
+  color: theme.palette.indigo.dark,
+  background: theme.palette.grey[100],
+  border: '1px solid #484848',
+  borderRadius: "20px",
+  padding: "0px 20px",
+  transition: 'all 0.2s'
 }));
