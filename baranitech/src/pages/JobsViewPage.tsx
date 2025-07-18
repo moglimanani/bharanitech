@@ -133,7 +133,7 @@ const JobsViewPage: React.FC = () => {
   const isLocation =  jobs?.city && jobs?.state && jobs?.country;
   return (
     <ContainerBox>
-      <AboutUsTitleStyled>Training</AboutUsTitleStyled>
+      <AboutUsTitleStyled>Career</AboutUsTitleStyled>
       <Container>
 
         {loading ? (

@@ -87,6 +87,9 @@ const TrainingsListPage: React.FC = () => {
                     <ParaStyled variant="body2">
                       <strong>Course duration:</strong> {+training.total_hours} Hours
                     </ParaStyled>
+                    <ParaStyled variant="body2">
+                      <strong>Price:</strong> ${+training.total_price}/-
+                    </ParaStyled>
                     {/* <ParaStyled variant="body2">
                   <strong>Date:</strong> {training.startdate}
                 </ParaStyled> */}

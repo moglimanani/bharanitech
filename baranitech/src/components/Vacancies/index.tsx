@@ -4,12 +4,14 @@ import { GridColorStyled, IconBadgeStyled, JobsStyled, VacanciesStyledMain } fro
 import { useJobCategories } from "../../contexts/jobCategoryContext";
 import { useEffect, useState } from "react";
 import { useAllJobs } from "../../contexts/allJobsContext";
+import { useNavigate } from "react-router";
 
 function Vacancies() {
 
   const [jobs, setJobs] = useState<Record<number, number>>({})
   const { categories } = useJobCategories()
   const { allJobs } = useAllJobs()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (Array.isArray(allJobs)) {
@@ -33,7 +35,7 @@ function Vacancies() {
       </ItemRight> */}
       {
         jobs && categories?.map((item) => (
-          <GridColorStyled spacing={1} key={`jobCat${item.id}`}>
+          <GridColorStyled spacing={1} key={`jobCat${item.id}`} onClick={()=>navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}`)}>
             <Grid>
               <JobsStyled align='left'>{item.title}</JobsStyled>
             </Grid>
