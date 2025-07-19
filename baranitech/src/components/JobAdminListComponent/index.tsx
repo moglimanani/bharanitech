@@ -20,6 +20,8 @@ import { ActionWrapper } from "../commonStyles";
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
 import { formatCurrency } from "../../helper";
+import PaginatedList from "../PaginatedList";
+import { DateStyled, TitleStyled, TypeStyled } from "../../pages/styles";
 
 interface JobType {
   id: number | string;
@@ -69,7 +71,7 @@ const Actions = styled(Box)(({ theme }) => ({
 }));
 
 const StyleDate = styled(Typography)(({ theme }) => ({
- // position: "absolute",
+  // position: "absolute",
   // top: theme.spacing(1),
   // right: theme.spacing(1),
   display: "flex",
@@ -89,6 +91,7 @@ const JobStyle = styled(Typography)(() => ({
   padding: '5px',
   margin: '5px auto 5px',
   width: '90%',
+  minHeight: '45px',
   color: '#242105',
   borderRadius: '20px',
 }));
@@ -99,13 +102,16 @@ const AddressStyle = styled(Typography)(() => ({
 }));
 
 const DescriptionStyle = styled(Typography)(() => ({
-  padding: '10px 0',
+  margin: '10px 0',
   lineHeight: '1.5em',
-  height: '3em',
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  width: '100%',
+  WebkitLineClamp: 2,
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  justifyContent: 'center',
+  minHeight: '40px',
+  verticalAlign: 'middle'
 }));
 
 
@@ -167,58 +173,72 @@ const JobAdminListComponent: React.FC = () => {
       },
     });
   };
-  
+
+  const constructJobs = jobs.map((item) => {
+    return (
+      <StyledCard style={{ borderRadius: '20px', position: 'relative', boxSizing: 'border-box', }} key={item.id}>
+        <ActionWrapper>
+          <IconButton
+            aria-label="edit"
+            size="small"
+            onClick={() => navigate(`edit/${item.id}`)}
+          >
+            <EditIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => deleteHandler(item.id)}
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </ActionWrapper>
+        <StyledCardContent>
+          <DateStyled>
+          {item.created_at &&
+              format(new Date(item.created_at), "dd MMM yyyy")}
+          </DateStyled>
+          <TypeStyled sx={{mt: '30px'}}>
+            {categories &&
+              categories?.find((cat) => cat?.id == item?.type)?.title}
+          </TypeStyled>
+          {/* <CategoryChip
+            label={
+              categories &&
+              categories?.find((cat) => cat?.id == item?.type)?.title
+            }
+            size="small"
+          /> */}
+          <VacancyStyle variant="body2" color="text.secondary">
+            {item.company ?? 'Company details not found.'}
+          </VacancyStyle>
+          <TitleStyled sx={{textAlign: 'center',p:0 }}>
+          {item.title}
+          </TitleStyled>
+          <DescriptionStyle variant="body2">{item.description}</DescriptionStyle>
+          {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
+          <VacancyStyle variant="body2">Salary : {formatCurrency(item.salary ?? 0)}/-  </VacancyStyle>
+          <VacancyStyle variant="body2">Vacancy : {item.total_vacancy}  </VacancyStyle>
+          <AddressStyle variant="body2">{item.city}</AddressStyle>
+          <AddressStyle variant="body2">{item.state}</AddressStyle>
+          <AddressStyle variant="body2">{item.country}</AddressStyle>
+
+        </StyledCardContent>
+      </StyledCard>
+    );
+  })
+
   return (
     <Grid container spacing={3}>
-      {jobs.map((item) => {
-        return (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item?.id}>
-            <StyledCard style={{borderRadius: '20px', position: 'relative'}}>
-            <ActionWrapper>
-                <IconButton
-                  aria-label="edit"
-                  size="small"
-                  onClick={() => navigate(`edit/${item.id}`)}
-                >
-                  <EditIcon fontSize="small" />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  onClick={() => deleteHandler(item.id)}
-                >
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
-              </ActionWrapper>
-              <StyledCardContent>
-                <StyleDate>
-                  {item.created_at &&
-                    format(new Date(item.created_at), "dd MMM yyyy")}
-                </StyleDate>
-                <CategoryChip
-                  label={
-                    categories &&
-                    categories?.find((cat) => cat?.id == item?.type)?.title
-                  }
-                  size="small"
-                />
-                 <DescriptionStyle variant="body2" color="text.secondary">
-                  {item.company}
-                </DescriptionStyle>
-                <JobStyle variant="body2">{item.title}</JobStyle>
-                <DescriptionStyle variant="body2">{item.description}</DescriptionStyle>
-                {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
-                <VacancyStyle variant="body2">Salary : {formatCurrency(item.salary ?? 0)}/-  </VacancyStyle>
-                <VacancyStyle variant="body2">Vacancy : {item.total_vacancy}  </VacancyStyle>
-                <AddressStyle variant="body2">{item.city}</AddressStyle>
-                <AddressStyle variant="body2">{item.state}</AddressStyle>
-                <AddressStyle variant="body2">{item.country}</AddressStyle>
-               
-              </StyledCardContent>
-            </StyledCard>
-          </Grid>
-        );
-      })}
+      <PaginatedList items={constructJobs}
+        itemsPerPage={9}
+        renderItem={(item, index) => (
+          <Box key={index}>
+            {item}
+          </Box>
+
+        )}
+      />
     </Grid>
   );
 };

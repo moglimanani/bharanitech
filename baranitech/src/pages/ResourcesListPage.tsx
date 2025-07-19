@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
-  Grid,
   Container,
   Alert,
   Box,
@@ -15,6 +14,7 @@ import { useAllResources } from '../contexts/allResourcesContext';
 import { getLanguageType } from '../helper';
 import { useNavigate } from 'react-router';
 import ResourceFilter from './ResourceFilter';
+import PaginatedList from '../components/PaginatedList';
 
 const StyledCard = styled(Card)(() => ({
   height: '100%',
@@ -48,6 +48,54 @@ const ResourcesListPage: React.FC = () => {
     );
   }
 
+  const contructResource = (resource: any) => {
+    return (
+      // <Grid size={{ xs: 12, sm: 6, md: 4 }} key={`resourcesList-${resource.id ?? 0}`}>
+      <StyledCard key={`resourcesList-${resource.id ?? 0}`}>
+        <CardContent sx={{ padding: "16px 16px 0" }}>
+          <LangStyled style={{ top: '10px' }}>
+            {getLanguageType[+resource.language].name}
+          </LangStyled>
+          <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }}>
+            {resource.title}
+          </TitleStyled>
+
+          {/* <ParaStyled variant="body2" color="text.secondary">
+      <span>Language:</span> {getLanguageType[+resource.language].name}
+      </ParaStyled> */}
+          <TypeStyled>
+            {categories.find((cat) => cat.id === resource.type)?.title}
+          </TypeStyled>
+          {/* <ParaStyled variant="body2" color="text.secondary">
+        {resource.description}
+      </ParaStyled> */}
+          <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+            {resource.url && (
+              <VideoFrame
+                src={resource.url}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+          </ParaStyled>
+        </CardContent>
+        <Box sx={{ padding: '0px 16px 0px 16px' }}>
+          <LearnButtonStyled fullWidth variant="contained" color="primary" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }} >
+            Learn
+          </LearnButtonStyled>
+        </Box>
+      </StyledCard>
+      // </Grid>
+    )
+  }
+
+  const fileteredResource = youtubes.filter((resource) => {
+    if (selectedLanguages !== null && selectedLanguages != +resource.language) { return false }
+    else {
+      return true;
+    }
+  }).map(resource => contructResource(resource))
+
   return (
     <Container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
@@ -61,49 +109,16 @@ const ResourcesListPage: React.FC = () => {
       }
       {
         !(!youtubes || youtubes.length === 0) && (
-          <Grid container spacing={3} style={{ marginBottom: '30px' }}>
-            {youtubes.map((resource) => {
-              if (selectedLanguages !== null && selectedLanguages != +resource.language) { return null }
-              return (
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={`resourcesList-${resource.id ?? 0}`}>
-                  <StyledCard>
-                    <CardContent>
-                      <LangStyled style={{ top: '20px' }}>
-                        {getLanguageType[+resource.language].name}
-                      </LangStyled>
-                      <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }}>
-                        {resource.title}
-                      </TitleStyled>
+          // <Grid container spacing={3} style={{ marginBottom: '30px' }}>
+          <PaginatedList items={fileteredResource}
+            itemsPerPage={9}
+            renderItem={(item, index) => (
+              <Box key={index}>
+                {item}
+              </Box>
 
-                      {/* <ParaStyled variant="body2" color="text.secondary">
-                <span>Language:</span> {getLanguageType[+resource.language].name}
-                </ParaStyled> */}
-                      <TypeStyled>
-                        {categories.find((cat) => cat.id === resource.type)?.title}
-                      </TypeStyled>
-                      {/* <ParaStyled variant="body2" color="text.secondary">
-                  {resource.description}
-                </ParaStyled> */}
-                      <ParaStyled variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                        {resource.url && (
-                          <VideoFrame
-                            src={resource.url}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        )}
-                      </ParaStyled>
-                    </CardContent>
-                    <Box sx={{ padding: 2 }}>
-                      <LearnButtonStyled fullWidth variant="contained" color="primary" onClick={() => navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}/${resource.id}`)} sx={{ cursor: 'pointer' }} >
-                        Learn
-                      </LearnButtonStyled>
-                    </Box>
-                  </StyledCard>
-                </Grid>
-              )
-            })}
-          </Grid>
+            )}
+          />
         )}
     </Container>
   );

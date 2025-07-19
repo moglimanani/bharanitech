@@ -1,10 +1,11 @@
 import { styled } from '@mui/material/styles';
-import { Grid, Card, CardMedia, Typography, CardContent, Dialog, DialogContent, IconButton, DialogTitle, Container } from '@mui/material';
+import { Grid, Card, CardMedia, Typography, CardContent, Dialog, DialogContent, IconButton, DialogTitle, Container, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import httpService from '../api/httpService';
 import { ApiResponse } from '../types/jobs';
 import { AdminTitleStyled } from './styles';
+import PaginatedList from '../components/PaginatedList';
 
 type ImageItem = {
   src: string;
@@ -93,6 +94,23 @@ export default function GalleryListPage() {
     setSelectedImage(null);
   };
 
+  const FilteredImages = images.map((img, index) => (
+
+    <ImageCard onClick={() => handleOpen(img)}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={`${import.meta.env.VITE_BE_IMAGE_PATH}/${img?.photo}`}
+        alt={img.title}
+      />
+      <CardContent>
+        <GalleryTypographyFont variant="h6">
+         {img?.title ?? 'No Title'}
+        </GalleryTypographyFont>
+      </CardContent>
+    </ImageCard>
+  ))
+
   return (
     <Container sx={{ mt: 1, mb: 4, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
@@ -105,25 +123,15 @@ export default function GalleryListPage() {
       }
       {
         !(!images || images.length === 0) && (
-          <Grid container spacing={4}>
-            {images.map((img, index) => (
-              <Grid key={index} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                <ImageCard onClick={() => handleOpen(img)}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={`${import.meta.env.VITE_BE_IMAGE_PATH}/${img?.photo}`}
-                    alt={img.title}
-                  />
-                  <CardContent>
-                    <GalleryTypographyFont variant="h6">
-                      {img.title}
-                    </GalleryTypographyFont>
-                  </CardContent>
-                </ImageCard>
-              </Grid>
-            ))}
-          </Grid>
+          <PaginatedList items={FilteredImages}
+            itemsPerPage={9}
+            renderItem={(item, index) => (
+              <Box key={index}>
+                {item}
+              </Box>
+
+            )}
+          />
         )}
       <Dialog open={open} onClose={handleClose} maxWidth="md">
         <DialogHeader>
@@ -142,6 +150,7 @@ export default function GalleryListPage() {
           )}
         </DialogContent>
       </Dialog>
+
     </Container>
   );
 }

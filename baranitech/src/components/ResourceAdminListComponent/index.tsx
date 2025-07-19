@@ -5,7 +5,8 @@ import {
   Typography,
   IconButton,
   Grid,
-  Chip
+  Chip,
+  Box
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -17,6 +18,7 @@ import { getLanguageType, getYouTubeEmbedUrl } from "../../helper";
 import { ActionWrapper } from "../commonStyles";
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
+import PaginatedList from "../PaginatedList";
 
 interface categoryType {
   id: number | string;
@@ -152,55 +154,63 @@ const ResourceAdminListComponent: React.FC = () => {
       },
     });
   };
+  const constructYoutubes = youtubes.map((item) => {
+    const embedUrl = getYouTubeEmbedUrl(item.url);
+    const languageType = getLanguageType.find(ltype => +item.language === +ltype.id)?.name ?? ''
+
+    return (
+        <StyledCard
+          style={{
+            background: "#ffffff",
+            padding: "15px",
+            borderRadius: "20px",
+          }}
+          key={item.id}
+        >
+          <ActionWrapper>
+            <IconButton
+              aria-label="edit"
+              size="small"
+              onClick={() => navigate(`edit/${item.id}`)}
+            >
+              <EditIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              aria-label="delete"
+              size="small"
+              onClick={() => deleteHandler(item.id)}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </ActionWrapper>
+          {embedUrl && (
+            <VideoFrame
+              src={embedUrl}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          )}
+
+          <StyledCardContent>
+            <CategoryChip label={item.category?.title} size="small" />
+            <CategoryChip label={languageType} size="small" />
+            <TypographyStyled variant="h6">{item.title}</TypographyStyled>
+          </StyledCardContent>
+        </StyledCard>
+    );
+  })
 
   return (
     <Grid container spacing={3}>
-      {youtubes.map((item) => {
-        const embedUrl = getYouTubeEmbedUrl(item.url);
-        const languageType = getLanguageType.find(ltype => +item.language === +ltype.id)?.name ?? ''
+      <PaginatedList items={constructYoutubes}
+        itemsPerPage={9}
+        renderItem={(item, index) => (
+          <Box key={index}>
+            {item}
+          </Box>
 
-        return (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
-            <StyledCard
-              style={{
-                background: "#ffffff",
-                padding: "15px",
-                borderRadius: "20px",
-              }}
-            >
-              <ActionWrapper>
-                <IconButton
-                  aria-label="edit"
-                  size="small"
-                  onClick={() => navigate(`edit/${item.id}`)}
-                >
-                  <EditIcon fontSize="small" />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  onClick={() => deleteHandler(item.id)}
-                >
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
-              </ActionWrapper>
-              {embedUrl && (
-                <VideoFrame
-                  src={embedUrl}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-
-              <StyledCardContent>
-                <CategoryChip label={item.category?.title} size="small" />
-                <CategoryChip label={languageType} size="small" />
-                <TypographyStyled variant="h6">{item.title}</TypographyStyled>
-              </StyledCardContent>
-            </StyledCard>
-          </Grid>
-        );
-      })}
+        )}
+      />
     </Grid>
   );
 };
