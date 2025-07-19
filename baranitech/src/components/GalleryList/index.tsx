@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   IconButton,
+  Box,
 } from "@mui/material";
 import httpService from "../../api/httpService";
 import { useDialog } from "../../contexts/dialogContext";
@@ -13,6 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import { ActionWrapper } from "../commonStyles";
 import { useNavigate } from "react-router";
+import PaginatedList from "../PaginatedList";
 
 export interface GalleryItem {
   id: number;
@@ -97,50 +99,59 @@ const GalleryList: React.FC = () => {
     });
   };
 
-  return (
-    <Grid container spacing={3} style={{ marginTop: "20px" }}>
-      {gallery.map((item) => (
-        <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.id}>
-          <Card
-            sx={{
-              position: "relative",
-              background: "#ffffff",
-              padding: "3px",
-              borderRadius: "20px",
-            }}
+  const constructGallery = gallery.map((item) => (
+      <Card
+        sx={{
+          position: "relative",
+          background: "#ffffff",
+          padding: "3px",
+          borderRadius: "20px",
+        }}
+        key={item.id}
+      >
+        <ActionWrapper>
+          <IconButton
+            aria-label="edit"
+            size="small"
+            onClick={() =>navigate(`edit/${item.id}`)}
           >
-            <ActionWrapper>
-              <IconButton
-                aria-label="edit"
-                size="small"
-                onClick={() =>navigate(`edit/${item.id}`)}
-              >
-                <EditIcon fontSize="small" />
-              </IconButton>
-              <IconButton
-                aria-label="delete"
-                size="small"
-                onClick={() => deleteGalleryItem(item.id)}
-              >
-                <DeleteIcon fontSize="small" />
-              </IconButton>
-            </ActionWrapper>
+            <EditIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => deleteGalleryItem(item.id)}
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </ActionWrapper>
 
-            <CardMedia
-              component="img"
-              height="200"
-              image={`${import.meta.env.VITE_BE_IMAGE_PATH}${item.photos[0]}`}
-              alt={item.title}
-              style={{ borderRadius: "20px 20px 0px 0px" }}
-            />
-            <CardContent>
-              <Typography variant="body2" component="div">
-                {item.title}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
+        <CardMedia
+          component="img"
+          height="200"
+          image={`${import.meta.env.VITE_BE_IMAGE_PATH}${item.photos[0]}`}
+          alt={item.title}
+          style={{ borderRadius: "20px 20px 0px 0px" }}
+        />
+        <CardContent>
+          <Typography variant="body2" component="div">
+            {item?.title ? item?.title : 'No Title'}
+          </Typography>
+        </CardContent>
+      </Card>
+  ))
+
+  return (
+    <Grid container spacing={3} style={{ marginTop: "20px", width: "100%" }}>
+      <PaginatedList items={constructGallery}
+            itemsPerPage={9}
+            renderItem={(item, index) => (
+              <Box key={index}>
+                {item}
+              </Box>
+
+            )}
+          />
     </Grid>
   );
 };

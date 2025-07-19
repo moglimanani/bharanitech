@@ -9,6 +9,7 @@ import {
   Chip,
   styled,
   IconButton,
+  Box,
 } from "@mui/material";
 import httpService from "../../api/httpService"; // Use your configured axios instance
 import { useDialog } from "../../contexts/dialogContext";
@@ -16,6 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ActionWrapper } from "../commonStyles";
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
+import PaginatedList from "../PaginatedList";
 
 
 export interface TrainingType {
@@ -95,70 +97,73 @@ const TrainingAdminListComponent: React.FC = () => {
       },
     });
   };
+  const constructTrainings = trainings.map((training) => (
+    <StyledCard key={training.id} sx={{width: "100%"}}>
+      <ActionWrapper>
+        <IconButton
+          aria-label="edit"
+          size="small"
+          onClick={() => navigate(`edit/${training.id}`)}
+        >
+          <EditIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          onClick={() => deleteHandler(training.id)}
+        >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      </ActionWrapper>
 
+      <CardContent>
+        <Typography variant="h6">{training.title}</Typography>
+        {/* <Typography variant="body2">
+          {training.description}
+        </Typography> */}
+
+        <Chip
+          label={+training.classification === 0 ? "Direct" : "Online"}
+          color={+training.classification === 0 ? "secondary" : "primary"}
+          size="small"
+          sx={{ mt: 1, mb: 1 }}
+        />
+
+        <Typography variant="body2" color="textSecondary">
+          📅 {training.startdate} → {training.enddate}
+        </Typography>
+
+        <Typography variant="body2" color="textSecondary">
+          📍 {training.city ?? 'No City'}, {training.state ?? 'No State'}, {training.country ?? 'No Country'}
+        </Typography>
+
+        <Typography variant="body2" color="textSecondary">
+          🕒 {training.total_hours} hrs • 💰 ${training.total_price}
+        </Typography>
+
+        {/* <Typography variant="body2" color="textSecondary">
+          📘 TOC: {training.table_of_contents}
+        </Typography> */}
+      </CardContent>
+    </StyledCard>
+  ))
   return (
-    <Grid>
+    <Grid container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       {/* <Typography variant="h4" gutterBottom>
         Training List
       </Typography> */}
-
       {loading && <CircularProgress />}
       {error && <Alert severity="error">{error}</Alert>}
 
-      <Grid container spacing={2}>
-        {trainings.map((training) => (
-          <Grid size={{ xs: 12, sm: 4 }} key={training.id}>
-            <StyledCard>
-            <ActionWrapper>
-                <IconButton
-                  aria-label="edit"
-                  size="small"
-                  onClick={() => navigate(`edit/${training.id}`)}
-                >
-                  <EditIcon fontSize="small" />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  onClick={() => deleteHandler(training.id)}
-                >
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
-              </ActionWrapper>
-             
-              <CardContent>
-                <Typography variant="h6">{training.title}</Typography>
-                {/* <Typography variant="body2">
-                  {training.description}
-                </Typography> */}
+        <PaginatedList items={constructTrainings}
+          itemsPerPage={9}
+          renderItem={(item, index) => (
+            <Box key={index} sx={{width:'100%'}}>
+              {item}
+            </Box>
 
-                <Chip
-                  label={+training.classification === 0 ? "Direct" : "Online"}
-                  color={+training.classification === 0 ? "secondary" : "primary"}
-                  size="small"
-                  sx={{ mt: 1, mb: 1 }}
-                />
-                        
-                <Typography variant="body2" color="textSecondary">
-                  📅 {training.startdate} → {training.enddate}
-                </Typography>
-
-                <Typography variant="body2" color="textSecondary">
-                  📍 {training.city}, {training.state}, {training.country}
-                </Typography>
-
-                <Typography variant="body2" color="textSecondary">
-                  🕒 {training.total_hours} hrs • 💰 ${training.total_price}
-                </Typography>
-
-                {/* <Typography variant="body2" color="textSecondary">
-                  📘 TOC: {training.table_of_contents}
-                </Typography> */}
-              </CardContent>
-            </StyledCard>
-          </Grid>
-        ))}
-      </Grid>
+          )}
+        />
     </Grid>
   );
 };

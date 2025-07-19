@@ -12,6 +12,8 @@ import {
   DialogProps,
   IconButton,
   FormGroup,
+  Chip,
+  Pagination,
 } from "@mui/material";
 
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
@@ -247,6 +249,37 @@ export const TypeStyled = styled(Typography)(({ theme }) => ({
   textOverflow: 'ellipsis'
 }));
 
+export const DateStyled = styled(Typography)(({ theme }) => ({
+  position: 'absolute', 
+  top: '16px', 
+  color: '#fff', 
+  fontSize: '.80em', 
+  background: theme.palette.grey[700], 
+  padding: '2px 8px', 
+  borderRadius: '12px',
+  fontFamily: 'Poetsen One'
+}))
+
+export const ChipStyled = styled(Chip)(({ theme})=>({
+  color: theme.palette.common.black,
+  backgroundColor: "transparent",
+  fontSize: '1.2em',
+  padding: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  margin: '0 0 0 0.5em',
+  '& svg.MuiChip-icon':{
+    color: theme.palette.common.black,
+  },
+  '& span': {
+    color: theme.palette.red.dark,
+    fontWeight: '600',
+    padding: '2px 8px',
+  },
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: 'vertical',
+}))
 
 export const ParaStyledOverflow = styled(Typography)(({ theme }) => ({
   textAlign: "left",
@@ -530,3 +563,22 @@ export const FilterFormStyled = styled(FormGroup)(({ theme }) => ({
   padding: "0px 20px",
   transition: 'all 0.2s'
 }));
+
+export const PaginationStyled = styled(Pagination)(({ theme }) => ({
+  color: theme.palette.common.white,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '& > ul':{
+    '& > li':{
+      '& > button':{
+        color: theme.palette.common.white,
+        '&.Mui-selected':{
+          color: theme.palette.common.white,
+          background: theme.palette.gold.main,
+        }
+      }
+    }
+  }
+}))
+     

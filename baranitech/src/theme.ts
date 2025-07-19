@@ -1,5 +1,5 @@
 // src/theme.ts
-import { grey, red, indigo } from '@mui/material/colors';
+import { grey, red, indigo, pink } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -38,7 +38,7 @@ const theme = createTheme({
       main: '#127B93',
       light: '#fff',
       dark: '#03a9f4',
-      contrastText: '#242105', //yellow
+      contrastText: '#242105', //black
     },
     background:{
         default: '#e6eef0' //mint
@@ -56,7 +56,9 @@ const theme = createTheme({
       main: '#c4f4ff'
     },
     pinkColour:{
-      main: '#ef476f'
+      main: pink[500],
+      light: pink[100],
+      dark: pink[900]
     },
     purpleLight:{
       main: "#9b9ece",

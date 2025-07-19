@@ -16,11 +16,15 @@ import {
   ParaStyled,
   TitleStyled,
   ParaStyledOverflow,
-  TypeStyled
+  TypeStyled,
+  DateStyled,
+  ChipStyled
 } from "./styles";
 import { useAllJobs } from "../contexts/allJobsContext";
 import { useDialog } from "../contexts/dialogContext";
 import { useNavigate } from "react-router";
+import WorkIcon from '@mui/icons-material/Work';
+import PaginatedList from "../components/PaginatedList";
 
 const StyledCard = styled(Card)(() => ({
   height: "100%",
@@ -39,6 +43,63 @@ const JobsListPage: React.FC = () => {
   const { confirm } = useDialog()
   const navigate = useNavigate()
 
+  const filteredJobs = allJobs.map((job) => {
+    const isLocation = job.city && job.country;
+
+    return (
+        <StyledCard>
+          <CardContent>
+            <Stack spacing={0} sx={{ alignItems: "flex-end" }}>
+              <Stack direction="row" spacing={0}>
+                <ChipStyled
+                  label={job.total_vacancy ?? 0}
+                  icon={<WorkIcon />}
+                />
+
+              </Stack>
+            </Stack>
+            <DateStyled>
+              {new Date(job.created_at).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </DateStyled>
+            <TitleStyled variant="h6" gutterBottom>
+              {job.title}
+            </TitleStyled>
+            <TypeStyled>
+              {job.category.title.replace(/-/g, ' ')}
+            </TypeStyled>
+            <ParaStyled variant="body2" color="text.secondary">
+              <strong>{job.company ?? "XXXX"}</strong>
+            </ParaStyled>
+            <ParaStyled variant="body2" color="text.secondary">
+              {isLocation ? job.city + ", " + job.country : "XXXXXX"}
+            </ParaStyled>
+            <ParaStyledOverflow
+              variant="body2"
+              sx={{ pb: 1, lineHeight: 1 }}
+              color="text.secondary"
+            >
+              {job.description}
+            </ParaStyledOverflow>
+
+          </CardContent>
+          <Box sx={{ p: '0 16px 0' }}>
+            <LearnButtonStyled
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}/${job.id}`)}
+            >
+              Details
+            </LearnButtonStyled>
+          </Box>
+        </StyledCard>
+    );
+  })
+
   return (
     <Container sx={{ mt: 1, p: { xs: 0, md: '8px 24px' } }}>
       <AdminTitleStyled variant="h4" gutterBottom>
@@ -51,70 +112,16 @@ const JobsListPage: React.FC = () => {
       }
       {
         !(!allJobs || allJobs.length === 0) && (
-          <Grid container spacing={3}>
-            {allJobs.map((job) => {
-              const isLocation = job.city && job.country;
+          <PaginatedList items={filteredJobs}
+            itemsPerPage={9}
+            renderItem={(item, index) => (
+              <Box key={index}>
+                {item}
+              </Box>
 
-              return (
-                <Grid
-                  size={{ xs: 12, sm: 6, md: 4 }}
-                  key={job.id}
-                  style={{ marginBottom: "30px" }}
-                >
-                  <StyledCard>
-                    <CardContent>
-                      <Stack spacing={1} sx={{ alignItems: "flex-end" }}>
-                        <Stack direction="row" spacing={1}>
-                          <Chip
-                            label={job.total_vacancy ?? 0}
-                            color="info"
-                            variant="filled"
-                          />
-                        </Stack>
-                      </Stack>
-                      <div style={{ position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', }}>
-                        {new Date(job.created_at).toLocaleDateString("en-GB", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        })}
-                      </div>
-                      <TitleStyled variant="h6" gutterBottom>
-                        {job.title}
-                      </TitleStyled>
-                      <TypeStyled>
-                        {job.category.title.replace(/-/g, ' ')}
-                      </TypeStyled>
-                      <ParaStyled variant="body2" color="text.secondary">
-                        <strong>{job.company ?? "XXXX"}</strong>
-                      </ParaStyled>
-                      <ParaStyled variant="body2" color="text.secondary">
-                        {isLocation ? job.city + ", " + job.country : "XXXXXX"}
-                      </ParaStyled>
-                      <ParaStyledOverflow
-                        variant="body2"
-                        sx={{ mt: 2 }}
-                        color="text.secondary"
-                      >
-                        {job.description}
-                      </ParaStyledOverflow>
+            )}
+          />
 
-                    </CardContent>
-                    <Box sx={{ padding: 2 }}>
-                      <LearnButtonStyled
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        onClick={() => navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}/${job.id}`)}
-                      >
-                        Details
-                      </LearnButtonStyled>
-                    </Box>
-                  </StyledCard>
-                </Grid>
-              );
-            })}
-          </Grid>
         )}
     </Container>
   );
