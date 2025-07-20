@@ -52,7 +52,7 @@ const TrainingsListPage: React.FC = () => {
             {format(new Date(training.startdate), "dd MMM yyyy")}
           </DateStyled>
         </Box>
-        <StackStyled spacing={1} sx={{ alignItems: 'center', top: '8px', right: '12px' }}>
+        <StackStyled spacing={1} sx={{ alignItems: 'center', top: '15px', right: '12px' }}>
           <Stack direction="row" spacing={1}>
 
             {+training.classification === 0 && <Chip label="In-Person" color="success" variant="outlined" />}
@@ -60,9 +60,8 @@ const TrainingsListPage: React.FC = () => {
           </Stack>
 
         </StackStyled>
-        <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{ cursor: 'pointer', marginTop: '8px' }}>
+        <TitleStyled variant="h6" gutterBottom onClick={() => navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/${training.id}`)} sx={{ cursor: 'pointer', marginTop: '15px' }}>
           {training.title}
-
         </TitleStyled>
         <TypeStyled sx={{ mb: 1 }}>
           {training.category.title.replace(/-/g, ' ')}
@@ -72,13 +71,13 @@ const TrainingsListPage: React.FC = () => {
     </ParaStyled> */}
         {/* <Divider sx={{ my: 1 }} /> */}
         <ParaStyled variant="body2">
-          <strong>Trainer:</strong> Ezhumalai
+          <strong>Trainer:</strong> <span>Ezhumalai</span>
         </ParaStyled>
         <ParaStyled variant="body2">
-          <strong>Course duration:</strong> {+training.total_hours} Hours
+          <strong>Course duration:</strong> <span>{+training.total_hours} Hours</span>
         </ParaStyled>
         <ParaStyled variant="body2">
-          <strong>Price:</strong> ${+training.total_price}/-
+          <strong>Price:</strong> <span>${+training.total_price}/-</span> 
         </ParaStyled>
         {/* <ParaStyled variant="body2">
       <strong>Date:</strong> {training.startdate}

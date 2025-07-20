@@ -71,6 +71,14 @@ const StyledDiv = styled('div')(({ theme }) => ({
 
 }));
 
+const StyledPara = styled('div')(({ theme }) => ({
+  padding: '20px',
+  textTransform: 'capitalize',
+//color: theme.palette.appBarColour.main,
+  fontSize: '1.2rem',
+
+}));
+
 const StyledDivPage = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
@@ -164,11 +172,11 @@ const JobsViewPage: React.FC = () => {
             {/* <StyledDiv>
               <span>{jobs.description}</span>
             </StyledDiv> */}
-            <StyledDiv>
+            <StyledPara>
               <div
                 dangerouslySetInnerHTML={{ __html: jobs.description }}
               />
-            </StyledDiv>
+            </StyledPara>
 
               {isLocation && (
                 <StyledDiv><span>Location:  {jobs.city}, {jobs.state}, {jobs.country}</span></StyledDiv>

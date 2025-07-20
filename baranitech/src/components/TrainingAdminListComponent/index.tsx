@@ -48,6 +48,42 @@ const StyledCard = styled(Card)(() => ({
   flexDirection: "column",
 }));
 
+const TitleStyled = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
+  fontSize: "1.2em",
+  color: theme.palette.appBarColour.main,
+  position: "relative",
+  textTransform: 'capitalize',
+  WebkitLineClamp: 1,
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  marginTop: '35px',
+}));
+
+const AddressStyle = styled(Typography)(() => ({
+  color: 'red',
+  fontSize: '11px',
+}));
+
+const DateStyled = styled(Typography)(({ theme }) => ({
+  position: 'absolute', 
+  top: '16px', 
+  color: '#fff', 
+  fontSize: '.80em', 
+  background: theme.palette.grey[700], 
+  padding: '2px 8px', 
+  borderRadius: '12px',
+  fontFamily: 'Poetsen One'
+}))
+
+const VacancyStyle = styled(Typography)(({ theme }) => ({
+  // borderRadius: '50%',
+  // background: '#403f3d',
+  paddingBottom: '10px',
+}));
+
 const TrainingAdminListComponent: React.FC = () => {
   const [trainings, setTrainings] = useState<TrainingType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -117,7 +153,10 @@ const TrainingAdminListComponent: React.FC = () => {
       </ActionWrapper>
 
       <CardContent>
-        <Typography variant="h6">{training.title}</Typography>
+        <DateStyled>
+        📅 {training.startdate} → {training.enddate}
+        </DateStyled>
+        <TitleStyled>{training.title}</TitleStyled>
         {/* <Typography variant="body2">
           {training.description}
         </Typography> */}
@@ -128,19 +167,13 @@ const TrainingAdminListComponent: React.FC = () => {
           size="small"
           sx={{ mt: 1, mb: 1 }}
         />
+        <VacancyStyle>
+        🕒 {training.total_hours} hrs • 💰 ${training.total_price}
+        </VacancyStyle>
 
-        <Typography variant="body2" color="textSecondary">
-          📅 {training.startdate} → {training.enddate}
-        </Typography>
-
-        <Typography variant="body2" color="textSecondary">
-          📍 {training.city ?? 'No City'}, {training.state ?? 'No State'}, {training.country ?? 'No Country'}
-        </Typography>
-
-        <Typography variant="body2" color="textSecondary">
-          🕒 {training.total_hours} hrs • 💰 ${training.total_price}
-        </Typography>
-
+        <AddressStyle>
+        📍 {training.city ?? 'No City'}, {training.state ?? 'No State'}, {training.country ?? 'No Country'}
+        </AddressStyle>
         {/* <Typography variant="body2" color="textSecondary">
           📘 TOC: {training.table_of_contents}
         </Typography> */}
