@@ -10,7 +10,7 @@ class JobCandidateController extends Controller
 {
     public function index()
     {
-        $results =  JobCandidate::with('job.category')->latest()->get();
+        $results = JobCandidate::with('job.category')->latest()->get();
         return response()->json([
             'status' => 'success',
             'data' => $results,
@@ -54,6 +54,10 @@ class JobCandidateController extends Controller
             'city' => $request->city, // City
             'state' => $request->state, // State
             'country' => $request->country, // Country
+            'min_salary' => $request->min_salary,
+            'max_salary' => $request->max_salary,
+            'experience' => $request->experience,
+            'skills' => $request->skills,
         ]);
 
         // Eager load the associated job details

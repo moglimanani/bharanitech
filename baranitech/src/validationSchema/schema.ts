@@ -84,10 +84,17 @@ export const TrainingRegisterFormSchema = yup.object().shape({
         if (!value) return false;
         return +value > 17;
     }),
-    address: yup.string().required('Address is required'),
+    address: yup.string(),
     city: yup.string().required('City is required'),
     state: yup.string().required('State is required'),
     country: yup.string().required('Country is required'),
+    min_salary: yup.number().min(0).required("Minimum salary is required"),
+    max_salary: yup
+      .number()
+      .min(yup.ref("min_salary"), "Maximum salary must be greater than minimum")
+      .required("Maximum salary is required"),
+    experience: yup.number().required("Experience is required"),
+    skills: yup.string().required("Skills are required"),
   });
 
 export const AdminGalleryAddSchema = yup.object({

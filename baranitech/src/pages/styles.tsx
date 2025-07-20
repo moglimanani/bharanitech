@@ -16,6 +16,10 @@ import {
   Pagination,
 } from "@mui/material";
 
+interface extentedInterfaceForLang {
+  language?: number;
+}
+
 export const BodyPara1Styled = styled(Typography)(({ theme }) => ({
   padding: "10px 10px 10px 0px",
   textAlign: "left",
@@ -522,7 +526,7 @@ export const ImageClientStyled = styled("img")(({ theme }) => ({
   }
 }))
 
-export const LangStyled = styled("p")(({ theme }) => ({
+export const LangStyled = styled(Typography)<extentedInterfaceForLang>(({ theme, language }) => ({
   position: 'absolute',
   right: '10px',
   margin: '0',
@@ -531,7 +535,7 @@ export const LangStyled = styled("p")(({ theme }) => ({
   borderRadius: '12px',
   top: '0px',
   fontSize: '.85em',
-  color: '#720834c9',
+  color: language == 0 ? theme.palette.pinkColour.main : theme.palette.green.dark,
   background: '#fff',
   fontWeight: 'bold',
   [theme.breakpoints.down("sm")]: {
@@ -585,3 +589,11 @@ export const PaginationStyled = styled(Pagination)(({ theme }) => ({
   }
 }))
      
+export const DescriptionStyled = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  fontSize: "1.2rem",
+  padding: "5px 10px 5px",
+  textTransform: 'capitalize',
+  fontFamily: 'Comfortaa',
+  margin: "16px"
+}));

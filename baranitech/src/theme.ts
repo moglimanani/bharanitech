@@ -1,5 +1,5 @@
 // src/theme.ts
-import { grey, red, indigo, pink } from '@mui/material/colors';
+import { grey, red, indigo, pink, green, orange } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -13,10 +13,10 @@ declare module '@mui/material/styles' {
     gold: Palette['primary'];
     red: Palette['primary'];
     indigo: Palette['primary'];
+    green: Palette['primary'];
   }
   interface PaletteOptions {
     appBarColour?: PaletteOptions['primary'];
-    orange?: PaletteOptions['primary'];
     buttonPrimaryBGColor?: PaletteOptions['primary'];
     flashPrimaryBGColor?: PaletteOptions['primary'];
     pinkColour?: PaletteOptions['primary'];
@@ -24,6 +24,8 @@ declare module '@mui/material/styles' {
     gold?: PaletteOptions['primary'];
     red?: PaletteOptions['primary'];
     indigo?: PaletteOptions['primary'];
+    green?: PaletteOptions['primary'];
+    orange?: PaletteOptions['primary'];
   }
 }
 
@@ -68,6 +70,11 @@ const theme = createTheme({
       main: "#cca000",
     },
     grey,
+    green:{
+      main: green[500],
+      dark: green[800],
+      light: green[300]
+    },
     indigo:{
       main: indigo[500],
       dark: indigo[800],
@@ -77,6 +84,11 @@ const theme = createTheme({
       main: red[800],
       dark: red[900],
       light: red[200]
+    },
+    orange:{
+      main: orange[800],
+      dark: orange[900],
+      light: orange[200]
     }
   },
   components:{

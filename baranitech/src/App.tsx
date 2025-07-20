@@ -65,7 +65,7 @@ function App() {
   return (
     <>
       {isLogged ? <AdminMenubar /> : <MenuBar />}
-      {Flashes}
+      {(!isLogged)  && Flashes}
       {!ifItsLoginOrRegisterPage && !(user?.email) && (
         <Vacancies />
       )}

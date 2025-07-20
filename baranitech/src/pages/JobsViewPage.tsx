@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Paper, Button, Stack, Chip } from '@mui/material';
 import { styled } from '@mui/system';
-import { useAllTrainings } from '../contexts/allTrainingsContext';
-import { TrainingType } from '../types/trainings';
-import { AboutUsTitleStyled, BackButtonStyled } from './styles';
+import { AboutUsTitleStyled, BackButtonStyled, DescriptionStyled } from './styles';
 import { useDialog } from '../contexts/dialogContext';
-import { TrainingRegisterForm } from '../components/TrainingRegisterForm';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import SchoolIcon from '@mui/icons-material/School';
 import theme from '../theme';
-import { formatCurrency } from '../helper';
 import { useAllJobs } from '../contexts/allJobsContext';
 import { JobsType } from '../types/jobs';
 import { JobsRegisterForm } from '../components/JobsRegisterForm';
@@ -172,11 +168,11 @@ const JobsViewPage: React.FC = () => {
             {/* <StyledDiv>
               <span>{jobs.description}</span>
             </StyledDiv> */}
-            <StyledPara>
+            <DescriptionStyled>
               <div
                 dangerouslySetInnerHTML={{ __html: jobs.description }}
               />
-            </StyledPara>
+            </DescriptionStyled>
 
               {isLocation && (
                 <StyledDiv><span>Location:  {jobs.city}, {jobs.state}, {jobs.country}</span></StyledDiv>

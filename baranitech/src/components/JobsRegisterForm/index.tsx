@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, DialogActions, DialogContent, Grid, styled, TextField } from "@mui/material";
+import { Button, DialogActions, DialogContent, Grid, InputAdornment, styled, TextField, Typography } from "@mui/material";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import { JobsRegisterFormSchema } from "../../validationSchema/schema";
 import { InferType } from "yup";
@@ -7,10 +7,10 @@ import { useEffect } from "react";
 import { useDialog } from "../../contexts/dialogContext";
 import httpService from "../../api/httpService";
 import { ApiResponse } from "../../types/common";
+import theme from "../../theme";
+import { useLoader } from "../../contexts/pageLoader";
+import { useNavigate } from "react-router";
 
-const StyledField = styled(TextField)`
-  margin-bottom: 16px !important;
-`;
 
 export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
@@ -49,10 +49,17 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
       state: "",
       country: "",
       email: "",
-      job_id: id
+      job_id: id,
+      min_salary: 0,
+      max_salary: 0,
+      experience: 0,
+      skills: "",
     },
   });
   const { handleCancel } = useDialog()
+  const { showLoader, hideLoader} = useLoader()
+  const navigate = useNavigate()
+
   useEffect(() => {
     if (!id) {
       handleCancel()
@@ -62,13 +69,13 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
 
 
   const onSubmit = async (data: FormData) => {
-
+    showLoader()
     try {
       const res = await httpService.post<ApiResponse>("/register-job-candidate", data);
 
       if (res.status) {
-        // setSuccess(true);
-        
+        navigate(`${import.meta.env.VITE_ROUTE_JOBS_URL}/thanks/1`)
+
         reset();
         handleCancel();
       } else {
@@ -76,6 +83,8 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      hideLoader()
     }
   };
   return (
@@ -88,7 +97,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="First name *"
                   type="text"
@@ -107,7 +116,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="Last name *"
                   type="text"
@@ -126,7 +135,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="Email *"
                   type="email"
@@ -139,11 +148,40 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <StyledField
-              fullWidth label="Occupation"
-              {...register("occupation", { required: "Occupation required" })}
-              error={!!errors.occupation}
-              helperText={errors.occupation?.message}
+            <Controller
+              name="occupation"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Occupation"
+                  type="text"
+                  margin="normal"
+                  {...field}
+                  // {...register("occupation", { required: "Occupation required" })}
+                  error={!!errors.occupation}
+                  helperText={errors.occupation?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Controller
+              name="phone"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Phone *"
+                  type="text"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.phone)}
+                  helperText={errors.phone?.message}
+                />
+              )}
             />
           </Grid>
 
@@ -153,9 +191,10 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue={0}
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="Age *"
+                  inputProps={{ min: 0 }}
                   type="number"
                   margin="normal"
                   {...field}
@@ -172,7 +211,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="Address *"
                   type="text"
@@ -191,7 +230,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="City *"
                   type="text"
@@ -209,7 +248,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="State *"
                   type="text"
@@ -227,7 +266,7 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
                   label="Country *"
                   type="text"
@@ -241,18 +280,95 @@ export const JobsRegisterForm = ({ id }: { id: number }) => {
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
             <Controller
-              name="phone"
+              name="min_salary"
+              control={control}
+              defaultValue={0}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Minimum Salary Expectation *"
+                  type="number"
+                  margin="normal"
+                  sx={{color: theme.palette.common.black}}
+                  slotProps={{
+                    input: {
+                      startAdornment: (<InputAdornment position="start">
+                        <Typography sx={{color:`${theme.palette.common.black} !important`}}>$</Typography>
+                      </InputAdornment>),
+                    },
+                  }}
+                  {...field}
+                  error={Boolean(errors.min_salary)}
+                  helperText={errors.min_salary?.message}
+                  inputProps={{ min: 0 }}
+                />
+              )}
+            />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Controller
+              name="max_salary"
+              control={control}
+              defaultValue={0}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Maximum Salary Expectation *"
+                  type="number"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.max_salary)}
+                  helperText={errors.max_salary?.message}
+                  inputProps={{ min: 0 }}
+                  slotProps={{
+                    input: {
+                      startAdornment: (<InputAdornment position="start">
+                        <Typography sx={{color:`${theme.palette.common.black} !important`}}>$</Typography>
+                      </InputAdornment>),
+                    },
+                  }}
+                />
+              )}
+            />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Controller
+              name="experience"
+              control={control}
+              defaultValue={1}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Years of Expectation *"
+                  type="number"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.experience)}
+                  helperText={errors.experience?.message}
+                  inputProps={{ min: 0 }}
+                />
+              )}
+            />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Controller
+              name="skills"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <StyledField
+                <TextField
                   fullWidth
-                  label="Phone *"
+                  label="Skills *"
                   type="text"
+                  multiline
+                  minRows={3}
                   margin="normal"
                   {...field}
-                  error={Boolean(errors.phone)}
-                  helperText={errors.phone?.message}
+                  error={Boolean(errors.skills)}
+                  helperText={errors.skills?.message}
                 />
               )}
             />
