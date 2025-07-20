@@ -20,6 +20,8 @@ import { ContactUsFormSchema } from "../validationSchema/schema";
 import { InferType } from "yup";
 import httpService from "../api/httpService";
 import { motion } from "framer-motion";
+import { useLoader } from "../contexts/pageLoader";
+import { useNavigate } from "react-router";
 
 interface ContactFormDataType {
   username: string;
@@ -58,6 +60,8 @@ type FormData = InferType<typeof ContactUsFormSchema>;
 
 const ContactPage: React.FC = () => {
   const [success, setSuccess] = useState(false);
+  const { showLoader, hideLoader} = useLoader()
+  const navigate = useNavigate()
   const { control, handleSubmit, formState, trigger, reset } =
     useForm<FormData>({
       resolver: yupResolver(ContactUsFormSchema),
@@ -76,6 +80,7 @@ const ContactPage: React.FC = () => {
   const { errors, isSubmitting, isValid } = formState;
 
   const submitContactForm = async (data: ContactFormDataType) => {
+    showLoader()
     try {
       const response = await httpService.post<ApiResponse>(
         `${import.meta.env.VITE_API_BASE_URL}contact`,
@@ -83,14 +88,15 @@ const ContactPage: React.FC = () => {
       );
 
       if (response.status) {
-        alert("Message sent successfully!");
+        navigate(`/thanks/3`)
         reset();
         setSuccess(true);
         // Optionally reset the form here
       }
     } catch (error: any) {
       console.error("Error submitting contact form:", error);
-      alert("Something went wrong. Please try again.");
+    } finally {
+      hideLoader()
     }
   };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BoxWhiteStyled, ButtonOneStyledWhite, ButtonWrapperStyledWhite, H2BoxStyled, ParaOneStyledWhite, PareBoxStyled, StyledH2, ThreeColumnStyledBlue, TitleDivStyledWhite, TypographyStyledWhite } from "./styles";
+import { BoxWhiteStyled, H2BoxStyled, PareBoxStyled } from "./styles";
 import { useAllTrainings } from "../../contexts/allTrainingsContext";
 import { TrainingType } from "../../types/trainings";
 import LatestTraining from "../LatestTraining";

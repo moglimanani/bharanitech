@@ -4,7 +4,7 @@ import { Box, Typography, CircularProgress, Paper, Button, Stack, Chip } from '@
 import { styled } from '@mui/system';
 import { useAllTrainings } from '../contexts/allTrainingsContext';
 import { TrainingType } from '../types/trainings';
-import { AboutUsTitleStyled, BackButtonStyled } from './styles';
+import { AboutUsTitleStyled, BackButtonStyled, DescriptionStyled } from './styles';
 import { useDialog } from '../contexts/dialogContext';
 import { TrainingRegisterForm } from '../components/TrainingRegisterForm';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
@@ -12,6 +12,10 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import SchoolIcon from '@mui/icons-material/School';
 import theme from '../theme';
 import { formatCurrency } from '../helper';
+
+interface extentedInterfaceForCategory {
+  category?: number;
+}
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
@@ -35,20 +39,13 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   textAlign: 'center'
 }));
 
-const StyledTypography = styled(Typography)(({ theme }) => ({
-  color: theme.palette.appBarColour.main,
-  fontWeight: 'bold',
-  textTransform: 'capitalize',
-  padding: '5px 10px 5px',
-  marginTop: '10px',
-}));
-const StyledTypographyCategory = styled(Typography)(({ theme }) => ({
+const StyledTypographyCategory = styled(Typography)<extentedInterfaceForCategory>(({ theme, category }) => ({
   color: theme.palette.common.white,
   fontWeight: 'bold',
   textTransform: 'capitalize',
   padding: '15px 10px',
   marginTop: '10px',
-  background: '#ed6c02',
+  background:  category === 0 ? theme.palette.green.main : theme.palette.orange.main,
   fontSize: '1.2em',
 }));
 const StyledTypographyTitle = styled(Typography)(({ theme }) => ({
@@ -131,7 +128,7 @@ const TrainingsViewPage: React.FC = () => {
   return (
     <ContainerBox>
       <AboutUsTitleStyled>Training</AboutUsTitleStyled>
-      <Container>
+       <Container>
 
         {loading ? (
           <Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
@@ -156,17 +153,17 @@ const TrainingsViewPage: React.FC = () => {
             <StyledTypographyTitle>
               {training.title}
             </StyledTypographyTitle>
-            <StyledTypographyCategory>
+            <StyledTypographyCategory category={+training.classification}>
               {training.category.title.replace(/-/g, ' ')}
             </StyledTypographyCategory>
             {/* <StyledDiv>
               <span>{training.description}</span>
             </StyledDiv> */}
-            <StyledDiv>
+            <DescriptionStyled>
               <div
                 dangerouslySetInnerHTML={{ __html: training.table_of_contents }}
               />
-            </StyledDiv>
+            </DescriptionStyled>
 
             <StyledDiv>
               <span>Total Hours:</span>
@@ -209,7 +206,7 @@ const TrainingsViewPage: React.FC = () => {
         ) : (
           <Typography>No training found.</Typography>
         )}
-      </Container>
+      </Container> 
     </ContainerBox>
   );
 };

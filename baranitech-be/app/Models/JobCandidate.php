@@ -22,6 +22,10 @@ class JobCandidate extends Model
         'city',              // Added city
         'state',             // Added state
         'country',           // Added country
+        'min_salary',
+        'max_salary',
+        'experience',
+        'skills',
     ];
 
     /**

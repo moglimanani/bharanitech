@@ -8,11 +8,11 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { flexDirection, styled } from "@mui/system";
+import { styled } from "@mui/system";
 import { useAllResources } from "../contexts/allResourcesContext";
 import { ResourceType } from "../types/resources";
 import { getLanguageType } from "../helper";
-import { AboutUsTitleStyled, BackButtonStyled, LangStyled } from "./styles";
+import { AboutUsTitleStyled, BackButtonStyled, DescriptionStyled, LangStyled } from "./styles";
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import { LeftRightBlock } from "../components/LatestTraining/styles";
 
@@ -134,57 +134,57 @@ const ResourceViewPage: React.FC = () => {
         ) : resource ? (
           <StyledPaper elevation={3}>
             <StyledDivMain>
-             
-                <LangStyled>
-                  {getLanguageType[+resource.language].name}
-                </LangStyled>
-                <StyledTypography variant="h5" gutterBottom>
-                  {resource.title}
-                </StyledTypography>
-                {/* <div style={{display: 'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }}> */}
-                {resource.url && (
-                  <VideoFrame 
-                    src={resource.url}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                )}
-                
-                
-                <StyledDiv>
-                  {/* <span>Description:</span> */}
-                  <div
-      dangerouslySetInnerHTML={{ __html: resource.description }}
-    />
-                  {/* <span>{resource.description}</span> */}
-                </StyledDiv>
-                <StyledParag>
+
+              <LangStyled language={+(resource.language)}>
+                {getLanguageType[+resource.language].name}
+              </LangStyled>
+              <StyledTypography variant="h5" gutterBottom>
+                {resource.title}
+              </StyledTypography>
+              {/* <div style={{display: 'flex', justifyContent:'center', alignItems:'center', marginTop:'30px' }}> */}
+              {resource.url && (
+                <VideoFrame
+                  src={resource.url}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
+
+
+              <DescriptionStyled>
+                {/* <span>Description:</span> */}
+                <div
+                  dangerouslySetInnerHTML={{ __html: resource.description }}
+                />
+                {/* <span>{resource.description}</span> */}
+              </DescriptionStyled>
+              <StyledParag>
                 <LeftRightBlock>
                   <div>
-                  <span>Type: {resource.category.title}</span>
+                    <span>{resource.category.title}</span>
                   </div>
                   <div>
-                  <span>Instructor:  Ezhumalai</span>
+                    <span>Ezhumalai</span>
                   </div>
-                  </LeftRightBlock>
-                
-                
-                </StyledParag>
-                {/* <StyledDiv>
+                </LeftRightBlock>
+
+
+              </StyledParag>
+              {/* <StyledDiv>
                 
                 </StyledDiv> */}
-                {/* <StyledDiv>
+              {/* <StyledDiv>
                   <span>Language:</span>
                   <span>{getLanguageType[+resource.language].name}</span>
                 </StyledDiv> */}
-              
-               
+
+
               {/* </div> */}
             </StyledDivMain>
             <StyledDivPage>
-              <BackButtonStyled color="primary" aria-label="back"  onClick={() =>
-                  navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}`)
-                }>
+              <BackButtonStyled color="primary" aria-label="back" onClick={() =>
+                navigate(`${import.meta.env.VITE_ROUTE_RESOURCES_LIST_URL}`)
+              }>
                 <ReplyAllIcon />
               </BackButtonStyled>
             </StyledDivPage>

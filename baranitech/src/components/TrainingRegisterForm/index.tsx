@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { useDialog } from "../../contexts/dialogContext";
 import httpService from "../../api/httpService";
 import { ApiResponse } from "../../types/common";
+import { useLoader } from "../../contexts/pageLoader";
+import { useNavigate } from "react-router";
 
 const StyledField = styled(TextField)`
   margin-bottom: 16px !important;
@@ -53,6 +55,8 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
     },
   });
   const { handleCancel } = useDialog()
+  const { showLoader, hideLoader} = useLoader()
+  const navigate = useNavigate()
   useEffect(() => {
     if (!id) {
       handleCancel()
@@ -62,13 +66,13 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
 
 
   const onSubmit = async (data: FormData) => {
-
-      try {
-        const res = await httpService.post<ApiResponse>("/register-training", data);
-
-        if (res.status) {
-          // setSuccess(true);
-          
+    showLoader()
+    try {
+      const res = await httpService.post<ApiResponse>("/register-training", data);
+      
+      if (res.status) {
+        navigate(`${import.meta.env.VITE_ROUTE_TRAININGS_URL}/thanks/2`)
+        
           reset();
           handleCancel();
         } else {
@@ -76,6 +80,8 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        hideLoader()
       }
   };
   return (
@@ -118,6 +124,7 @@ export const TrainingRegisterForm = ({ id }: { id: number }) => {
               fullWidth label="Age" type="number"
               {...register("user_age", { required: "Age is required" })}
               error={!!errors.user_age}
+              inputProps={{ min: 0 }}
               helperText={errors.user_age?.message}
             />
           </Grid>

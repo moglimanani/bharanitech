@@ -4,7 +4,7 @@ import {
   Container,
   Typography,
   Alert,
-  Grid 
+  Grid
 } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { styled } from '@mui/material/styles';
@@ -44,10 +44,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
- // border: `1px solid ${theme.palette.grey[300]}`,
+  // border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.spacing(1),
- // boxShadow: theme.shadows[3],
- // backgroundColor: theme.palette.background.paper,
+  // boxShadow: theme.shadows[3],
+  // backgroundColor: theme.palette.background.paper,
 }));
 
 const StyledForm = styled('form')(({ theme }) => ({
@@ -70,12 +70,12 @@ const RegisterPage: React.FC = () => {
     mode: 'onChange',
     reValidateMode: 'onBlur',
     defaultValues: {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-  }
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      phone: '',
+    }
   })
 
   const onSubmit = async (data: RegisterFormType) => {
@@ -104,126 +104,126 @@ const RegisterPage: React.FC = () => {
   return (
     <LoginWrapperStyled container>
       <Grid size={{ xs: 12, md: 5 }}>
-      <StyledContainer maxWidth="sm">
-      {openSnackbar && (
-        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
-          Registration successful!
-        </Alert>
-      )}
-      <LoginWrapperIconStyled sx={{ m: 1, bgcolor: 'primary.main' }}>
-        <PersonAddIcon />
-      </LoginWrapperIconStyled>
+        <StyledContainer maxWidth="sm">
+          {openSnackbar && (
+            <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+              Registration successful!
+            </Alert>
+          )}
+          <LoginWrapperIconStyled sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <PersonAddIcon />
+          </LoginWrapperIconStyled>
 
-      <Typography component="h1" variant="h5">
-        Register
-      </Typography>
+          <Typography component="h1" variant="h5">
+            Register
+          </Typography>
 
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name='username'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Username *"
-              margin="normal"
-              {...field}
-              error={Boolean(errors.username)}
-              helperText={errors.username?.message}
+          <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name='username'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Username *"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.username)}
+                  helperText={errors.username?.message}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name='email'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Email *"
-              margin="normal"
-              {...field}
-              error={Boolean(errors.email)}
-              helperText={errors.email?.message}
+            <Controller
+              name='email'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Email *"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.email)}
+                  helperText={errors.email?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name='phone'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Phone Number *"
-              margin="normal"
-              {...field}
-              error={Boolean(errors.phone)}
-              helperText={errors.phone?.message}
+            <Controller
+              name='phone'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Phone Number *"
+                  margin="normal"
+                  {...field}
+                  error={Boolean(errors.phone)}
+                  helperText={errors.phone?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name='password'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Password *"
-              margin="normal"
-              type="password"
-              {...field}
-              error={Boolean(errors.password)}
-              helperText={errors.password?.message}
+            <Controller
+              name='password'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Password *"
+                  margin="normal"
+                  type="password"
+                  {...field}
+                  error={Boolean(errors.password)}
+                  helperText={errors.password?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name='confirmPassword'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              label="Confirm Password *"
-              margin="normal"
-              type="password"
-              {...field}
-              error={Boolean(errors.confirmPassword)}
-              helperText={errors.confirmPassword?.message}
+            <Controller
+              name='confirmPassword'
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Confirm Password *"
+                  margin="normal"
+                  type="password"
+                  {...field}
+                  error={Boolean(errors.confirmPassword)}
+                  helperText={errors.confirmPassword?.message}
+                />
+              )}
             />
-          )}
-        />
 
-        <LoginWrapperButtonStyled
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3 }}
-          disabled={!isValid}
-        >
-          {isSubmitting ? 'Registering...' : 'Register'}
-        </LoginWrapperButtonStyled>
-        <LoginWrapperButtonStyled
-          type="button"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3 }}
-          onClick={handleToLogin}
-        >
-          Back to Login
-        </LoginWrapperButtonStyled>
-      </StyledForm>
-    </StyledContainer>
+            <LoginWrapperButtonStyled
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3 }}
+              disabled={!isValid}
+            >
+              {isSubmitting ? 'Registering...' : 'Register'}
+            </LoginWrapperButtonStyled>
+            <LoginWrapperButtonStyled
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3 }}
+              onClick={handleToLogin}
+            >
+              Back to Login
+            </LoginWrapperButtonStyled>
+          </StyledForm>
+        </StyledContainer>
       </Grid>
       <LoginWrapperImageStyled size={{ xs: 12, md: 5 }}>
-         <img src="/login.png" alt="login" loading="lazy" />
+        <img src="/login.png" alt="login" loading="lazy" />
       </LoginWrapperImageStyled>
     </LoginWrapperStyled>
-   
+
   );
 };
 
