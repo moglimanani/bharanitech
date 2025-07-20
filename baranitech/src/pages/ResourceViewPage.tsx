@@ -39,10 +39,19 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const StyledDiv = styled("div")(({ theme }) => ({
   color: theme.palette.secondary.main,
-  fontSize: "14px",
+  fontSize: "1.2rem",
   padding: "5px 10px 5px",
   textTransform: 'capitalize',
+  fontFamily: 'Comfortaa',
 }));
+
+const StyledParag = styled("div")(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  padding: "5px 10px 5px",
+  textTransform: 'capitalize',
+  fontSize: '.95rem',
+}));
+
 
 const StyledDivPage = styled("div")(({ theme }) => ({
   display: "flex",
@@ -149,7 +158,7 @@ const ResourceViewPage: React.FC = () => {
     />
                   {/* <span>{resource.description}</span> */}
                 </StyledDiv>
-                <StyledDiv>
+                <StyledParag>
                 <LeftRightBlock>
                   <div>
                   <span>Type: {resource.category.title}</span>
@@ -160,7 +169,7 @@ const ResourceViewPage: React.FC = () => {
                   </LeftRightBlock>
                 
                 
-                </StyledDiv>
+                </StyledParag>
                 {/* <StyledDiv>
                 
                 </StyledDiv> */}

@@ -74,9 +74,6 @@ const JobsListPage: React.FC = () => {
             <ParaStyled variant="body2" color="text.secondary">
               <strong>{job.company ?? "XXXX"}</strong>
             </ParaStyled>
-            <ParaStyled variant="body2" color="text.secondary">
-              {isLocation ? job.city + ", " + job.country : "XXXXXX"}
-            </ParaStyled>
             <ParaStyledOverflow
               variant="body2"
               sx={{ pb: 1, lineHeight: 1 }}
@@ -84,7 +81,9 @@ const JobsListPage: React.FC = () => {
             >
               {job.description}
             </ParaStyledOverflow>
-
+            <ParaStyledOverflow variant="body2" color="text.secondary">
+              {isLocation ? job.city + ", " + job.country : "XXXXXX"}
+            </ParaStyledOverflow>
           </CardContent>
           <Box sx={{ p: '0 16px 0' }}>
             <LearnButtonStyled

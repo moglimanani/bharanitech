@@ -97,7 +97,7 @@ const JobStyle = styled(Typography)(() => ({
 }));
 
 const AddressStyle = styled(Typography)(() => ({
-  color: '#242105',
+  color: 'red',
   fontSize: '11px',
 }));
 
@@ -118,10 +118,13 @@ const DescriptionStyle = styled(Typography)(() => ({
 const VacancyStyle = styled(Typography)(({ theme }) => ({
   // borderRadius: '50%',
   // background: '#403f3d',
-  paddingBottom: '10px'
+  paddingBottom: '10px',
 }));
 
-
+const VacancyStylePara = styled(Typography)(({ theme }) => ({
+  paddingBottom: '10px',
+  fontSize: '1.1rem',
+}));
 
 const JobAdminListComponent: React.FC = () => {
   const [jobs, setJobs] = useState<JobType[]>([]);
@@ -198,7 +201,7 @@ const JobAdminListComponent: React.FC = () => {
           {item.created_at &&
               format(new Date(item.created_at), "dd MMM yyyy")}
           </DateStyled>
-          <TypeStyled sx={{mt: '30px'}}>
+          <TypeStyled sx={{mt: '40px', marginBottom: '15px'}}>
             {categories &&
               categories?.find((cat) => cat?.id == item?.type)?.title}
           </TypeStyled>
@@ -209,9 +212,9 @@ const JobAdminListComponent: React.FC = () => {
             }
             size="small"
           /> */}
-          <VacancyStyle variant="body2" color="text.secondary">
+          <VacancyStylePara variant="body2" color="text.secondary">
             {item.company ?? 'Company details not found.'}
-          </VacancyStyle>
+          </VacancyStylePara>
           <TitleStyled sx={{textAlign: 'center',p:0 }}>
           {item.title}
           </TitleStyled>
@@ -219,9 +222,8 @@ const JobAdminListComponent: React.FC = () => {
           {/* <TypeVacancyStyle variant="body2">{item.type}</TypeVacancyStyle> */}
           <VacancyStyle variant="body2">Salary : {formatCurrency(item.salary ?? 0)}/-  </VacancyStyle>
           <VacancyStyle variant="body2">Vacancy : {item.total_vacancy}  </VacancyStyle>
-          <AddressStyle variant="body2">{item.city}</AddressStyle>
-          <AddressStyle variant="body2">{item.state}</AddressStyle>
-          <AddressStyle variant="body2">{item.country}</AddressStyle>
+          <AddressStyle variant="body2">📍 {item.city} {item.state} {item.country}</AddressStyle>
+         
 
         </StyledCardContent>
       </StyledCard>

@@ -220,9 +220,11 @@ export const TitleStyled = styled(Typography)(({ theme }) => ({
 
 export const ParaStyled = styled(Typography)(({ theme }) => ({
   textAlign: "left",
-  fontSize: ".88rem",
+  fontSize: "1rem",
   paddingTop: "5px",
   textTransform: 'capitalize',
+  lineHeight: '30px',
+  marginTop: '5px',
   color: theme.palette.secondary.main,
   '& span': {
     color: theme.palette.appBarColour.main,
@@ -237,6 +239,7 @@ export const TypeStyled = styled(Typography)(({ theme }) => ({
   textTransform: 'capitalize',
   color: theme.palette.red.dark,
   backgroundColor: theme.palette.grey[200],
+  borderRadius: '12px',
   '& span': {
     color: theme.palette.appBarColour.main,
     fontWeight: '600',
@@ -270,7 +273,7 @@ export const ChipStyled = styled(Chip)(({ theme})=>({
   justifyContent: 'center',
   margin: '0 0 0 0.5em',
   '& svg.MuiChip-icon':{
-    color: theme.palette.common.black,
+    color: theme.palette.appBarColour.main,
   },
   '& span': {
     color: theme.palette.red.dark,
