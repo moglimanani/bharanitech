@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\YouTubeCategory;
+use App\Models\YoutubeCategory;
 use Illuminate\Http\JsonResponse;
 
-class YouTubeCategoryController extends Controller
+class YoutubeCategoryController extends Controller
 {
     public function index(): JsonResponse
     {
-        $categories = YouTubeCategory::all();
+        $categories = YoutubeCategory::all();
 
         return response()->json([
             'status' => true,
