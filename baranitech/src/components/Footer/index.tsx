@@ -1,9 +1,15 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
+import { FooterDeveloperStyled } from '../HeaderComponent/styles';
+import { useNavigate } from 'react-router';
 
 const Footer: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
+  const handleDeveloepNavigate = () => {
+    navigate('/moglidevelopers');
+  }
   return (
     <Box
       component="footer"
@@ -21,8 +27,8 @@ const Footer: React.FC = () => {
         }
       }}
     >
-      <Typography variant="body2">
-        © {new Date().getFullYear()} Developed by <strong><a href='mailto:suryajehan10@gmail.com'>Mogli Developer</a></strong>
+      <Typography variant="body2" component="div">
+        © {new Date().getFullYear()} Developed by <FooterDeveloperStyled variant='h5' onClick={handleDeveloepNavigate}>Mogli Developer</FooterDeveloperStyled>
       </Typography>
     </Box>
   );

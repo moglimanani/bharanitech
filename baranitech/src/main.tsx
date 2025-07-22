@@ -76,6 +76,7 @@ import CandidateRegistedListComponent from './components/CandidatesRegisteredJob
 import JobsViewPage from './pages/JobsViewPage.tsx'
 import { LoaderProvider } from './contexts/pageLoader.tsx'
 import ThankYou from './pages/ThankYouPage.tsx'
+import MogliDevelopersPage from './pages/MogliDevelopersPage.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -96,6 +97,7 @@ createRoot(document.getElementById('root')!).render(
                             <ScrollToTop />
                             <Routes>
                               <Route element={<App />}>
+                                <Route path={import.meta.env.VITE_ROUTE_DEVELOPER_URL} element={<MogliDevelopersPage />} />
                                 <Route path={import.meta.env.VITE_ROUTE_HOME_URL} element={<HomePage />} />
                                 <Route path={import.meta.env.VITE_ROUTE_ABOUTUS_URL} element={<AboutUsPage />} />
                                 <Route path={import.meta.env.VITE_ROUTE_LOGIN_URL} element={<LoginPage />} />

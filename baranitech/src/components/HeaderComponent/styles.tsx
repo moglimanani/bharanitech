@@ -27,6 +27,19 @@ export const TypographyStyled = styled(Typography)(({theme})=>({
       margin: '0',
    }
 }))
+export const FooterDeveloperStyled = styled(Typography)(({theme})=>({
+   fontFamily: 'Poetsen One',
+   fontSize: '1em',
+   display: 'inline-block',
+   cursor: 'pointer',
+   color: theme.palette.pinkColour.main,
+   [theme.breakpoints.down('sm')]: {
+      //background: 'Yellow',
+      fontSize: '1.3em',
+      padding: '0',
+      margin: '0',
+   }
+}))
 
 export const ToolbarStyled = styled(Toolbar)(({theme})=>({
    [theme.breakpoints.up('sm')]: {
