@@ -597,3 +597,16 @@ export const DescriptionStyled = styled(Typography)(({ theme }) => ({
   fontFamily: 'Comfortaa',
   margin: "16px"
 }));
+
+export const DeveoperFormStyled = styled('form')(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  fontSize: "1.2rem",
+  padding: "5px 10px 5px",
+  textTransform: 'capitalize',
+  fontFamily: 'Comfortaa',
+  margin: "16px",
+  backgroundColor: theme.palette.common.white,
+  border: '1px solid #484848',
+  borderRadius: "20px",
+  transition: 'all 0.2s'
+}));

@@ -19,6 +19,7 @@ export const StyledpriceRow = styled(Grid)(({ theme }) => ({
   padding: '10px 0 0 20px',
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: '3fr',
+    padding: '10px 0 0 0px',
   },
 }));
 
@@ -71,7 +72,7 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
     position: 'absolute',
     left: '50%',
     transform: 'translate(-50%)',
-    bottom: '10px',
+    bottom: '30px',
     background: '#127B93',
     color: '#fff',
   },

@@ -31,6 +31,7 @@ export const ContactUsFormSchema = yup.object({
             return date <= eighteenYearsAgo;
         })
 })
+
 export const TrainingRegisterFormSchema = yup.object().shape({
     user_name: yup.string().required('Name is required'),
     user_occupation: yup.string().required('Occupation is required'),
@@ -58,6 +59,7 @@ export const TrainingRegisterFormSchema = yup.object().shape({
       .typeError('Training ID must be a number')
       .required('Training ID is required'),
   });
+
   export const JobsRegisterFormSchema = yup.object().shape({
     first_name: yup.string().required('First name is required'),
     last_name: yup.string().required('Last name is required'),
@@ -95,6 +97,19 @@ export const TrainingRegisterFormSchema = yup.object().shape({
       .required("Maximum salary is required"),
     experience: yup.number().required("Experience is required"),
     skills: yup.string().required("Skills are required"),
+  });
+
+  export const DeveloperContactRegisterFormSchema = yup.object().shape({
+    name: yup.string().required('First name is required'),
+    email: yup
+    .string()
+    .email('Invalid email address')
+    .required('Email is required'),
+    phone: yup
+    .string()
+    .matches(/^\+?[0-9]{10,15}$/, 'Enter a valid phone number')
+    .required('Phone number is required'),
+    message: yup.string().required("comments are required"),
   });
 
 export const AdminGalleryAddSchema = yup.object({

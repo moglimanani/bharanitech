@@ -114,8 +114,8 @@ export const GridColorStyled = styled(Grid)(({ theme }) => ({
     fontWeight: 'bold',
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '0px',
-    margin: '8px 2px',
+    padding: '5px 8px',
+    margin: '8px',
   },
 
 }))

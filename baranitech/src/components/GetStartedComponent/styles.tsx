@@ -102,7 +102,8 @@ export const WrapperDivStyled = styled('div')(({theme})=>({
   },
   '& > p': {
     color: theme.palette.secondary.main,
-    fontSize: '.95em'
+    fontSize: '.95em',
+    marginTop: '0px'
   },
 
 }))

@@ -130,8 +130,8 @@ export const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     paddingTop: '20px',
+    paddingBottom: '20px',
     [theme.breakpoints.up('sm')]: {
-        paddingBottom: '20px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

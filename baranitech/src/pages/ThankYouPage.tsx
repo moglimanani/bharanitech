@@ -9,6 +9,7 @@ const ThankYou = () => {
     //1 => Job Submission
     //2 => Training Submission
     //3 => Contact Submission
+    //4=> contact developer
 
 
     return (
@@ -34,6 +35,14 @@ const ThankYou = () => {
                 <>
                     <DescriptionStyled sx={{ color: theme.palette.common.white, textAlign: 'center' }}>Thank you for reaching out!</DescriptionStyled>
                     <DescriptionStyled sx={{ color: theme.palette.common.white, textAlign: 'center' }}>We’ve received your message and our team will get back to you shortly. <br />
+                    Please keep an eye on your email and phone for our response.
+                    </DescriptionStyled>
+                </>
+            )}
+            {+thankyouId === 4 && (
+                <>
+                    <DescriptionStyled sx={{ color: theme.palette.common.white, textAlign: 'center' }}>Thanks for getting in touch with us! </DescriptionStyled>
+                    <DescriptionStyled sx={{ color: theme.palette.common.white, textAlign: 'center' }}>Your message means a lot to the Mogli Developers team. <br/> We'll review your inquiry and respond within 24 hours. <br />
                     Please keep an eye on your email and phone for our response.
                     </DescriptionStyled>
                 </>
