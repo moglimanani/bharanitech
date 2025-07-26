@@ -17,7 +17,7 @@ const ResourcesThreeColumnWhitePage: React.FC = () => {
 
   return (
     <BoxWhiteStyled sx={{ flexGrow: 1, p: 2 }}>
-      <H2BoxStyled>Learning Resources</H2BoxStyled>
+      <H2BoxStyled>Learning Resources </H2BoxStyled>
       <PareBoxStyled>In the digital age, YouTube isn't just for entertainment—it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: it's a global classroom with millions of educational videos. Here's why it's especially valuable for learners: </PareBoxStyled>
       <Grid container spacing={2}>
         {

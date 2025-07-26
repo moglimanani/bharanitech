@@ -23,7 +23,7 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
-  border: '1px solid #484848',
+ // border: '1px solid #484848',
   borderRadius: "20px",
   margin: "30px 0 0px",
   padding: "10px 0px",
@@ -31,9 +31,9 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   width: '100%',
   cursor: 'pointer',
   '&:hover': {
-    border: '1px solid #484848',
-    color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
+   // border: '1px solid #484848',
+    color: theme.palette.appBarColour.light,
+    backgroundImage: 'linear-gradient(to right, #243949 0%, #517fa4 100%)',
   }
 }));
 

@@ -62,15 +62,15 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
-  border: '1px solid #484848',
+  //border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",
   padding: "10px 20px",
   transition: 'all 0.2s',
   '&:hover': {
-    border: '1px solid #484848',
+    //border: '1px solid #484848',
     color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
+    backgroundImage: 'linear-gradient(to right, #243949 0%, #517fa4 100%)',
   }
 }));
 
@@ -151,7 +151,7 @@ const ResourceViewPage: React.FC = () => {
               )}
 
 
-              <DescriptionStyled>
+              <DescriptionStyled style={{marginLeft: '0'}}>
                 {/* <span>Description:</span> */}
                 <div
                   dangerouslySetInnerHTML={{ __html: resource.description }}
