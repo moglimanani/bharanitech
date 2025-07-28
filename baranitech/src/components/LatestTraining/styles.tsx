@@ -24,7 +24,7 @@ export const StyledpriceRow = styled(Grid)(({ theme }) => ({
 }));
 
 export const StyledpriceCol = styled(Grid)(({ theme }) => ({
-  background: '#c4f4ff',
+  background: '#fff',
   // padding: '2%',
   minHeight: '350px',
   borderRadius: '12px',
@@ -35,18 +35,20 @@ export const StyledpriceCol = styled(Grid)(({ theme }) => ({
   position: 'relative',
   textTransform: 'capitalize',
   '& > p': {
-    fontSize: '24px',
+    fontSize: '1.6rem',
     textTransform: 'capitalize',
-    marginBottom: '0px'
+    marginBottom: '0px',
+    fontFamily: 'Poetsen One',
   },
   '& > h3': {
-    fontSize: '32px',
+    // fontSize: '32px',
     margin: '10px 0 10px',
     fontWeight: '500',
     color: '#127B93',
   },
   '& > h3 > span': {
-    fontSize: '16px',
+    fontSize: '1.8rem',
+    fontFamily: 'Poetsen One',
   },
   '& > ul': {
     textAlign: 'left',
@@ -86,16 +88,17 @@ export const LearnButtonStyled = styled(Button)<ButtonProps>(({ theme }) => ({
   cursor: 'pointer',
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
-  border: '1px solid #484848',
+ // border: '1px solid #484848',
   borderRadius: "20px",
   margin: "a auto",
   padding: "10px 20px",
   transition: 'all 0.2s',
   width: 'auto',
   '&:hover': {
-    border: '1px solid #484848',
-    color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)',
+    // border: '1px solid #484848',
+    color: theme.palette.appBarColour.light,
+    backgroundImage: 'linear-gradient(to right, #243949 0%, #517fa4 100%)',
+    
   }
 }));
 
@@ -104,6 +107,7 @@ export const LeftRightBlock = styled('div')(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
+  fontSize: '.95rem',
   // margin: '0 0 20px',
   flex: '1 1',
   '&>div':{

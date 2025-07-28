@@ -19,7 +19,7 @@ const LatestTraining = ({ trainings }: LatestTrainingPropsType) => {
     return (
       <StyledpriceCol key={`trainingBlocks=${id}`}>
         <p>{item.title}</p>
-        <h3>${+item.total_price}/-</h3>
+        <h3><span>$ {+item.total_price}/-</span></h3>
         <ul>
           <li>
             <LeftRightBlock>
