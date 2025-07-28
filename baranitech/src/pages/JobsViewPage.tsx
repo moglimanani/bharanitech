@@ -11,6 +11,7 @@ import theme from '../theme';
 import { useAllJobs } from '../contexts/allJobsContext';
 import { JobsType } from '../types/jobs';
 import { JobsRegisterForm } from '../components/JobsRegisterForm';
+import { format } from 'date-fns';
 
 // Styled Components
 const Container = styled(Box)(({ theme }) => ({
@@ -85,15 +86,15 @@ export const LearnButtonStyled = styled(Button)(({ theme }) => ({
   fontSize: ".88rem",
   color: theme.palette.appBarColour.light,
   background: theme.palette.appBarColour.main,
-  border: '1px solid #484848',
+ // border: '1px solid #484848',
   borderRadius: "20px",
   margin: "10px 0 20px",
   padding: "10px 20px",
   transition: 'all 0.2s',
   '&:hover': {
-    border: '1px solid #484848',
-    color: theme.palette.appBarColour.main,
-    backgroundImage: 'linear-gradient(to top, #a8edea 0%,rgb(216, 214, 221) 100%)'
+    //border: '1px solid #484848',
+    color: theme.palette.appBarColour.light,
+    backgroundImage: 'linear-gradient(to right, #243949 0%, #517fa4 100%)',
   }
 }));
 
@@ -156,8 +157,8 @@ const JobsViewPage: React.FC = () => {
 
             </Stack>
             <SchoolIcon sx={{ color: theme.palette.appBarColour.main, fontSize: '4em' }} />
-            <div style={{ position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '0 10px', borderRadius: '12px', left: '16px' }}>
-              {jobs.created_at}
+            <div style={{ position: 'absolute', top: '21px', color: '#fff', fontSize: '.90em', background: '#484848', padding: '5px 15px', borderRadius: '12px', left: '16px' }}>
+               {format(new Date(jobs.created_at), "dd MMM yyyy")}
             </div>
             <StyledTypographyTitle>
               {jobs.title}
