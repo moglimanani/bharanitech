@@ -1,6 +1,7 @@
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, Typography } from "@mui/material";
 import { getLanguageType } from "../helper";
 import { FilterFormStyled, LearnButtonStyled } from "./styles";
+import theme from "../theme";
 
 interface ResourceFilterProps {
     selectedLanguages: number | null;
@@ -29,11 +30,13 @@ const ResourceFilter = ({ selectedLanguages, setSelectedLanguage }: ResourceFilt
     return (
         <Box marginBottom={2}>
             <FilterFormStyled>
-                <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid sx={{ xs: 12 }} alignItems="flex-start">
-                        <Typography>Language</Typography>
+                <Grid container alignItems="center" display="flex" flexDirection={{xs: 'column', sm: 'row'}} justifyContent="space-between">
+                    <Grid sx={{ xs: 12, pt: {xs:3, sm: 0} }} alignItems="flex-start" >
+                        <Typography color={theme.palette.pinkColour.main} variant="h5">Language</Typography>
                     </Grid>
+                    <Grid container alignItems="center" display="flex" flexDirection={{xs: 'row', sm: 'row'}} justifyContent="space-between">
                     {FormControlLabels}
+                    </Grid>
                     <Grid sx={{ xs: 12 }}>
                         <LearnButtonStyled sx={{margin:2}} variant="contained" onClick={() => onClear()}>Clear</LearnButtonStyled>
                     </Grid>

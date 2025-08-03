@@ -157,7 +157,7 @@ const ResourceAdminListComponent: React.FC = () => {
   const constructYoutubes = youtubes.map((item) => {
     const embedUrl = getYouTubeEmbedUrl(item.url);
     const languageType = getLanguageType.find(ltype => +item.language === +ltype.id)?.name ?? ''
-
+    const classiType = ['Protection relay testing','Equipment testing','Electrical Notes']
     return (
         <StyledCard
           style={{
@@ -192,9 +192,9 @@ const ResourceAdminListComponent: React.FC = () => {
           )}
 
           <StyledCardContent>
-            <CategoryChip label={item.category?.title} size="small" />
+            <CategoryChip label={classiType[+item.category?.category] + " - " + item.category?.title} size="small" />
             <CategoryChip label={languageType} size="small" />
-            <TypographyStyled variant="h6">{item.title}</TypographyStyled>
+            <TypographyStyled variant="h6">{item.title}</TypographyStyled>      
           </StyledCardContent>
         </StyledCard>
     );

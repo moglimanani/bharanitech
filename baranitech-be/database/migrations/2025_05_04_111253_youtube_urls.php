@@ -8,7 +8,7 @@ return new class extends Migration {
     {
         Schema::create('youtube_urls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type')->constrained('youtube_categorys')->onDelete('cascade');
+            $table->foreignId('type')->constrained('youtube_categories')->onDelete('cascade');
             $table->string('title');
             $table->string('url', 2048)->unique();
             $table->text('description')->nullable();

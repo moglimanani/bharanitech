@@ -37,12 +37,11 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   padding: "5px 10px 5px",
 }));
 
-const StyledDiv = styled("div")(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  fontSize: "1.2rem",
-  padding: "5px 10px 5px",
-  textTransform: 'capitalize',
-  fontFamily: 'Comfortaa',
+const StyledContainer = styled("div")(({ theme }) => ({
+  margin: "0 30px",
+  [theme.breakpoints.down("sm")]: {
+      margin: "0",
+  },
 }));
 
 const StyledParag = styled("div")(({ theme }) => ({
@@ -50,6 +49,15 @@ const StyledParag = styled("div")(({ theme }) => ({
   padding: "5px 10px 5px",
   textTransform: 'capitalize',
   fontSize: '.95rem',
+  [theme.breakpoints.down("md")]: {
+    '& > div':{
+      flexDirection: "column",
+      '& > div':{
+        textAlign: 'center',
+        marginBottom: '10px'
+      }
+    },
+  },
 }));
 
 
@@ -115,9 +123,10 @@ const ResourceViewPage: React.FC = () => {
       setError("Training not found");
     }
   }, [rid]);
+  const classiType = ['Protection relay testing','Equipment testing','Electrical Notes']
 
   return (
-    <div style={{ margin: "0 30px" }}>
+    <StyledContainer>
       <AboutUsTitleStyled>Resources View</AboutUsTitleStyled>
       <Container>
         {loading ? (
@@ -161,6 +170,8 @@ const ResourceViewPage: React.FC = () => {
               <StyledParag>
                 <LeftRightBlock>
                   <div>
+                    <span>{classiType[+resource.category.category]}</span>
+                    <span> - </span>
                     <span>{resource.category.title}</span>
                   </div>
                   <div>
@@ -193,7 +204,7 @@ const ResourceViewPage: React.FC = () => {
           <Typography>No resource found.</Typography>
         )}
       </Container>
-    </div>
+    </StyledContainer>
   );
 };
 
