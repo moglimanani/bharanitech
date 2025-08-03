@@ -34,7 +34,7 @@ class YoutubeUrlController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'type' => 'required|exists:youtube_categorys,id',
+                'type' => 'required|exists:youtube_categories,id',
                 'title' => 'required|string|max:255',
                 'url' => 'required|url|unique:youtube_urls,url',
                 'description' => 'nullable|string',
@@ -105,7 +105,7 @@ class YoutubeUrlController extends Controller
             }
             //
             $validator = Validator::make($request->all(), [
-                'type' => 'nullable|exists:youtube_categorys,id',
+                'type' => 'nullable|exists:youtube_categories,id',
                 'title' => 'nullable|string|max:255',
                 'url' => 'nullable|url|unique:youtube_urls,url,' . $video->id,
                 'description' => 'nullable|string',

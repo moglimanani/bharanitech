@@ -568,7 +568,7 @@ export const FilterFormStyled = styled(FormGroup)(({ theme }) => ({
   border: '1px solid #484848',
   borderRadius: "20px",
   padding: "0px 20px",
-  transition: 'all 0.2s'
+  transition: 'all 0.2s',
 }));
 
 export const PaginationStyled = styled(Pagination)(({ theme }) => ({

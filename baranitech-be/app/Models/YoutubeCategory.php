@@ -14,7 +14,7 @@ class YoutubeCategory extends Model
      *
      * @var string
      */
-    // protected $table = 'youtube_categorys';  // Specify the table name if it's not the default
+    // protected $table = 'youtube_categories';  // Specify the table name if it's not the default
 
     /**
      * The attributes that are mass assignable.

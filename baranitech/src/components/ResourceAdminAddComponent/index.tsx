@@ -43,6 +43,9 @@ const ResourceAdminAddComponent: React.FC = () => {
   const [equipmentTestingCategories, setEquipmentTestingCategories] = useState<
     YouTubeCategory[]
   >([]);
+  const [resourceGeneralCategories, setResourceGeneralCategories] = useState<
+    YouTubeCategory[]
+  >([])
   const [success, setSuccess] = useState(false);
   const fullEditPath = `${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_URL}/${import.meta.env.VITE_ROUTE_ADMIN_RESOURCE_EDIT_URL
     }`;
@@ -116,6 +119,7 @@ const ResourceAdminAddComponent: React.FC = () => {
     setEquipmentTestingCategories(
       categories.filter((item) => item.category === 1)
     );
+    setResourceGeneralCategories(categories.filter((item) => item.category === 2))
   }, [categories]);
 
   useEffect(() => {
@@ -174,6 +178,12 @@ const ResourceAdminAddComponent: React.FC = () => {
     }
   };
 
+  const classType = [
+    relayTestingCategories,
+    equipmentTestingCategories,
+    resourceGeneralCategories
+  ]
+
   return (
     <StyledContainer maxWidth="xl">
       <Box
@@ -199,6 +209,7 @@ const ResourceAdminAddComponent: React.FC = () => {
                   <Select label="Classification" {...field}>
                     <MenuItem value="0">Protection Relay Testing</MenuItem>
                     <MenuItem value="1">Equipment Testing</MenuItem>
+                    <MenuItem value="2">Electrical Notes</MenuItem>
                   </Select>
                 )}
               />
@@ -213,9 +224,8 @@ const ResourceAdminAddComponent: React.FC = () => {
                 control={control}
                 render={({ field }) => (
                   <Select label="Type" {...field}>
-                    {(classification === "0"
-                      ? relayTestingCategories
-                      : equipmentTestingCategories
+                    {
+                     (classType[+classification]
                     ).map((item) => (
                       <MenuItem key={item.id} value={item.title}>
                         {item.title}
